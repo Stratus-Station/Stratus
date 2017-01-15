@@ -574,13 +574,32 @@ var/list/slot_equipment_priority = list( \
 		return 0
 
 	changeNext_move(CLICK_CD_POINT)
-	var/obj/P = new /obj/effect/decal/point(tile)
-	P.invisibility = invisibility
-	spawn (20)
-		if(P)
-			qdel(P)
+	if(is_point_aim(A))//check whether it's a normal point or a gun aim
+		//P = new /obj/effect/decal/aiming(tile)
+		//add an overlay to the aimed at mob, because why note
+		var/overlay = image('icons/effects/Targeted.dmi', "locked")
+		A.overlays += overlay
+		spawn(40)
+			if(A && A.overlays && overlay)
+				A.overlays -= overlay
+			qdel(overlay)
+		for(var/mob/living/K in viewers(src))
+			K << 'sound/weapons/TargetOn.ogg'
+	else
+		var/obj/P = new /obj/effect/decal/point(tile)
+		P.invisibility = invisibility
+		spawn (20)
+			if(P)
+				qdel(P)
 
 	return 1
+
+/mob/proc/is_point_aim(atom/pointed_at)
+	//proc used for checking whether the point is actually aiming
+	if(ismob(pointed_at) && ishuman(src))
+		if(istype(get_active_hand(), /obj/item/weapon/gun/))
+			return 1
+	return 0
 
 /mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
 	if((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
@@ -1130,7 +1149,7 @@ mob/proc/yank_out_object()
 		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new ()
 			affected.wounds += I
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 2)
 
 		if(ishuman(U))
 			var/mob/living/carbon/human/human_user = U

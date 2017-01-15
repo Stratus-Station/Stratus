@@ -100,6 +100,7 @@
 	SetDizzy(0)
 	SetJitter(0)
 	heart_attack = 0
+	shock_stage = 0
 
 	//Handle species-specific deaths.
 	if(species) species.handle_death(src)

@@ -9,11 +9,6 @@
 	no_embed = 1 // Physically impossible for energy weapons to embed themselves into people, this should fix that. -- Dave
 	hitsound = 'sound/weapons/blade1.ogg' // Probably more appropriate than the previous hitsound. -- Dave
 
-/obj/item/weapon/melee/energy/suicide_act(mob/user)
-	user.visible_message(pick("<span class='suicide'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>", \
-						"<span class='suicide'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>"))
-	return (BRUTELOSS|FIRELOSS)
-
 /obj/item/weapon/melee/energy/attack_self(mob/living/carbon/user)
 	if(user.disabilities & CLUMSY && prob(50))
 		to_chat(user, "<span class='warning'>You accidentally cut yourself with [src], like a doofus!</span>")
@@ -69,10 +64,6 @@
 	attack_verb_on = list()
 	sharp = 1
 	edge = 1
-
-/obj/item/weapon/melee/energy/axe/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] swings the [src.name] towards /his head! It looks like \he's trying to commit suicide.</span>")
-	return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/melee/energy/sword
 	name = "energy sword"

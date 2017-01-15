@@ -216,12 +216,6 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
-/obj/item/toy/katana/suicide_act(mob/user)
-	var/dmsg = pick("[user] tries to stab \the [src] into their abdomen, but it shatters! They look as if they might die from the shame.","[user] tries to stab \the [src] into their abdomen, but \the [src] bends and breaks in half! They look as if they might die from the shame.","[user] tries to slice their own throat, but the plastic blade has no sharpness, causing them to lose their balance, slip over, and break their neck with a loud snap!")
-	user.visible_message("<span class='suicide'>[dmsg] It looks like they are trying to commit suicide.</span>")
-	return (BRUTELOSS)
-
-
 /*
  * Snap pops viral shit
  */
@@ -1355,11 +1349,6 @@ obj/item/toy/cards/deck/syndicate/black
 	attack_verb = list("struck", "hit", "bashed")
 	var/bullet_position = 1
 	var/is_empty = 0
-
-/obj/item/toy/russian_revolver/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] quickly loads six bullets into the [src.name]'s cylinder and points it at \his head before pulling the trigger! It looks like they are trying to commit suicide.</span>")
-	playsound(loc, 'sound/weapons/Gunshot.ogg', 50, 1)
-	return (BRUTELOSS)
 
 /obj/item/toy/russian_revolver/New()
 	spin_cylinder()

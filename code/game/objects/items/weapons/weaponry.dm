@@ -10,11 +10,6 @@
 	throw_range = 15
 	attack_verb = list("banned")
 
-
-/obj/item/weapon/banhammer/suicide_act(mob/user)
-		to_chat(viewers(user), "<span class='suicide'>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</span>")
-		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
-
 /obj/item/weapon/sord
 	name = "\improper SORD"
 	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
@@ -27,10 +22,6 @@
 	edge = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-
-	suicide_act(mob/user)
-		to_chat(viewers(user), "<span class='suicide'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-		return(BRUTELOSS)
 
 /obj/item/weapon/sord/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
@@ -51,10 +42,6 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	block_chance = 50
-
-/obj/item/weapon/claymore/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	return(BRUTELOSS)
 
 /obj/item/weapon/claymore/ceremonial
 	name = "ceremonial claymore"
@@ -79,11 +66,7 @@
 
 /obj/item/weapon/katana/cursed
 	slot_flags = null
-
-/obj/item/weapon/katana/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>")
-	return(BRUTELOSS)
-
+	
 /obj/item/weapon/harpoon
 	name = "harpoon"
 	sharp = 1

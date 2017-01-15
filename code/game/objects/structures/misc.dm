@@ -15,7 +15,7 @@
 		return attack_hand(user)
 
 	attack_hand(mob/user as mob)
-		to_chat(user, "Civilians: NT is recruiting! Please head SOUTH to the NT Recruitment office to join the station's crew!")
+		to_chat(user, "Visitors: NT is recruiting! Please head SOUTH to the NT Recruitment office to join the station's crew!")
 
 /obj/structure/ninjatele
 

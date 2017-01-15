@@ -13,11 +13,6 @@
 	attack_verb = list("bashed", "battered", "judged", "whacked")
 	burn_state = FLAMMABLE
 
-/obj/item/weapon/gavelhammer/suicide_act(mob/user)
-	user.visible_message("<span class='warning'>[user] has sentenced \himself to death with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	playsound(loc, 'sound/items/gavel.ogg', 50, 1, -1)
-	return (BRUTELOSS)
-
 /obj/item/weapon/gavelblock
 	name = "gavel block"
 	desc = "Smack it with a gavel hammer when the assistants get rowdy."

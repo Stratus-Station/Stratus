@@ -66,7 +66,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts patching the damaged vein in [target]'s [affected.name] with \the [tool]." , \
 	"You start patching the damaged vein in [target]'s [affected.name] with \the [tool].")
-	target.custom_pain("The pain in [affected.name] is unbearable!",1)
+	target.custom_pain("The pain in [affected.name] is unbearable!",3)
 	..()
 
 /datum/surgery_step/fix_vein/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool,datum/surgery/surgery)
@@ -122,7 +122,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts cutting away necrotic tissue in [target]'s [affected.name] with \the [tool]." , \
 	"You start cutting away necrotic tissue in [target]'s [affected.name] with \the [tool].")
-	target.custom_pain("The pain in [affected.name] is unbearable!",1)
+	target.custom_pain("The pain in [affected.name] is unbearable!",3)
 	..()
 
 /datum/surgery_step/fix_dead_tissue/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool,datum/surgery/surgery)
@@ -176,7 +176,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts applying medication to the affected tissue in [target]'s [affected.name] with \the [tool]." , \
 	"You start applying medication to the affected tissue in [target]'s [affected.name] with \the [tool].")
-	target.custom_pain("Something in your [affected.name] is causing you a lot of pain!",1)
+	target.custom_pain("Something in your [affected.name] is causing you a lot of pain!",0)
 	..()
 
 /datum/surgery_step/fix_dead_tissue/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool,datum/surgery/surgery)

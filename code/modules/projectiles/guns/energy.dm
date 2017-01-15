@@ -141,25 +141,6 @@
 /obj/item/weapon/gun/energy/ui_action_click()
 	toggle_gunlight()
 
-/obj/item/weapon/gun/energy/suicide_act(mob/user)
-	if(can_shoot())
-		user.visible_message("<span class='suicide'>[user] is putting the barrel of the [name] in \his mouth.  It looks like \he's trying to commit suicide.</span>")
-		sleep(25)
-		if(user.l_hand == src || user.r_hand == src)
-			user.visible_message("<span class='suicide'>[user] melts \his face off with the [name]!</span>")
-			playsound(loc, fire_sound, 50, 1, -1)
-			var/obj/item/ammo_casing/energy/shot = ammo_type[select]
-			power_supply.use(shot.e_cost)
-			update_icon()
-			return(FIRELOSS)
-		else
-			user.visible_message("<span class='suicide'>[user] panics and starts choking to death!</span>")
-			return(OXYLOSS)
-	else
-		user.visible_message("<span class='suicide'>[user] is pretending to blow \his brains out with the [name]! It looks like \he's trying to commit suicide!</b></span>")
-		playsound(loc, 'sound/weapons/empty.ogg', 50, 1, -1)
-		return (OXYLOSS)
-
 /obj/item/weapon/gun/energy/proc/robocharge()
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/R = loc

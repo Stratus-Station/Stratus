@@ -535,14 +535,6 @@
 	build_path = /obj/item/ammo_casing/shotgun/rubbershot
 	category = list("initial", "Security")
 
-/datum/design/c38
-	name = "Speed Loader (.38)"
-	id = "c38"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 30000)
-	build_path = /obj/item/ammo_box/c38
-	category = list("initial", "Security")
-
 /datum/design/radio_headset
 	name = "Radio Headset"
 	id = "radio_headset"
@@ -568,38 +560,6 @@
 	category = list("initial", "Communication")
 
 //hacked autolathe recipes
-/datum/design/c45
-	name = "Ammo Box (.45)"
-	id = "c45"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 30000)
-	build_path = /obj/item/ammo_box/c45
-	category = list("hacked", "Security")
-
-/datum/design/a357
-	name = "Ammo Box (.357)"
-	id = "a357"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 30000)
-	build_path = /obj/item/ammo_box/a357
-	category = list("hacked", "Security")
-
-/datum/design/c9mm
-	name = "Ammo Box (9mm)"
-	id = "c9mm"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 30000)
-	build_path = /obj/item/ammo_box/c9mm
-	category = list("hacked", "Security")
-
-/datum/design/c10mm
-	name = "Ammo Box (10mm)"
-	id = "c10mm"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 30000)
-	build_path = /obj/item/ammo_box/c10mm
-	category = list("hacked", "Security")
-
 /datum/design/buckshot_shell
 	name = "Buckshot Shell"
 	id = "buckshot_shell"

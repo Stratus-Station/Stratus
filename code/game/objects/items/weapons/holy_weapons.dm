@@ -12,10 +12,6 @@
 	var/reskin_selectable = TRUE			//set to FALSE if a subtype is meant to not normally be available as a reskin option (fluff ones will get re-added through their list)
 	var/list/fluff_transformations = list() //does it have any special transformations only accessible to it? Should only be subtypes of /obj/item/weapon/nullrod
 
-/obj/item/weapon/nullrod/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is killing \himself with \the [src.name]! It looks like \he's trying to get closer to god!</span>")
-	return (BRUTELOSS|FIRELOSS)
-
 /obj/item/weapon/nullrod/attack(mob/M, mob/living/carbon/user)
 	..()
 	if(M.mind)
@@ -556,7 +552,7 @@
 		else
 			to_chat(missionary, "<span class='notice'>You successfully convert [target] to your cause. The following grows because of your faith!</span>")
 			faith -= 100
-	else if(target.mind.assigned_role == "Civilian")
+	else if(target.mind.assigned_role == "Visitor")
 		if(prob(55))	//55% chance to take LESS faith than normal, because civies are stupid and easily manipulated
 			to_chat(missionary, "<span class='notice'>Your message seems to resound well with [target]; converting them was much easier than expected.</span>")
 			faith -= 50

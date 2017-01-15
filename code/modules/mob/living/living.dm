@@ -51,6 +51,13 @@
 		return 0
 	if(!..())
 		return 0
+
+	//for pointing guns at people if that's yoor thing
+	if(is_point_aim(A))
+		var/obj/item/weapon/gun/G = get_active_hand()
+		A.visible_message("<span class='warning'><b>[src] points \the [G] at [A]!", "<span class='danger'><font size=4><b>[src] points \the [G] at you!")
+		return 1
+
 	visible_message("<b>[src]</b> points to [A]")
 	return 1
 

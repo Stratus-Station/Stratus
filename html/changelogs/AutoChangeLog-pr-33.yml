@@ -1,0 +1,5 @@
+author: "MarsM0nd"
+delete-after: True
+changes: 
+  - rscadd: "A new module type that puts the item into your hand, similar to the water backpacks."
+  - bugfix: "put_in_l/r_hand doesn't put items into missing hands anymore."

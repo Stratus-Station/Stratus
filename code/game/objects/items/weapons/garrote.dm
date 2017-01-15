@@ -63,7 +63,7 @@
 		return
 
 	if(M == U)
-		U.suicide() // This will display a prompt for confirmation first.
+		to_chat(U, "You don't think garroting yourself is a smart idea...") // This will display a prompt for confirmation first.
 		return
 
 	if(M.dir != U.dir)
@@ -160,9 +160,3 @@
 
 	strangling.Silence(3) // Non-improvised effects
 	strangling.apply_damage(4, OXY, "head")
-
-
-/obj/item/weapon/twohanded/garrote/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is wrapping the [src] around \his neck and pulling the handles! It looks like \he's trying to commit suicide.</span>")
-	playsound(src.loc, 'sound/weapons/cablecuff.ogg', 15, 1, -1)
-	return (OXYLOSS)

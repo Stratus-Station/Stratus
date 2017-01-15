@@ -1559,7 +1559,7 @@
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)	mind.assigned_role = "Civilian"	//defualt
+	if(!mind.assigned_role)	mind.assigned_role = "Visitor"	//defualt
 
 /mob/proc/sync_mind()
 	mind_initialize()  //updates the mind (or creates and initializes one if one doesn't exist)

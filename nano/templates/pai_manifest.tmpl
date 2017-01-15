@@ -79,7 +79,7 @@ Copy-pasted from pda.tmpl
 			{{/for}}
 		{{/if}}
 		{{if data.manifest.civ}}
-			<tr><th colspan="3" class="civ">Civilian</th></tr>
+			<tr><th colspan="3" class="civ">Visitors</th></tr>
 			{{for data.manifest["civ"]}}
 				{{if value.rank == "Head of Personnel"}}
 					<tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>

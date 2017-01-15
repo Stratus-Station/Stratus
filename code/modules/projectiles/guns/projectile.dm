@@ -135,22 +135,6 @@
 		boolets += magazine.ammo_count()
 	return boolets
 
-/obj/item/weapon/gun/projectile/suicide_act(mob/user)
-	if(chambered && chambered.BB && !chambered.BB.nodamage)
-		user.visible_message("<span class='suicide'>[user] is putting the barrel of the [name] in \his mouth.  It looks like \he's trying to commit suicide.</span>")
-		sleep(25)
-		if(user.l_hand == src || user.r_hand == src)
-			process_fire(user, user, 0, zone_override = "head")
-			user.visible_message("<span class='suicide'>[user] blows \his brains out with the [name]!</span>")
-			return(BRUTELOSS)
-		else
-			user.visible_message("<span class='suicide'>[user] panics and starts choking to death!</span>")
-			return(OXYLOSS)
-	else
-		user.visible_message("<span class='suicide'>[user] is pretending to blow \his brains out with the [name]! It looks like \he's trying to commit suicide!</b></span>")
-		playsound(loc, 'sound/weapons/empty.ogg', 50, 1, -1)
-		return (OXYLOSS)
-
 /obj/item/weapon/gun/projectile/proc/sawoff(mob/user)
 	if(sawn_state == SAWN_OFF)
 		to_chat(user, "<span class='warning'>\The [src] is already shortened!</span>")

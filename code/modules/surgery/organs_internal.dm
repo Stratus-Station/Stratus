@@ -101,11 +101,10 @@
 		if(target.get_int_organ(I))
 			to_chat(user, "<span class='warning'> \The [target] already has [I].</span>")
 			return -1
-
 		if(affected)
 			user.visible_message("[user] starts transplanting \the [tool] into [target]'s [affected.name].", \
 			"You start transplanting \the [tool] into [target]'s [affected.name].")
-			H.custom_pain("Someone's rooting around in your [affected.name]!",1)
+			H.custom_pain("Someone's rooting around in your [affected.name]!",2)
 		else
 			user.visible_message("[user] starts transplanting \the [tool] into [target]'s [parse_zone(target_zone)].", \
 			"You start transplanting \the [tool] into [target]'s [parse_zone(target_zone)].")

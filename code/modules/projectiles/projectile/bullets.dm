@@ -42,6 +42,7 @@
 	damage = 5
 	weaken = 3
 	stamina = 60
+	icon_state = "bullet-r"
 
 /obj/item/projectile/bullet/weakbullet2/rubber //detective's bullets that don't embed
 	embed = 0
@@ -50,6 +51,13 @@
 /obj/item/projectile/bullet/weakbullet3
 	damage = 20
 
+/obj/item/projectile/bullet/weakbullet4
+	name = "rubber bullet"
+	damage = 5
+	stamina = 30
+	icon_state = "bullet-r"
+	embed = 0
+	sharp = 0
 
 /obj/item/projectile/bullet/toxinbullet
 	damage = 15
@@ -133,8 +141,11 @@
 
 /obj/item/projectile/bullet/rpellet
 	name = "rubber pellet"
-	damage = 3
-	stamina = 25
+	damage = 1.5
+	stamina = 19
+	embed = 0
+	sharp = 0
+	icon_state = "bullet-r"
 
 /obj/item/projectile/bullet/stunshot//taser slugs for shotguns, nothing special
 	name = "stunshot"

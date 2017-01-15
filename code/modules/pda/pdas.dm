@@ -91,10 +91,6 @@
 	default_cartridge = /obj/item/weapon/cartridge/supervisor
 	icon_state = "pda-h"
 
-/obj/item/device/pda/heads/magistrate
-	default_cartridge = /obj/item/weapon/cartridge/supervisor
-	icon_state = "pda-h"
-
 /obj/item/device/pda/heads/blueshield
 	default_cartridge = /obj/item/weapon/cartridge/hos
 	icon_state = "pda-h"

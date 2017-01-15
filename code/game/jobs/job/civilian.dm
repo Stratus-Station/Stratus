@@ -1,16 +1,15 @@
-/datum/job/civilian
-	title = "Civilian"
-	flag = CIVILIAN
+/datum/job/visitor
+	title = "Visitor"
+	flag = VISITOR
 	department_flag = SUPPORT
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
-	access = list()			//See /datum/job/assistant/get_access()
-	minimal_access = list()	//See /datum/job/assistant/get_access()
-	alt_titles = list("Tourist","Businessman","Trader","Assistant")
+	access = list()			//See /datum/job/visitor/get_access()
+	minimal_access = list()	//See /datum/job/visitor/get_access()
 
-/datum/job/civilian/equip(var/mob/living/carbon/human/H)
+/datum/job/visitor/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
 	switch(H.backbag)
 		if(2) H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
@@ -21,7 +20,7 @@
 	H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
 	return 1
 
-/datum/job/civilian/get_access()
+/datum/job/visitor/get_access()
 	if(config.assistant_maint)
 		return list(access_maint_tunnels)
 	else

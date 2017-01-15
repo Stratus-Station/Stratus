@@ -1,0 +1,5 @@
+author: "DarkPyrolord"
+delete-after: True
+changes: 
+  - rscadd: "Adds in heat and cold levels for Vulpkanin and differentiates them from the human values."
+  - rscadd: "Also adds in heat and cold modifiers, Vulpkanin now take more damage from heat and less from the cold."

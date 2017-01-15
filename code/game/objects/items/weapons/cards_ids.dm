@@ -439,7 +439,7 @@
 						RebuildHTML()
 
 					if("Occupation")
-						var/new_job = sanitize(stripped_input(user,"What job would you like to put on this card?\nChanging occupation will not grant or remove any access levels.","Agent Card Occupation", "Civilian", MAX_MESSAGE_LEN))
+						var/new_job = sanitize(stripped_input(user,"What job would you like to put on this card?\nChanging occupation will not grant or remove any access levels.","Agent Card Occupation", "Visitor", MAX_MESSAGE_LEN))
 						if(!Adjacent(user))
 							return
 						src.assignment = new_job

@@ -140,7 +140,7 @@
 //The Griffin's special recruit abilitiy
 /obj/effect/proc_holder/spell/targeted/recruit
 	name = "Recruit Greyshirt"
-	desc = "Allows you to recruit a conscious, non-braindead, non-catatonic human to be part of the Greyshirts, your personal henchmen. This works on Civilians only and you can recruit a maximum of 3!."
+	desc = "Allows you to recruit a conscious, non-braindead, non-catatonic human to be part of the Greyshirts, your personal henchmen. This works on Visitors only and you can recruit a maximum of 3!."
 	charge_max = 450
 	clothes_req = 0
 	range = 1 //Adjacent to user
@@ -168,8 +168,8 @@
 			to_chat(usr, "<span class='warning'>You can only recruit humans.</span>")
 			charge_counter = charge_max
 			return
-		if(target.mind.assigned_role != "Civilian")
-			to_chat(usr, "<span class='warning'>You can only recruit Civilians.</span>")
+		if(target.mind.assigned_role != "Visitor")
+			to_chat(usr, "<span class='warning'>You can only recruit Visitors.</span>")
 		if(recruiting)
 			to_chat(usr, "<span class='danger'>You are already recruiting!</span>")
 			charge_counter = charge_max

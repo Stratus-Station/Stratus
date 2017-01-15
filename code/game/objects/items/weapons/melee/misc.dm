@@ -15,11 +15,6 @@
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
 	hitsound = 'sound/weapons/slash.ogg' //pls replace
 
-
-/obj/item/weapon/melee/chainofcommand/suicide_act(mob/user)
-		to_chat(viewers(user), "<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-		return (OXYLOSS)
-
 /obj/item/weapon/melee/rapier
 	name = "captain's rapier"
 	desc = "An elegant weapon, for a more civilized age."

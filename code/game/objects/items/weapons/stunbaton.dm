@@ -14,10 +14,6 @@
 	var/obj/item/weapon/stock_parts/cell/high/bcell = null
 	var/hitcost = 1500
 
-/obj/item/weapon/melee/baton/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
-	return (FIRELOSS)
-
 /obj/item/weapon/melee/baton/New()
 	..()
 	update_icon()
@@ -202,6 +198,7 @@
 	item_state = "prod"
 	force = 3
 	throwforce = 5
+	w_class = 4
 	stunforce = 5
 	hitcost = 3750
-	slot_flags = null
+	slot_flags = SLOT_BACK

@@ -237,7 +237,7 @@ var/list/uplink_items = list()
 	reference = "PG"
 	item = /obj/item/clothing/gloves/color/black/thief
 	cost = 6
-	job = list("Civilian")
+	job = list("Visitor")
 
 //Bartender
 

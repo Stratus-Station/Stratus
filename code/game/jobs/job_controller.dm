@@ -111,7 +111,7 @@ var/global/datum/controller/occupations/job_master
 			if(!job)
 				continue
 
-			if(istype(job, GetJob("Civilian"))) // We don't want to give him assistant, that's boring!
+			if(istype(job, GetJob("Visitor"))) // We don't want to give him assistant, that's boring!
 				continue
 
 			if(job.title in command_positions) //If you want a command position, select it!
@@ -262,14 +262,14 @@ var/global/datum/controller/occupations/job_master
 		HandleFeedbackGathering()
 
 		//People who wants to be assistants, sure, go on.
-		Debug("DO, Running Civilian Check 1")
-		var/datum/job/civ = new /datum/job/civilian()
-		var/list/civilian_candidates = FindOccupationCandidates(civ, 3)
-		Debug("AC1, Candidates: [civilian_candidates.len]")
-		for(var/mob/new_player/player in civilian_candidates)
+		Debug("DO, Running Visito Check 1")
+		var/datum/job/civ = new /datum/job/visitor()
+		var/list/visitor_candidates = FindOccupationCandidates(civ, 3)
+		Debug("AC1, Candidates: [visitor_candidates.len]")
+		for(var/mob/new_player/player in visitor_candidates)
 			Debug("AC1 pass, Player: [player]")
-			AssignRole(player, "Civilian")
-			civilian_candidates -= player
+			AssignRole(player, "Visitor")
+			visitor_candidates -= player
 		Debug("DO, AC1 end")
 
 		//Select one head
@@ -363,13 +363,13 @@ var/global/datum/controller/occupations/job_master
 			if(player.mind.special_role)
 				GiveRandomJob(player)
 				if(player in unassigned)
-					AssignRole(player, "Civilian")
+					AssignRole(player, "Visitor")
 
 		// Then we assign what we can to everyone else.
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == BE_ASSISTANT)
 				Debug("AC2 Assistant located, Player: [player]")
-				AssignRole(player, "Civilian")
+				AssignRole(player, "Visitor")
 			else if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 				player.ready = 0
 				unassigned -= player

@@ -51,7 +51,7 @@
 		if("Research Director")
 			suit=/obj/item/clothing/suit/space/eva/plasmaman/science/rd
 			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/science/rd
-		if("Station Engineer", "Mechanic")
+		if("Station Engineer", "Explorer")
 			suit=/obj/item/clothing/suit/space/eva/plasmaman/engineer/
 			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/engineer/
 		if("Chief Engineer")
@@ -67,9 +67,6 @@
 			suit=/obj/item/clothing/suit/space/eva/plasmaman/security/
 			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/security/
 			H.equip_or_collect(new /obj/item/weapon/gun/energy/gun/advtaser(H), slot_in_backpack)
-		if("Magistrate")
-			suit=/obj/item/clothing/suit/space/eva/plasmaman/magistrate
-			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/magistrate
 		if("Head of Security")
 			suit=/obj/item/clothing/suit/space/eva/plasmaman/security/hos
 			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/security/hos
@@ -111,7 +108,7 @@
 		if("Janitor")
 			suit=/obj/item/clothing/suit/space/eva/plasmaman/janitor
 			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/janitor
-		if("Civilian", "Barber")
+		if("Visitor", "Barber")
 			suit=/obj/item/clothing/suit/space/eva/plasmaman/assistant
 			helm=/obj/item/clothing/head/helmet/space/eva/plasmaman/assistant
 		if("Clown")

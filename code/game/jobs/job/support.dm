@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#c3ffa0"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_weapons, access_mineral_storeroom)
 	minimal_access = list(access_bar, access_maint_tunnels, access_weapons, access_mineral_storeroom)
 
@@ -25,7 +25,6 @@
 		H.equip_or_collect(new /obj/item/device/pda/bar(H), slot_wear_pda)
 		H.equip_or_collect(new /obj/item/weapon/storage/belt/bandolier/full(H), slot_in_backpack)
 		H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
-		H.equip_or_collect(new /obj/item/toy/russian_revolver(H), slot_in_backpack)
 
 		H.dna.SetSEState(SOBERBLOCK,1)
 		H.mutations += SOBER
@@ -42,7 +41,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#c3ffa0"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
 	minimal_access = list(access_kitchen, access_maint_tunnels)
 	alt_titles = list("Cook","Culinary Artist","Butcher")
@@ -72,7 +71,7 @@
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#c3ffa0"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics, access_maint_tunnels)
 	alt_titles = list("Hydroponicist", "Botanical Researcher")
@@ -104,7 +103,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#ffdd7a"
 	idtype = /obj/item/weapon/card/id/supply
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
@@ -134,7 +133,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the quartermaster"
-	selection_color = "#dddddd"
+	selection_color = "#ffebb2"
 	idtype = /obj/item/weapon/card/id/supply
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_mineral_storeroom)
@@ -162,7 +161,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster"
-	selection_color = "#dddddd"
+	selection_color = "#ffebb2"
 	idtype = /obj/item/weapon/card/id/supply
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_mining, access_mint, access_mining_station, access_mailsorting, access_maint_tunnels, access_mineral_storeroom)
@@ -201,7 +200,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#ffb2fb"
 	idtype = /obj/item/weapon/card/id/clown
 	access = list(access_clown, access_theatre, access_maint_tunnels)
 	minimal_access = list(access_clown, access_theatre, access_maint_tunnels)
@@ -245,7 +244,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#eeeeee"
 	idtype = /obj/item/weapon/card/id/mime
 	access = list(access_mime, access_theatre, access_maint_tunnels)
 	minimal_access = list(access_mime, access_theatre, access_maint_tunnels)
@@ -285,7 +284,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#bbbbbb"
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
 	alt_titles = list("Custodial Technician")
@@ -314,7 +313,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#bbbbbb"
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library, access_maint_tunnels)
 	alt_titles = list("Journalist")
@@ -344,7 +343,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
+	selection_color = "#bbbbbb"
 	alt_titles = list("Hair Stylist","Beautician")
 	access = list(access_maint_tunnels)
 	minimal_access = list(access_maint_tunnels)
@@ -362,4 +361,32 @@
 		H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
 		H.equip_or_collect(new /obj/item/weapon/storage/box/barber(H), slot_in_backpack)
 		H.equip_or_collect(new /obj/item/weapon/storage/box/lip_stick(H), slot_in_backpack)
+		return 1
+
+/datum/job/explorer
+	title = "Explorer"
+	flag = EXPLORER
+	department_flag = KARMA
+	total_positions = 2
+	spawn_positions = 1
+	supervisors = "the head of personnel"
+	selection_color = "#bbbbbb"
+	idtype = /obj/item/weapon/card/id
+	access = list(access_tech_storage, access_maint_tunnels, access_mechanic, access_external_airlocks, access_mineral_storeroom, access_eva, access_gateway)
+	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_mechanic, access_external_airlocks, access_mineral_storeroom, access_eva, access_gateway)
+	alt_titles = list("Spacepod Mechanic")
+
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.equip_or_collect(new /obj/item/device/radio/headset(H), slot_l_ear)
+		switch(H.backbag)
+			if(2) H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
+			if(3) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+			if(4) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+		H.equip_or_collect(new /obj/item/clothing/under/rank/explorer(H), slot_w_uniform)
+		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
+		H.equip_or_collect(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
+		H.equip_or_collect(new /obj/item/device/pda(H), slot_wear_pda)
+		H.equip_or_collect(new /obj/item/weapon/storage/box/engineer(H), slot_in_backpack)
+		H.equip_or_collect(new /obj/item/weapon/pod_paint_bucket(H), slot_in_backpack)
 		return 1

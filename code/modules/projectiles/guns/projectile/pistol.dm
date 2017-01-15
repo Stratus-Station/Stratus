@@ -54,6 +54,14 @@
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
 
+/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45
+	name = "Enforcer .45"
+	desc = "A pistol of modern design. Standard issue for Nanotrasen Asset Protection units."
+	icon_state = "enforcer"
+	force = 10
+	mag_type = /obj/item/ammo_box/magazine/m45/enforcer45
+	can_suppress = 0
+
 /obj/item/weapon/gun/projectile/automatic/pistol/APS
 	name = "stechkin APS pistol"
 	desc = "The original russian version of a widely used Syndicate sidearm. Uses 9mm ammo."

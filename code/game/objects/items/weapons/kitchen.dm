@@ -103,12 +103,6 @@
 	sharp = 1
 	edge = 1
 
-/obj/item/weapon/kitchen/knife/suicide_act(mob/user)
-	user.visible_message(pick("<span class='suicide'>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
-						"<span class='suicide'>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
-						"<span class='suicide'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>"))
-	return (BRUTELOSS)
-
 /obj/item/weapon/kitchen/knife/plastic
 	name = "plastic knife"
 	desc = "The bluntest of blades."

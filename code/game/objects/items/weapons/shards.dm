@@ -15,11 +15,6 @@
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
-/obj/item/weapon/shard/suicide_act(mob/user)
-		to_chat(viewers(user), pick("<span class='danger'>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>",
-									"<span class='danger'>[user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>"))
-		return (BRUTELOSS)
-
 /obj/item/weapon/shard/New()
 	src.icon_state = pick("large", "medium", "small")
 	switch(src.icon_state)

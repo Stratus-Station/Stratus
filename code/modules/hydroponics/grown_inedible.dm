@@ -46,10 +46,6 @@
 	origin_tech = "combat=1"
 	attack_verb = list("stung")
 
-/obj/item/weapon/grown/nettle/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is eating some of the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	return (BRUTELOSS|TOXLOSS)
-
 /obj/item/weapon/grown/nettle/pickup(mob/living/user)
 	if(!iscarbon(user))
 		return 0

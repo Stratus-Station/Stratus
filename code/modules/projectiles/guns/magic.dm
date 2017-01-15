@@ -74,8 +74,3 @@
 /obj/item/weapon/gun/magic/shoot_with_empty_chamber(mob/living/user as mob|obj)
 	to_chat(user, "<span class='warning'>The [name] whizzles quietly.<span>")
 	return
-
-/obj/item/weapon/gun/magic/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is twisting the [name] above \his head, releasing a magical blast! It looks like \he's trying to commit suicide.</span>")
-	playsound(loc, fire_sound, 50, 1, -1)
-	return FIRELOSS

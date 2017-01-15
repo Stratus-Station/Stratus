@@ -1,0 +1,9 @@
+author: "FlattestGuitar"
+delete-after: True
+changes: 
+  - rscadd: "Does the changelog system even work?"
+  - rscadd: "Adds crawling"
+  - rscadd: "Adds dying."
+  - rscadd: "Wait what?"
+  - rscadd: "Yeah, I said that."
+  - tweak: "Hrm..."

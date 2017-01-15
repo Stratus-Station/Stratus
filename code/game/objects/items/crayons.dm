@@ -20,10 +20,6 @@
 	var/dat
 	var/list/validSurfaces = list(/turf/simulated/floor)
 
-/obj/item/toy/crayon/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</span>")
-	return (BRUTELOSS|OXYLOSS)
-
 /obj/item/toy/crayon/New()
 	..()
 	name = "[colourName] crayon" //Makes crayons identifiable in things like grinders

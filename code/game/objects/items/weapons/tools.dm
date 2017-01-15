@@ -49,11 +49,6 @@
 	attack_verb = list("stabbed")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
-	suicide_act(mob/user)
-		to_chat(viewers(user), pick("<span class='suicide'>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</span>", \
-									"<span class='suicide'>[user] is stabbing the [src.name] into \his heart! It looks like \he's trying to commit suicide.</span>"))
-		return(BRUTELOSS)
-
 /obj/item/weapon/screwdriver/New()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
 		if("red")
@@ -174,10 +169,6 @@
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))
 		to_chat(user, "It contains [get_fuel()] unit\s of fuel out of [max_fuel].")
-
-/obj/item/weapon/weldingtool/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] welds \his every orifice closed! It looks like \he's trying to commit suicide..</span>")
-	return (FIRELOSS)
 
 /obj/item/weapon/weldingtool/proc/update_torch()
 	overlays.Cut()

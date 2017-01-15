@@ -481,13 +481,6 @@ var/global/list/datum/stack_recipe/cable_coil_recipes = list(
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 
-/obj/item/stack/cable_coil/suicide_act(mob/user)
-	if(locate(/obj/structure/stool) in user.loc)
-		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	else
-		user.visible_message("<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	return(OXYLOSS)
-
 /obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/paramcolor = null)
 	..()
 	src.amount = length

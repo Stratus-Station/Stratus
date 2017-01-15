@@ -9,11 +9,6 @@
 	var/mob/affecting = null
 	var/deity_name = "Christ"
 
-	suicide_act(mob/user)
-		to_chat(viewers(user), "<span class='warning'><b>[user] stares into [src.name] and attempts to trascend understanding of the universe!</b></span>")
-		return (user.dust())
-
-
 /obj/item/weapon/storage/bible/booze
 	name = "bible"
 	desc = "To be applied to the head repeatedly."

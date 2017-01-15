@@ -370,8 +370,10 @@
 		M.adjustBruteLoss(-2*REAGENTS_EFFECT_MULTIPLIER)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.traumatic_shock < 100)
-			H.shock_stage = 0
+		if(H.traumatic_shock < 100 && prob(25))
+			H.shock_stage -= 1
+		if(prob(2) && H.heart_attack)
+			H.heart_attack = 0
 	..()
 
 /datum/reagent/medicine/salbutamol

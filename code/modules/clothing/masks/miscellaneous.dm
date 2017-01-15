@@ -355,9 +355,3 @@
 		to_chat(H, "<span class='danger'>[src] grips your face!</span>")
 		if(H.mind && H.mind.assigned_role != "Cluwne")
 			H.makeCluwne()
-
-/obj/item/clothing/mask/cursedclown/suicide_act(mob/user)
-	user.visible_message("<span class='danger'>[user] gazes into the eyes of [src]. [src] gazes back!</span>")
-	spawn(10)
-		user.gib()
-	return BRUTELOSS

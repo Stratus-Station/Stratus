@@ -79,7 +79,7 @@ var/list/karma_spenders = list()
 		to_chat(src, "<span class='warning'>You can't spend karma on someone connected from the same IP.</span>")
 		return 0
 	return 1
-	
+
 
 /mob/verb/spend_karma_list()
 	set name = "Award Karma"
@@ -197,8 +197,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy=3'>Unlock Nanotrasen Representative -- 30KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy=5'>Unlock Blueshield -- 30KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy=9'>Unlock Security Pod Pilot -- 30KP</a><br>
-			<a href='?src=[UID()];karmashop=shop;KarmaBuy=6'>Unlock Mechanic -- 30KP</a><br>
-			<a href='?src=[UID()];karmashop=shop;KarmaBuy=7'>Unlock Magistrate -- 45KP</a><br>
+			<a href='?src=[UID()];karmashop=shop;KarmaBuy=6'>Unlock Explorer -- 30KP</a><br>
 			"}
 
 		if(1) // Species Unlocks

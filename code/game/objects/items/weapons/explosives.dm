@@ -87,34 +87,6 @@
 			to_chat(user, "<span class='notice'>You plant the bomb. Timer counting down from [det_time].</span>")
 			addtimer(src, "prime", det_time*10)
 
-/obj/item/weapon/grenade/plastic/suicide_act(mob/user)
-	message_admins("[key_name_admin(user)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) (<A HREF='?_src_=holder;adminplayerobservefollow=\ref[user]'>FLW</A>) suicided with [src.name] at ([user.x],[user.y],[user.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)",0,1)
-	message_admins("[key_name(user)] suicided with [name] at ([user.x],[user.y],[user.z])")
-	user.visible_message("<span class='suicide'>[user] activates the [name] and holds it above \his head! It looks like \he's going out with a bang!</span>")
-	var/message_say = "FOR NO RAISIN!"
-	if(user.mind)
-		if(user.mind.special_role)
-			var/role = lowertext(user.mind.special_role)
-			if(role == ROLE_TRAITOR || role == "syndicate" || role == "syndicate commando")
-				message_say = "FOR THE SYNDICATE!"
-			else if(role == ROLE_CHANGELING)
-				message_say = "FOR THE HIVE!"
-			else if(role == ROLE_CULTIST)
-				message_say = "FOR NARSIE!"
-			else if(role == ROLE_NINJA)
-				message_say = "FOR THE CLAN!"
-			else if(role == ROLE_WIZARD)
-				message_say = "FOR THE FEDERATION!"
-			else if(role == ROLE_REV || role == "head revolutionary")
-				message_say = "FOR THE REVOLOUTION!"
-			else if(role == "death commando" || role == ROLE_ERT)
-				message_say = "FOR NANOTRASEN!"
-	user.say(message_say)
-	target = user
-	sleep(10)
-	prime()
-	user.gib()
-
 /obj/item/weapon/grenade/plastic/update_icon()
 	if(nadeassembly)
 		icon_state = "[item_state]1"

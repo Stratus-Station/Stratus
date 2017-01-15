@@ -74,3 +74,10 @@
 	icon_state = "mechanic"
 	item_state = "mechanic"
 	item_color = "mechanic"
+
+/obj/item/clothing/under/rank/explorer
+	desc = "A comfortable set of clothing for the ones brave enough the explore the uncharted."
+	name = "explorer's jumpsuit"
+	icon_state = "robotics2"
+	item_state = "jensensuit"//looked kinda similar
+	item_color = "robotics2"

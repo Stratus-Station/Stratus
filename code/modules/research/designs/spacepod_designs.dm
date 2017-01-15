@@ -3,7 +3,7 @@
 	name = "Circuit Design (Space Pod Mainboard)"
 	desc = "Allows for the construction of a Space Pod mainboard."
 	id = "spacepod_main"
-	req_tech = list("materials" = 1) //All parts required to build a basic pod have materials 1, so the mechanic can do his damn job.
+	req_tech = list("materials" = 1) //All parts required to build a basic pod have materials 1
 	build_type = PODFAB
 	materials = list(MAT_METAL=5000)
 	build_path = /obj/item/weapon/circuitboard/mecha/pod

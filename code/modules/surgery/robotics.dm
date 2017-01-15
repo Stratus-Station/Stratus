@@ -327,7 +327,7 @@
 
 		user.visible_message("[user] begins reattaching [target]'s [tool].", \
 		"You start reattaching [target]'s [tool].")
-		target.custom_pain("Someone's rooting around in your [affected.name]!",1)
+		target.custom_pain("Someone's rooting around in your [affected.name]!",2)
 	else if(istype(tool,/obj/item/device/mmi))
 		current_type = "install"
 
@@ -388,7 +388,7 @@
 				user.visible_message("[user] starts to decouple [target]'s [I] with \the [tool].", \
 				"You start to decouple [target]'s [I] with \the [tool]." )
 
-				target.custom_pain("The pain in your [affected.name] is living hell!",1)
+				target.custom_pain("The pain in your [affected.name] is living hell!",2)
 			else
 				return -1
 
@@ -404,7 +404,7 @@
 					user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 					"You start mending the damage to [target]'s [I.name]'s mechanisms." )
 
-		target.custom_pain("The pain in your [affected.name] is living hell!",1)
+		target.custom_pain("The pain in your [affected.name] is living hell!",2)
 
 	else if(implement_type in implements_finish)
 		current_type = "finish"
@@ -521,7 +521,7 @@
 	user.visible_message("[user] starts to decouple [target]'s [affected.name] with \the [tool].", \
 	"You start to decouple [target]'s [affected.name] with \the [tool]." )
 
-	target.custom_pain("Your [affected.amputation_point] is being ripped apart!",1)
+	target.custom_pain("Your [affected.amputation_point] is being ripped apart!",5)
 	..()
 
 /datum/surgery_step/robotics/external/amputate/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool,datum/surgery/surgery)

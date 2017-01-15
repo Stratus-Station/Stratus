@@ -1,20 +1,22 @@
-# Paradise
+# Stratus
 
-[Website](http://www.nanotrasen.se/) - [Code](https://github.com/ParadiseSS13/Paradise) - [IRC](http://www.nanotrasen.se/phpBB3/viewtopic.php?f=10&t=1113)
+We're running a slightly modified version of Paradise Station, a fork of the game SS13.
+
+[Website](http://ntdsf13.boards.net) - [Code](https://github.com/StratusSS13/Stratus) - [Discord](https://discord.gg/dXV528r)
 
 ---
 
 ### GETTING THE CODE
 The simplest way to obtain the code is using the github .zip feature.
 
-Click [here](https://github.com/ParadiseSS13/Paradise/archive/master.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
+Click [here](https://github.com/StratusSS13/Stratus) and simply download a .zip file of the whole codebase.
 
 The more complicated and easier to update method is using git.  
 You'll need to download git or some client from [here](http://git-scm.com/).  
 When that's installed, right click in any folder and click on "Git Bash".  
 When that opens, type in:
 
-    git clone https://github.com/ParadiseSS13/Paradise.git
+    git clone https://github.com/StratusSS13/Stratus.git
 
 (hint: hold down ctrl and press insert to paste into git bash)
 
@@ -31,13 +33,13 @@ Open paradise.dme by double-clicking it, open the Build menu, and click compile.
 This'll take a little while, and if everything's done right,
 you'll get a message like this:
 
-    saving paradise.dmb (DEBUG mode)
+    saving stratus.dmb (DEBUG mode)
 
-    paradise.dmb - 0 errors, 0 warnings
+    stratus.dmb - 0 errors, 0 warnings
 
 If you see any errors or warnings,
 something has gone wrong - possibly a corrupt download or the files extracted wrong,
-or a code issue on the main repo.  Ask on IRC.
+or a code issue on the main repo.  Ask on the Discord.
 
 Once that's done, open up the config folder.  
 You'll want to edit config.txt to set your server location,
@@ -121,9 +123,9 @@ including addons and modifications you have made.
 See [this](https://www.gnu.org/licenses/why-affero-gpl.html) for more information.
 
 Any files located in the
-`Paradise/goon`,
-`Paradise/icons/goonstation`, or
-`Paradise/sound/goonstation`
+`Stratus/goon`,
+`Stratus/icons/goonstation`, or
+`Stratus/sound/goonstation`
 directories, or any subdirectories of mentioned directories are licensed under the
 Creative Commons 3.0 BY-NC-SA license
 (https://creativecommons.org/licenses/by-nc-sa/3.0)
@@ -131,6 +133,3 @@ Creative Commons 3.0 BY-NC-SA license
 All other assets including icons and sound files are licensed under the
 Creative Commons 3.0 BY-SA license (https://creativecommons.org/licenses/by-sa/3.0/),
 unless otherwise indicated.
-
-
-

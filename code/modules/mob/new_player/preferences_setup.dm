@@ -418,7 +418,7 @@
 	var/uniform_dmi='icons/mob/uniform.dmi'
 	if(disabilities&DISABILITY_FLAG_FAT)
 		uniform_dmi='icons/mob/uniform_fat.dmi'
-	if(job_support_low & CIVILIAN)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
+	if(job_support_low & VISITOR)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
 		clothes_s = new /icon(uniform_dmi, "grey_s")
 		clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 		if(backbag == 2)
@@ -855,7 +855,7 @@
 					clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
 	else if(job_karma_high)
 		switch(job_karma_high)
-			if(MECHANIC)
+			if(EXPLORER)
 				clothes_s = new /icon(uniform_dmi, "mechanic_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "orange"), ICON_UNDERLAY)
 				clothes_s.Blend(new /icon('icons/mob/belt.dmi', "utility"), ICON_OVERLAY)
@@ -911,19 +911,6 @@
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-norm"), ICON_OVERLAY)
 					if(4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-			if(JUDGE)
-				clothes_s = new /icon(uniform_dmi, "really_black_suit_s")
-				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "laceups"), ICON_UNDERLAY)
-				clothes_s.Blend(new /icon('icons/mob/head.dmi', "mercy_hood"), ICON_UNDERLAY)
-				clothes_s.Blend(new /icon('icons/mob/suit.dmi', "judge"), ICON_UNDERLAY)
-				switch(backbag)
-					if(2)
-						clothes_s.Blend(new /icon('icons/mob/back.dmi', "backpack"), ICON_OVERLAY)
-					if(3)
-						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-norm"), ICON_OVERLAY)
-					if(4)
-						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-
 	if(disabilities & NEARSIGHTED)
 		preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
 

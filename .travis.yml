@@ -10,8 +10,7 @@ env:
     - BYOND_MAJOR="510"
     - BYOND_MINOR="1346"
   matrix:
-    - DM_MAPFILE="cyberiad"
-    - DM_MAPFILE="metastation"
+    - DM_MAPFILE="stratus"
     - DM_MAPFILE="test_away_missions"
 
 cache:
@@ -30,7 +29,7 @@ before_script:
   - ./install-byond.sh
 script:
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - bash dm.sh -M${DM_MAPFILE} paradise.dme
+  - bash dm.sh -M${DM_MAPFILE} stratus.dme
 
 matrix:
   include:

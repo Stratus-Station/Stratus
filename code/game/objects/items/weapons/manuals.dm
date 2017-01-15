@@ -1136,7 +1136,7 @@
 				<h1><a name="Contents">Contents</a></h1>
 				<ol>
 					<li><a href="#Forward">A forward on using EVA gear</a></li>
-					<li><a href="#Civilian">Donning a Civilian Suits</a></li>
+					<li><a href="#Visitor">Donning a Visitor Suits</a></li>
 					<li><a href="#Hardsuit">Putting on a Hardsuit</a></li>
 					<li><a href="#Final">Final Checks</a></li>
 				</ol>
@@ -1147,9 +1147,9 @@
 
 				EVA gear. Wonderful to use. It's useful for mining, engineering, and occasionally just surviving, if things are that bad. Most people have EVA training,
 				but apparently there are some on a space station who don't. This guide should give you a basic idea of how to use this gear, safely. It's split into two sections:
-				 Civilian suits and hardsuits.<BR><BR>
+				 Visitor suits and hardsuits.<BR><BR>
 
-				<h1><a name="Civilian">Civilian Suits</a></h1><BR>
+				<h1><a name="Visitor">Visitor Suits</a></h1><BR>
 				<I>The bulkiest things this side of Alpha Centauri</I><BR>
 				These suits are the grey ones that are stored in EVA. They're the more simple to get on, but are also a lot bulkier, and provide less protection from environmental hazards such as radiaion or physical impact.
 				As Medical, Engineering, Security, and Mining all have hardsuits of their own, these don't see much use, but knowing how to put them on is quite useful anyways.<BR><BR>
@@ -1636,7 +1636,7 @@
                     <li>The Chief Engineer is bound to the same rules regarding the axe as Atmospheric Technicians;</li>
                     <li>The Chief Engineer is permitted to carry a telescopic baton and a flash; </li>
                     <li>The Chief Engineer is responsible for maintaining the integrity of the Gravitational Singularity Engine and/or the Supermatter Engine and/or the Tesla Engine. Neglecting this duty is grounds for termination should the Engine malfunction;</li>
-                    <li>The Chief Engineer is responsible for maintaining the integrity of the Cyberiad's Atmospherics System. Failure to maintain this integrity is grounds for termination;</li>
+                    <li>The Chief Engineer is responsible for maintaining the integrity of the Stratus' Atmospherics System. Failure to maintain this integrity is grounds for termination;</li>
                     <li>The Chief Engineer may declare an area "Condemned", if it is damaged to the point where repairs cannot reasonably be completed within an acceptable frame of time;</li>
                     <li>The Chief Engineer is permitted to grant Building Permits to crewmembers, but must keep the Station Blueprints in a safe location at all times.</li>
 				</ol>
@@ -1652,7 +1652,7 @@
                     <li>Engineers must constantly monitor the Supermatter Engine, if it is the chosen method of power generation, if it is currently active (ie, under Emitter Fire). This is not negotiable;</li>
                     <li>Engineers must respond promptly to breaches, regardless of size. Failure to report within fifteen (15) minutes will be considered a breach of Standard Operating Procedure, unless there are no spare Engineers to report or an Atmospheric Technician has arrived on scene first. All Hazard Zones must be cordoned off with Engineering Tape, for the sake of everyone else;</li>
                     <li>Engineers are permitted to hack doors to gain unauthorized access to locations if said locations happen to require urgent repairs;</li>
-                    <li>Engineers are to maintain the integrity of the Cyberiad's Power Network. In addition, hotwiring the Gravitational Singularity Engine, Supermatter Engine or Tesla Engine is strictly forbidden;</li>
+                    <li>Engineers are to maintain the integrity of the Stratus' Power Network. In addition, hotwiring the Gravitational Singularity Engine, Supermatter Engine or Tesla Engine is strictly forbidden;</li>
                     <li>Engineers must ensure there is at least one (1) engineering hardsuit available on the station at all times, unless there is an emergency that requires the use of all suits.</li>
 				</ol>
                 <br><br>
@@ -1672,7 +1672,7 @@
                 <h1><a name="mech"><B>Mechanic</B></a></h1><BR>
 				<ol>
 					<li>The Mechanic is not permitted to fit any weaponry onto constructed Space Pods without express permission by the Head of Security;</li>
-                    <li>The Mechanic is permitted to construct Space Pods for any crewmember that requests one, provided the Pods do not have any weaponry. Anyone possessing a Pod is to follow Mechanic SOP, Civilians included;</li>
+                    <li>The Mechanic is permitted to construct Space Pods for any crewmember that requests one, provided the Pods do not have any weaponry. Anyone possessing a Pod is to follow Mechanic SOP, Visitors included;</li>
                     <li>The Mechanic is not permitted to enter the Security Pod Bay, unless the Security Pod Pilot or Head of Security permit it;</li>
                     <li>The Mechanic is not permitted to bring any Space Pod into the actual station</li>
 				</ol>
@@ -2063,7 +2063,7 @@
 					<li>The Security Pod Pilot is not permitted to use the Laser Module during arrests, and must switch to the Disabler Module;</li>
 					<li>The Security Pod Pilot must carry around a spare set of tools and energy cell, for their own sake;</li>
 					<li>The Security Pod Pilot may immediately, and without warning, conduct arrests on individuals attempting to perform E.V.A actions near the AI Satellite. Exception is made if the AI Unit is malfunctioning;</li>
-					<li>The Security Pod Pilot is not permitted to explore the area surrounding the station, and must therefore be confined to the immediate orbital area of the NSS Cyberiad, the NXS Klapaucius (the Telecomms Satellite) and the Mining/Research Asteroid. Exception is made if the Head of Security permits otherwise.</li>
+					<li>The Security Pod Pilot is not permitted to explore the area surrounding the station, and must therefore be confined to the immediate orbital area of the NTDSF Stratus, the NXS Klapaucius (the Telecomms Satellite) and the Mining/Research Asteroid. Exception is made if the Head of Security permits otherwise.</li>
 				</ol><BR>
 
 				<h style='color: darkblue'>Code Blue</h>
@@ -2506,11 +2506,11 @@
 					<li>The Captain is not permitted to perform regular Security Duty. However, they may still assist Security if they are understaffed, or if they see a crime being committed. However, the Captain is not permitted to take items from the Armory under normal circumstances, unless authorized by the Head of Security. In addition, the Captain may not requisition weaponry for themselves from Cargo and/or Science, unless there's an immediate threat to station and/or crew;</li>
 					<li>If a Department lacks a Head of Staff, the Captain should make reasonable efforts to appoint an Acting Head of Staff, if there are available personnel to fill the position;</li>
 					<li>The Captain is to ensure that Space Law is being correctly applied. This should be done in cooperation with the Head of Security;</li>
-					<li>The Captain is not to leave the NSS Cyberiad unless given specific permission by Central Command, or it happens to be the end of the shift. This includes via space or via the Gateway. To do so is to be considered abandoning their posts and is grounds for termination;</li>
+					<li>The Captain is not to leave the NTDSF Stratus unless given specific permission by Central Command, or it happens to be the end of the shift. This includes via space or via the Gateway. To do so is to be considered abandoning their posts and is grounds for termination;</li>
 					<li>The Captain must keep the Nuclear Authentication Disk on their person at all times or, failing that, in the possession of the Head of Security or Blueshield;</li>
 					<li>The Captain is to attempt to resolve every issue that arises in Command locally before contacting Central Command;</li>
 					<li>The Captain is not permitted to carry their Antique Laser Gun or Space Armor unless there's an immediate emergency that requires attending to;</li>
-					<li>The Captain, despite being in charge of the Cyberiad, is not independent from NanoTrasen. Any attempts to disregard general company policy are to be considered an instant condition for contract termination;</li>
+					<li>The Captain, despite being in charge of the Stratus, is not independent from NanoTrasen. Any attempts to disregard general company policy are to be considered an instant condition for contract termination;</li>
 					<li>The Captain may only promote personnel to a Acting Head of Staff position if there is no assigned Head of Staff associated with the Department. Said Acting Head of Staff must be a member of the Department they are to lead. See below for more information on Chain of Command;</li>
                     <li>The Captain may not fire any Head of Staff without reasonable justification (ie, incompetency, criminal activity, or otherwise any action that endangers/compromises the station and/or crew). The Captain may not fire any Central Command VIPs (ie, Blueshield, Magistrate, NanoTrasen Representative) without permission from Central Command, unless they are blatantly acting against the well-being and safety of the crew and station.</li>
 				</ol><BR>

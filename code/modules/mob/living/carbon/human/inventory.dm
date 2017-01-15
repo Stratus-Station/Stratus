@@ -613,3 +613,13 @@
 			return 1
 
 	return 0 //Unsupported slot
+
+/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+	if(has_organ("l_hand"))
+		return ..()
+	return 0	//Missing the hand, don't equip and signal with the 0
+
+/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+	if(has_organ("r_hand"))
+		return ..()
+	return 0	//Missing the hand, don't equip and signal with the 0

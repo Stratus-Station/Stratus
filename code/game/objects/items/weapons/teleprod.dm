@@ -4,6 +4,7 @@
 	icon_state = "teleprod_nocell"
 	item_state = "teleprod"
 	origin_tech = "combat=2;bluespace=4;materials=3"
+	slot_flags = null
 
 /obj/item/weapon/melee/baton/cattleprod/teleprod/attack(mob/living/carbon/M, mob/living/carbon/user)//handles making things teleport when hit
 	..()
