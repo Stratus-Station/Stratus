@@ -77,8 +77,6 @@
 		drop_l_hand()
 	else
 		lying = 0
-	if(can_crawl)
-		canmove = 1
 	if(buckled)
 		lying = 90 * buckle_lying
 	else if((fall_over || resting) && !lying)
@@ -88,7 +86,7 @@
 			lying = 90
 		else if(dir == WEST && lying != 270)
 			lying = 270
-
+	canmove = can_crawl
 	density = !lying
 	if(lying)
 		if(layer == initial(layer))
