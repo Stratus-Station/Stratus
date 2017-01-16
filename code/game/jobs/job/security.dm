@@ -4,6 +4,7 @@
 	department_flag = ENGSEC
 	total_positions = 1
 	spawn_positions = 1
+	is_security = 1
 	supervisors = "the captain"
 	selection_color = "#ffdddd"
 	idtype = /obj/item/weapon/card/id/hos
@@ -53,6 +54,7 @@
 	department_flag = ENGSEC
 	total_positions = 1
 	spawn_positions = 1
+	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/security
@@ -96,6 +98,7 @@
 	department_flag = ENGSEC
 	total_positions = 1
 	spawn_positions = 1
+	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	alt_titles = list("Forensic Technician")
@@ -150,6 +153,7 @@
 	department_flag = ENGSEC
 	total_positions = 5
 	spawn_positions = 5
+	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/security
@@ -188,6 +192,7 @@
 	department_flag = KARMA
 	total_positions = 1
 	spawn_positions = 1
+	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/security
@@ -221,6 +226,7 @@
 	department_flag = KARMA
 	total_positions = 1
 	spawn_positions = 1
+	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/security

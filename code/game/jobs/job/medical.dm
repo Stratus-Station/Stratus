@@ -4,6 +4,7 @@
 	department_flag = MEDSCI
 	total_positions = 1
 	spawn_positions = 1
+	is_medical = 1
 	supervisors = "the captain"
 	selection_color = "#ffddf0"
 	idtype = /obj/item/weapon/card/id/cmo
@@ -47,6 +48,7 @@
 	department_flag = MEDSCI
 	total_positions = 5
 	spawn_positions = 3
+	is_medical = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
@@ -107,6 +109,7 @@
 	department_flag = MEDSCI
 	total_positions = 2
 	spawn_positions = 2
+	is_medical = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
@@ -138,6 +141,7 @@
 	department_flag = MEDSCI
 	total_positions = 2
 	spawn_positions = 2
+	is_medical = 1
 	supervisors = "the chief medical officer and the research director"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
@@ -166,6 +170,7 @@
 	department_flag = MEDSCI
 	total_positions = 1
 	spawn_positions = 1
+	is_medical = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
@@ -196,6 +201,7 @@
 	department_flag = MEDSCI
 	total_positions = 1
 	spawn_positions = 1
+	is_medical = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
@@ -233,6 +239,7 @@
 	department_flag = MEDSCI
 	total_positions = 1
 	spawn_positions = 1
+	is_medical = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/medical
