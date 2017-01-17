@@ -793,28 +793,28 @@
 		"}*/
 
 /obj/item/weapon/book/manual/security_space_law
-	name = "Space Law"
+	name = "Corporate Enforcement Policies"
 	desc = "A set of Nanotrasen guidelines for keeping law and order on their space stations."
-	icon_state = "bookSpaceLaw"
+	icon_state = "bookCorporateEnforcement"
 	author = "Nanotrasen"
-	title = "Space Law"
+	title = "Corporate Enforcement Policies"
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://nanotrasen.se/wiki/index.php?title=Space_law&printable=yes" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='97%' src="https://dev.ntdsf13.com/wiki/index.php/Corporate_Enforcement?title=Corporate_Enforcement&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 
 		"}
 
 /obj/item/weapon/book/manual/security_space_law/black
-	name = "Space Law - Limited Edition"
+	name = "Corporate Enforcement Policies - Limited Edition"
 	desc = "A leather-bound, immaculately-written copy of JUSTICE."
-	icon_state = "bookSpaceLawblack"
-	title = "Space Law - Limited Edition"
+	icon_state = "bookCorporateEnforcementNeat"
+	title = "Corporate Enforcement Policies - Limited Edition"
 
 /obj/item/weapon/book/manual/engineering_guide
 	name = "Engineering Textbook"
