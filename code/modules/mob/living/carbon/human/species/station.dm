@@ -512,6 +512,8 @@
 	unarmed_type = /datum/unarmed_attack/punch
 	remains_type = /obj/effect/decal/remains/slime
 
+	oxy_mod = 0
+	brain_mod = 2.5
 	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS | NO_SCAN
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | NO_EYES
@@ -755,6 +757,7 @@
 	clothing_flags = HAS_SOCKS
 	dietflags = 0		//Diona regenerate nutrition in light, no diet necessary
 	reagent_tag = PROCESS_ORG
+	oxy_mod = 0
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
 	butt_sprite = "diona"
@@ -850,13 +853,20 @@
 	unarmed_type = /datum/unarmed_attack/punch
 	remains_type = /obj/effect/decal/remains/robot
 
+
 	blurb = "Positronic intelligence really took off in the 26th century, and it is not uncommon to see independant, free-willed \
 	robots on many human stations, particularly in fringe systems where standards are slightly lax and public opinion less relevant \
 	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
 	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
 	inhuman in outlook and perspective."
+	brute_mod = 2.5 // 100% * 2.5 * 0.6 (robolimbs) ~= 150%
+	burn_mod = 2.5  // So they take 50% extra damage from brute/burn overall.
+	tox_mod = 0
+	clone_mod = 0
+	oxy_mod = 0
+	death_message = "gives one shrill beep before falling limp, their monitor flashing blue before completely shutting off..."
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_DNA | NO_POISON | RADIMMUNE | ALL_RPARTS | NOTRANSSTING
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_DNA | RADIMMUNE | ALL_RPARTS| NOTRANSSTING
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | HAS_HEAD_MARKINGS | HAS_HEAD_ACCESSORY
 	dietflags = 0		//IPCs can't eat, so no diet
@@ -870,11 +880,6 @@
 	male_scream_sound = 'sound/goonstation/voice/robot_scream.ogg'
 	female_scream_sound = 'sound/goonstation/voice/robot_scream.ogg'
 	butt_sprite = "machine"
-
-	eyes = "blank_eyes"
-	brute_mod = 2.5 // 100% * 2.5 * 0.6 (robolimbs) ~= 150%
-	burn_mod = 2.5  // So they take 50% extra damage from brute/burn overall.
-	death_message = "gives one shrill beep before falling limp, their monitor flashing blue before completely shutting off..."
 
 	has_organ = list(
 		"brain" = /obj/item/organ/internal/brain/mmi_holder/posibrain,
