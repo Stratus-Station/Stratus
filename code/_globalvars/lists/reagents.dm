@@ -29,7 +29,7 @@ var/list/standard_medicines = list("charcoal","toxin","cyanide","morphine","epin
 // Rare medicines
 var/list/rare_medicines = list("nanites","xenomicrobes","minttoxin","adminordrazine","blood")
 // Drinks
-var/list/drinks = list("beer2","hot_coco","orangejuice","tomatojuice","limejuice","carrotjuice",
+var/list/drinks = list("beer2","chocolate","orangejuice","tomatojuice","limejuice","carrotjuice",
 					"berryjuice","poisonberryjuice","watermelonjuice","lemonjuice","banana",
 					"nothing","potato","milk","soymilk","cream","coffee","tea","icecoffee",
 					"icetea","cola","nuka_cola","spacemountainwind","thirteenloko","dr_gibb",

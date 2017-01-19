@@ -215,7 +215,7 @@
 	desc = "Made in Space South America."
 	icon_state = "hot_coco"
 	item_state = "coffee"
-	list_reagents = list("hot_coco" = 30, "sugar" = 5)
+	list_reagents = list("chocolate" = 30, "sugar" = 5)
 
 /obj/item/weapon/reagent_containers/food/drinks/chocolate
 	name = "Hot Chocolate"

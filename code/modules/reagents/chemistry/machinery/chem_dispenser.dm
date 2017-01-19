@@ -265,7 +265,7 @@
 	ui_title = "Soda Dispens-o-matic"
 	energy = 100
 	max_energy = 100
-	dispensable_reagents = list("water", "ice", "milk", "soymilk", "coffee", "tea", "hot_coco", "cola", "spacemountainwind", "dr_gibb", "space_up",
+	dispensable_reagents = list("water", "ice", "milk", "soymilk", "coffee", "tea", "chocolate", "cola", "spacemountainwind", "dr_gibb", "space_up",
 	"tonic", "sodawater", "lemon_lime", "grapejuice", "sugar", "orangejuice", "lemonjuice", "limejuice", "tomatojuice", "banana",
 	"watermelonjuice", "carrotjuice", "potato", "berryjuice")
 	hack_message = "You change the mode from 'McNano' to 'Pizza King'."

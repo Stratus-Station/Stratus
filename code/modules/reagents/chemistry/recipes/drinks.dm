@@ -1,12 +1,3 @@
-
-/datum/chemical_reaction/hot_coco
-	name = "Hot Coco"
-	id = "hot_coco"
-	result = "hot_coco"
-	required_reagents = list("water" = 5, "cocoa" = 1)
-	result_amount = 5
-	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
-
 /datum/chemical_reaction/chocolate_milk
 	name = "Chocolate Milk"
 	id = "chocolate_milk"
@@ -733,7 +724,7 @@
 	name = "Servo"
 	id = "servo"
 	result = "servo"
-	required_reagents = list("synthanol" = 2, "cream" = 1, "hot_coco" = 1)
+	required_reagents = list("synthanol" = 2, "cream" = 1, "chocolate" = 1)
 	result_amount = 4
 	mix_message = "The ingredients mix into a dark brown substance."
 
