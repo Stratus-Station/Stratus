@@ -234,3 +234,15 @@
 		H.IgniteMob()
 
 	return 1
+
+/datum/species/plasmaman/handle_reagents(var/mob/living/carbon/human/H, var/datum/reagent/R)
+	if(R.id == "plasma" || R.id == "plasma_dust")
+		if(prob(50))
+			H.AdjustDrunk(4)//don't drink plasma, kids
+		if(prob(5))
+			to_chat(H, pick("You feel relaxed...", "Everything seems really pleasant right now...", "You feel really good..."))
+		R.current_cycle++
+		R.holder.remove_reagent(R.id, R.metabolization_rate * H.metabolism_efficiency * H.digestion_ratio)
+		return 0
+
+	return ..()

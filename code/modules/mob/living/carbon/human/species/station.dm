@@ -203,6 +203,19 @@
 /datum/species/vulpkanin/handle_death(var/mob/living/carbon/human/H)
 	H.stop_tail_wagging(1)
 
+/datum/species/vulpkanin/handle_reagents(var/mob/living/carbon/human/H, var/datum/reagent/R)
+	if(R.id == "chocolate")
+		H.Jitter(5)
+		if(prob(25))
+			H.adjustToxLoss(2)
+		if(prob(5))
+			to_chat(H, "<span class='warning'>[pick("Something hurts your insides!", "Your stomach aches sharply!", "Your stomach HURTS!")]")
+		else if(prob(5))
+			H.vomit()
+		return 1
+
+	return ..()
+
 /datum/species/skrell
 	name = "Skrell"
 	name_plural = "Skrell"
@@ -922,6 +935,27 @@
 		if(H)
 			H.update_hair()
 			H.update_fhair()
+
+/datum/species/machine/handle_reagents(var/mob/living/carbon/human/H, var/datum/reagent/R)
+	if(R.id == "fuel")
+		if(R.current_cycle == 3)
+			to_chat(H, "<span class='warning'>[pick("You notice your insides heating up...", "It seems you're heating up...", "You start heating up...")]")
+		if(R.current_cycle == 10)
+			to_chat(H, "<span class='warning'[pick("Your motors start whirring loudly!", "You're working much faster than before!", "You can hear your hydraulics working much faster!")]")
+		if(R.current_cycle >= 10)
+			H.AdjustJitter(2)
+
+		H.bodytemperature += 10
+
+		H.AdjustDrowsy(-10)
+		H.AdjustParalysis(-2.5)
+		H.AdjustStunned(-2.5)
+		H.AdjustWeakened(-2.5)
+		H.adjustStaminaLoss(-2)
+		H.SetSleeping(0)
+		return 1
+
+	return ..()
 
 /datum/species/drask
 	name = "Drask"
