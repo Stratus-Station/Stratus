@@ -209,17 +209,6 @@
 	description = "Chocolate-flavored milk, tastes like being a kid again."
 	color = "#85432C"
 
-/datum/reagent/consumable/drink/hot_coco
-	name = "Hot Chocolate"
-	id = "hot_coco"
-	description = "Made with love! And coco beans."
-	nutriment_factor = 3 * REAGENTS_METABOLISM
-	color = "#403010" // rgb: 64, 48, 16
-	adj_temp_hot = 5
-	drink_icon = "hot_coco"
-	drink_name = "Glass of hot coco"
-	drink_desc = "Delicious and cozy"
-
 /datum/reagent/consumable/drink/coffee
 	name = "Coffee"
 	id = "coffee"
