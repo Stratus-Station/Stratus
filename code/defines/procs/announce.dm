@@ -136,12 +136,13 @@
 	formatted_message += "<br><span class='alert'>[message]</span>"
 	if(message_announcer)
 		formatted_message += "<br><span class='alert'> -[message_announcer]</span>"
+	formatted_message += "<br>"
 	
 	return formatted_message
 
 /datum/announcement/priority/command/Format_Message(message, message_title, message_announcer, from)
 	var/formatted_message
-	formatted_message += "<h1 class='alert'>[message_title]</h1>"
+	formatted_message += "<h1 class='alert'>[title]</h1>"
 	if(message_title)
 		formatted_message += "<br><h2 class='alert'>[message_title]</h2>"
 	formatted_message += "<br><span class='alert'>[message]</span><br>"
