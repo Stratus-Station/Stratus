@@ -44,7 +44,7 @@
 /datum/gear/suit/coat/job/atmos
 	display_name = "winter coat, atmospherics"
 	path = /obj/item/clothing/suit/hooded/wintercoat/engineering/atmos
-	allowed_roles = list("Chief Engineer", "Life Support Specialist")
+	allowed_roles = list("Chief Engineer", "Atmospherics Technician")
 
 /datum/gear/suit/coat/job/hydro
 	display_name = "winter coat, hydroponics"
@@ -59,7 +59,7 @@
 /datum/gear/suit/coat/job/miner
 	display_name = "winter coat, miner"
 	path = /obj/item/clothing/suit/hooded/wintercoat/miner
-	allowed_roles = list("Shaft Miner")
+	allowed_roles = list("Miner")
 
 //LABCOATS
 /datum/gear/suit/labcoat_emt

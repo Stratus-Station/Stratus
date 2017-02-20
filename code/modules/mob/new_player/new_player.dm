@@ -254,17 +254,6 @@
 	if(job.available_in_playtime(client))
 		return 0
 
-	if(config.assistantlimit)
-		if(job.title == "Visitor")
-			var/count = 0
-			var/datum/job/officer = job_master.GetJob("Security Officer")
-			var/datum/job/warden = job_master.GetJob("Warden")
-			var/datum/job/hos = job_master.GetJob("Head of Security")
-			count += (officer.current_positions + warden.current_positions + hos.current_positions)
-			if(job.current_positions > (config.assistantratio * count))
-				if(count >= 5) // if theres more than 5 security on the station just let assistants join regardless, they should be able to handle the tide
-					return 1
-				return 0
 	return 1
 
 /mob/new_player/proc/IsAdminJob(rank)
@@ -426,9 +415,7 @@
 		"Security" = list(jobs = list(), titles = security_positions, color = "#ff9999"),
 		"Miscellaneous" = list(jobs = list(), titles = list(), color = "#ffffff", colBreak = 1),
 		"Synthetic" = list(jobs = list(), titles = nonhuman_positions, color = "#ccffcc"),
-		"Support / Service" = list(jobs = list(), titles = service_positions, color = "#cccccc"),
 		"Medical" = list(jobs = list(), titles = medical_positions, color = "#99ffe6", colBreak = 1),
-		"Science" = list(jobs = list(), titles = science_positions, color = "#e6b3e6"),
 		"Supply" = list(jobs = list(), titles = supply_positions, color = "#ead4ae"),
 		)
 	for(var/datum/job/job in job_master.occupations)

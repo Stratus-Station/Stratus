@@ -48,15 +48,14 @@
 	title = "Station Engineer"
 	flag = ENGINEER
 	department_flag = ENGSEC
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 3
+	spawn_positions = 3
 	is_engineering = 1
 	supervisors = "the chief engineer"
 	selection_color = "#fff5cc"
 	idtype = /obj/item/weapon/card/id/engineering
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mineral_storeroom)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_mineral_storeroom)
-	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -78,18 +77,17 @@
 
 
 /datum/job/atmos
-	title = "Life Support Specialist"
+	title = "Atmospherics Technician"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
-	total_positions = 3
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	is_engineering = 1
 	supervisors = "the chief engineer"
 	selection_color = "#fff5cc"
 	idtype = /obj/item/weapon/card/id/engineering
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mineral_storeroom)
 	minimal_access = list(access_eva, access_atmospherics, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_construction, access_mineral_storeroom)
-	alt_titles = list("Atmospheric Technician")
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -104,4 +102,34 @@
 		H.equip_or_collect(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
 		H.equip_or_collect(new /obj/item/device/pda/atmos(H), slot_wear_pda)
 		H.equip_or_collect(new /obj/item/weapon/storage/box/engineer(H), slot_in_backpack)
+		return 1
+
+/datum/job/roboticist
+	title = "Roboticist"
+	flag = ROBOTICIST
+	department_flag = ENGSEC
+	total_positions = 1
+	spawn_positions = 1
+	is_engineering = 1
+	supervisors = "the chief engineer"
+	selection_color = "#fff5cc"
+	idtype = /obj/item/weapon/card/id/engineering
+	//TODO: reword robotics access
+	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research, access_mineral_storeroom)
+	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_maint_tunnels, access_mineral_storeroom)
+	minimal_player_age = 3
+
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		switch(H.backbag)
+			if(2) H.equip_or_collect(new /obj/item/weapon/storage/backpack(H), slot_back)
+			if(3) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+			if(4) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sci(H), slot_l_ear)
+		H.equip_or_collect(new /obj/item/clothing/under/rank/roboticist(H), slot_w_uniform)
+		H.equip_or_collect(new /obj/item/clothing/shoes/black(H), slot_shoes)
+		H.equip_or_collect(new /obj/item/device/pda/roboticist(H), slot_wear_pda)
+		H.equip_or_collect(new /obj/item/clothing/suit/storage/labcoat(H), slot_wear_suit)
+		H.equip_or_collect(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
+		H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
 		return 1

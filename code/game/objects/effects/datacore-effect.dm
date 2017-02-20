@@ -68,9 +68,6 @@
 		if(real_rank in science_positions)
 			sci[name] = rank
 			department = 1
-		if(real_rank in service_positions)
-			ser[name] = rank
-			department = 1
 		if(real_rank in supply_positions)
 			sup[name] = rank
 			department = 1
@@ -193,12 +190,6 @@ var/global/list/PDA_Manifest = list()
 			if(depthead && sci.len != 1)
 				sci.Swap(1, sci.len)
 
-		if(real_rank in service_positions)
-			ser[++ser.len] = list("name" = name, "rank" = rank, "active" = isactive)
-			department = 1
-			if(depthead && ser.len != 1)
-				ser.Swap(1, ser.len)
-
 		if(real_rank in supply_positions)
 			sup[++sup.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
@@ -225,4 +216,3 @@ var/global/list/PDA_Manifest = list()
 		"misc" = misc\
 		)
 	return
-

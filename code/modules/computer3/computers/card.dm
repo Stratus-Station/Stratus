@@ -77,39 +77,7 @@
 
 		counter = 0
 		jobs_all += "</tr><tr height='20'><td><font color='#808080'><b>Support</b></font></td>"//Grey
-		for(var/job in support_positions)
-			counter++
-			if(counter >= 6)
-				jobs_all += "</tr><tr height='20'><td></td><td></td>"
-				counter = 0
-			jobs_all += "<td weight='100'><a href='?src=[UID()];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
-
-			dat = {"<script type="text/javascript">
-								function markRed(){
-									var nameField = document.getElementById('namefield');
-									nameField.style.backgroundColor = "#FFDDDD";
-								}
-								function markGreen(){
-									var nameField = document.getElementById('namefield');
-									nameField.style.backgroundColor = "#DDFFDD";
-								}
-								function markAccountGreen(){
-									var nameField = document.getElementById('accountfield');
-									nameField.style.backgroundColor = "#DDFFDD";
-								}
-								function markAccountRed(){
-									var nameField = document.getElementById('accountfield');
-									nameField.style.backgroundColor = "#FFDDDD";
-								}
-								function showAll(){
-									var allJobsSlot = document.getElementById('alljobsslot');
-									allJobsSlot.innerHTML = "<a href='#' onclick='hideAll()'>hide</a><br>"+ "[jobs_all]";
-								}
-								function hideAll(){
-									var allJobsSlot = document.getElementById('alljobsslot');
-									allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>[(writer.assignment) ? writer.assignment : "Unassgied"]</a>";
-								}
-							</script>"}
+		
 		return dat
 
 	// creates the list of access rights on the card

@@ -237,7 +237,7 @@ var/list/uplink_items = list()
 	reference = "PG"
 	item = /obj/item/clothing/gloves/color/black/thief
 	cost = 6
-	job = list("Visitor")
+	//job = list("Visitor")
 
 //Bartender
 
@@ -317,7 +317,7 @@ var/list/uplink_items = list()
 	reference = "AIRJ"
 	item = /obj/item/clothing/under/contortionist
 	cost = 6
-	job = list("Life Support Specialist")
+	job = list("Atmospherics Technician")
 
 /datum/uplink_item/dangerous/energizedfireaxe
 	name = "Energized Fire Axe"
@@ -325,7 +325,7 @@ var/list/uplink_items = list()
 	reference = "EFA"
 	item = /obj/item/weapon/twohanded/energizedfireaxe
 	cost = 10
-	job = list("Life Support Specialist")
+	job = list("Atmospherics Technician")
 
 //Stimulants
 

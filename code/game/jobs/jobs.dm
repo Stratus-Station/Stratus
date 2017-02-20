@@ -60,10 +60,8 @@ var/list/assistant_occupations = list(
 
 var/list/command_positions = list(
 	"Captain",
-	"Head of Personnel",
 	"Head of Security",
 	"Chief Engineer",
-	"Research Director",
 	"Chief Medical Officer"
 )
 
@@ -71,17 +69,15 @@ var/list/command_positions = list(
 var/list/engineering_positions = list(
 	"Chief Engineer",
 	"Station Engineer",
-	"Life Support Specialist"
+	"Atmospherics Technician",
+	"Roboticist"
 )
 
 
 var/list/medical_positions = list(
 	"Chief Medical Officer",
 	"Medical Doctor",
-	"Geneticist",
-	"Psychiatrist",
 	"Chemist",
-	"Virologist",
 	"Paramedic"
 )
 
@@ -94,48 +90,18 @@ var/list/science_positions = list(
 )
 
 //BS12 EDIT
-var/list/support_positions = list(
-	"Head of Personnel",
-	"Bartender",
-	"Botanist",
-	"Chef",
-	"Janitor",
-	"Librarian",
-	"Quartermaster",
-	"Cargo Technician",
-	"Shaft Miner",
-	"Internal Affairs Agent",
-	"Chaplain",
-	"Clown",
-	"Mime",
-	"Barber",
-	"Nanotrasen Representative",
-	"Blueshield",
-	"Explorer"
-)
-
 var/list/supply_positions = list(
-	"Head of Personnel",
 	"Quartermaster",
 	"Cargo Technician",
-	"Shaft Miner"
+	"Miner",
+	"Janitor"
 )
-
-var/list/service_positions = support_positions - supply_positions + list("Head of Personnel")
-
 
 var/list/security_positions = list(
 	"Head of Security",
-	"Warden",
 	"Detective",
 	"Security Officer",
-	"Brig Physician",
-	"Security Pod Pilot"
-)
-
-
-var/list/civilian_positions = list(
-	"Visitor"
+	"Security Medic"
 )
 
 var/list/nonhuman_positions = list(
@@ -145,15 +111,7 @@ var/list/nonhuman_positions = list(
 	"pAI"
 )
 
-var/list/whitelisted_positions = list(
-	"Blueshield",
-	"Nanotrasen Representative",
-	"Barber",
-	"Explorer",
-	"Brig Physician",
-	"Security Pod Pilot",
-)
-
+var/list/whitelisted_positions = list()
 
 /proc/guest_jobbans(var/job)
 	return (job in whitelisted_positions)
@@ -182,7 +140,7 @@ var/list/whitelisted_positions = list(
 
 var/global/list/exp_jobsmap = list(
 	EXP_TYPE_LIVING = list(), // all living mobs
-	EXP_TYPE_CREW = list(titles = command_positions | engineering_positions | medical_positions | science_positions | support_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg") | whitelisted_positions), // crew positions
+	EXP_TYPE_CREW = list(titles = command_positions | engineering_positions | medical_positions | supply_positions | security_positions | list("AI","Cyborg") | whitelisted_positions), // crew positions
 	EXP_TYPE_SPECIAL = list(), // antags, ERT, etc
 	EXP_TYPE_GHOST = list(), // dead people, observers
 	EXP_TYPE_EXEMPT = list() // special grandfather setting

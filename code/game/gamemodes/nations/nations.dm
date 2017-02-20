@@ -4,7 +4,7 @@ datum/game_mode/nations
 	required_players = 25
 	var/kickoff = 0
 	var/victory = 0
-	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
+	var/list/cargonians = list("Quartermaster","Cargo Technician","Miner")
 	var/list/servicion = list("Clown", "Mime", "Bartender", "Chef", "Botanist", "Librarian", "Chaplain", "Barber")
 
 
@@ -102,7 +102,7 @@ datum/game_mode/nations
 				to_chat(H, "You are now part of the great sovereign nation of [H.mind.nation.default_name]!")
 				continue
 
-			if(H.mind.assigned_role in (support_positions + command_positions))
+			if(H.mind.assigned_role in (command_positions))
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				update_nations_icons_added(H,"hudcommand")
 				H.mind.nation.membership += H.mind.current
@@ -113,12 +113,8 @@ datum/game_mode/nations
 				to_chat(H, "You are now part of the great sovereign nation of [H.mind.nation.default_name]!")
 				continue
 
-			if(H.mind.assigned_role in civilian_positions)
-				to_chat(H, "You do not belong to any nation and are free to sell your services to the highest bidder.")
-				continue
-
 			else
-				message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
+				to_chat(H, "You do not belong to any nation and are free to sell your services to the highest bidder.")
 				continue
 
 
@@ -215,15 +211,11 @@ datum/game_mode/nations
 			to_chat(H, "You are now part of the great sovereign nation of [H.mind.nation.current_name]!")
 			return 1
 
-		if(H.mind.assigned_role in (support_positions + command_positions))
+		if(H.mind.assigned_role in command_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			mode.update_nations_icons_added(H,"hudcommand")
 			H.mind.nation.membership += H.mind.current
 			to_chat(H, "You are now part of the great sovereign nation of [H.mind.nation.current_name]!")
-			return 1
-
-		if(H.mind.assigned_role in civilian_positions)
-			to_chat(H, "You do not belong to any nation and are free to sell your services to the highest bidder.")
 			return 1
 
 		if(H.mind.assigned_role == "AI")
@@ -231,8 +223,9 @@ datum/game_mode/nations
 			return 1
 
 		else
-			message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
+			to_chat(H, "You do not belong to any nation and are free to sell your services to the highest bidder.")
 			return 1
+
 	message_admins("[H.name] latejoined with no mind.")
 	return 1
 

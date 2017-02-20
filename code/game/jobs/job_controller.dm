@@ -116,9 +116,6 @@ var/global/datum/controller/occupations/job_master
 			if(!job)
 				continue
 
-			if(istype(job, GetJob("Visitor"))) // We don't want to give him assistant, that's boring!
-				continue
-
 			if(job.title in command_positions) //If you want a command position, select it!
 				continue
 
@@ -268,16 +265,6 @@ var/global/datum/controller/occupations/job_master
 
 		HandleFeedbackGathering()
 
-		//People who wants to be assistants, sure, go on.
-		Debug("DO, Running Visito Check 1")
-		var/datum/job/civ = new /datum/job/visitor()
-		var/list/visitor_candidates = FindOccupationCandidates(civ, 3)
-		Debug("AC1, Candidates: [visitor_candidates.len]")
-		for(var/mob/new_player/player in visitor_candidates)
-			Debug("AC1 pass, Player: [player]")
-			AssignRole(player, "Visitor")
-			visitor_candidates -= player
-		Debug("DO, AC1 end")
 
 		//Select one head
 		Debug("DO, Running Head Check")
@@ -347,43 +334,14 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == GET_RANDOM_JOB)
 				GiveRandomJob(player)
-		/*
-		Old job system
-		for(var/level = 1 to 3)
-			for(var/datum/job/job in occupations)
-				Debug("Checking job: [job]")
-				if(!job)
-					continue
-				if(!unassigned.len)
-					break
-				if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
-					continue
-				var/list/candidates = FindOccupationCandidates(job, level)
-				while(candidates.len && ((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
-					var/mob/new_player/candidate = pick(candidates)
-					Debug("Selcted: [candidate], for: [job.title]")
-					AssignRole(candidate, job.title)
-					candidates -= candidate*/
 
 		Debug("DO, Standard Check end")
 
-		Debug("DO, Running AC2")
-
-		// Antags, who have to get in, come first
-		for(var/mob/new_player/player in unassigned)
-			if(player.mind.special_role)
-				GiveRandomJob(player)
-				if(player in unassigned)
-					AssignRole(player, "Visitor")
 
 		// Then we assign what we can to everyone else.
 		for(var/mob/new_player/player in unassigned)
-			if(player.client.prefs.alternate_option == BE_ASSISTANT)
-				Debug("AC2 Assistant located, Player: [player]")
-				AssignRole(player, "Visitor")
-			else if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
-				player.ready = 0
-				unassigned -= player
+			player.ready = 0
+			unassigned -= player
 		return 1
 
 

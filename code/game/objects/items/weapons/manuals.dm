@@ -1835,7 +1835,7 @@
 					<li><a href="#foreword">Foreword</a></li>
 					<li><a href="#qm">Quarter Master</a></li>
 					<li><a href="#ct">Cargo Technician</a></li>
-					<li><a href="#sf">Shaft Miner</a></li>
+					<li><a href="#sf">Miner</a></li>
 				</ol>
 				<br><BR>
 
@@ -1852,8 +1852,8 @@
                     <li>The Quartermaster is not permitted to authorize the ordering of Security equipment and/or gear without express permission from the Head of Security and/or Captain. An exception is made during extreme emergencies, such as Nuclear Operatives or a Blob Organism, where said equipment is to be delivered to Security, post haste;</li>
                     <li>The Quartermaster must ensure at least one copy of every Order Form (ie, the forms produced by the Requests Console) is kept inside Cargo. The same applies for Cargo Technicians;</li>
                     <li>The Quartermaster is not permitted to produce .357 speedloaders for the Detective without express permission from the Head of Security;</li>
-                    <li>The Quartermaster is not to keep any illegal items that are flushed down Disposals, and must deliver them to Security. The same applies for Cargo Technicians and Shaft Miners;</li>
-                    <li>The Quartermaster is not permitted to hack the MULE Delivery Bots so that they may ride them, or that they may go faster. The same applies for Cargo Technicians and Shaft Miners;</li>
+                    <li>The Quartermaster is not to keep any illegal items that are flushed down Disposals, and must deliver them to Security. The same applies for Cargo Technicians and Miners;</li>
+                    <li>The Quartermaster is not permitted to hack the MULE Delivery Bots so that they may ride them, or that they may go faster. The same applies for Cargo Technicians and Miners;</li>
                     <li>The Quartermaster is permitted to authorize non-departmental orders (such as a Medical Doctor asking for Insulated Gloves) without express permission from the respective Head of Staff (in this example, the Chief Engineer), utilizing their best judgement, although they may still request a stamped form. However, any breach of Standard Operating Procedure and/or Space Law that results from said order will also implicate the Quartermaster;</li>
                     <li>The Quartermaster is not permitted to authorize a Supermatter Crate without express permission from the Chief Engineer.</li>
 				</ol>
@@ -1874,14 +1874,14 @@
 				</ol>
                 <br><br>
 
-                <h1><a name="sf"><B>Shaft Miner</B></a></h1><BR>
+                <h1><a name="sf"><B>Miner</B></a></h1><BR>
 				<ol>
-					<li>Shaft Miners are not permitted to bring Gibtonite aboard the station;</li>
-                    <li>Shaft Miners must deliver at least 1000 Points of mined material to the Ore Redemption Machine within one (1) hour;</li>
-                    <li>Shaft Miners are not permitted to hoard materials. All mined materials are to be left in the Ore Redemption Machine;</li>
-                    <li>Shaft Miners are not permitted to throw people into manufactured wormholes, nor are they permitted to trick people into using Bluespace Crystals, or throwing Bluespace Crystals at anyone;</li>
-                    <li>Shaft Miners are not permitted to mine their way into the Labor Camp;</li>
-                    <li>Should Shaft Miners encounter Xenomorph lifeforms, they are to report to Medbay immediately</li>
+					<li>Miners are not permitted to bring Gibtonite aboard the station;</li>
+                    <li>Miners must deliver at least 1000 Points of mined material to the Ore Redemption Machine within one (1) hour;</li>
+                    <li>Miners are not permitted to hoard materials. All mined materials are to be left in the Ore Redemption Machine;</li>
+                    <li>Miners are not permitted to throw people into manufactured wormholes, nor are they permitted to trick people into using Bluespace Crystals, or throwing Bluespace Crystals at anyone;</li>
+                    <li>Miners are not permitted to mine their way into the Labor Camp;</li>
+                    <li>Should Miners encounter Xenomorph lifeforms, they are to report to Medbay immediately</li>
 				</ol>
                 <br><br>
 				</body>

@@ -18,12 +18,10 @@
 	..("Guard")
 
 /mob/living/carbon/human/interactive/away/hotel/chef
-	default_job = /datum/job/chef
 	away_area = /area/awaymission/spacehotel/kitchen
 	override_under = /obj/item/clothing/under/mafia/vest
 
 /mob/living/carbon/human/interactive/away/hotel/bartender
-	default_job = /datum/job/bartender
 	override_under = /obj/item/clothing/under/mafia/vest
 
 /mob/living/carbon/human/interactive/away/hotel/concierge

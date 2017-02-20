@@ -24,21 +24,12 @@ var/time_last_changed_position = 0
 		/datum/job/ai,
 		/datum/job/cyborg,
 		/datum/job/captain,
-		/datum/job/hop,
 		/datum/job/hos,
 		/datum/job/chief_engineer,
-		/datum/job/rd,
 		/datum/job/cmo,
-		/datum/job/blueshield,
-		/datum/job/nanotrasenrep,
-		/datum/job/pilot,
 		/datum/job/brigdoc,
-		/datum/job/explorer,
-		/datum/job/barber,
-		/datum/job/chaplain,
 		/datum/job/ntnavyofficer,
 		/datum/job/ntspecops,
-		/datum/job/visitor
 	)
 
 	//The scaling factor of max total positions in relation to the total amount of people on board the station in %
@@ -200,10 +191,7 @@ var/time_last_changed_position = 0
 
 	data["engineering_jobs"] = format_jobs(engineering_positions)
 	data["medical_jobs"] = format_jobs(medical_positions)
-	data["science_jobs"] = format_jobs(science_positions)
 	data["security_jobs"] = format_jobs(security_positions)
-	data["support_jobs"] = format_jobs(support_positions)
-	data["civilian_jobs"] = format_jobs(civilian_positions)
 	data["special_jobs"] = format_jobs(whitelisted_positions)
 	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
 	data["card_skins"] = format_card_skins(get_station_card_skins())

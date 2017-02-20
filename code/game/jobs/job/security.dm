@@ -46,52 +46,6 @@
 		H.sec_hud_set_implants()
 		return 1
 
-
-
-/datum/job/warden
-	title = "Warden"
-	flag = WARDEN
-	department_flag = ENGSEC
-	total_positions = 1
-	spawn_positions = 1
-	is_security = 1
-	supervisors = "the head of security"
-	selection_color = "#ffeeee"
-	idtype = /obj/item/weapon/card/id/security
-	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_weapons)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_weapons)
-	minimal_player_age = 21
-	exp_requirements = 300
-	exp_type = EXP_TYPE_CREW
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec/alt(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_or_collect(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-			if(3) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
-			if(4) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/rank/warden(H), slot_w_uniform)
-		H.equip_or_collect(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_or_collect(new /obj/item/clothing/suit/armor/vest/warden(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/warden(H), slot_head)
-		H.equip_or_collect(new /obj/item/device/pda/warden(H), slot_wear_pda)
-		H.equip_or_collect(new /obj/item/clothing/gloves/color/black(H), slot_gloves)
-		H.equip_or_collect(new /obj/item/clothing/glasses/hud/security/sunglasses(H), slot_glasses)
-//		H.equip_or_collect(new /obj/item/clothing/mask/gas(H), slot_wear_mask) //Grab one from the armory you donk
-		H.equip_or_collect(new /obj/item/device/flash(H), slot_l_store)
-		H.equip_or_collect(new /obj/item/weapon/gun/projectile/automatic/pistol/enforcer45(H), slot_s_store)
-		H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
-		H.equip_or_collect(new /obj/item/weapon/restraints/handcuffs(H), slot_in_backpack)
-		H.equip_or_collect(new /obj/item/ammo_box/magazine/m45/enforcer45(H), slot_in_backpack)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		H.sec_hud_set_implants()
-		return 1
-
-
-
 /datum/job/detective
 	title = "Detective"
 	flag = DETECTIVE
@@ -101,11 +55,9 @@
 	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
-	alt_titles = list("Forensic Technician")
 	idtype = /obj/item/weapon/card/id/security
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court, access_weapons)
 	minimal_access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court, access_weapons)
-	alt_titles = list("Forensic Technician")
 	minimal_player_age = 14
 	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
@@ -151,8 +103,8 @@
 	title = "Security Officer"
 	flag = OFFICER
 	department_flag = ENGSEC
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 3
+	spawn_positions = 3
 	is_security = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
@@ -187,7 +139,7 @@
 		return 1
 
 /datum/job/brigdoc
-	title = "Brig Physician"
+	title = "Security Medic"
 	flag = BRIGDOC
 	department_flag = KARMA
 	total_positions = 1
@@ -214,42 +166,6 @@
 		H.equip_or_collect(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
 		H.equip_or_collect(new /obj/item/device/flashlight/pen(H), slot_s_store)
 		H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		H.sec_hud_set_implants()
-		return 1
-
-/datum/job/pilot
-	title = "Security Pod Pilot"
-	flag = PILOT
-	department_flag = KARMA
-	total_positions = 1
-	spawn_positions = 1
-	is_security = 1
-	supervisors = "the head of security"
-	selection_color = "#ffeeee"
-	idtype = /obj/item/weapon/card/id/security
-	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue, access_weapons, access_pilot, access_external_airlocks)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_weapons, access_pilot, access_external_airlocks)
-	minimal_player_age = 7
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec/alt(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_or_collect(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-			if(3) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
-			if(4) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_or_collect(new /obj/item/clothing/under/rank/security/pod_pilot(H), slot_w_uniform)
-		H.equip_or_collect(new /obj/item/clothing/suit/jacket/pilot(H), slot_wear_suit)
-		H.equip_or_collect(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_or_collect(new /obj/item/device/pda/security(H), slot_wear_pda)
-		H.equip_or_collect(new /obj/item/clothing/gloves/color/black(H), slot_gloves)
-		H.equip_or_collect(new /obj/item/weapon/gun/projectile/automatic/pistol/enforcer45(H), slot_s_store)
-		H.equip_or_collect(new /obj/item/device/flash(H), slot_l_store)
-		H.equip_or_collect(new /obj/item/weapon/storage/box/engineer(H), slot_in_backpack)
-		H.equip_or_collect(new /obj/item/weapon/restraints/handcuffs(H), slot_in_backpack)
-		H.equip_or_collect(new /obj/item/ammo_box/magazine/m45/enforcer45(H), slot_in_backpack)
 		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 		L.imp_in = H
 		L.implanted = 1
