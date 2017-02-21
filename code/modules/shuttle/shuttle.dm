@@ -195,6 +195,7 @@
 
 	var/area/shuttle/areaInstance
 
+	var/iselevator = FALSE
 	var/timer						//used as a timer (if you want time left to complete move, use timeLeft proc)
 	var/mode = SHUTTLE_IDLE			//current shuttle mode (see global defines)
 	var/callTime = 50				//time spent in transit (deciseconds)
@@ -444,7 +445,7 @@
 
 		//move mobile to new location
 		for(var/atom/movable/AM in T0)
-			AM.onShuttleMove(T1, rotation)
+			AM.onShuttleMove(T1, rotation, iselevator)
 
 		if(rotation)
 			T1.shuttleRotate(rotation)

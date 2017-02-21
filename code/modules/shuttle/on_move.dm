@@ -1,9 +1,10 @@
 // Shuttle on-movement //
-/atom/movable/proc/onShuttleMove(turf/T1, rotation)
+/atom/movable/proc/onShuttleMove(turf/T1, rotation, iselevator)
     if(rotation)
         shuttleRotate(rotation)
     forceMove(T1)
     return 1
+
 
 /atom/movable/lighting_overlay/onShuttleMove()
     return 0
@@ -42,11 +43,11 @@
         else
             shake_camera(src, 7, 1)
 
-/mob/living/carbon/onShuttleMove()
+/mob/living/carbon/onShuttleMove(turf/T1, rotation, iselevator)
     . = ..()
     if(!.)
         return
-    if(!buckled)
+    if(!buckled && !iselevator)
         Weaken(3)
 
 // After docking //
