@@ -57,7 +57,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/tele_proof = 0
 	var/no_teleportlocs = 0
-	
+
 	var/outdoors = 0 //For space, the asteroid, lavaland, etc. Used with blueprints to determine if we are adding a new area (vs editing a station room)
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
@@ -242,6 +242,10 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/mining
 	name = "\improper Mining Shuttle"
 	music = "music/escape.ogg"
+	icon_state = "shuttle"
+
+/area/shuttle/elevator
+	name = "\improper Mining Elevator"
 	icon_state = "shuttle"
 
 /area/shuttle/transport

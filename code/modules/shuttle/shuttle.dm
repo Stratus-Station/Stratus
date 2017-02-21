@@ -341,11 +341,11 @@
 	var/obj/docking_port/stationary/S1 = findTransitDock()
 	if(S1)
 		if(dock(S1))
-			WARNING("shuttle \"[id]\" could not enter transit space. Docked at [S0 ? S0.id : "null"]. Transit dock [S1 ? S1.id : "null"].")
+			WARNING("Shuttle \"[id]\" could not enter transit space. Docked at [S0 ? S0.id : "null"]. Transit dock [S1 ? S1.id : "null"].")
 		else
 			previous = S0
 	else
-		WARNING("shuttle \"[id]\" could not enter transit space. S0=[S0 ? S0.id : "null"] S1=[S1 ? S1.id : "null"]")
+		WARNING("Shuttle \"[id]\" could not enter transit space. S0=[S0 ? S0.id : "null"] S1=[S1 ? S1.id : "null"]")
 
 
 
@@ -642,6 +642,7 @@
 	var/admin_controlled
 	var/max_connect_range = 7
 	var/docking_request = 0
+	var/shutname = "Shuttle"
 
 /obj/machinery/computer/shuttle/New(location, obj/item/weapon/circuitboard/shuttle/C)
 	..()
@@ -724,9 +725,9 @@
 			return
 		switch(shuttle_master.moveShuttle(shuttleId, href_list["move"], 1))
 			if(0)
-				to_chat(usr, "<span class='notice'>Shuttle received message and will be sent shortly.</span>")
+				to_chat(usr, "<span class='notice'>[shutname] received message and will be sent shortly.</span>")
 			if(1)
-				to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
+				to_chat(usr, "<span class='warning'>Invalid [shutname] requested.</span>")
 			else
 				to_chat(usr, "<span class='notice'>Unable to comply.</span>")
 		updateUsrDialog()
@@ -817,6 +818,17 @@
 	req_access = list(access_syndicate)
 	shuttleId = "sit"
 	possible_destinations = "sit_arrivals;sit_scimaint;sit_engshuttle;sit_away"
+
+/obj/machinery/computer/shuttle/elevator
+	name = "Elevator Console"
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "elevator"
+	density = 0
+	pixel_y = 32
+	desc = "Used to call and send the mining elevator."
+	shuttleId = "elevator"
+	possible_destinations = "elevator_home;elevator_away"
+	shutname = "Elevator"
 
 
 var/global/trade_dock_timelimit = 0
