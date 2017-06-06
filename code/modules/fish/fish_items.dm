@@ -1,17 +1,4 @@
 
-var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfish,
-									"clownfish" = /obj/item/weapon/grown/bananapeel/clownfish,
-									"shark" = /obj/item/weapon/fish/shark,
-									"baby space carp" = /obj/item/weapon/fish/babycarp,
-									"catfish" = /obj/item/weapon/fish/catfish,
-									"feederfish" = /obj/item/weapon/reagent_containers/food/snacks/feederfish,
-									"salmon" = /obj/item/weapon/fish/salmon,
-									"shrimp" = /obj/item/weapon/reagent_containers/food/snacks/shrimp,
-									"electric eel" = /obj/item/weapon/fish/electric_eel,
-									"glofish" = /obj/item/weapon/fish/glofish
-,
-									)
-
 //////////////////////////////////////////////
 //			Aquarium Supplies				//
 //////////////////////////////////////////////
@@ -23,7 +10,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	icon_state = "egg_scoop"
 	slot_flags = SLOT_BELT
 	throwforce = 0
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
 	throw_range = 7
 
@@ -34,7 +21,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	icon_state = "net"
 	slot_flags = SLOT_BELT
 	throwforce = 0
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
 	throw_range = 7
 
@@ -44,7 +31,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	icon = 'icons/obj/fish_items.dmi'
 	icon_state = "fish_food"
 	throwforce = 1
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
 	throw_range = 7
 
@@ -55,7 +42,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	icon_state = "brush"
 	slot_flags = SLOT_BELT
 	throwforce = 0
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
 	throw_range = 7
 	attack_verb = list("scrubbed", "brushed", "scraped")
@@ -95,7 +82,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	icon = 'icons/obj/fish_items.dmi'
 	icon_state = "fish"
 	throwforce = 1
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
 	throw_range = 7
 	force = 1

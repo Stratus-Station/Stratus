@@ -53,6 +53,8 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	var/contraband = 0
 	var/group = supply_misc
 	var/list/announce_beacons = list() // Particular beacons that we'll notify the relevant department when we reach
+	var/special = FALSE //Event/Station Goals/Admin enabled packs
+	var/special_enabled = FALSE
 
 
 /datum/supply_packs/New()
@@ -248,6 +250,17 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "disabler crate"
 
+/datum/supply_packs/security/forensics
+	name = "Forensics Crate"
+	contains = list(/obj/item/device/detective_scanner,
+					/obj/item/weapon/storage/box/evidence,
+					/obj/item/device/camera,
+					/obj/item/device/taperecorder,
+					/obj/item/toy/crayon/white,
+					/obj/item/clothing/head/det_hat)
+	cost = 20
+	containername = "forensics crate"
+
 ///// Armory stuff
 
 /datum/supply_packs/security/armory
@@ -324,6 +337,17 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 /////// Weapons: Specialist
 
 /datum/supply_packs/security/armory/ballistic
+	name = "Riot Shotguns Crate"
+	contains = list(/obj/item/weapon/gun/projectile/shotgun/riot,
+					/obj/item/weapon/gun/projectile/shotgun/riot,
+					/obj/item/weapon/gun/projectile/shotgun/riot,
+					/obj/item/weapon/storage/belt/bandolier,
+					/obj/item/weapon/storage/belt/bandolier,
+					/obj/item/weapon/storage/belt/bandolier)
+	cost = 50
+	containername = "riot shotgun crate"
+
+/datum/supply_packs/security/armory/ballisticauto
 	name = "Combat Shotguns Crate"
 	contains = list(/obj/item/weapon/gun/projectile/shotgun/automatic/combat,
 					/obj/item/weapon/gun/projectile/shotgun/automatic/combat,
@@ -331,13 +355,35 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/weapon/storage/belt/bandolier,
 					/obj/item/weapon/storage/belt/bandolier,
 					/obj/item/weapon/storage/belt/bandolier)
-	cost = 20
+	cost = 80
 	containername = "combat shotgun crate"
+
+/datum/supply_packs/security/armory/buckshotammo
+	name = "Buckshot Ammo Crate"
+	contains = list(/obj/item/ammo_box/shotgun/buck,
+					/obj/item/weapon/storage/box/buck,
+					/obj/item/weapon/storage/box/buck,
+					/obj/item/weapon/storage/box/buck,
+					/obj/item/weapon/storage/box/buck,
+					/obj/item/weapon/storage/box/buck)
+	cost = 45
+	containername = "buckshot ammo crate"
+
+/datum/supply_packs/security/armory/slugammo
+	name = "Slug Ammo Crate"
+	contains = list(/obj/item/ammo_box/shotgun,
+					/obj/item/weapon/storage/box/slug,
+					/obj/item/weapon/storage/box/slug,
+					/obj/item/weapon/storage/box/slug,
+					/obj/item/weapon/storage/box/slug,
+					/obj/item/weapon/storage/box/slug)
+	cost = 45
+	containername = "slug ammo crate"
 
 /datum/supply_packs/security/armory/expenergy
 	name = "Energy Guns Crate"
 	contains = list(/obj/item/weapon/gun/energy/gun,
-					/obj/item/weapon/gun/energy/gun)			// Only two guns to keep costs down
+					/obj/item/weapon/gun/energy/gun)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure/plasma
 	containername = "energy gun crate"
@@ -374,9 +420,9 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 
 /////// Implants & etc
 
-/datum/supply_packs/security/armory/loyalty
+/datum/supply_packs/security/armory/mindshield
 	name = "Mindshield Implants Crate"
-	contains = list (/obj/item/weapon/storage/lockbox/loyalty)
+	contains = list (/obj/item/weapon/storage/lockbox/mindshield)
 	cost = 40
 	containername = "mindshield implant crate"
 
@@ -860,6 +906,13 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containername = "tank transfer valves crate"
 	access = access_rd
 
+/datum/supply_packs/science/prototype
+	name = "Machine Prototype Crate"
+	contains = list(/obj/item/device/machineprototype)
+	cost = 80
+	containertype = /obj/structure/closet/crate/secure/scisec
+	containername = "machine prototype crate"
+	access = access_research
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Organic /////////////////////////////////////////
@@ -1147,6 +1200,13 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "glass sheets crate"
 
+/datum/supply_packs/materials/wood30
+	name = "30 Wood Planks Crate"
+	contains = list(/obj/item/stack/sheet/wood)
+	amount = 30
+	cost = 15
+	containername = "wood planks crate"
+
 /datum/supply_packs/materials/cardboard50
 	name = "50 Cardboard Sheets Crate"
 	contains = list(/obj/item/stack/sheet/cardboard)
@@ -1164,7 +1224,7 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 
 /datum/supply_packs/materials/plastic30
 	name = "30 Plastic Sheets Crate"
-	contains = list(/obj/item/stack/sheet/mineral/plastic)
+	contains = list(/obj/item/stack/sheet/plastic)
 	amount = 30
 	cost = 25
 	containername = "plastic sheets crate"
@@ -1406,6 +1466,7 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/clothing/head/collectable/flatcap,
 					/obj/item/clothing/head/collectable/pirate,
 					/obj/item/clothing/head/collectable/kitty,
+					/obj/item/clothing/head/crown/fancy,
 					/obj/item/clothing/head/collectable/rabbitears,
 					/obj/item/clothing/head/collectable/wizard,
 					/obj/item/clothing/head/collectable/hardhat,
@@ -1526,6 +1587,61 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 20
 	containername = "polo supply crate"
 
+///////////// Station Goals
+
+/datum/supply_packs/misc/bsa
+	name = "Bluespace Artillery Parts"
+	cost = 150
+	special = TRUE
+	contains = list(/obj/item/weapon/circuitboard/machine/bsa/front,
+					/obj/item/weapon/circuitboard/machine/bsa/middle,
+					/obj/item/weapon/circuitboard/machine/bsa/back,
+					/obj/item/weapon/circuitboard/computer/bsa_control
+					)
+	containername = "bluespace artillery parts crate"
+
+/datum/supply_packs/misc/dna_vault
+	name = "DNA Vault Parts"
+	cost = 120
+	special = TRUE
+	contains = list(
+					/obj/item/weapon/circuitboard/machine/dna_vault
+					)
+	containername = "dna vault parts crate"
+
+/datum/supply_packs/misc/dna_probes
+	name = "DNA Vault Samplers"
+	cost = 30
+	special = TRUE
+	contains = list(/obj/item/device/dna_probe,
+					/obj/item/device/dna_probe,
+					/obj/item/device/dna_probe,
+					/obj/item/device/dna_probe,
+					/obj/item/device/dna_probe
+					)
+	containername = "dna samplers crate"
+
+
+/datum/supply_packs/misc/shield_sat
+	name = "Shield Generator Satellite"
+	cost = 30
+	special = TRUE
+	contains = list(
+					/obj/machinery/satellite/meteor_shield,
+					/obj/machinery/satellite/meteor_shield,
+					/obj/machinery/satellite/meteor_shield
+					)
+	containername = "shield sat crate"
+
+
+/datum/supply_packs/misc/shield_sat_control
+	name = "Shield System Control Board"
+	cost = 50
+	special = TRUE
+	contains = list(
+					/obj/item/weapon/circuitboard/computer/sat_control
+					)
+	containername = "shield control board crate"
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Vending /////////////////////////////////////////

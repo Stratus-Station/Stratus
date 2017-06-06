@@ -3,11 +3,11 @@
 	desc = "A rod of pure obsidian, its very presence disrupts and dampens the powers of Nar-Sie's followers."
 	icon_state = "nullrod"
 	item_state = "nullrod"
-	force = 18
+	force = 15
 	throw_speed = 3
 	throw_range = 4
 	throwforce = 10
-	w_class = 1
+	w_class = WEIGHT_CLASS_TINY
 	var/reskinned = FALSE
 	var/reskin_selectable = TRUE			//set to FALSE if a subtype is meant to not normally be available as a reskin option (fluff ones will get re-added through their list)
 	var/list/fluff_transformations = list() //does it have any special transformations only accessible to it? Should only be subtypes of /obj/item/weapon/nullrod
@@ -67,7 +67,7 @@
 	item_state = "disintegrate"
 	desc = "This hand of yours glows with an awesome power!"
 	flags = ABSTRACT | NODROP
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	hitsound = 'sound/weapons/sear.ogg'
 	damtype = BURN
 	attack_verb = list("punched", "cross countered", "pummeled")
@@ -77,7 +77,7 @@
 	icon_state = "godstaff-red"
 	item_state = "godstaff-red"
 	desc = "It has a mysterious, protective aura."
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	force = 5
 	slot_flags = SLOT_BACK
 	block_chance = 50
@@ -92,7 +92,7 @@
 	icon_state = "claymore"
 	item_state = "claymore"
 	desc = "A weapon fit for a crusade!"
-	w_class = 4
+	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = SLOT_BACK|SLOT_BELT
 	block_chance = 30
 	sharp = 1
@@ -179,7 +179,7 @@
 	icon_state = "scythe0"
 	item_state = "scythe0"
 	desc = "Ask not for whom the bell tolls..."
-	w_class = 4
+	w_class = WEIGHT_CLASS_BULKY
 	armour_penetration = 35
 	slot_flags = SLOT_BACK
 	sharp = 1
@@ -193,7 +193,7 @@
 	item_state = "hfrequency1"
 	desc = "Bad references are the DNA of the soul."
 	attack_verb = list("chopped", "sliced", "cut", "zandatsu'd")
-	
+
 /obj/item/weapon/nullrod/scythe/spellblade
 	icon_state = "spellblade"
 	item_state = "spellblade"
@@ -251,7 +251,7 @@
 	item_state = "hammeron"
 	desc = "This war hammer cost the chaplain fourty thousand space dollars."
 	slot_flags = SLOT_BELT
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	attack_verb = list("smashed", "bashed", "hammered", "crunched")
 
 /obj/item/weapon/nullrod/chainsaw
@@ -259,7 +259,7 @@
 	desc = "Good? Bad? You're the guy with the chainsaw hand."
 	icon_state = "chainsaw1"
 	item_state = "mounted_chainsaw"
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	flags = NODROP | ABSTRACT
 	sharp = 1
 	edge = 1
@@ -279,12 +279,16 @@
 
 /obj/item/weapon/nullrod/whip
 	name = "holy whip"
-	desc = "What a terrible night to be on Space Station 13."
+	desc = "What a terrible night to be in spess"
 	icon_state = "chain"
 	item_state = "chain"
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed")
 	hitsound = 'sound/weapons/slash.ogg'
+
+/obj/item/weapon/nullrod/whip/New()
+	..()
+	desc = "What a terrible night to be on the [station_name()]."
 
 /obj/item/weapon/nullrod/whip/afterattack(atom/movable/AM, mob/user, proximity)
 	if(!proximity)
@@ -314,7 +318,7 @@
 	icon_state = "arm_blade"
 	item_state = "arm_blade"
 	flags = ABSTRACT | NODROP
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	sharp = 1
 	edge = 1
 
@@ -324,7 +328,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "carpplushie"
 	item_state = "carp_plushie"
-	force = 15
+	force = 13
 	attack_verb = list("bitten", "eaten", "fin slapped")
 	hitsound = 'sound/weapons/bite.ogg'
 	var/used_blessing = FALSE
@@ -341,8 +345,8 @@
 /obj/item/weapon/nullrod/claymore/bostaff //May as well make it a "claymore" and inherit the blocking
 	name = "monk's staff"
 	desc = "A long, tall staff made of polished wood. Traditionally used in ancient old-Earth martial arts, now used to harass the clown."
-	w_class = 4
-	force = 15
+	w_class = WEIGHT_CLASS_BULKY
+	force = 13
 	block_chance = 40
 	slot_flags = SLOT_BACK
 	sharp = 0
@@ -357,7 +361,7 @@
 	name = "arrhythmic knife"
 	icon_state = "crysknife"
 	item_state = "crysknife"
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	desc = "They say fear is the true mind killer, but stabbing them in the head works too. Honour compels you to not sheathe it once drawn."
 	sharp = 1
 	edge = 1
@@ -381,7 +385,7 @@
 	name = "unholy pitchfork"
 	icon_state = "pitchfork0"
 	item_state = "pitchfork0"
-	w_class = 3
+	w_class = WEIGHT_CLASS_NORMAL
 	desc = "Holding this makes you look absolutely devilish."
 	attack_verb = list("poked", "impaled", "pierced", "jabbed")
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -510,7 +514,7 @@
 	reskin_selectable = FALSE
 	icon_state = "godstaff-red"
 	item_state = "godstaff-red"
-	w_class = 5
+	w_class = WEIGHT_CLASS_HUGE
 	force = 5
 	slot_flags = SLOT_BACK
 	block_chance = 50
@@ -588,7 +592,7 @@
 		to_chat(missionary, "<span class='warning'>Your faith is strong, but their mind is already slaved to someone else's ideals. Perhaps an inquisition would reveal more...</span>")
 		faith -= 25		//same faith cost as losing sight of them mid-conversion, but did you just find someone who can lead you to a fellow traitor?
 		return
-	if(isloyal(target))
+	if(ismindshielded(target))
 		if(prob(20))	//loyalty implants typically overpower this, but you CAN get lucky and convert still (20% chance of success)
 			faith -= 125	//yes, this puts it negative. it's gonna take longer to recharge if you manage to convert a one of these people to balance the new power you gained through them
 			to_chat(missionary, "<span class='notice'>Through sheer willpower, you overcome their closed mind and rally [target] to your cause! You may need a bit longer than usual before your faith is fully recharged, and they won't remain loyal to you for long ...</span>")

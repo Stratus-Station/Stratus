@@ -15,7 +15,7 @@
 	name = "card"
 	desc = "A card."
 	icon = 'icons/obj/card.dmi'
-	w_class = 1
+	w_class = WEIGHT_CLASS_TINY
 	var/associated_account_number = 0
 
 	var/list/files = list(  )
@@ -299,7 +299,7 @@
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
 	var/list/initial_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
-	origin_tech = "syndicate=3"
+	origin_tech = "syndicate=1"
 	var/registered_user = null
 	untrackable = 1
 
@@ -606,6 +606,12 @@
 	name = "Prisoner #13-007"
 	registered_name = "Prisoner #13-007"
 
+/obj/item/weapon/card/id/prisoner/random
+/obj/item/weapon/card/id/prisoner/random/New()
+	var/random_number = "#[rand(0, 99)]-[rand(0, 999)]"
+	name = "Prisoner [random_number]"
+	registered_name = name
+
 /obj/item/weapon/card/id/salvage_captain
 	name = "Captain's ID"
 	registered_name = "Captain"
@@ -715,6 +721,18 @@
 	desc = "A modified ID card given only to those people who have devoted their lives to the better interests of Nanotrasen. It sparkles blue."
 	icon_state = "lifetimeid"
 
+/obj/item/weapon/card/id/ert
+	name = "ERT ID"
+	icon_state = "ERT_empty"
+
+/obj/item/weapon/card/id/ert/commander
+	icon_state = "ERT_leader"
+/obj/item/weapon/card/id/ert/security
+	icon_state = "ERT_security"
+/obj/item/weapon/card/id/ert/engineering
+	icon_state = "ERT_engineering"
+/obj/item/weapon/card/id/ert/medic
+	icon_state = "ERT_medical"
 // Decals
 /obj/item/weapon/id_decal
 	name = "identification card decal"

@@ -10,19 +10,19 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
+	icon = 'icons/obj/clothing/species/plasmaman/suits.dmi'
 	species_restricted = list("Plasmaman")
+	sprite_sheets = list(
+		"Plasmaman" = 'icons/mob/species/plasmaman/suit.dmi'
+		)
 	flags = STOPSPRESSUREDMAGE
-
 	icon_state = "plasmaman_suit"
 	item_state = "plasmaman_suit"
 
 	var/next_extinguish = 0
 	var/extinguish_cooldown = 10 SECONDS
-	var/extinguishes_left = 10 // Yeah yeah, reagents, blah blah blah.  This should be simple.
-
-/obj/item/clothing/suit/space/eva/plasmaman/examine(mob/user)
-	..(user)
-	to_chat(user, "<span class='info'>There are [extinguishes_left] extinguisher canisters left in this suit.</span>")
+	var/max_extinguishes = 5
+	var/extinguishes_left = 5 // Yeah yeah, reagents, blah blah blah.  This should be simple.
 
 /obj/item/clothing/suit/space/eva/plasmaman/proc/Extinguish(var/mob/user)
 	var/mob/living/carbon/human/H=user
@@ -32,15 +32,49 @@
 
 		next_extinguish = world.time + extinguish_cooldown
 		extinguishes_left--
-		to_chat(H, "<span class='warning'>Your suit automatically extinguishes the fire.</span>")
+		to_chat(user, "<span class='warning'>You hear a soft click and a hiss from your suit as it automatically extinguishes the fire.</span>")
+		if(!extinguishes_left)
+			to_chat(user, "<span class='warning'>Onboard auto-extinguisher depleted, refill with a cartridge.</span>")
+		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
 		H.ExtinguishMob()
+
+/obj/item/clothing/suit/space/eva/plasmaman/attackby(var/obj/item/A as obj, mob/user as mob, params)
+	..()
+	if(istype(A, /obj/item/weapon/plasmensuit_cartridge)) //This suit can only be reloaded by the appropriate cartridges, and only if it's got no more extinguishes left.
+		if(!extinguishes_left)
+			extinguishes_left = max_extinguishes //Full replenishment from the cartridge.
+			to_chat(user, "<span class='notice'>You replenish \the [src] with the cartridge.</span>")
+			qdel(A)
+		else
+			to_chat(user, "<span class='notice'>The suit must be depleted before it can be refilled.</span>")
+
+/obj/item/clothing/suit/space/eva/plasmaman/examine(mob/user)
+	..(user)
+	to_chat(user, "<span class='info'>There are [extinguishes_left] extinguisher canisters left in this suit.</span>")
+
+/obj/item/weapon/plasmensuit_cartridge //Can be used to refill Plasmaman suits when they run out of autoextinguishes.
+	name = "auto-extinguisher cartridge"
+	desc = "A tiny and light fibreglass-framed auto-extinguisher cartridge."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "miniFE0"
+	item_state = "miniFE"
+	hitsound = null //Ultralight and
+	flags = null //non-conductive
+	force = 0
+	throwforce = 0
+	w_class = WEIGHT_CLASS_SMALL //Fits in boxes.
+	materials = list()
+	attack_verb = list("tapped")
 
 /obj/item/clothing/head/helmet/space/eva/plasmaman
 	name = "plasmaman helmet"
 	desc = "A special containment helmet designed to protect a plasmaman's volatile body from outside exposure and quickly extinguish it in emergencies."
 	flags = STOPSPRESSUREDMAGE
+	icon = 'icons/obj/clothing/species/plasmaman/hats.dmi'
 	species_restricted = list("Plasmaman")
-
+	sprite_sheets = list(
+		"Plasmaman" = 'icons/mob/species/plasmaman/helmet.dmi'
+		)
 	icon_state = "plasmaman_helmet0"
 	item_state = "plasmaman_helmet0"
 	var/base_state = "plasmaman_helmet"
@@ -73,15 +107,16 @@
 	name = "plasmaman atmospheric suit"
 	icon_state = "plasmamanAtmos_suit"
 	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 0)
-	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
+	max_heat_protection_temperature = FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT
 
 /obj/item/clothing/head/helmet/space/eva/plasmaman/atmostech
 	name = "plasmaman atmospheric helmet"
 	icon_state = "plasmamanAtmos_helmet0"
 	base_state = "plasmamanAtmos_helmet"
 	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 0)
-	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
-
+	max_heat_protection_temperature = FIRE_IMMUNITY_HELM_MAX_TEMP_PROTECT
+	flash_protect = 2
+	
 /obj/item/clothing/suit/space/eva/plasmaman/engineer
 	name = "plasmaman engineer suit"
 	icon_state = "plasmamanEngineer_suit"
@@ -92,18 +127,20 @@
 	icon_state = "plasmamanEngineer_helmet0"
 	base_state = "plasmamanEngineer_helmet"
 	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 75)
-
+	flash_protect = 2
+	
 /obj/item/clothing/suit/space/eva/plasmaman/engineer/ce
 	name = "plasmaman chief engineer suit"
 	icon_state = "plasmaman_CE"
-	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
+	max_heat_protection_temperature = FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT
+
 
 /obj/item/clothing/head/helmet/space/eva/plasmaman/engineer/ce
 	name = "plasmaman chief engineer helmet"
 	icon_state = "plasmaman_CE_helmet0"
 	base_state = "plasmaman_CE_helmet"
-	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
-
+	max_heat_protection_temperature = FIRE_IMMUNITY_HELM_MAX_TEMP_PROTECT
+	flash_protect = 2
 
 //SERVICE
 /obj/item/clothing/suit/space/eva/plasmaman/assistant
@@ -184,14 +221,14 @@
 /obj/item/clothing/suit/space/eva/plasmaman/miner
 	name = "plasmaman miner suit"
 	icon_state = "plasmamanMiner_suit"
+	armor = list(melee = 30, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 50)
 	slowdown = 1
-	armor = list(melee = 40, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 50)
 
 /obj/item/clothing/head/helmet/space/eva/plasmaman/miner
 	name = "plasmaman miner helmet"
 	icon_state = "plasmamanMiner_helmet0"
 	base_state = "plasmamanMiner_helmet"
-	armor = list(melee = 40, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 50)
+	armor = list(melee = 30, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 50)
 
 
 // MEDSCI
@@ -250,18 +287,38 @@
 	icon_state = "plasmaman_RD_helmet0"
 	base_state = "plasmaman_RD_helmet"
 
+//MAGISTRATE
+/obj/item/clothing/suit/space/eva/plasmaman/magistrate
+	name = "plasmaman magistrate suit"
+	icon_state = "plasmaman_HoS"
+
+/obj/item/clothing/head/helmet/space/eva/plasmaman/magistrate
+	name = "plasmaman magistrate helmet"
+	icon_state = "plasmaman_HoS_helmet0"
+	base_state = "plasmaman_HoS_helmet"
+
+//NT REP
+/obj/item/clothing/suit/space/eva/plasmaman/nt_rep
+	name = "plasmaman NT representative suit"
+	icon_state = "plasmaman_rep"
+
+/obj/item/clothing/head/helmet/space/eva/plasmaman/nt_rep
+	name = "plasmaman NT representative helmet"
+	icon_state = "plasmaman_rep_helmet0"
+	base_state = "plasmaman_rep_helmet"
+
 //SECURITY
 
 /obj/item/clothing/suit/space/eva/plasmaman/security
 	name = "plasmaman security suit"
 	icon_state = "plasmamanSecurity_suit"
-	armor = list(melee = 30, bullet = 15, laser = 30, energy = 10, bomb = 10, bio = 100, rad = 50)
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 10, bomb = 10, bio = 100, rad = 50)
 
 /obj/item/clothing/head/helmet/space/eva/plasmaman/security
 	name = "plasmaman security helmet"
 	icon_state = "plasmamanSecurity_helmet0"
 	base_state = "plasmamanSecurity_helmet"
-	armor = list(melee = 30, bullet = 15, laser = 30, energy = 10, bomb = 10, bio = 100, rad = 50)
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 10, bomb = 10, bio = 100, rad = 50)
 
 /obj/item/clothing/suit/space/eva/plasmaman/security/hos
 	name = "plasmaman head of security suit"

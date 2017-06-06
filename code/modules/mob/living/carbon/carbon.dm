@@ -17,10 +17,8 @@
 	med_hud_set_status()
 
 /mob/living/carbon/Destroy()
-	for(var/atom/movable/guts in internal_organs)
-		qdel(guts)
-	for(var/atom/movable/food in stomach_contents)
-		qdel(food)
+	QDEL_LIST(internal_organs)
+	QDEL_LIST(stomach_contents)
 	remove_from_all_data_huds()
 	return ..()
 
@@ -56,7 +54,7 @@
 		last_stomach_attack = world.time
 		for(var/mob/M in hearers(4, src))
 			if(M.client)
-				M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
+				M.show_message(text("<span class='warning'>You hear something rumbling inside [src]'s stomach...</span>"), 2)
 
 		var/obj/item/I = user.get_active_hand()
 		if(I && I.force)
@@ -76,7 +74,7 @@
 
 			for(var/mob/M in viewers(user, null))
 				if(M.client)
-					M.show_message(text("\red <B>[user] attacks [src]'s stomach wall with the [I.name]!"), 2)
+					M.show_message(text("<span class='warning'><B>[user] attacks [src]'s stomach wall with the [I.name]!</span>"), 2)
 			playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 			if(prob(src.getBruteLoss() - 50))
@@ -143,16 +141,14 @@
 		return 0
 	if(NO_SHOCK in mutations) //shockproof
 		return 0
-
+	if(tesla_shock && tesla_ignore)
+		return FALSE
 	shock_damage *= siemens_coeff
 	if(shock_damage<1 && !override)
 		return 0
 	if(reagents.has_reagent("teslium"))
 		shock_damage *= 1.5 //If the mob has teslium in their body, shocks are 50% more damaging!
-	take_overall_damage(0,shock_damage)
-	//src.burn_skin(shock_damage)
-	//src.adjustFireLoss(shock_damage) //burn_skin will do this for us
-	//src.updatehealth()
+	take_overall_damage(0,shock_damage, used_weapon = "Electrocution")
 	visible_message(
 		"<span class='danger'>[src] was shocked by \the [source]!</span>", \
 		"<span class='userdanger'>You feel a powerful shock coursing through your body!</span>", \
@@ -174,7 +170,7 @@
 			"<span class='userdanger'>The [source] arc flashes and electrocutes you!</span>", \
 			"<span class='italics'>You hear a lightning-like crack!</span>" \
 		)
-		playsound(loc, "sound/effects/eleczap.ogg", 50, 1, -1)
+		playsound(loc, 'sound/effects/eleczap.ogg', 50, 1, -1)
 		explosion(src.loc,-1,0,2,2)
 	if(override)
 		return override
@@ -217,11 +213,11 @@
 		if(src == M && istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
 			src.visible_message( \
-				text("\blue [src] examines [].",src.gender==MALE?"himself":"herself"), \
-				"\blue You check yourself for injuries." \
+				text("<span class='notice'>[src] examines [].</span>",src.gender==MALE?"himself":"herself"), \
+				"<span class='notice'>You check yourself for injuries.</span>" \
 				)
 
-			for(var/obj/item/organ/external/org in H.organs)
+			for(var/obj/item/organ/external/org in H.bodyparts)
 				var/status = ""
 				var/brutedamage = org.brute_dam
 				var/burndamage = org.burn_dam
@@ -247,7 +243,7 @@
 					status = "weirdly shapen."
 				if(status == "")
 					status = "OK"
-				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.name,status),1)
+				src.show_message(text("\t []My [] is [].",status=="OK"?"<span class='notice'></span>":"<span class='warning'></span>",org.name,status),1)
 			if(staminaloss)
 				if(staminaloss > 30)
 					to_chat(src, "<span class='info'>You're completely exhausted.</span>")
@@ -495,6 +491,29 @@ var/list/ventcrawl_machinery = list(/obj/machinery/atmospherics/unary/vent_pump,
 
 
 //Throwing stuff
+
+/mob/living/carbon/throw_impact(atom/hit_atom, throwingdatum)
+	. = ..()
+	var/hurt = TRUE
+	/*if(istype(throwingdatum, /datum/thrownthing))
+		var/datum/thrownthing/D = throwingdatum
+		if(isrobot(D.thrower))
+			var/mob/living/silicon/robot/R = D.thrower
+			if(!R.emagged)
+				hurt = FALSE*/
+	if(hit_atom.density && isturf(hit_atom))
+		if(hurt)
+			Weaken(1)
+			take_organ_damage(10)
+	if(iscarbon(hit_atom) && hit_atom != src)
+		var/mob/living/carbon/victim = hit_atom
+		if(hurt)
+			victim.take_organ_damage(10)
+			take_organ_damage(10)
+			victim.Weaken(1)
+			Weaken(1)
+			visible_message("<span class='danger'>[src] crashes into [victim], knocking them both over!</span>", "<span class='userdanger'>You violently crash into [victim]!</span>")
+		playsound(src, 'sound/weapons/punch1.ogg', 50, 1)
 
 /mob/living/carbon/proc/toggle_throw_mode()
 	if(in_throw_mode)
@@ -810,6 +829,10 @@ var/list/ventcrawl_machinery = list(/obj/machinery/atmospherics/unary/vent_pump,
 				legcuffed = null
 				update_inv_legcuffed()
 				return
+			else
+				unEquip(I)
+				I.dropped()
+				return
 			return 1
 		else
 			to_chat(src, "<span class='warning'>You fail to remove [I]!</span>")
@@ -936,7 +959,7 @@ var/list/ventcrawl_machinery = list(/obj/machinery/atmospherics/unary/vent_pump,
 /mob/living/carbon/proc/can_eat(flags = 255)
 	return 1
 
-/mob/living/carbon/proc/eat(var/obj/item/weapon/reagent_containers/food/toEat, mob/user)
+/mob/living/carbon/proc/eat(var/obj/item/weapon/reagent_containers/food/toEat, mob/user, var/bitesize_override)
 	if(!istype(toEat))
 		return 0
 	var/fullness = nutrition + 10
@@ -953,7 +976,7 @@ var/list/ventcrawl_machinery = list(/obj/machinery/atmospherics/unary/vent_pump,
 	else
 		if(!forceFed(toEat, user, fullness))
 			return 0
-	consume(toEat)
+	consume(toEat, bitesize_override)
 	score_foodeaten++
 	return 1
 
@@ -1006,7 +1029,8 @@ var/list/ventcrawl_machinery = list(/obj/machinery/atmospherics/unary/vent_pump,
 
 /*TO DO - If/when stomach organs are introduced, override this at the human level sending the item to the stomach
 so that different stomachs can handle things in different ways VB*/
-/mob/living/carbon/proc/consume(var/obj/item/weapon/reagent_containers/food/toEat)
+/mob/living/carbon/proc/consume(var/obj/item/weapon/reagent_containers/food/toEat, var/bitesize_override)
+	var/this_bite = bitesize_override ? bitesize_override : toEat.bitesize
 	if(!toEat.reagents)
 		return
 	if(satiety > -200)
@@ -1014,9 +1038,9 @@ so that different stomachs can handle things in different ways VB*/
 	if(toEat.consume_sound)
 		playsound(loc, toEat.consume_sound, rand(10,50), 1)
 	if(toEat.reagents.total_volume)
-		var/fraction = min(toEat.bitesize/toEat.reagents.total_volume, 1)
+		var/fraction = min(this_bite/toEat.reagents.total_volume, 1)
 		toEat.reagents.reaction(src, toEat.apply_type, fraction)
-		toEat.reagents.trans_to(src, toEat.bitesize*toEat.transfer_efficiency)
+		toEat.reagents.trans_to(src, this_bite*toEat.transfer_efficiency)
 
 /mob/living/carbon/get_access()
 	. = ..()

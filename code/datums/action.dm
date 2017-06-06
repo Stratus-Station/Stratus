@@ -29,8 +29,7 @@
 		Remove(owner)
 	if(target)
 		target = null
-	qdel(button)
-	button = null
+	QDEL_NULL(button)
 	return ..()
 
 /datum/action/proc/Grant(mob/M)
@@ -146,7 +145,7 @@
 	name = "Pull The Starting Cord"
 
 /datum/action/item_action/print_report
-	name = "Print Forensic Report"
+	name = "Print Report"
 
 /datum/action/item_action/toggle_gunlight
 	name = "Toggle Gunlight"
@@ -187,7 +186,7 @@
 
 /datum/action/item_action/toggle_hardsuit_mode
 	name = "Toggle Hardsuit Mode"
-	
+
 /datum/action/item_action/toggle_unfriendly_fire
 	name = "Toggle Friendly Fire \[ON\]"
 	desc = "Toggles if the staff causes friendly fire."
@@ -357,7 +356,7 @@
 	..()
 	name = "Toggle [target.name]"
 	button.name = name
-	
+
 /datum/action/item_action/organ_action/use/New(Target)
 	..()
 	name = "Use [target.name]"

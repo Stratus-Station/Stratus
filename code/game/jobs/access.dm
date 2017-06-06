@@ -71,8 +71,10 @@
 /var/const/access_mechanic = 70
 /var/const/access_pilot = 71
 /var/const/access_ntrep = 73
+/var/const/access_magistrate = 74
 /var/const/access_minisat = 75
 /var/const/access_mineral_storeroom = 76
+/var/const/access_network = 77
 
 /var/const/access_weapons = 99 //Weapon authorization for secbots
 
@@ -92,17 +94,20 @@
 /var/const/access_cent_bridge = 113//Bridge.
 /var/const/access_cent_commander = 114//Commander's Office/ID computer.
 
-	//The Syndicate
+//The Syndicate
 /var/const/access_syndicate = 150//General Syndicate Access
 /var/const/access_syndicate_leader = 151//Nuke Op Leader Access
 /var/const/access_vox = 152//Vox Access
 
 //Trade Stations
-
 var/const/access_trade_sol = 160
 
-	//MONEY
+//MONEY
 /var/const/access_crate_cash = 200
+
+//Awaymissions
+/var/const/access_away01 = 271
+
 
 /obj/var/list/req_access = null
 /obj/var/req_access_txt = "0"
@@ -240,7 +245,7 @@ var/const/access_trade_sol = 160
 	            access_theatre, access_research, access_mining, access_mailsorting,
 	            access_heads_vault, access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce,
 	            access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_paramedic, access_blueshield, access_mechanic,access_weapons,
-	            access_pilot, access_ntrep, access_mineral_storeroom, access_minisat)
+	            access_pilot, access_ntrep, access_magistrate, access_mineral_storeroom, access_minisat, access_network)
 
 /proc/get_all_centcom_access()
 	return list(access_cent_general, access_cent_living, access_cent_medical, access_cent_security, access_cent_storage, access_cent_shuttles, access_cent_telecomms, access_cent_teleporter, access_cent_specops, access_cent_specops_commander, access_cent_blackops, access_cent_thunder, access_cent_bridge, access_cent_commander)
@@ -259,13 +264,13 @@ var/const/access_trade_sol = 160
 		if(REGION_ALL)
 			return get_all_accesses()
 		if(REGION_GENERAL) //station general
-			return list(access_kitchen, access_bar, access_hydroponics, access_janitor, access_chapel_office, access_crematorium, access_library, access_theatre, access_lawyer, access_clown, access_mime)
+			return list(access_kitchen, access_bar, access_hydroponics, access_janitor, access_chapel_office, access_crematorium, access_library, access_theatre, access_lawyer, access_magistrate, access_clown, access_mime)
 		if(REGION_SECURITY) //security
 			return list(access_sec_doors, access_weapons, access_security, access_brig, access_armory, access_forensics_lockers, access_court, access_pilot, access_hos)
 		if(REGION_MEDBAY) //medbay
 			return list(access_medical, access_genetics, access_morgue, access_chemistry, access_psychiatrist, access_virology, access_surgery, access_cmo, access_paramedic)
 		if(REGION_RESEARCH) //research
-			return list(access_research, access_tox, access_tox_storage, access_genetics, access_robotics, access_xenobiology, access_xenoarch, access_minisat, access_rd)
+			return list(access_research, access_tox, access_tox_storage, access_genetics, access_robotics, access_xenobiology, access_xenoarch, access_minisat, access_rd, access_network)
 		if(REGION_ENGINEERING) //engineering and maintenance
 			return list(access_construction, access_maint_tunnels, access_engine, access_engine_equip, access_external_airlocks, access_tech_storage, access_atmospherics, access_minisat, access_ce, access_mechanic)
 		if(REGION_SUPPLY) //supply
@@ -425,6 +430,8 @@ var/const/access_trade_sol = 160
 			return "Keycode Auth. Device"
 		if(access_tcomsat)
 			return "Telecommunications"
+		if(access_network)
+			return "Network Access"
 		if(access_gateway)
 			return "Gateway"
 		if(access_sec_doors)
@@ -439,6 +446,8 @@ var/const/access_trade_sol = 160
 			return "Mechanic Workshop"
 		if(access_pilot)
 			return "Security Pod Pilot"
+		if(access_magistrate)
+			return "Magistrate"
 		if(access_mineral_storeroom)
 			return "Mineral Storage"
 		if(access_minisat)

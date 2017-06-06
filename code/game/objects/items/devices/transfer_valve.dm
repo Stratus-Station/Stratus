@@ -13,15 +13,9 @@
 	origin_tech = "materials=1;engineering=1"
 
 /obj/item/device/transfer_valve/Destroy()
-	if(tank_one)
-		qdel(tank_one)
-		tank_one = null
-	if(tank_two)
-		qdel(tank_two)
-		tank_two = null
-	if(attached_device)
-		qdel(attached_device)
-		attached_device = null
+	QDEL_NULL(tank_one)
+	QDEL_NULL(tank_two)
+	QDEL_NULL(attached_device)
 	attacher = null
 	return ..()
 
@@ -128,16 +122,16 @@
 		tank_one.forceMove(get_turf(src))
 		tank_one = null
 		update_icon()
-		if((!tank_two || tank_two.w_class < 4) && (w_class > 3))
-			w_class = 3
+		if((!tank_two || tank_two.w_class < WEIGHT_CLASS_BULKY) && (w_class > WEIGHT_CLASS_NORMAL))
+			w_class = WEIGHT_CLASS_NORMAL
 	else if(tank_two && href_list["tanktwo"])
 		split_gases()
 		valve_open = 0
 		tank_two.forceMove(get_turf(src))
 		tank_two = null
 		update_icon()
-		if((!tank_one || tank_one.w_class < 4) && (w_class > 3))
-			w_class = 3
+		if((!tank_one || tank_one.w_class < WEIGHT_CLASS_BULKY) && (w_class > WEIGHT_CLASS_NORMAL))
+			w_class = WEIGHT_CLASS_NORMAL
 	else if(href_list["open"])
 		toggle_valve()
 	else if(attached_device)

@@ -8,7 +8,7 @@
 	force = 12
 	throwforce = 10
 	throw_range = 7
-	w_class = 3
+	w_class = WEIGHT_CLASS_NORMAL
 	origin_tech = "combat=5;powerstorage=3;syndicate=3"
 	var/click_delay = 1.5
 	var/fisto_setting = 1
@@ -17,9 +17,7 @@
 
 
 /obj/item/weapon/melee/powerfist/Destroy()
-	if(tank)
-		qdel(tank)
-		tank = null
+	QDEL_NULL(tank)
 	return ..()
 
 /obj/item/weapon/melee/powerfist/examine(mob/user)
@@ -46,7 +44,7 @@
 				fisto_setting = 3
 			if(3)
 				fisto_setting = 1
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		playsound(loc, W.usesound, 50, 1)
 		to_chat(user, "<span class='notice'>You tweak \the [src]'s piston valve to [fisto_setting].</span>")
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(tank)

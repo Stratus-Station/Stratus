@@ -5,7 +5,7 @@
 	name = "paradox bag"
 	desc = "Somehow, it's in two places at once."
 	max_combined_w_class = 60
-	max_w_class = 3
+	max_w_class = WEIGHT_CLASS_NORMAL
 
 //External
 /obj/item/device/shared_storage
@@ -33,7 +33,7 @@
 	if(bag)
 		bag.loc = user
 		bag.attackby(W, user, params)
-		
+
 /obj/item/device/shared_storage/attack_self(mob/living/carbon/user)
 	if(!iscarbon(user))
 		return
@@ -116,7 +116,7 @@
 		H.adjustBruteLoss(20)
 		H.emote("scream")
 	..()*/
-	
+
 //Boat
 
 /obj/vehicle/lavaboat
@@ -144,7 +144,7 @@
 	item_state = "rods"
 	desc = "Not to be confused with the kind Research hassles you for."
 	force = 12
-	w_class = 3
+	w_class = WEIGHT_CLASS_NORMAL
 	burn_state = LAVA_PROOF | FIRE_PROOF
 
 /datum/crafting_recipe/oar
@@ -183,7 +183,7 @@
 	generic_pixel_y = 2
 	generic_pixel_x = 1
 	vehicle_move_delay = 1
-	
+
 // Wisp Lantern
 /obj/item/device/wisp_lantern
 	name = "spooky lantern"
@@ -238,16 +238,16 @@
 	layer = ABOVE_ALL_MOB_LAYER
 	light_power = 1
 	light_range = 7
-	
+
 //Red/Blue Cubes
-	
+
 /obj/item/device/warp_cube
 	name = "blue cube"
 	desc = "A mysterious blue cube."
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	icon_state = "blue_cube"
 	var/obj/item/device/warp_cube/linked
-	
+
 /obj/item/device/warp_cube/Destroy()
 	if(linked)
 		linked.linked = null
@@ -260,14 +260,14 @@
 		return
 
 	var/datum/effect/system/harmless_smoke_spread/smoke = new /datum/effect/system/harmless_smoke_spread()
-	smoke.set_up(1, 0, user.loc) 
+	smoke.set_up(1, 0, user.loc)
 	smoke.start()
 
 	user.forceMove(get_turf(linked))
 	feedback_add_details("warp_cube","[src.type]")
 
 	var/datum/effect/system/harmless_smoke_spread/smoke2 = new /datum/effect/system/harmless_smoke_spread()
-	smoke2.set_up(1, 0, user.loc) 
+	smoke2.set_up(1, 0, user.loc)
 	smoke2.start()
 
 /obj/item/device/warp_cube/red
@@ -281,7 +281,7 @@
 		var/obj/item/device/warp_cube/blue = new(src.loc)
 		linked = blue
 		blue.linked = src
-		
+
 //Meat Hook
 
 /obj/item/weapon/gun/magic/hook
@@ -329,9 +329,9 @@
 			L.forceMove(get_turf(firer))
 
 /obj/item/projectile/hook/Destroy()
-	qdel(chain)
+	QDEL_NULL(chain)
 	return ..()
-	
+
 //Immortality Talisman
 
 /obj/item/device/immortality_talisman

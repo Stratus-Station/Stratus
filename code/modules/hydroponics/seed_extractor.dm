@@ -44,7 +44,7 @@
 	icon_state = "sextractor"
 	density = 1
 	anchored = 1
-	var/piles = list()
+	var/list/piles = list()
 	var/max_seeds = 1000
 	var/seed_multiplier = 1
 
@@ -55,6 +55,10 @@
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
 	RefreshParts()
+
+/obj/machinery/seed_extractor/Destroy()
+	QDEL_LIST(piles)
+	return ..()
 
 /obj/machinery/seed_extractor/RefreshParts()
 	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
@@ -124,12 +128,17 @@
 	src.amount = am
 
 /obj/machinery/seed_extractor/attack_hand(mob/user)
-	user.set_machine(src)
+	interact(user)
+
+/obj/machinery/seed_extractor/attack_ghost(mob/user)
 	interact(user)
 
 /obj/machinery/seed_extractor/interact(mob/user)
-	if (stat)
+	if(stat)
 		return 0
+
+	add_fingerprint(user)
+	user.set_machine(src)
 
 	var/dat = "<b>Stored seeds:</b><br>"
 
@@ -149,7 +158,7 @@
 
 /obj/machinery/seed_extractor/Topic(var/href, var/list/href_list)
 	if(..())
-		return
+		return 1
 	usr.set_machine(src)
 
 	href_list["li"] = text2num(href_list["li"])

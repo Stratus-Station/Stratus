@@ -32,6 +32,14 @@ var/list/organ_cache = list()
 	var/sterile = 0 //can the organ be infected by germs?
 	var/tough = 0 //can organ be easily damaged?
 
+/obj/item/organ/Destroy()
+	processing_objects.Remove(src)
+	if(owner)
+		remove(owner, 1)
+	QDEL_LIST_ASSOC_VAL(autopsy_data)
+	QDEL_NULL(dna)
+	return ..()
+
 /obj/item/organ/proc/update_health()
 	return
 
@@ -66,7 +74,7 @@ var/list/organ_cache = list()
 			blood_DNA = list()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 
-/obj/item/organ/proc/die()
+/obj/item/organ/proc/necrotize(update_sprite=TRUE)
 	if(status & ORGAN_ROBOT)
 		return
 	damage = max_damage
@@ -105,10 +113,10 @@ var/list/organ_cache = list()
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_THREE)
-			die()
+			necrotize()
 
 		if(damage >= max_damage)
-			die()
+			necrotize()
 
 	else if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Handle antibiotics and curing infections
@@ -117,7 +125,7 @@ var/list/organ_cache = list()
 
 	//check if we've hit max_damage
 	if(damage >= max_damage)
-		die()
+		necrotize()
 
 /obj/item/organ/proc/is_preserved()
 	if(istype(loc,/obj/item/device/mmi))
@@ -286,7 +294,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/internal/heart/emp_act(intensity)
 	if(owner && robotic == 2)
-		owner.heart_attack = 1
+		Stop() // In the name of looooove~!
 		owner.visible_message("<span class='danger'>[owner] clutches their chest and gasps!</span>","<span class='userdanger'>You clutch your chest in pain!</span>")
 	else if(owner && robotic == 1)
 		take_damage(11,1)
@@ -316,19 +324,13 @@ var/list/organ_cache = list()
 	owner = null
 	return src
 
-/obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
+/obj/item/organ/proc/replaced(var/mob/living/carbon/human/target)
+	return // Nothing uses this, it is always overridden
 
-	if(!istype(target)) return
-
-	owner = target
-	processing_objects -= src
-	affected.internal_organs |= src
-	if(!target.get_int_organ(src))
-		target.internal_organs += src
-	loc = target
-	if(robotic)
-		status |= ORGAN_ROBOT
-
+// A version of `replaced` that "flattens" the process of insertion, making organs "Plug'n'play"
+// (Particularly the heart, which stops beating when removed)
+/obj/item/organ/proc/safe_replace(var/mob/living/carbon/human/target)
+	replaced(target)
 
 /obj/item/organ/proc/surgeryize()
 	return

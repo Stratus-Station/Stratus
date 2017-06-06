@@ -17,8 +17,8 @@
 	invisibility = INVISIBILITY_REVENANT
 	health =  INFINITY //Revenants don't use health, they use essence instead
 	maxHealth =  INFINITY
-	see_invisible = INVISIBILITY_REVENANT
 	see_in_dark = 8
+	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
 	universal_understand = 1
 	response_help   = "passes through"
 	response_disarm = "swings at"
@@ -29,7 +29,6 @@
 	harm_intent_damage = 0
 	friendly = "touches"
 	status_flags = 0
-	see_in_dark = 8
 	wander = 0
 	density = 0
 	flying = 1
@@ -318,7 +317,7 @@
 	desc = "A pile of fine blue dust. Small tendrils of violet mist swirl around it."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "revenantEctoplasm"
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	var/reforming = 1
 	var/essence = 75 //the maximum essence of the reforming revenant
 	var/inert = 0

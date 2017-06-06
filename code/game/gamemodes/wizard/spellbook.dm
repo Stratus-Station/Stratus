@@ -106,6 +106,11 @@
 	spell_type = /obj/effect/proc_holder/spell/fireball
 	log_name = "FB"
 
+/datum/spellbook_entry/rod_form
+	name = "Rod Form"
+	spell_type = /obj/effect/proc_holder/spell/targeted/rod_form
+	log_name = "RF"
+
 /datum/spellbook_entry/magicm
 	name = "Magic Missile"
 	spell_type = /obj/effect/proc_holder/spell/targeted/projectile/magic_missile
@@ -314,7 +319,7 @@
 			user.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
 			user.see_in_dark = 8
 			user.see_invisible = SEE_INVISIBLE_LEVEL_TWO
-			to_chat(user, "\blue The walls suddenly disappear.")
+			to_chat(user, "<span class='notice'>The walls suddenly disappear.</span>")
 	return 1
 
 
@@ -348,7 +353,7 @@
 /datum/spellbook_entry/item/armor
 	name = "Mastercrafted Armor Set"
 	desc = "An artefact suit of armor that allows you to cast spells while providing more protection against attacks and the void of space."
-	item_path = /obj/item/clothing/suit/space/rig/wizard
+	item_path = /obj/item/clothing/suit/space/hardsuit/wizard
 	log_name = "HS"
 	category = "Defensive"
 
@@ -357,7 +362,7 @@
 	if(.)
 		new /obj/item/clothing/shoes/sandal(get_turf(user)) //In case they've lost them.
 		new /obj/item/clothing/gloves/color/purple(get_turf(user))//To complete the outfit
-		new /obj/item/clothing/head/helmet/space/rig/wizard(get_turf(user))
+		new /obj/item/clothing/head/helmet/space/hardsuit/wizard(get_turf(user))
 
 /datum/spellbook_entry/item/contract
 	name = "Contract of Apprenticeship"
@@ -492,7 +497,7 @@
 	icon_state ="book"
 	throw_speed = 2
 	throw_range = 5
-	w_class = 1
+	w_class = WEIGHT_CLASS_TINY
 	var/uses = 10
 	var/temp = null
 	var/op = 1
@@ -853,7 +858,7 @@
 	spellname = "disintegrate"
 	icon_state ="bookfireball"
 	desc = "This book feels like it will rip stuff apart."
-	
+
 /obj/item/weapon/spellbook/oneuse/sacredflame
 	spell = /obj/effect/proc_holder/spell/targeted/sacred_flame
 	spellname = "sacred flame"

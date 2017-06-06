@@ -81,6 +81,8 @@
 	var/translator_on = 0 // keeps track of the translator module
 
 	var/current_pda_messaging = null
+	var/custom_sprite = 0
+	var/slowdown = 0
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
 	loc = paicard
@@ -115,6 +117,12 @@
 		var/datum/data/pda/app/chatroom/C = pda.find_program(/datum/data/pda/app/chatroom)
 		C.toff = 1
 	..()
+
+/mob/living/silicon/pai/movement_delay()
+	. = ..()
+	. += slowdown
+	. += 1 //A bit slower than humans, so they're easier to smash
+	. += config.robot_delay
 
 /mob/living/silicon/pai/update_icons()
 	if(stat == DEAD)
@@ -172,7 +180,7 @@
 	if(prob(20))
 		var/turf/T = get_turf_or_move(loc)
 		for(var/mob/M in viewers(T))
-			M.show_message("\red A shower of sparks spray from [src]'s inner workings.", 3, "\red You hear and smell the ozone hiss of electrical sparks being expelled violently.", 2)
+			M.show_message("<span class='warning'>A shower of sparks spray from [src]'s inner workings.</span>", 3, "<span class='warning'>You hear and smell the ozone hiss of electrical sparks being expelled violently.</span>", 2)
 		return death(0)
 
 	switch(pick(1,2,3))
@@ -241,7 +249,7 @@
 		if(I_HELP)
 			for(var/mob/O in viewers(src, null))
 				if((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src]'s casing with its scythe like arm."), 1)
+					O.show_message(text("<span class='notice'>[M] caresses [src]'s casing with its scythe like arm.</span>"), 1)
 
 		else //harm
 			M.do_attack_animation(src)
@@ -319,7 +327,7 @@
 				cameralist[C.network] = C.network
 
 	network = input(usr, "Which network would you like to view?") as null|anything in cameralist
-	to_chat(src, "\blue Switched to [network] camera network.")
+	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
 //End of code by Mord_Sith
 */
 
@@ -394,17 +402,47 @@
 	set category = "pAI Commands"
 	set name = "Choose Chassis"
 
+	var/list/my_choices = list()
 	var/choice
 	var/finalized = "No"
+
+	//check for custom_sprite
+	if(!custom_sprite)
+		var/file = file2text("config/custom_sprites.txt")
+		var/lines = splittext(file, "\n")
+
+		for(var/line in lines)
+		// split & clean up
+			var/list/Entry = splittext(line, ":")
+			for(var/i = 1 to Entry.len)
+				Entry[i] = trim(Entry[i])
+
+			if(Entry.len < 2 || Entry[1] != "pai")			//ignore incorrectly formatted entries or entries that aren't marked for pAI
+				continue
+
+			if(Entry[2] == ckey)							//They're in the list? Custom sprite time, var and icon change required
+				custom_sprite = 1
+				my_choices["Custom"] = "[ckey]-pai"
+
+	my_choices = possible_chassis.Copy()
+	if(custom_sprite)
+		my_choices["Custom"] = "[ckey]-pai"
+
+	if(loc == card)		//don't let them continue in card form, since they won't be able to actually see their new mobile form sprite.
+		to_chat(src, "<span class='warning'>You must be in your mobile form to reconfigure your chassis.</span>")
+		return
+
 	while(finalized == "No" && client)
-
-		choice = input(usr,"What would you like to use for your mobile chassis icon? This decision can only be made once.") as null|anything in possible_chassis
+		choice = input(usr,"What would you like to use for your mobile chassis icon? This decision can only be made once.") as null|anything in my_choices
 		if(!choice) return
-
-		icon_state = possible_chassis[choice]
+		if(choice == "Custom")
+			icon = 'icons/mob/custom_synthetic/custom-synthetic.dmi'
+		else
+			icon = 'icons/mob/pai.dmi'
+		icon_state = my_choices[choice]
 		finalized = alert("Look at your sprite. Is this what you wish to use?",,"No","Yes")
 
-	chassis = possible_chassis[choice]
+	chassis = my_choices[choice]
 	verbs -= /mob/living/silicon/pai/proc/choose_chassis
 
 /mob/living/silicon/pai/proc/choose_verbs()
@@ -508,10 +546,10 @@
 	card.forceMove(card.loc)
 	icon_state = "[chassis]"
 
-/mob/living/silicon/pai/Bump(atom/movable/AM as mob|obj, yes)
+/mob/living/silicon/pai/Bump()
 	return
 
-/mob/living/silicon/pai/Bumped(AM as mob|obj)
+/mob/living/silicon/pai/Bumped()
 	return
 
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
@@ -562,15 +600,23 @@
 // Handle being picked up.
 
 
-/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber)
+/mob/living/silicon/pai/get_scooped(mob/living/carbon/grabber)
 	var/obj/item/weapon/holder/H = ..()
 	if(!istype(H))
 		return
 	if(resting)
 		icon_state = "[chassis]"
 		resting = 0
-	H.icon_state = "pai-[icon_state]"
-	H.item_state = "pai-[icon_state]"
+	if(custom_sprite)
+		H.icon = 'icons/mob/custom_synthetic/custom-synthetic.dmi'
+		H.icon_override = 'icons/mob/custom_synthetic/custom_head.dmi'
+		H.lefthand_file = 'icons/mob/custom_synthetic/custom_lefthand.dmi'
+		H.righthand_file = 'icons/mob/custom_synthetic/custom_righthand.dmi'
+		H.icon_state = "[icon_state]"
+		H.item_state = "[icon_state]_hand"
+	else
+		H.icon_state = "pai-[icon_state]"
+		H.item_state = "pai-[icon_state]"
 	grabber.put_in_active_hand(H)//for some reason unless i call this it dosen't work
 	grabber.update_inv_l_hand()
 	grabber.update_inv_r_hand()

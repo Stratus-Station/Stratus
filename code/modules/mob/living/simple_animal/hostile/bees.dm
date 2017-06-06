@@ -58,14 +58,11 @@
 
 /mob/living/simple_animal/hostile/poison/bees/Destroy()
 	beegent = null
+	if(beehome)
+		if(beehome.bees)
+			beehome.bees.Remove(src)
+		beehome = null
 	return ..()
-
-/mob/living/simple_animal/hostile/poison/bees/death(gibbed)
-	beegent = null
-	..()
-
-/mob/living/simple_animal/hostile/poison/bees/examine(mob/user)
-	..()
 
 /mob/living/simple_animal/hostile/poison/bees/proc/generate_bee_visuals()
 	overlays.Cut()
@@ -137,21 +134,6 @@
 /mob/living/simple_animal/hostile/poison/bees/worker
 	//Blank type define in case we need to give them special stuff later, plus organization (currently they are same as base type bee)
 
-
-/mob/living/simple_animal/hostile/poison/bees/worker/Destroy()
-	if(beehome)
-		if(beehome.bees)
-			beehome.bees.Remove(src)
-		beehome = null
-	return ..()
-
-/mob/living/simple_animal/hostile/poison/bees/worker/death(gibbed)
-	if(beehome)
-		if(beehome.bees)
-			beehome.bees.Remove(src)
-		beehome = null
-	..()
-
 /mob/living/simple_animal/hostile/poison/bees/worker/examine(mob/user)
 	..()
 
@@ -161,8 +143,8 @@
 /mob/living/simple_animal/hostile/poison/bees/worker/Found(atom/A)
 	if(istype(A, /obj/machinery/hydroponics))
 		var/obj/machinery/hydroponics/Hydro = A
-		if(Hydro.myseed && !Hydro.dead && !Hydro.recent_bee_visit)
-			wanted_objects |= /obj/machinery/hydroponics //so we only hunt them while they're alive/seeded/not visisted
+		if(Hydro.myseed && !Hydro.dead && !Hydro.recent_bee_visit && !Hydro.lid_state)
+			wanted_objects |= /obj/machinery/hydroponics //so we only hunt them while they're alive/seeded/not visisted and uncovered
 			return 1
 	..()
 
@@ -188,12 +170,12 @@
 		..()
 
 /mob/living/simple_animal/hostile/poison/bees/worker/proc/pollinate(obj/machinery/hydroponics/Hydro)
-	if(!istype(Hydro) || !Hydro.myseed || Hydro.dead || Hydro.recent_bee_visit)
+	if(!istype(Hydro) || !Hydro.myseed || Hydro.dead || Hydro.recent_bee_visit || Hydro.lid_state)
 		target = null
 		return
 
 	target = null //so we pick a new hydro tray next FindTarget(), instead of loving the same plant for eternity
-	wanted_objects -= /obj/machinery/hydroponics //so we only hunt them while they're alive/seeded/not visisted
+	wanted_objects -= /obj/machinery/hydroponics //so we only hunt them while they're alive/seeded/not visisted and uncovered
 	Hydro.recent_bee_visit = TRUE
 	spawn(BEE_TRAY_RECENT_VISIT)
 		if(Hydro)
@@ -295,8 +277,7 @@
 	queen = new(src)
 
 /obj/item/queen_bee/Destroy()
-	qdel(queen)
-	queen = null
+	QDEL_NULL(queen)
 	return ..()
 
 
@@ -313,6 +294,10 @@
 	search_objects = 0 //these bees don't care about trivial things like plants, especially when there is havoc to sow
 	beegent = new /datum/reagent/facid()		//prepare to die
 	var/list/master_and_friends = list()
+
+/mob/living/simple_animal/hostile/poison/bees/syndi/Destroy()
+	master_and_friends.Cut()
+	return ..()
 
 /mob/living/simple_animal/hostile/poison/bees/syndi/assign_reagent(datum/reagent/R)
 	return

@@ -4,9 +4,9 @@
 	icon_state = "soulstone"
 	item_state = "electronic"
 	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'. The shard still flickers with a fraction of the full artifact's power."
-	w_class = 1
+	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_BELT
-	origin_tech = "bluespace=4;materials=4"
+	origin_tech = "bluespace=4;materials=5"
 	var/imprinted = "empty"
 
 	var/usability = TRUE // Can this soul stone be used by anyone, or only cultists/wizards?
@@ -51,7 +51,7 @@
 		to_chat(user, "<span class='warning'>There is no power left in the shard.</span>")
 		return
 
-	if(!ishuman(M) || istype(M, /mob/living/carbon/human/dummy)) //If target is not a human or a dummy
+	if(!ishuman(M)) //If target is not a human
 		return ..()
 
 	if(M.has_brain_worms()) //Borer stuff - RR
@@ -62,8 +62,8 @@
 		to_chat(user, "<span class='warning'>A mysterious force prevents you from trapping this being's soul.</span>")
 		return ..()
 
-	if(iscultist(M))
-		to_chat(user, "<span class='cultlarge'>This soul is already MINE.</span>")
+	if(iscultist(user) && iscultist(M))
+		to_chat(user, "<span class='cultlarge'>\"Come now, do not capture your fellow's soul.\</span>")
 		return ..()
 
 		M.create_attack_log("<font color='orange'>Has had their soul captured with [src.name] by [key_name(user)]</font>")

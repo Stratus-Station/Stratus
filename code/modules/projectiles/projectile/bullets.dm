@@ -81,13 +81,14 @@
 
 /obj/item/projectile/bullet/pellet
 	name = "pellet"
-	damage = 15
+	damage = 12.5
 
 /obj/item/projectile/bullet/pellet/weak
 	damage = 6
 
 /obj/item/projectile/bullet/pellet/weak/New()
-	range = rand(8)
+	range = rand(1, 8)
+	..()
 
 /obj/item/projectile/bullet/pellet/weak/on_range()
  	var/datum/effect/system/spark_spread/sparks = new /datum/effect/system/spark_spread
@@ -99,7 +100,8 @@
 	damage = 3
 
 /obj/item/projectile/bullet/pellet/overload/New()
-	range = rand(10)
+	range = rand(1, 10)
+	..()
 
 /obj/item/projectile/bullet/pellet/overload/on_hit(atom/target, blocked = 0)
  	..()
@@ -141,8 +143,8 @@
 
 /obj/item/projectile/bullet/rpellet
 	name = "rubber pellet"
-	damage = 1.5
-	stamina = 19
+	damage = 3
+	stamina = 25
 	embed = 0
 	sharp = 0
 	icon_state = "bullet-r"
@@ -201,11 +203,14 @@
 	stun = 4
 
 /obj/item/projectile/bullet/honker
+	name = "banana"
 	damage = 0
 	weaken = 5
 	stun = 5
 	forcedodge = 1
 	nodamage = 1
+	embed = 0
+	sharp = 0
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	hitsound = 'sound/items/bikehorn.ogg'
 	icon = 'icons/obj/hydroponics/harvest.dmi'

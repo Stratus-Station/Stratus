@@ -10,10 +10,15 @@
 	slot_flags = SLOT_BELT
 	force = 10
 	throwforce = 7
-	w_class = 3
-	origin_tech = "combat=4"
+	w_class = WEIGHT_CLASS_NORMAL
+	origin_tech = "combat=5"
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
 	hitsound = 'sound/weapons/slash.ogg' //pls replace
+
+
+/obj/item/weapon/melee/chainofcommand/suicide_act(mob/user)
+		to_chat(viewers(user), "<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
+		return (OXYLOSS)
 
 /obj/item/weapon/melee/rapier
 	name = "captain's rapier"
@@ -23,7 +28,7 @@
 	flags = CONDUCT
 	force = 15
 	throwforce = 10
-	w_class = 4
+	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 50
 	armour_penetration = 75
 	sharp = 1
@@ -45,7 +50,7 @@
 	item_state = "icepick"
 	force = 15
 	throwforce = 10
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	attack_verb = list("stabbed", "jabbed", "iced,")
 
 /obj/item/weapon/melee/candy_sword
@@ -55,5 +60,5 @@
 	item_state = "candy_sword"
 	force = 10
 	throwforce = 7
-	w_class = 3
+	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("slashed", "stabbed", "sliced", "caned")

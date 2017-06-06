@@ -96,6 +96,7 @@
 	if(collar)
 		collar.forceMove(loc)
 		collar = null
+	master_commander = null
 	simple_animal_list -= src
 	return ..()
 
@@ -249,20 +250,6 @@
 	else if(bodytemperature > maxbodytemp)
 		adjustBruteLoss(heat_damage_per_tick)
 
-/mob/living/simple_animal/Bumped(AM as mob|obj)
-	if(!AM) return
-
-	if(resting || buckled)
-		return
-
-	if(isturf(src.loc))
-		if((status_flags & CANPUSH) && ismob(AM))
-			var/newamloc = src.loc
-			src.loc = AM:loc
-			AM:loc = newamloc
-		else
-			..()
-
 /mob/living/simple_animal/gib()
 	if(icon_gib)
 		flick(icon_gib, src)
@@ -303,7 +290,7 @@
 
 /mob/living/simple_animal/proc/attacked_by(obj/item/I, mob/living/user) // Handled in _onclick/click.dm
 	return
-	
+
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)
 		return
@@ -447,11 +434,11 @@
 
 
 /mob/living/simple_animal/movement_delay()
-	var/tally = 0 //Incase I need to add stuff other than "speed" later
+	. = ..()
 
-	tally = speed
+	. = speed
 
-	return tally+config.animal_delay
+	. += config.animal_delay
 
 /mob/living/simple_animal/Stat()
 	..()
@@ -712,16 +699,17 @@
 /mob/living/simple_animal/proc/sentience_act() //Called when a simple animal gains sentience via gold slime potion
 	return
 
-/mob/living/simple_animal/update_sight()
+/mob/living/simple_animal/update_sight(reset_sight = FALSE)
 	if(!client)
 		return
 	if(stat == DEAD)
 		grant_death_vision()
 		return
 
-	see_invisible = initial(see_invisible)
-	see_in_dark = initial(see_in_dark)
-	sight = initial(sight)
+	if(reset_sight)
+		see_invisible = initial(see_invisible)
+		see_in_dark = initial(see_in_dark)
+		sight = initial(sight)
 
 	if(client.eye != src)
 		var/atom/A = client.eye

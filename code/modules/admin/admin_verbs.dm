@@ -2,7 +2,9 @@
 var/list/admin_verbs_default = list(
 	/client/proc/deadmin_self,			/*destroys our own admin datum so we can play as a regular player*/
 	/client/proc/hide_verbs,			/*hides all our adminverbs*/
-	/client/proc/cmd_mentor_check_new_players
+	/client/proc/toggleadminhelpsound, /*toggles whether we hear bwoinks*/
+	/client/proc/cmd_mentor_check_new_players,
+	/client/proc/cmd_mentor_check_player_exp /* shows players by playtime */
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/check_antagonists,		/*shows all antags*/
@@ -75,8 +77,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/debug_variables,
 	/client/proc/show_snpc_verbs,
 	/client/proc/reset_all_tcs,			/*resets all telecomms scripts*/
-	/client/proc/cmd_admin_check_player_exp, /* shows players by playtime */
-	/client/proc/toggle_mentor_chat
+	/client/proc/toggle_mentor_chat,
+	/client/proc/toggle_advanced_interaction, /*toggle admin ability to interact with not only machines, but also atoms such as buttons and doors*/
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -87,7 +89,8 @@ var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
 	/client/proc/play_server_sound,
-	/client/proc/play_intercomm_sound
+	/client/proc/play_intercomm_sound,
+	/client/proc/stop_global_admin_sounds
 	)
 var/list/admin_verbs_event = list(
 	/client/proc/object_talk,
@@ -110,7 +113,8 @@ var/list/admin_verbs_event = list(
 	/client/proc/response_team, // Response Teams admin verb
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/fax_panel,
-	/client/proc/event_manager_panel
+	/client/proc/event_manager_panel,
+	/client/proc/modify_goals
 	)
 
 var/list/admin_verbs_spawn = list(
@@ -153,7 +157,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/enable_debug_verbs,
 	/client/proc/toggledebuglogs,
 	/client/proc/qdel_toggle,
-	/client/proc/gc_dump_hdl,
+	/client/proc/cmd_display_del_log,
 	/client/proc/debugNatureMapGenerator,
 	/client/proc/check_bomb_impacts,
 	/client/proc/test_movable_UI,
@@ -198,7 +202,8 @@ var/list/admin_verbs_mod = list(
 var/list/admin_verbs_mentor = list(
 	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
 	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
-	/client/proc/cmd_admin_pm_by_key_panel	/*admin-pm list by key*/
+	/client/proc/cmd_admin_pm_by_key_panel,	/*admin-pm list by key*/
+	/client/proc/cmd_mentor_say	/* mentor say*/
 	// cmd_mentor_say is added/removed by the toggle_mentor_chat verb
 )
 var/list/admin_verbs_proccall = list(
@@ -550,7 +555,7 @@ var/list/admin_verbs_snpc = list(
 
 	var/turf/epicenter = mob.loc
 	var/list/choices = list("Small Bomb", "Medium Bomb", "Big Bomb", "Custom Bomb")
-	var/choice = input("What size explosion would you like to produce?") in choices
+	var/choice = input("What size explosion would you like to produce?") as null|anything in choices
 	switch(choice)
 		if(null)
 			return 0
@@ -629,7 +634,7 @@ var/list/admin_verbs_snpc = list(
 		for(var/mob/V in hearers(O))
 			V.show_message(message, 2)
 		log_admin("[key_name(usr)] made [O] at [O.x], [O.y], [O.z] make a sound")
-		message_admins("\blue [key_name_admin(usr)] made [O] at [O.x], [O.y], [O.z] make a sound")
+		message_admins("<span class='notice'>[key_name_admin(usr)] made [O] at [O.x], [O.y], [O.z] make a sound</span>")
 		feedback_add_details("admin_verb","MS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/togglebuildmodeself()
@@ -677,7 +682,7 @@ var/list/admin_verbs_snpc = list(
 		to_chat(usr, "<b>Disabled air processing.</b>")
 	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] used 'kill air'.")
-	message_admins("\blue [key_name_admin(usr)] used 'kill air'.", 1)
+	message_admins("<span class='notice'>[key_name_admin(usr)] used 'kill air'.</span>", 1)
 
 /client/proc/deadmin_self()
 	set name = "De-admin self"
@@ -969,20 +974,33 @@ var/list/admin_verbs_snpc = list(
 	set name = "Show SNPC Verbs"
 	set category = "Admin"
 
-	if(!holder)
+	if(!check_rights(R_ADMIN))
 		return
 
 	verbs += admin_verbs_snpc
 	verbs -= /client/proc/show_snpc_verbs
-	to_chat(src, "<span class='interface'>SNPC verbs on.</span>")
+	to_chat(src, "<span class='interface'>SNPC verbs have been toggled on.</span>")
 
 /client/proc/hide_snpc_verbs()
 	set name = "Hide SNPC Verbs"
 	set category = "Admin"
 
-	if(!holder)
+	if(!check_rights(R_ADMIN))
 		return
 
 	verbs -= admin_verbs_snpc
 	verbs += /client/proc/show_snpc_verbs
-	to_chat(src, "<span class='interface'>SNPC verbs off.</span>")
+	to_chat(src, "<span class='interface'>SNPC verbs have been toggled off.</span>")
+
+/client/proc/toggle_advanced_interaction()
+	set name = "Toggle Advanced Admin Interaction"
+	set category = "Admin"
+	set desc = "Allows you to interact with atoms such as buttons and doors, on top of regular machinery interaction."
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	advanced_admin_interaction = !advanced_admin_interaction
+
+	log_admin("[key_name(usr)] has [advanced_admin_interaction ? "activated" : "deactivated"] their advanced admin interaction.")
+	message_admins("[key_name_admin(usr)] has [advanced_admin_interaction ? "activated" : "deactivated"] their advanced admin interaction.")

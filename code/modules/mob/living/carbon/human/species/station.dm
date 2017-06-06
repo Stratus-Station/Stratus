@@ -6,18 +6,17 @@
 	primitive_form = "Monkey"
 	path = /mob/living/carbon/human/human
 	language = "Sol Common"
+	flags = HAS_LIPS | CAN_BE_FAT
+	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
+	bodyflags = HAS_SKIN_TONE | HAS_BODY_MARKINGS
+	dietflags = DIET_OMNI
 	unarmed_type = /datum/unarmed_attack/punch
-
 	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
 	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
 	While the central Sol government maintains control of its far-flung people, powerful corporate \
 	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
 	worlds tumultous at best."
 
-	flags = HAS_LIPS | CAN_BE_FAT
-	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
-	bodyflags = HAS_SKIN_TONE | HAS_BODY_MARKINGS
-	dietflags = DIET_OMNI
 	reagent_tag = PROCESS_ORG
 	//Has standard darksight of 2.
 
@@ -32,7 +31,6 @@
 	tail = "sogtail"
 	unarmed_type = /datum/unarmed_attack/claws
 	primitive_form = "Stok"
-	footprints = /obj/effect/decal/cleanable/blood/tracks/footprints/claw
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -44,12 +42,6 @@
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = FEET_CLAWS | HAS_TAIL | HAS_HEAD_ACCESSORY | HAS_BODY_MARKINGS | HAS_HEAD_MARKINGS | HAS_SKIN_COLOR | HAS_ALT_HEADS | TAIL_WAGGING
 	dietflags = DIET_CARN
-	reagent_tag = PROCESS_ORG
-	flesh_color = "#34AF10"
-	base_color = "#066000"
-	//Default styles for created mobs.
-	default_hair = "Unathi Horns"
-	butt_sprite = "unathi"
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -59,6 +51,14 @@
 	heat_level_2 = 420 //Default 400
 	heat_level_3 = 480 //Default 460
 	heat_level_3_breathe = 1100 //Default 1000
+
+	flesh_color = "#34AF10"
+	reagent_tag = PROCESS_ORG
+	base_color = "#066000"
+	//Default styles for created mobs.
+	default_headacc = "Simple"
+	default_headacc_colour = "#404040"
+	butt_sprite = "unathi"
 
 	has_organ = list(
 		"heart" =    /obj/item/organ/internal/heart,
@@ -92,22 +92,12 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
-	footprints = /obj/effect/decal/cleanable/blood/tracks/footprints/claw
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
 	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
 	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
 	using unique inflections their mouths form."
-
-	flags = HAS_LIPS | CAN_BE_FAT
-	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
-	bodyflags = FEET_PADDED | HAS_TAIL | HAS_HEAD_ACCESSORY | HAS_HEAD_MARKINGS | HAS_BODY_MARKINGS | HAS_SKIN_COLOR | TAIL_WAGGING | HAS_FUR
-	dietflags = DIET_OMNI
-	reagent_tag = PROCESS_ORG
-	flesh_color = "#AFA59E"
-	base_color = "#424242"
-	butt_sprite = "tajaran"
 
 	cold_level_1 = 240
 	cold_level_2 = 180
@@ -117,6 +107,17 @@
 	heat_level_2 = 380
 	heat_level_3 = 440
 	heat_level_3_breathe = 900
+
+	primitive_form = "Farwa"
+
+	flags = HAS_LIPS | CAN_BE_FAT
+	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
+	bodyflags = FEET_PADDED | HAS_TAIL | HAS_HEAD_ACCESSORY | HAS_HEAD_MARKINGS | HAS_BODY_MARKINGS | HAS_SKIN_COLOR | TAIL_WAGGING | HAS_FUR
+	dietflags = DIET_OMNI
+	reagent_tag = PROCESS_ORG
+	flesh_color = "#AFA59E"
+	base_color = "#424242"
+	butt_sprite = "tajaran"
 
 	has_organ = list(
 		"heart" =    /obj/item/organ/internal/heart,
@@ -152,7 +153,6 @@
 	primitive_form = "Wolpin"
 	tail = "vulptail"
 	unarmed_type = /datum/unarmed_attack/claws
-	footprints = /obj/effect/decal/cleanable/blood/tracks/footprints/claw
 
 	blurb = "Vulpkanin are a species of sharp-witted canine-pideds residing on the planet Altam just barely within the \
 	dual-star Vazzend system. Their politically de-centralized society and independent natures have led them to become a species and \
@@ -168,16 +168,6 @@
 	flesh_color = "#966464"
 	base_color = "#CF4D2F"
 	butt_sprite = "vulp"
-
-	cold_level_1 = 235 //Default 260
-	cold_level_2 = 175 //Default 200
-	cold_level_3 = 95 //Default 120
-	cold_env_multiplier = 0.75
-
-	heat_level_1 = 330 //Default 360
-	heat_level_2 = 370 //Default 400
-	heat_level_3 = 430 //Default 460
-	hot_env_multiplier = 1.5
 
 	has_organ = list(
 		"heart" =    /obj/item/organ/internal/heart,
@@ -202,19 +192,6 @@
 /datum/species/vulpkanin/handle_death(var/mob/living/carbon/human/H)
 	H.stop_tail_wagging(1)
 
-/datum/species/vulpkanin/handle_reagents(var/mob/living/carbon/human/H, var/datum/reagent/R)
-	if(R.id == "chocolate")
-		H.Jitter(5)
-		if(prob(25))
-			H.adjustToxLoss(2)
-		if(prob(5))
-			to_chat(H, "<span class='warning'>[pick("Something hurts your insides!", "Your stomach aches sharply!", "Your stomach HURTS!")]")
-		else if(prob(5))
-			H.vomit()
-		return 1
-
-	return ..()
-
 /datum/species/skrell
 	name = "Skrell"
 	name_plural = "Skrell"
@@ -225,7 +202,6 @@
 	language = "Skrellian"
 	primitive_form = "Neara"
 	unarmed_type = /datum/unarmed_attack/punch
-	footprints = /obj/effect/decal/cleanable/blood/tracks/footprints/claw
 
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
@@ -237,11 +213,14 @@
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | HAS_BODY_MARKINGS
 	dietflags = DIET_HERB
-	reagent_tag = PROCESS_ORG
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
+	base_color = "#38b661" //RGB: 56, 182, 97.
+	default_hair_colour = "#38b661"
+	eyes = "skrell_eyes_s"
 	//Default styles for created mobs.
 	default_hair = "Skrell Male Tentacles"
+	reagent_tag = PROCESS_ORG
 	butt_sprite = "skrell"
 
 	has_organ = list(
@@ -251,7 +230,8 @@
 		"kidneys" =  /obj/item/organ/internal/kidneys,
 		"brain" =    /obj/item/organ/internal/brain,
 		"appendix" = /obj/item/organ/internal/appendix,
-		"eyes" =     /obj/item/organ/internal/eyes //Default darksight of 2.
+		"eyes" =     /obj/item/organ/internal/eyes, //Default darksight of 2.
+		"headpocket" = /obj/item/organ/internal/headpocket
 		)
 
 	suicide_messages = list(
@@ -267,13 +247,13 @@
 	icobase = 'icons/mob/human_races/vox/r_vox.dmi'
 	deform = 'icons/mob/human_races/vox/r_def_vox.dmi'
 	path = /mob/living/carbon/human/vox
+
 	default_language = "Galactic Common"
 	language = "Vox-pidgin"
 	tail = "voxtail"
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 	unarmed_type = /datum/unarmed_attack/claws	//I dont think it will hurt to give vox claws too.
-	footprints = /obj/effect/decal/cleanable/blood/tracks/footprints/claw
 
 	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
 	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
@@ -282,17 +262,7 @@
 	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
-	flags = NO_SCAN | IS_WHITELISTED | NOTRANSSTING
-	clothing_flags = HAS_SOCKS
-	dietflags = DIET_OMNI
-	bodyflags = HAS_ICON_SKIN_TONE | HAS_TAIL | TAIL_WAGGING | TAIL_OVERLAPPED | HAS_BODY_MARKINGS | HAS_TAIL_MARKINGS
-	reagent_tag = PROCESS_ORG
-	blood_color = "#2299FC"
-	flesh_color = "#808D11"
-	//Default styles for created mobs.
-	default_hair = "Short Vox Quills"
-	default_hair_colour = "#614f19" //R: 97, G: 79, B: 25
-	butt_sprite = "vox"
+	brute_mod = 1.2 //20% more brute damage. Fragile bird bones.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -319,9 +289,26 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
+	flags = NO_SCAN | IS_WHITELISTED | NOTRANSSTING
+	clothing_flags = HAS_SOCKS
+	dietflags = DIET_OMNI
+	bodyflags = HAS_ICON_SKIN_TONE | HAS_TAIL | TAIL_WAGGING | TAIL_OVERLAPPED | HAS_BODY_MARKINGS | HAS_TAIL_MARKINGS
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
+	//Default styles for created mobs.
+	default_hair = "Short Vox Quills"
+	default_hair_colour = "#614f19" //R: 97, G: 79, B: 25
+	butt_sprite = "vox"
+
+	reagent_tag = PROCESS_ORG
 	scream_verb = "shrieks"
 	male_scream_sound = 'sound/voice/shriek1.ogg'
 	female_scream_sound = 'sound/voice/shriek1.ogg'
+	male_cough_sounds = list('sound/voice/shriekcough.ogg')
+	female_cough_sounds = list('sound/voice/shriekcough.ogg')
+	male_sneeze_sound = 'sound/voice/shrieksneeze.ogg'
+	female_sneeze_sound = 'sound/voice/shrieksneeze.ogg'
 
 	icon_skin_tones = list(
 		1 = "Default Green",
@@ -363,13 +350,13 @@
 		newname += pick(vox_name_syllables)
 	return capitalize(newname)
 
-/datum/species/vox/equip(var/mob/living/carbon/human/H)
-	if(H.mind.assigned_role != "Clown" && H.mind.assigned_role != "Mime")
+/datum/species/vox/after_equip_job(datum/job/J, mob/living/carbon/human/H)
+	if(!H.mind || !H.mind.assigned_role || H.mind.assigned_role != "Clown" && H.mind.assigned_role != "Mime")
 		H.unEquip(H.wear_mask)
 	H.unEquip(H.l_hand)
 
 	H.equip_or_collect(new /obj/item/clothing/mask/breath/vox(H), slot_wear_mask)
-	var/tank_pref = H.client.prefs.speciesprefs
+	var/tank_pref = H.client && H.client.prefs ? H.client.prefs.speciesprefs : null
 	if(tank_pref)//Diseasel, here you go
 		H.equip_or_collect(new /obj/item/weapon/tank/nitrogen(H), slot_l_hand)
 	else
@@ -385,7 +372,7 @@
 	..()
 
 /datum/species/vox/updatespeciescolor(var/mob/living/carbon/human/H, var/owner_sensitive = 1) //Handling species-specific skin-tones for the Vox race.
-	if(H.species.name == "Vox") //Making sure we don't break Armalis.
+	if(H.species.bodyflags & HAS_ICON_SKIN_TONE) //Making sure we don't break Armalis.
 		var/new_icobase = 'icons/mob/human_races/vox/r_vox.dmi' //Default Green Vox.
 		var/new_deform = 'icons/mob/human_races/vox/r_def_vox.dmi' //Default Green Vox.
 		switch(H.s_tone)
@@ -415,6 +402,14 @@
 		H.change_icobase(new_icobase, new_deform, owner_sensitive) //Update the icobase/deform of all our organs, but make sure we don't mess with frankenstein limbs in doing so.
 		H.update_dna()
 
+/datum/species/vox/handle_reagents(var/mob/living/carbon/human/H, var/datum/reagent/R)
+	if(R.id == "oxygen") //Armalis are above such petty things.
+		H.adjustToxLoss(1*REAGENTS_EFFECT_MULTIPLIER) //Same as plasma.
+		H.reagents.remove_reagent(R.id, REAGENTS_METABOLISM)
+		return 0 //Handling reagent removal on our own.
+
+	return ..()
+
 /datum/species/vox/armalis/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.verbs += /mob/living/carbon/human/proc/leap
 	H.verbs += /mob/living/carbon/human/proc/gut
@@ -427,10 +422,6 @@
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	path = /mob/living/carbon/human/voxarmalis
 	unarmed_type = /datum/unarmed_attack/claws/armalis
-
-	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN | IS_WHITELISTED
-	dietflags = DIET_OMNI	//should inherit this from vox, this is here just in case
-	reagent_tag = PROCESS_ORG
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -451,8 +442,14 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN | IS_WHITELISTED
+	bodyflags = HAS_TAIL
+	dietflags = DIET_OMNI	//should inherit this from vox, this is here just in case
+
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
+
+	reagent_tag = PROCESS_ORG
 
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
@@ -474,6 +471,9 @@
 		"is holding their breath!",
 		"is huffing oxygen!")
 
+/datum/species/vox/armalis/handle_reagents() //Skip the Vox oxygen reagent toxicity. Armalis are above such things.
+	return 1
+
 /datum/species/kidan
 	name = "Kidan"
 	name_plural = "Kidan"
@@ -483,17 +483,18 @@
 	default_language = "Galactic Common"
 	language = "Chittin"
 	unarmed_type = /datum/unarmed_attack/claws
-	footprints = /obj/effect/decal/cleanable/blood/tracks/footprints/claw
 
 	brute_mod = 0.8
 
 	flags = IS_WHITELISTED
-	clothing_flags = HAS_SOCKS
-	bodyflags = FEET_CLAWS
-	eyes = "kidan_eyes"
+	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
+	bodyflags = FEET_CLAWS | HAS_HEAD_ACCESSORY | HAS_HEAD_MARKINGS | HAS_BODY_MARKINGS
+	eyes = "kidan_eyes_s"
 	dietflags = DIET_HERB
 	blood_color = "#FB9800"
 	reagent_tag = PROCESS_ORG
+	//Default styles for created mobs.
+	default_headacc = "Normal Antennae"
 	butt_sprite = "kidan"
 
 	has_organ = list(
@@ -503,7 +504,8 @@
 		"kidneys" =  /obj/item/organ/internal/kidneys,
 		"brain" =    /obj/item/organ/internal/brain,
 		"appendix" = /obj/item/organ/internal/appendix,
-		"eyes" =     /obj/item/organ/internal/eyes //Default darksight of 2.
+		"eyes" =     /obj/item/organ/internal/eyes, //Default darksight of 2.
+		"lantern" =  /obj/item/organ/internal/lantern
 		)
 
 	allowed_consumed_mobs = list(/mob/living/simple_animal/diona)
@@ -512,8 +514,9 @@
 		"is attempting to bite their antenna off!",
 		"is jamming their claws into their eye sockets!",
 		"is twisting their own neck!",
+		"is cracking their exoskeleton!",
+		"is stabbing themselves with their mandibles!",
 		"is holding their breath!")
-
 /datum/species/slime
 	name = "Slime People"
 	name_plural = "Slime People"
@@ -525,8 +528,18 @@
 	unarmed_type = /datum/unarmed_attack/punch
 	remains_type = /obj/effect/decal/remains/slime
 
+	// More sensitive to the cold
+	cold_level_1 = 280
+	cold_level_2 = 240
+	cold_level_3 = 200
+	cold_env_multiplier = 3
+
 	oxy_mod = 0
 	brain_mod = 2.5
+
+	male_cough_sounds = list('sound/effects/slime_squish.ogg')
+	female_cough_sounds = list('sound/effects/slime_squish.ogg')
+
 	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS | NO_SCAN
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | NO_EYES
@@ -536,11 +549,6 @@
 	//ventcrawler = 1 //ventcrawling commented out
 	butt_sprite = "slime"
 	//Has default darksight of 2.
-
-	male_cough_sounds = null    //slime people don't have lungs
-	female_cough_sounds = null
-	male_sneeze_sound = null
-	female_sneeze_sound = null
 
 	has_organ = list(
 		"brain" = /obj/item/organ/internal/brain/slime
@@ -573,8 +581,8 @@
 		H.g_skin = new_color_list[2]
 		H.b_skin = new_color_list[3]
 		if(world.time % SLIMEPERSON_ICON_UPDATE_PERIOD > SLIMEPERSON_ICON_UPDATE_PERIOD - 20) // The 20 is because this gets called every 2 seconds, from the mob controller
-			for(var/organname in H.organs_by_name)
-				var/obj/item/organ/external/E = H.organs_by_name[organname]
+			for(var/organname in H.bodyparts_by_name)
+				var/obj/item/organ/external/E = H.bodyparts_by_name[organname]
 				if(istype(E) && E.dna.species == "Slime People")
 					E.sync_colour_to_human(H)
 			H.update_hair(0)
@@ -627,13 +635,13 @@
 		return
 
 	var/list/missing_limbs = list()
-	for(var/l in organs_by_name)
-		var/obj/item/organ/external/E = organs_by_name[l]
+	for(var/l in bodyparts_by_name)
+		var/obj/item/organ/external/E = bodyparts_by_name[l]
 		if(!istype(E) || istype(E, /obj/item/organ/external/stump))
 			var/list/limblist = species.has_limbs[l]
 			var/obj/item/organ/external/limb = limblist["path"]
 			var/parent_organ = initial(limb.parent_organ)
-			var/obj/item/organ/external/parentLimb = organs_by_name[parent_organ]
+			var/obj/item/organ/external/parentLimb = bodyparts_by_name[parent_organ]
 			if(!istype(parentLimb) || parentLimb.is_stump())
 				continue
 			missing_limbs[initial(limb.name)] = l
@@ -655,7 +663,7 @@
 			to_chat(src, "<span class='warning'>You're too hungry to regenerate a limb!</span>")
 			return
 
-		var/obj/item/organ/external/O = organs_by_name[chosen_limb]
+		var/obj/item/organ/external/O = bodyparts_by_name[chosen_limb]
 
 		var/stored_brute = 0
 		var/stored_burn = 0
@@ -673,7 +681,7 @@
 		var/limb_list = species.has_limbs[chosen_limb]
 		var/obj/item/organ/external/limb_path = limb_list["path"]
 		// Parent check
-		var/obj/item/organ/external/potential_parent = organs_by_name[initial(limb_path.parent_organ)]
+		var/obj/item/organ/external/potential_parent = bodyparts_by_name[initial(limb_path.parent_organ)]
 		if(!istype(potential_parent) || potential_parent.is_stump())
 			to_chat(src, "<span class='danger'>You've lost the organ that you've been growing your new part on!</span>")
 			return // No rayman for you
@@ -712,13 +720,6 @@
 	eyes = "grey_eyes_s"
 	butt_sprite = "grey"
 
-	flags = IS_WHITELISTED | HAS_LIPS | CAN_BE_FAT
-	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
-	bodyflags =  HAS_BODY_MARKINGS
-	dietflags = DIET_HERB
-	reagent_tag = PROCESS_ORG
-	blood_color = "#A200FF"
-
 	has_organ = list(
 		"heart" =    /obj/item/organ/internal/heart,
 		"lungs" =    /obj/item/organ/internal/lungs,
@@ -733,6 +734,14 @@
 
 	default_genes = list(REMOTE_TALK)
 
+
+	flags = IS_WHITELISTED | HAS_LIPS | CAN_BE_FAT
+	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
+	bodyflags =  HAS_BODY_MARKINGS
+	dietflags = DIET_HERB
+	reagent_tag = PROCESS_ORG
+	blood_color = "#A200FF"
+
 /datum/species/grey/handle_dna(var/mob/living/carbon/C, var/remove)
 	if(!remove)
 		C.dna.SetSEState(REMOTETALKBLOCK,1,1)
@@ -742,7 +751,7 @@
 		genemutcheck(C,REMOTETALKBLOCK,null,MUTCHK_FORCED)
 	..()
 
-/datum/species/grey/equip(var/mob/living/carbon/human/H)
+/datum/species/grey/after_equip_job(datum/job/J, mob/living/carbon/human/H)
 	var/speech_pref = H.client.prefs.speciesprefs
 	if(speech_pref)
 		H.mind.speech_span = "wingdings"
@@ -760,26 +769,6 @@
 	slowdown = 5
 	remains_type = /obj/effect/decal/cleanable/ash
 
-	male_cough_sounds = null  //diona don't have lungs
-	female_cough_sounds = null
-	male_sneeze_sound = null
-	female_sneeze_sound = null
-	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
-	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
-	there is no effective upper limit to the number that can fuse in gestalt, and reports exist	of the Epsilon Ursae \
-	Minoris primary being ringed with a cloud of singing space-station-sized entities.<br/><br/>The Dionaea coexist peacefully with \
-	all known species, especially the Skrell. Their communal mind makes them slow to react, and they have difficulty understanding \
-	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
-	water and other radiation."
-
-	flags = NO_BREATHE | RADIMMUNE | IS_PLANT | NO_BLOOD | NO_PAIN
-	clothing_flags = HAS_SOCKS
-	dietflags = 0		//Diona regenerate nutrition in light, no diet necessary
-	reagent_tag = PROCESS_ORG
-	oxy_mod = 0
-	blood_color = "#004400"
-	flesh_color = "#907E4A"
-	butt_sprite = "diona"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -793,7 +782,26 @@
 	heat_level_3 = 400
 	heat_level_3_breathe = 700
 
+	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
+	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
+	there is no effective upper limit to the number that can fuse in gestalt, and reports exist	of the Epsilon Ursae \
+	Minoris primary being ringed with a cloud of singing space-station-sized entities.<br/><br/>The Dionaea coexist peacefully with \
+	all known species, especially the Skrell. Their communal mind makes them slow to react, and they have difficulty understanding \
+	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
+	water and other radiation."
+
+	flags = NO_BREATHE | RADIMMUNE | IS_PLANT | NO_BLOOD | NO_PAIN
+	clothing_flags = HAS_SOCKS
+	dietflags = 0		//Diona regenerate nutrition in light, no diet necessary
+
+	oxy_mod = 0
+
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
+	blood_color = "#004400"
+	flesh_color = "#907E4A"
+	butt_sprite = "diona"
+
+	reagent_tag = PROCESS_ORG
 
 	has_organ = list(
 		"nutrient channel" =   /obj/item/organ/internal/liver/diona,
@@ -869,6 +877,13 @@
 /datum/species/machine
 	name = "Machine"
 	name_plural = "Machines"
+
+	blurb = "Positronic intelligence really took off in the 26th century, and it is not uncommon to see independant, free-willed \
+	robots on many human stations, particularly in fringe systems where standards are slightly lax and public opinion less relevant \
+	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
+	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
+	inhuman in outlook and perspective."
+
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	path = /mob/living/carbon/human/machine
@@ -877,12 +892,7 @@
 	unarmed_type = /datum/unarmed_attack/punch
 	remains_type = /obj/effect/decal/remains/robot
 
-
-	blurb = "Positronic intelligence really took off in the 26th century, and it is not uncommon to see independant, free-willed \
-	robots on many human stations, particularly in fringe systems where standards are slightly lax and public opinion less relevant \
-	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
-	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
-	inhuman in outlook and perspective."
+	eyes = "blank_eyes"
 	brute_mod = 2.5 // 100% * 2.5 * 0.6 (robolimbs) ~= 150%
 	burn_mod = 2.5  // So they take 50% extra damage from brute/burn overall.
 	tox_mod = 0
@@ -890,7 +900,7 @@
 	oxy_mod = 0
 	death_message = "gives one shrill beep before falling limp, their monitor flashing blue before completely shutting off..."
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_DNA | RADIMMUNE | ALL_RPARTS| NOTRANSSTING
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_DNA | RADIMMUNE | ALL_RPARTS | NOTRANSSTING
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | HAS_HEAD_MARKINGS | HAS_HEAD_ACCESSORY
 	dietflags = 0		//IPCs can't eat, so no diet
@@ -900,6 +910,7 @@
 	default_hair = "Blue IPC Screen"
 	virus_immune = 1
 	can_revive_by_healing = 1
+	has_gender = FALSE
 	reagent_tag = PROCESS_SYN
 	male_scream_sound = 'sound/goonstation/voice/robot_scream.ogg'
 	female_scream_sound = 'sound/goonstation/voice/robot_scream.ogg'
@@ -912,7 +923,8 @@
 	has_organ = list(
 		"brain" = /obj/item/organ/internal/brain/mmi_holder/posibrain,
 		"cell" = /obj/item/organ/internal/cell,
-		"optics" = /obj/item/organ/internal/eyes/optical_sensor //Default darksight of 2.
+		"optics" = /obj/item/organ/internal/eyes/optical_sensor, //Default darksight of 2.
+		"charger" = /obj/item/organ/internal/cyberimp/chest/arm_mod/power_cord
 		)
 
 	vision_organ = /obj/item/organ/internal/eyes/optical_sensor
@@ -951,27 +963,6 @@
 			H.update_hair()
 			H.update_fhair()
 
-/datum/species/machine/handle_reagents(var/mob/living/carbon/human/H, var/datum/reagent/R)
-	if(R.id == "fuel")
-		if(R.current_cycle == 3)
-			to_chat(H, "<span class='warning'>[pick("You notice your insides heating up...", "It seems you're heating up...", "You start heating up...")]")
-		if(R.current_cycle == 10)
-			to_chat(H, "<span class='warning'[pick("Your motors start whirring loudly!", "You're working much faster than before!", "You can hear your hydraulics working much faster!")]")
-		if(R.current_cycle >= 10)
-			H.AdjustJitter(2)
-
-		H.bodytemperature += 10
-
-		H.AdjustDrowsy(-10)
-		H.AdjustParalysis(-2.5)
-		H.AdjustStunned(-2.5)
-		H.AdjustWeakened(-2.5)
-		H.adjustStaminaLoss(-2)
-		H.SetSleeping(0)
-		return 1
-
-	return ..()
-
 /datum/species/drask
 	name = "Drask"
 	name_plural = "Drask"
@@ -1003,15 +994,16 @@
 	in their labyrinthine settlements, carved out beneath Hoorlm's icy surface, where the air \
 	is of breathable density."
 
+	suicide_messages = list(
+		"is self-warming with friction!",
+		"is jamming fingers through their big eyes!",
+		"is sucking in warm air!",
+		"is holding their breath!")
+
 	flags = IS_WHITELISTED | HAS_LIPS
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT
 	bodyflags = FEET_CLAWS | HAS_SKIN_TONE | HAS_BODY_MARKINGS
 	dietflags = DIET_OMNI
-	flesh_color = "#a3d4eb"
-	reagent_tag = PROCESS_ORG
-	base_color = "#a3d4eb"
-	blood_color = "#a3d4eb"
-	butt_sprite = "drask"
 
 	cold_level_1 = -1 //Default 260 - Lower is better
 	cold_level_2 = -1 //Default 200
@@ -1024,6 +1016,12 @@
 	heat_level_3_breathe = 600 //Default 1000
 	hot_env_multiplier = 2
 
+	flesh_color = "#a3d4eb"
+	reagent_tag = PROCESS_ORG
+	base_color = "#a3d4eb"
+	blood_color = "#a3d4eb"
+	butt_sprite = "drask"
+
 	has_organ = list(
 		"heart" =      				/obj/item/organ/internal/heart/drask,
 		"lungs" =     				/obj/item/organ/internal/lungs/drask,
@@ -1031,12 +1029,6 @@
 		"eyes" =     				/obj/item/organ/internal/eyes/drask, //5 darksight.
 		"brain" =  					/obj/item/organ/internal/brain/drask
 		)
-
-	suicide_messages = list(
-		"is self-warming with friction!",
-		"is jamming fingers through their big eyes!",
-		"is sucking in warm air!",
-		"is holding their breath!")
 
 /datum/species/drask/handle_temperature(datum/gas_mixture/breath, var/mob/living/carbon/human/H)
 	if( abs(310.15 - breath.temperature) > 50)

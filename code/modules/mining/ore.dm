@@ -62,7 +62,7 @@
 	points = 1
 	refined_type = /obj/item/stack/sheet/glass
 	materials = list(MAT_GLASS=MINERAL_MATERIAL_AMOUNT)
-	
+
 /obj/item/weapon/ore/glass/basalt
 	name = "volcanic ash"
 	icon_state = "volcanic_sand"
@@ -153,7 +153,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "Gibtonite ore"
 	item_state = "Gibtonite ore"
-	w_class = 4
+	w_class = WEIGHT_CLASS_BULKY
 	throw_range = 0
 	anchored = 1 //Forces people to carry it by hand, no pulling!
 	var/primed = 0
@@ -163,8 +163,7 @@
 	var/datum/wires/explosive/gibtonite/wires
 
 /obj/item/weapon/twohanded/required/gibtonite/Destroy()
-	qdel(wires)
-	wires = null
+	QDEL_NULL(wires)
 	return ..()
 
 /obj/item/weapon/twohanded/required/gibtonite/attackby(obj/item/I, mob/user, params)
@@ -193,7 +192,11 @@
 			return
 	..()
 
-/obj/item/weapon/twohanded/required/gibtonite/attack_self(user)
+/obj/item/weapon/twohanded/required/gibtonite/attack_ghost(mob/user)
+	if(wires)
+		wires.Interact(user)
+
+/obj/item/weapon/twohanded/required/gibtonite/attack_self(mob/user)
 	if(wires)
 		wires.Interact(user)
 	else

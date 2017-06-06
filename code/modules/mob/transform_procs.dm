@@ -55,7 +55,7 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	for(var/t in organs)
+	for(var/t in bodyparts)
 		qdel(t)
 	for(var/i in internal_organs)
 		qdel(i)
@@ -110,7 +110,7 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	for(var/t in organs)
+	for(var/t in bodyparts)
 		qdel(t)
 
 	var/alien_caste = pick("Hunter","Sentinel","Drone")
@@ -142,7 +142,7 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	for(var/t in organs)
+	for(var/t in bodyparts)
 		qdel(t)
 
 	var/mob/living/carbon/slime/new_slime
@@ -178,7 +178,7 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	for(var/t in organs)	//this really should not be necessary
+	for(var/t in bodyparts)	//this really should not be necessary
 		qdel(t)
 
 	var/mob/living/simple_animal/pet/corgi/new_corgi = new /mob/living/simple_animal/pet/corgi (loc)
@@ -207,7 +207,7 @@
 	icon = null
 	invisibility = 101
 
-	for(var/t in organs)
+	for(var/t in bodyparts)
 		qdel(t)
 
 	var/mob/new_mob = new mobpath(src.loc)
@@ -247,7 +247,7 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	for(var/t in organs)	//this really should not be necessary
+	for(var/t in bodyparts)	//this really should not be necessary
 		qdel(t)
 
 	var/obj/item/device/paicard/card = new(loc)

@@ -1,8 +1,11 @@
 /obj/item/mounted/frame
 	name = "mountable frame"
 	desc = "Place it on a wall."
+	origin_tech = "materials=1;engineering=1"
 	var/sheets_refunded = 2
 	var/list/mount_reqs = list() //can contain simfloor, nospace. Used in try_build to see if conditions are needed, then met
+	toolspeed = 1
+	usesound = 'sound/items/Deconstruct.ogg'
 
 /obj/item/mounted/frame/attackby(obj/item/weapon/W, mob/user)
 	..()

@@ -58,6 +58,16 @@
 #define COLOR_WHITE 	"#FFFFFF"
 #define COLOR_GRAY      "#808080"
 
+//FONTS:
+// Used by Paper and PhotoCopier (and PaperBin once a year).
+// Used by PDA's Notekeeper.
+// Used by NewsCaster and NewsPaper.
+// Used by Modular Computers
+#define PEN_FONT "Verdana"
+#define CRAYON_FONT "Comic Sans MS"
+#define PRINTER_FONT "Times New Roman"
+#define SIGNFONT "Times New Roman"
+
 //some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26	//Used to trigger removal from a processing list
 
@@ -317,3 +327,9 @@
 #define BIRD_SCORE "Hierophants Killed"
 #define BOSS_SCORE "Bosses Killed"
 #define TENDRIL_CLEAR_SCORE "Tendrils Killed"
+
+// The number of station goals generated each round.
+#define STATION_GOAL_BUDGET 1
+
+#define FIRST_DIAG_STEP 1
+#define SECOND_DIAG_STEP 2

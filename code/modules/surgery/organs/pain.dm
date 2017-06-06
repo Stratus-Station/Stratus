@@ -43,37 +43,25 @@ mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0
 
 
 // message is the custom message to be displayed
-// pain_strength is 0 for weak pain flash, 1 for strong pain flash
-mob/living/carbon/human/proc/custom_pain(var/message, var/pain_strength = 0)
-	if(stat >= 1)//if not conscious
-		return
+// flash_strength is 0 for weak pain flash, 1 for strong pain flash
+mob/living/carbon/human/proc/custom_pain(var/message, var/flash_strength)
+	if(stat >= 1) return
 
-	if(species && species.flags & NO_PAIN)//if species feels no pain
-		return
+	if(species && species.flags & NO_PAIN) return
 
-	if(reagents.has_reagent("morphine") || reagents.has_reagent("hydrocodone"))//if pain meds
+	if(reagents.has_reagent("morphine"))
 		return
-
+	if(reagents.has_reagent("hydrocodone"))
+		return
 	var/msg = "<span class='danger'>[message]</span>"
-	var/pain_amount = (10 * pain_strength) + 10//even at 0 pain deals pain. Funny, isn't it?
-
-	switch(pain_strength)
-		if(0)//ouch
-			visible_message(pick("<b>[src]</b> sharply inhales in pain.", "<b>[src]</b> twitches in pain.", "<b>[src]</b> squirms in pain."))
-		if(1)//OUCH
-			visible_message(pick("<b>[src]</b> grinds their teeth in pain.", "<b>[src]</b> grunts in pain."))//I don't ERP enough to know what to put here.
-			msg = "\red <font size=3><b>[message]</b></font>"
-		if(2 to INFINITY)//OH SHIT FUCK
-			emote("scream")
-			msg = "\red <font size=4><b>[message]</b></font>"
-
-	shock_stage += pain_amount//put down some HURT
+	if(flash_strength >= 1)
+		msg = "<span class='warning'><font size=3><b>[message]</b></font></span>"
 
 	// Anti message spam checks
 	if(msg && ((msg != last_pain_message) || (world.time >= next_pain_time)))
 		last_pain_message = msg
 		to_chat(src, msg)
-	next_pain_time = world.time + 50//5 seconds latency
+	next_pain_time = world.time + 100
 
 mob/living/carbon/human/proc/handle_pain()
 	// not when sleeping
@@ -104,7 +92,7 @@ mob/living/carbon/human/proc/handle_pain()
 		return
 	var/maxdam = 0
 	var/obj/item/organ/external/damaged_organ = null
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in bodyparts)
 		if(E.status & ORGAN_DEAD|ORGAN_ROBOT) continue
 		var/dam = E.get_damage()
 		// make the choice of the organ depend on damage,

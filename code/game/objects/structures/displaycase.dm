@@ -22,6 +22,11 @@ var/global/list/captain_display_cases = list()
 	var/obj/item/device/assembly/prox_sensor/sensor = null
 	var/state = DISPLAYCASE_FRAME_CIRCUIT
 
+/obj/structure/displaycase_frame/Destroy()
+	QDEL_NULL(circuit)
+	QDEL_NULL(sensor)
+	return ..()
+
 /obj/structure/displaycase_frame/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	var/pstate = state
 	var/turf/T = get_turf(src)
@@ -33,14 +38,14 @@ var/global/list/captain_display_cases = list()
 				circuit.forceMove(src)
 				state++
 				to_chat(user, "<span class='notice'>You add the airlock electronics to the frame.</span>")
-				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+				playsound(get_turf(src),W.usesound, 50, 1)
 			if(istype(W, /obj/item/weapon/crowbar))
 				new /obj/machinery/constructable_frame/machine_frame(T)
 				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(T)
 				G.amount = 5
 				qdel(src)
 				to_chat(user, "<span class='notice'>You pry the glass out of the frame.</span>")
-				playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(get_turf(src), W.usesound, 50, 1)
 				return
 
 		if(DISPLAYCASE_FRAME_SCREWDRIVER)
@@ -54,7 +59,7 @@ var/global/list/captain_display_cases = list()
 					C.req_one_access = null
 				if(isprox(sensor))
 					C.burglar_alarm = 1
-				playsound(get_turf(src), 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(get_turf(src), W.usesound, 50, 1)
 				qdel(src)
 				return
 			if(istype(W, /obj/item/weapon/crowbar))
@@ -65,13 +70,13 @@ var/global/list/captain_display_cases = list()
 					sensor = null
 				state--
 				to_chat(user, "<span class='notice'>You pry the electronics out of the frame.</span>")
-				playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(get_turf(src), W.usesound, 50, 1)
 			if(isprox(W) && !isprox(sensor))
 				user.drop_item()
 				sensor = W
 				sensor.forceMove(src)
 				to_chat(user, "<span class='notice'>You add the proximity sensor to the frame.</span>")
-				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				playsound(src.loc, W.usesound, 50, 1)
 
 	if(pstate != state)
 		pstate = state
@@ -116,8 +121,7 @@ var/global/list/captain_display_cases = list()
 
 /obj/structure/displaycase/Destroy()
 	dump()
-	qdel(circuit)
-	circuit = null
+	QDEL_NULL(circuit)
 	return ..()
 
 /obj/structure/displaycase/captains_laser/Destroy()
@@ -227,7 +231,7 @@ var/global/list/captain_display_cases = list()
 			"You pry \the [src] apart.", \
 			"You hear something pop.")
 		var/turf/T = get_turf(src)
-		playsound(T, 'sound/items/Crowbar.ogg', 50, 1)
+		playsound(T, W.usesound, 50, 1)
 		dump()
 		var/obj/item/weapon/airlock_electronics/C = circuit
 		if(!C)
@@ -252,51 +256,70 @@ var/global/list/captain_display_cases = list()
 			new /obj/machinery/constructable_frame/machine_frame(T)
 		qdel(src)
 		return
-	if(locked && !destroyed)
-		src.health -= W.force
-		src.healthcheck()
-		..()
-	else if(!occupant && !(W.flags & (ABSTRACT | NODROP))) //ABSTRACT to stop grabs and the like to be displayed.
-		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src], and it floats as the hoverfield activates.</span>")
-		user.drop_item()
-		W.forceMove(src)
-		occupant=W
-		update_icon()
+	if(W.flags & ABSTRACT)
+		to_chat(user, "<span class='danger'>You can't put this into the case.</span>")
+		return
+	if(user.a_intent == I_HARM)
+		if(locked && !destroyed)
+			src.health -= W.force
+			src.healthcheck()
+			..()
+		else if(!locked)
+			dump()
+			to_chat(user, "<span class='danger'>You smash \the [W] into the delicate electronics at the bottom of the case, and deactivate the hover field.</span>")
+			update_icon()
 	else
-		to_chat(user, "<span class='danger'>You smash \the [W] into the delicate electronics at the bottom of the case, and deactivate the hover field.</span>")
-		dump()
-		update_icon()
+		if(locked)
+			to_chat(user, "<span class='warning'>It's locked, you can't put anything into it.</span>")
+			return
+		if(!occupant)
+			if(!user.drop_item())
+				to_chat(user, "<span class='notice'>[W] is stuck to you. You cannot put it in [src]!</span>")
+				return
+			to_chat(user, "<span class='notice'>You insert \the [W] into \the [src], and it floats as the hoverfield activates.</span>")
+			user.drop_item()
+			W.forceMove(src)
+			occupant=W
+			update_icon()
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)
-	if(!locked)
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			var/print = H.get_full_print()
-			if(!ue)
-				to_chat(user, "<span class='notice'>Your press your thumb against the fingerprint scanner, registering your identity with the case.</span>")
-				ue = print
-				return
-			if(occupant)
-				if(ue != print)
-					to_chat(user, "<span class='danger'>You smash your fist into the delicate electronics at the bottom of the case, and deactivate the hover field.</span>")
-					src.add_fingerprint(user)
-				else
-					to_chat(user, "<span class='notice'>Your press your thumb against the fingerprint scanner, and deactivate the hover field built into the case.</span>")
-				dump()
-				update_icon()
-			else
-				to_chat(user, "[bicon(src)] <span class='warning'>\The [src] is empty!</span>")
+	if(destroyed || (!locked && user.a_intent == I_HARM))
+		if(occupant)
+			dump()
+			to_chat(user, "<span class='danger'>You smash your fist into the delicate electronics at the bottom of the case, and deactivate the hover field.</span>")
+			src.add_fingerprint(user)
+			update_icon()
 	else
-		user.changeNext_move(CLICK_CD_MELEE)
-		user.do_attack_animation(src)
-		user.visible_message("<span class='danger'>[user.name] kicks \the [src]!</span>", \
-			"<span class='danger'>You kick \the [src]!</span>", \
-			"You hear glass crack.")
-		src.health -= 2
-		healthcheck()
-		/*user.visible_message("[user.name] gently runs his hands over \the [src] in appreciation of its contents.", \
-			"You gently run your hands over \the [src] in appreciation of its contents.", \
-			"You hear someone streaking glass with their greasy hands.")*/
+		if(user.a_intent == I_HARM)
+			user.changeNext_move(CLICK_CD_MELEE)
+			user.do_attack_animation(src)
+			user.visible_message("<span class='danger'>[user.name] kicks \the [src]!</span>", \
+				"<span class='danger'>You kick \the [src]!</span>", \
+				"You hear glass crack.")
+			src.health -= 2
+			healthcheck()
+		else if(!locked)
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
+				var/print = H.get_full_print()
+				if(!ue)
+					to_chat(user, "<span class='notice'>Your press your thumb against the fingerprint scanner, registering your identity with the case.</span>")
+					ue = print
+					return
+				if(ue != print)
+					to_chat(user, "<span class='warning'>Access denied.</span>")
+					return
+
+				if(occupant)
+					to_chat(user, "<span class='notice'>Your press your thumb against the fingerprint scanner, and deactivate the hover field built into the case.</span>")
+					dump()
+					update_icon()
+				else
+					to_chat(src, "[bicon(src)] <span class='warning'>\The [src] is empty!</span>")
+		else
+			user.visible_message("[user.name] gently runs his hands over \the [src] in appreciation of its contents.", \
+				"You gently run your hands over \the [src] in appreciation of its contents.", \
+				"You hear someone streaking glass with their greasy hands.")
 
 #undef DISPLAYCASE_FRAME_CIRCUIT
 #undef DISPLAYCASE_FRAME_SCREWDRIVER

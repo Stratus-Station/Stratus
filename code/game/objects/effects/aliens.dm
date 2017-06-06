@@ -104,9 +104,9 @@
 /obj/structure/alien/resin/hitby(atom/movable/AM)
 	..()
 	var/tforce = 0
-	if(!isobj(AM))
+	if(ismob(AM))
 		tforce = 10
-	else
+	else if(isobj(AM))
 		var/obj/O = AM
 		tforce = O.throwforce
 	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
@@ -222,7 +222,7 @@
 		var/obj/item/weapon/weldingtool/WT = I
 		if(WT.remove_fuel(0, user))
 			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+			playsound(loc, WT.usesound, 100, 1)
 
 	health -= damage
 	healthcheck()
@@ -381,7 +381,7 @@
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+			playsound(loc, WT.usesound, 100, 1)
 
 	health -= damage
 	user.changeNext_move(CLICK_CD_MELEE)

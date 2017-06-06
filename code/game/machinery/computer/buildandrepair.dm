@@ -13,7 +13,7 @@
 /obj/item/weapon/circuitboard
 	density = 0
 	anchored = 0
-	w_class = 2
+	w_class = WEIGHT_CLASS_SMALL
 	name = "circuit board"
 	icon = 'icons/obj/module.dmi'
 	icon_state = "id_mod"
@@ -29,35 +29,43 @@
 	var/list/records = null
 	var/frame_desc = null
 	var/contain_parts = 1
+	toolspeed = 1
+	usesound = 'sound/items/Deconstruct.ogg'
 
+/obj/item/weapon/circuitboard/computer
+	board_type = "computer"
+
+/obj/item/weapon/circuitboard/machine
+	board_type = "machine"
 
 /obj/item/weapon/circuitboard/message_monitor
 	name = "Circuit board (Message Monitor)"
 	build_path = /obj/machinery/computer/message_monitor
-	origin_tech = "programming=3"
+	origin_tech = "programming=2"
 /obj/item/weapon/circuitboard/camera
 	name = "Circuit board (Camera Monitor)"
 	build_path = /obj/machinery/computer/security
-	origin_tech = "programming=2"
+	origin_tech = "programming=2;combat=2"
 /obj/item/weapon/circuitboard/xenobiology
 	name = "Circuit board (Xenobiology Console)"
 	build_path = /obj/machinery/computer/camera_advanced/xenobio
 	origin_tech = "programming=3;biotech=3"
 /obj/item/weapon/circuitboard/aicore
 	name = "Circuit board (AI Core)"
-	origin_tech = "programming=4;biotech=2"
+	origin_tech = "programming=3"
 	board_type = "other"
 /obj/item/weapon/circuitboard/aiupload
 	name = "Circuit board (AI Upload)"
 	build_path = /obj/machinery/computer/aiupload
-	origin_tech = "programming=4"
+	origin_tech = "programming=4;engineering=4"
 /obj/item/weapon/circuitboard/borgupload
 	name = "Circuit board (Cyborg Upload)"
 	build_path = /obj/machinery/computer/borgupload
-	origin_tech = "programming=4"
+	origin_tech = "programming=4;engineering=4"
 /obj/item/weapon/circuitboard/med_data
 	name = "Circuit board (Medical Records)"
 	build_path = /obj/machinery/computer/med_data
+	origin_tech = "programming=2;biotech=2"
 /obj/item/weapon/circuitboard/pandemic
 	name = "circuit board (PanD.E.M.I.C. 2200)"
 	build_path = /obj/machinery/computer/pandemic
@@ -69,20 +77,42 @@
 /obj/item/weapon/circuitboard/communications
 	name = "Circuit board (Communications Console)"
 	build_path = /obj/machinery/computer/communications
-	origin_tech = "programming=2;magnets=2"
+	origin_tech = "programming=3;magnets=3"
 /obj/item/weapon/circuitboard/card
 	name = "Circuit board (ID Computer)"
 	build_path = /obj/machinery/computer/card
+	origin_tech = "programming=3"
+/obj/item/weapon/circuitboard/card/minor
+	name = "Circuit board (Dept ID Computer)"
+	build_path = /obj/machinery/computer/card/minor
+	var/target_dept = TARGET_DEPT_GENERIC
+/obj/item/weapon/circuitboard/card/minor/hos
+	name = "Circuit board (Sec ID Computer)"
+	build_path = /obj/machinery/computer/card/minor/hos
+	target_dept = TARGET_DEPT_SEC
+/obj/item/weapon/circuitboard/card/minor/cmo
+	name = "Circuit board (Medical ID Computer)"
+	build_path = /obj/machinery/computer/card/minor/cmo
+	target_dept = TARGET_DEPT_MED
+/obj/item/weapon/circuitboard/card/minor/rd
+	name = "Circuit board (Science ID Computer)"
+	build_path = /obj/machinery/computer/card/minor/rd
+	target_dept = TARGET_DEPT_SCI
+/obj/item/weapon/circuitboard/card/minor/ce
+	name = "Circuit board (Engineering ID Computer)"
+	build_path = /obj/machinery/computer/card/minor/ce
+	target_dept = TARGET_DEPT_ENG
 /obj/item/weapon/circuitboard/card/centcom
 	name = "Circuit board (CentComm ID Computer)"
 	build_path = /obj/machinery/computer/card/centcom
 /obj/item/weapon/circuitboard/teleporter
 	name = "Circuit board (Teleporter Console)"
 	build_path = /obj/machinery/computer/teleporter
-	origin_tech = "programming=2;bluespace=2"
+	origin_tech = "programming=3;bluespace=3;plasmatech=3"
 /obj/item/weapon/circuitboard/secure_data
 	name = "Circuit board (Security Records)"
 	build_path = /obj/machinery/computer/secure_data
+	origin_tech = "programming=2;combat=2"
 /obj/item/weapon/circuitboard/skills
 	name = "Circuit board (Employment Records)"
 	build_path = /obj/machinery/computer/skills
@@ -124,7 +154,7 @@
 /obj/item/weapon/circuitboard/cloning
 	name = "Circuit board (Cloning Machine Console)"
 	build_path = /obj/machinery/computer/cloning
-	origin_tech = "programming=3;biotech=3"
+	origin_tech = "programming=2;biotech=2"
 /obj/item/weapon/circuitboard/arcade/battle
 	name = "circuit board (Arcade Battle)"
 	build_path = /obj/machinery/computer/arcade/battle
@@ -132,7 +162,7 @@
 /obj/item/weapon/circuitboard/arcade/orion_trail
 	name = "circuit board (Orion Trail)"
 	build_path = /obj/machinery/computer/arcade/orion_trail
-	origin_tech = "programming=2"
+	origin_tech = "programming=1"
 /obj/item/weapon/circuitboard/solar_control
 	name = "Circuit board (Solar Control)"
 	build_path = /obj/machinery/power/solar_control
@@ -140,6 +170,7 @@
 /obj/item/weapon/circuitboard/powermonitor
 	name = "Circuit board (Power Monitor)"
 	build_path = /obj/machinery/computer/monitor
+	origin_tech = "programming=2;powerstorage=2"
 /obj/item/weapon/circuitboard/olddoor
 	name = "Circuit board (DoorMex)"
 	build_path = /obj/machinery/computer/pod/old
@@ -192,15 +223,15 @@
 /obj/item/weapon/circuitboard/crew
 	name = "Circuit board (Crew Monitoring Computer)"
 	build_path = /obj/machinery/computer/crew
-	origin_tech = "programming=3;biotech=2;magnets=2"
+	origin_tech = "programming=2;biotech=2"
 /obj/item/weapon/circuitboard/mech_bay_power_console
 	name = "Circuit board (Mech Bay Power Control Console)"
 	build_path = /obj/machinery/computer/mech_bay_power_console
-	origin_tech = "programming=2;powerstorage=3"
+	origin_tech = "programming=3;powerstorage=3"
 /obj/item/weapon/circuitboard/ordercomp
 	name = "Circuit board (Supply Ordering Console)"
 	build_path = /obj/machinery/computer/ordercomp
-	origin_tech = "programming=2"
+	origin_tech = "programming=3"
 /obj/item/weapon/circuitboard/supplycomp
 	name = "Circuit board (Supply Shuttle Console)"
 	build_path = /obj/machinery/computer/supplycomp
@@ -210,19 +241,19 @@
 /obj/item/weapon/circuitboard/operating
 	name = "Circuit board (Operating Computer)"
 	build_path = /obj/machinery/computer/operating
-	origin_tech = "programming=2;biotech=2"
+	origin_tech = "programming=2;biotech=3"
 /obj/item/weapon/circuitboard/comm_monitor
 	name = "Circuit board (Telecommunications Monitor)"
 	build_path = /obj/machinery/computer/telecomms/monitor
-	origin_tech = "programming=3"
+	origin_tech = "programming=3;magnets=3;bluespace=2"
 /obj/item/weapon/circuitboard/comm_server
 	name = "Circuit board (Telecommunications Server Monitor)"
 	build_path = /obj/machinery/computer/telecomms/server
-	origin_tech = "programming=3"
+	origin_tech = "programming=3;magnets=3;bluespace=2"
 /obj/item/weapon/circuitboard/comm_traffic
 	name = "Circuitboard (Telecommunications Traffic Control)"
 	build_path = /obj/machinery/computer/telecomms/traffic
-	origin_tech = "programming=3"
+	origin_tech = "programming=3;magnets=3;bluespace=2"
 
 
 /obj/item/weapon/circuitboard/shuttle
@@ -258,7 +289,7 @@
 /obj/item/weapon/circuitboard/aifixer
 	name = "Circuit board (AI Integrity Restorer)"
 	build_path = /obj/machinery/computer/aifixer
-	origin_tech = "programming=3;biotech=2"
+	origin_tech = "programming=2;biotech=2"
 /obj/item/weapon/circuitboard/area_atmos
 	name = "Circuit board (Area Air Control)"
 	build_path = /obj/machinery/computer/area_atmos
@@ -266,7 +297,7 @@
 /obj/item/weapon/circuitboard/telesci_console
 	name = "Circuit board (Telepad Control Console)"
 	build_path = /obj/machinery/computer/telescience
-	origin_tech = "programming=3;bluespace=2"
+	origin_tech = "programming=3;bluespace=3;plasmatech=4"
 
 /obj/item/weapon/circuitboard/atmos_automation
 	name = "Circuit board (Atmospherics Automation)"
@@ -274,6 +305,7 @@
 /obj/item/weapon/circuitboard/large_tank_control
 	name = "Circuit board (Atmospheric Tank Control)"
 	build_path = /obj/machinery/computer/general_air_control/large_tank_control
+	origin_tech = "programming=2;engineering=3;materials=2"
 
 /obj/item/weapon/circuitboard/turbine_computer
 	name = "circuit board (Turbine Computer)"
@@ -283,7 +315,7 @@
 /obj/item/weapon/circuitboard/HONKputer
 	name = "Circuit board (HONKputer)"
 	build_path = /obj/machinery/computer/HONKputer
-	origin_tech = "programming=4"
+	origin_tech = "programming=2"
 	icon = 'icons/obj/machines/HONKputer.dmi'
 	icon_state = "bananium_board"
 	board_type = "honkcomputer"
@@ -349,8 +381,8 @@
 	switch(state)
 		if(0)
 			if(istype(P, /obj/item/weapon/wrench))
-				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20, target = src))
+				playsound(loc, P.usesound, 50, 1)
+				if(do_after(user, 20 * P.toolspeed, target = src))
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
 					anchored = 1
 					state = 1
@@ -359,23 +391,23 @@
 				if(!WT.remove_fuel(0, user))
 					to_chat(user, "<span class='warning'>The welding tool must be on to complete this task.</span>")
 					return
-				playsound(loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20, target = src))
+				playsound(loc, WT.usesound, 50, 1)
+				if(do_after(user, 20 * WT.toolspeed, target = src))
 					if(!src || !WT.isOn()) return
 					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 					new /obj/item/stack/sheet/metal(loc, 5)
 					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
-				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20, target = src))
+				playsound(loc, P.usesound, 50, 1)
+				if(do_after(user, 20 * P.toolspeed, target = src))
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 					anchored = 0
 					state = 0
 			if(istype(P, /obj/item/weapon/circuitboard) && !circuit)
 				var/obj/item/weapon/circuitboard/B = P
 				if(B.board_type == "computer")
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					playsound(loc, B.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
 					icon_state = "1"
 					circuit = P
@@ -384,12 +416,12 @@
 				else
 					to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 			if(istype(P, /obj/item/weapon/screwdriver) && circuit)
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
 				state = 2
 				icon_state = "2"
 			if(istype(P, /obj/item/weapon/crowbar) && circuit)
-				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 				state = 1
 				icon_state = "0"
@@ -397,16 +429,16 @@
 				circuit = null
 		if(2)
 			if(istype(P, /obj/item/weapon/screwdriver) && circuit)
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
 				state = 1
 				icon_state = "1"
 			if(istype(P, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = P
 				if(C.amount >= 5)
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					playsound(loc, C.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
-					if(do_after(user, 20, target = src))
+					if(do_after(user, 20 * C.toolspeed, target = src))
 						if(state == 2 && C.amount >= 5 && C.use(5))
 							to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 							state = 3
@@ -419,7 +451,7 @@
 					return
 		if(3)
 			if(istype(P, /obj/item/weapon/wirecutters))
-				playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the cables.</span>")
 				state = 2
 				icon_state = "2"
@@ -429,9 +461,9 @@
 			if(istype(P, /obj/item/stack/sheet/glass))
 				var/obj/item/stack/sheet/glass/G = P
 				if(G.amount >= 2)
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					playsound(loc, G.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You start to add the glass panel to the frame.</span>")
-					if(do_after(user, 20, target = src))
+					if(do_after(user, 20 * G.toolspeed, target = src))
 						if(state == 3 && G.amount >= 2 && G.use(2))
 							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
 							state = 4
@@ -444,13 +476,13 @@
 					return
 		if(4)
 			if(istype(P, /obj/item/weapon/crowbar))
-				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
 				state = 3
 				icon_state = "3"
 				new /obj/item/stack/sheet/glass(loc, 2)
 			if(istype(P, /obj/item/weapon/screwdriver))
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 				var/B = new circuit.build_path (loc)
 				if(circuit.powernet) B:powernet = circuit.powernet
@@ -473,7 +505,7 @@
 	switch(state)
 		if(0)
 			if(istype(P, /obj/item/weapon/wrench))
-				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				if(do_after(user, 20, target = src))
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
 					anchored = 1
@@ -483,23 +515,23 @@
 				if(!WT.remove_fuel(0, user))
 					to_chat(user, "<span class='warning'>The welding tool must be on to complete this task.</span>")
 					return
-				playsound(loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20, target = src))
+				playsound(loc, WT.usesound, 50, 1)
+				if(do_after(user, 20 * WT.toolspeed, target = src))
 					if(!src || !WT.isOn()) return
 					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 					new /obj/item/stack/sheet/mineral/bananium(loc, 5)
 					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
-				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20, target = src))
+				playsound(loc, P.usesound, 50, 1)
+				if(do_after(user, 20 * P.toolspeed, target = src))
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 					anchored = 0
 					state = 0
 			if(istype(P, /obj/item/weapon/circuitboard) && !circuit)
 				var/obj/item/weapon/circuitboard/B = P
 				if(B.board_type == "honkcomputer")
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					playsound(loc, P.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
 					icon_state = "1"
 					circuit = P
@@ -508,12 +540,12 @@
 				else
 					to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 			if(istype(P, /obj/item/weapon/screwdriver) && circuit)
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
 				state = 2
 				icon_state = "2"
 			if(istype(P, /obj/item/weapon/crowbar) && circuit)
-				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 				state = 1
 				icon_state = "0"
@@ -521,16 +553,16 @@
 				circuit = null
 		if(2)
 			if(istype(P, /obj/item/weapon/screwdriver) && circuit)
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
 				state = 1
 				icon_state = "1"
 			if(istype(P, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = P
 				if(C.amount >= 5)
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					playsound(loc, C.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
-					if(do_after(user, 20, target = src))
+					if(do_after(user, 20 * C.toolspeed, target = src))
 						if(state == 2 && C.amount >= 5 && C.use(5))
 							to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 							state = 3
@@ -543,7 +575,7 @@
 					return
 		if(3)
 			if(istype(P, /obj/item/weapon/wirecutters))
-				playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the cables.</span>")
 				state = 2
 				icon_state = "2"
@@ -553,9 +585,9 @@
 			if(istype(P, /obj/item/stack/sheet/glass))
 				var/obj/item/stack/sheet/glass/G = P
 				if(G.amount >= 2)
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					playsound(loc, G.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You start to add the glass panel to the frame.</span>")
-					if(do_after(user, 20, target = src))
+					if(do_after(user, 20 * G.toolspeed, target = src))
 						if(state == 3 && G.amount >= 2 && G.use(2))
 							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
 							state = 4
@@ -568,13 +600,13 @@
 					return
 		if(4)
 			if(istype(P, /obj/item/weapon/crowbar))
-				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
 				state = 3
 				icon_state = "3"
 				new /obj/item/stack/sheet/glass(loc, 2)
 			if(istype(P, /obj/item/weapon/screwdriver))
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				playsound(loc, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 				var/B = new circuit.build_path (loc)
 				if(circuit.powernet) B:powernet = circuit.powernet

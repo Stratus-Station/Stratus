@@ -346,7 +346,7 @@
 	if(..())
 		handle_dreams()
 		adjustStaminaLoss(-10)
-		if(prob(10) && health && !hal_crit)
+		if(prob(10) && health && hal_screwyhud != SCREWYHUD_CRIT)
 			spawn(0)
 				emote("snore")
 	// Keep SSD people asleep

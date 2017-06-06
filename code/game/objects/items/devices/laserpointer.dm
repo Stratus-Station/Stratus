@@ -8,9 +8,8 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	materials = list(MAT_METAL=500, MAT_GLASS=500)
-	w_class = 2 //Increased to 2, because diodes are w_class 2. Conservation of matter.
-	origin_tech = "combat=1"
-	origin_tech = "magnets=2"
+	w_class = WEIGHT_CLASS_SMALL //Increased to 2, because diodes are w_class 2. Conservation of matter.
+	origin_tech = "combat=1;magnets=2"
 	var/energy = 5
 	var/max_energy = 5
 	var/effectchance = 33
@@ -35,9 +34,7 @@
 		pointer_icon_state = pick("red_laser","green_laser","blue_laser","purple_laser")
 
 /obj/item/device/laser_pointer/Destroy()
-	if(diode)
-		qdel(diode)
-		diode = null
+	QDEL_NULL(diode)
 	return ..()
 
 /obj/item/device/laser_pointer/upgraded/New()

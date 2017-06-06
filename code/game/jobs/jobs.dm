@@ -25,6 +25,7 @@ var/const/VIROLOGIST		=(1<<6)
 var/const/PSYCHIATRIST		=(1<<7)
 var/const/ROBOTICIST		=(1<<8)
 var/const/PARAMEDIC			=(1<<9)
+var/const/CORONER			=(1<<10)
 
 
 var/const/SUPPORT			=(1<<2)
@@ -42,7 +43,7 @@ var/const/LAWYER			=(1<<9)
 var/const/CHAPLAIN			=(1<<10)
 var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
-var/const/VISITOR			=(1<<13)
+var/const/CIVILIAN			=(1<<13)
 
 
 var/const/KARMA				=(1<<3)
@@ -50,8 +51,9 @@ var/const/KARMA				=(1<<3)
 var/const/NANO				=(1<<0)
 var/const/BLUESHIELD		=(1<<1)
 var/const/BARBER			=(1<<3)
-var/const/EXPLORER			=(1<<4)
+var/const/MECHANIC			=(1<<4)
 var/const/BRIGDOC			=(1<<5)
+var/const/JUDGE				=(1<<6)
 var/const/PILOT				=(1<<7)
 
 var/list/assistant_occupations = list(
@@ -60,8 +62,10 @@ var/list/assistant_occupations = list(
 
 var/list/command_positions = list(
 	"Captain",
+	"Head of Personnel",
 	"Head of Security",
 	"Chief Engineer",
+	"Research Director",
 	"Chief Medical Officer"
 )
 
@@ -69,16 +73,20 @@ var/list/command_positions = list(
 var/list/engineering_positions = list(
 	"Chief Engineer",
 	"Station Engineer",
-	"Atmospherics Technician",
-	"Roboticist"
+	"Life Support Specialist",
+	"Mechanic"
 )
 
 
 var/list/medical_positions = list(
 	"Chief Medical Officer",
 	"Medical Doctor",
+	"Geneticist",
+	"Psychiatrist",
 	"Chemist",
-	"Paramedic"
+	"Virologist",
+	"Paramedic",
+	"Coroner"
 )
 
 
@@ -90,18 +98,48 @@ var/list/science_positions = list(
 )
 
 //BS12 EDIT
-var/list/supply_positions = list(
+var/list/support_positions = list(
+	"Head of Personnel",
+	"Bartender",
+	"Botanist",
+	"Chef",
+	"Janitor",
+	"Librarian",
 	"Quartermaster",
 	"Cargo Technician",
-	"Miner",
-	"Janitor"
+	"Shaft Miner",
+	"Internal Affairs Agent",
+	"Chaplain",
+	"Clown",
+	"Mime",
+	"Barber",
+	"Magistrate",
+	"Nanotrasen Representative",
+	"Blueshield"
 )
+
+var/list/supply_positions = list(
+	"Head of Personnel",
+	"Quartermaster",
+	"Cargo Technician",
+	"Shaft Miner"
+)
+
+var/list/service_positions = support_positions - supply_positions + list("Head of Personnel")
+
 
 var/list/security_positions = list(
 	"Head of Security",
+	"Warden",
 	"Detective",
 	"Security Officer",
-	"Security Medic"
+	"Brig Physician",
+	"Security Pod Pilot"
+)
+
+
+var/list/civilian_positions = list(
+	"Civilian"
 )
 
 var/list/nonhuman_positions = list(
@@ -111,7 +149,16 @@ var/list/nonhuman_positions = list(
 	"pAI"
 )
 
-var/list/whitelisted_positions = list()
+var/list/whitelisted_positions = list(
+	"Blueshield",
+	"Nanotrasen Representative",
+	"Barber",
+	"Mechanic",
+	"Brig Physician",
+	"Magistrate",
+	"Security Pod Pilot",
+)
+
 
 /proc/guest_jobbans(var/job)
 	return (job in whitelisted_positions)
@@ -140,7 +187,7 @@ var/list/whitelisted_positions = list()
 
 var/global/list/exp_jobsmap = list(
 	EXP_TYPE_LIVING = list(), // all living mobs
-	EXP_TYPE_CREW = list(titles = command_positions | engineering_positions | medical_positions | supply_positions | security_positions | list("AI","Cyborg") | whitelisted_positions), // crew positions
+	EXP_TYPE_CREW = list(titles = command_positions | engineering_positions | medical_positions | science_positions | support_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg") | whitelisted_positions), // crew positions
 	EXP_TYPE_SPECIAL = list(), // antags, ERT, etc
 	EXP_TYPE_GHOST = list(), // dead people, observers
 	EXP_TYPE_EXEMPT = list() // special grandfather setting

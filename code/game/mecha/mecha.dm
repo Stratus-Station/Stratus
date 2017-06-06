@@ -334,7 +334,7 @@
 		else if(istype(obstacle, /obj/structure/grille/))
 			var/obj/structure/grille/G = obstacle
 			G.health = (0.25*initial(G.health))
-			G.destroyed = 1
+			G.broken = 1
 			G.icon_state = "[initial(G.icon_state)]-b"
 			G.density = 0
 			new /obj/item/stack/rods(get_turf(G.loc))
@@ -368,8 +368,11 @@
 			breakthrough = 1
 
 		else
-			throwing = 0 //so mechas don't get stuck when landing after being sent by a Mass Driver
+			if(throwing)
+				throwing.finalize(FALSE)
 			crashing = null
+
+		..()
 
 		if(breakthrough)
 			if(crashing)
@@ -491,14 +494,14 @@
 		take_damage(15)
 		check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		playsound(loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		to_chat(user, "\red You slash at the armored suit!")
-		visible_message("\red The [user] slashes at [name]'s armor!")
+		to_chat(user, "<span class='warning'>You slash at the armored suit!</span>")
+		visible_message("<span class='warning'>The [user] slashes at [name]'s armor!</span>")
 	else
 		log_append_to_last("Armor saved.")
 		playsound(loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		to_chat(user, "\green Your claws had no effect!")
-		occupant_message("\blue The [user]'s claws are stopped by the armor.")
-		visible_message("\blue The [user] rebounds off [name]'s armor!")
+		to_chat(user, "<span class=notice'>Your claws had no effect!</span>")
+		occupant_message("<span class='notice'>The [user]'s claws are stopped by the armor.</span>")
+		visible_message("<span class='notice'>The [user] rebounds off [name]'s armor!</span>")
 	return
 
 
@@ -519,12 +522,12 @@
 		else
 			log_append_to_last("Armor saved.")
 			playsound(loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-			occupant_message("\blue The [user]'s attack is stopped by the armor.")
-			visible_message("\blue The [user] rebounds off [name]'s armor!")
+			occupant_message("<span class='notice'>The [user]'s attack is stopped by the armor.</span>")
+			visible_message("<span class='notice'>The [user] rebounds off [name]'s armor!</span>")
 			user.create_attack_log("<font color='red'>attacked [name]</font>")
 	return
 
-/obj/mecha/hitby(atom/movable/A as mob|obj) //wrapper
+/obj/mecha/hitby(atom/movable/A) //wrapper
 	..()
 	log_message("Hit by [A].",1)
 
@@ -537,6 +540,7 @@
 			dam_coeff = B.damage_coeff
 			counter_tracking = 1
 			break
+
 	if(istype(A, /obj/item/mecha_parts/mecha_tracking))
 		if(!counter_tracking)
 			A.forceMove(src)
@@ -598,7 +602,6 @@
 				WR.crowbar_salvage += E
 				E.forceMove(WR)
 				E.equip_ready = 1
-				E.reliability = round(rand(E.reliability/3,E.reliability))
 			else
 				E.forceMove(loc)
 				qdel(E)
@@ -610,13 +613,9 @@
 			WR.crowbar_salvage += internal_tank
 			internal_tank.forceMove(WR)
 	else
-		for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
-			E.forceMove(loc)
-			qdel(E)
-		if(cell)
-			qdel(cell)
-		if(internal_tank)
-			qdel(internal_tank)
+		QDEL_LIST(equipment)
+		QDEL_NULL(cell)
+		QDEL_NULL(internal_tank)
 
 	processing_objects.Remove(src)
 	poi_list.Remove(src)
@@ -629,8 +628,7 @@
 	else
 		qdel(cabin_air)
 	cabin_air = null
-	qdel(spark_system)
-	spark_system = null
+	QDEL_NULL(spark_system)
 
 	mechas_list -= src //global mech list
 	return ..()
@@ -663,7 +661,7 @@
 
 /obj/mecha/emp_act(severity)
 	if(get_charge())
-		use_power((cell.charge / 2) / severity)
+		use_power((cell.charge/3)/(severity*2))
 		take_damage(50 / severity, "energy")
 	log_message("EMP detected", 1)
 	check_for_internal_damage(list(MECHA_INT_FIRE, MECHA_INT_TEMP_CONTROL, MECHA_INT_CONTROL_LOST, MECHA_INT_SHORT_CIRCUIT), 1)
@@ -734,7 +732,7 @@
 			// Since having maint protocols available is controllable by the MMI, I see this as a consensual way to remove an MMI without destroying the mech
 			user.visible_message("[user] begins levering out the MMI from the [src].", "You begin to lever out the MMI from the [src].")
 			to_chat(occupant, "<span class='warning'>[user] is prying you out of the exosuit!</span>")
-			if(do_after(user,80,target=src))
+			if(do_after(user, 80 * W.toolspeed, target=src))
 				user.visible_message("<span class='notice'>[user] pries the MMI out of the [src]!</span>", "<span class='notice'>You finish removing the MMI from the [src]!</span>")
 				go_out()
 		return
@@ -858,11 +856,11 @@
 /obj/mecha/emag_act(user as mob)
 	if(istype(src,	/obj/mecha/working/ripley) && emagged == 0)
 		emagged = 1
-		to_chat(usr, "\blue You slide the card through the [src]'s ID slot.")
+		to_chat(usr, "<span class='notice'>You slide the card through the [src]'s ID slot.</span>")
 		playsound(loc, "sparks", 100, 1)
 		desc += "</br><span class='danger'>The mech's equipment slots spark dangerously!</span>"
 	else
-		to_chat(usr, "\red The [src]'s ID slot rejects the card.")
+		to_chat(usr, "<span class='warning'>The [src]'s ID slot rejects the card.</span>")
 	return
 
 
@@ -1048,12 +1046,12 @@
 	var/obj/machinery/atmospherics/unary/portables_connector/possible_port = locate(/obj/machinery/atmospherics/unary/portables_connector/) in loc
 	if(possible_port)
 		if(connect(possible_port))
-			occupant_message("\blue [name] connects to the port.")
+			occupant_message("<span class='notice'>[name] connects to the port.</span>")
 			verbs += /obj/mecha/verb/disconnect_from_port
 			verbs -= /obj/mecha/verb/connect_to_port
 			return
 		else
-			occupant_message("\red [name] failed to connect to the port.")
+			occupant_message("<span class='warning'>[name] failed to connect to the port.</span>")
 			return
 	else
 		occupant_message("Nothing happens")
@@ -1068,11 +1066,11 @@
 	if(usr!=occupant)
 		return
 	if(disconnect())
-		occupant_message("\blue [name] disconnects from the port.")
+		occupant_message("<span class='notice'>[name] disconnects from the port.</span>")
 		verbs -= /obj/mecha/verb/disconnect_from_port
 		verbs += /obj/mecha/verb/connect_to_port
 	else
-		occupant_message("\red [name] is not connected to the port at the moment.")
+		occupant_message("<span class='warning'>[name] is not connected to the port at the moment.</span>")
 
 /obj/mecha/verb/toggle_lights()
 	set name = "Toggle Lights"

@@ -2,11 +2,11 @@
 	name = "host brain"
 	real_name = "host brain"
 
-/mob/living/captive_brain/say(var/message)
+/mob/living/captive_brain/say(message)
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, "\red You cannot speak in IC (muted).")
+			to_chat(src, "<span class='warning'>You cannot speak in IC (muted).</span>")
 			return
 		if(client.handle_spam_prevention(message,MUTE_IC))
 			return
@@ -43,7 +43,7 @@
 	to_chat(B.host, "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>")
 
 	var/delay = (rand(350,450) + B.host.brainloss)
-	addtimer(src, "return_control", delay)
+	addtimer(src, "return_control", delay, FALSE, B)
 
 /mob/living/captive_brain/proc/return_control(mob/living/simple_animal/borer/B)
 	if(!B || !B.controlling)
@@ -53,7 +53,7 @@
 	to_chat(src, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
 	to_chat(B.host, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
 
-	B.detatch()
+	B.detach()
 
 /mob/living/simple_animal/borer
 	name = "cortical borer"
@@ -145,7 +145,7 @@
 	if(client.statpanel == "Status")
 		stat("Chemicals", chemicals)
 
-/mob/living/simple_animal/borer/say(message)
+/mob/living/simple_animal/borer/say(var/message)
 	var/datum/language/dialect = parse_language(message)
 	if(!dialect)
 		dialect = get_default_language()
@@ -250,16 +250,16 @@
 			if(host.reagents.has_reagent("sugar"))
 				if(!docile)
 					if(controlling)
-						to_chat(host, "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility.")
+						to_chat(host, "<span class='notice'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</span>")
 					else
-						to_chat(src, "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility.")
+						to_chat(src, "<span class='notice'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</span>")
 					docile = TRUE
 			else
 				if(docile)
 					if(controlling)
-						to_chat(host, "\blue You shake off your lethargy as the sugar leaves your host's blood.")
+						to_chat(host, "<span class='notice'>You shake off your lethargy as the sugar leaves your host's blood.</span>")
 					else
-						to_chat(src, "\blue You shake off your lethargy as the sugar leaves your host's blood.")
+						to_chat(src, "<span class='notice'>You shake off your lethargy as the sugar leaves your host's blood.</span>")
 					docile = FALSE
 
 			if(chemicals < max_chems)
@@ -267,7 +267,7 @@
 			if(controlling)
 
 				if(docile)
-					to_chat(host, "\blue You are feeling far too docile to continue controlling your host...")
+					to_chat(host, "<span class='notice'>You are feeling far too docile to continue controlling your host...</span>")
 					host.release_control()
 					return
 
@@ -322,7 +322,7 @@
 
 	to_chat(src, "You slither up [M] and begin probing at their ear canal...")
 
-	if(!do_after(src,50, target = M))
+	if(!do_after(src, 50, target = M))
 		to_chat(src, "As [M] moves away, you are dislodged and fall to the ground.")
 		return
 
@@ -392,10 +392,11 @@
 	content += "<table>"
 
 	for(var/datum in typesof(/datum/borer_chem))
-		var/datum/borer_chem/C = new datum()
-		var/datum/reagent/R = chemical_reagents_list[C.chemname]
-		if(C.chemname)
-			content += "<tr><td><a class='chem-select' href='?_src_=[UID()];src=[UID()];borer_use_chem=[C.chemname]'>[R.name] ([C.chemuse])</a><p>[C.chemdesc]</p></td></tr>"
+		var/datum/borer_chem/C = datum
+		var/cname = initial(C.chemname)
+		var/datum/reagent/R = chemical_reagents_list[cname]
+		if(cname)
+			content += "<tr><td><a class='chem-select' href='?_src_=[UID()];src=[UID()];borer_use_chem=[cname]'>[R.name] ([initial(C.chemuse)])</a><p>[initial(C.chemdesc)]</p></td></tr>"
 
 	content += "</table>"
 
@@ -417,19 +418,17 @@
 			return
 
 		var/topic_chem = href_list["borer_use_chem"]
-		var/datum/borer_chem/C
+		var/datum/borer_chem/C = null
 
 		for(var/datum in typesof(/datum/borer_chem))
-			var/datum/borer_chem/test = new datum()
-			if(test.chemname == topic_chem)
-				C = test
+			var/datum/borer_chem/test = datum
+			if(initial(test.chemname) == topic_chem)
+				C = new test()
 				break
 
-		var/datum/reagent/R = chemical_reagents_list[C.chemname]
-		if(!istype(C, /datum/borer_chem))
-			return
 		if(!C || !host || controlling || !src || stat)
 			return
+		var/datum/reagent/R = chemical_reagents_list[C.chemname]
 		if(chemicals < C.chemuse)
 			to_chat(src, "<span class='boldnotice'>You need [C.chemuse] chemicals stored to secrete [R.name]!</span>")
 			return
@@ -439,6 +438,9 @@
 		chemicals -= C.chemuse
 		log_game("[src]/([src.ckey]) has injected [R.name] into their host [host]/([host.ckey])")
 
+		// This is used because we use a static set of datums to determine what chems are available,
+		// instead of a table or something. Thus, when we instance it, we can safely delete it
+		qdel(C)
 	..()
 
 /mob/living/simple_animal/borer/verb/hide_borer()
@@ -448,17 +450,18 @@
 
 	if(host)
 		to_chat(usr, "<span class='warning'>You cannot do this while you're inside a host.</span>")
+		return
 
 	if(stat != CONSCIOUS)
 		return
 
 	if(!hiding)
 		layer = TURF_LAYER+0.2
-		to_chat(src, "\green You are now hiding.")
+		to_chat(src, "<span class=notice'>You are now hiding.</span>")
 		hiding = TRUE
 	else
 		layer = MOB_LAYER
-		to_chat(src, "\green You stop hiding.")
+		to_chat(src, "<span class=notice'>You stop hiding.</span>")
 		hiding = FALSE
 
 /mob/living/simple_animal/borer/verb/dominate_victim()
@@ -496,8 +499,8 @@
 		to_chat(src, "You cannot dominate someone who is already infested!")
 		return
 
-	to_chat(src, "\red You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.")
-	to_chat(M, "\red You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing.")
+	to_chat(src, "<span class='warning'>You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.</span>")
+	to_chat(M, "<span class='warning'>You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing.</span>")
 	M.Weaken(3)
 
 	used_dominate = world.time
@@ -516,7 +519,7 @@
 		return
 
 	if(docile)
-		to_chat(src, "\blue You are feeling far too docile to do that.")
+		to_chat(src, "<span class='notice'>You are feeling far too docile to do that.</span>")
 		return
 
 	if(!host || !src)
@@ -555,7 +558,7 @@
 	if(!host)
 		return
 	if(controlling)
-		detatch()
+		detach()
 	GrantBorerActions()
 	RemoveInfestActions()
 	forceMove(get_turf(host))
@@ -591,7 +594,7 @@
 		return
 
 	if(docile)
-		to_chat(src, "\blue You are feeling far too docile to do that.")
+		to_chat(src, "<span class='notice'>You are feeling far too docile to do that.</span>")
 		return
 
 	if(bonding)
@@ -699,10 +702,10 @@
 	if(B && B.host_brain)
 		to_chat(src, "<span class='danger'>You withdraw your probosci, releasing control of [B.host_brain]</span>")
 
-		B.detatch()
+		B.detach()
 
 	else
-		to_chat(src, "<span class='danger'>ERROR NO BORER OR BRAINMOB DETECTED IN THIS MOB, THIS IS A BUG !</span>")
+		log_runtime(EXCEPTION("Missing borer or missing host brain upon borer release."), src)
 
 //Check for brain worms in head.
 /mob/proc/has_brain_worms()
@@ -736,7 +739,7 @@
 		to_chat(src, "You need 100 chemicals to reproduce!")
 		return
 
-/mob/living/simple_animal/borer/proc/detatch()
+/mob/living/simple_animal/borer/proc/detach()
 
 	if(!host || !controlling)
 		return
@@ -812,7 +815,7 @@
 		to_chat(src, "<span class='notice'>You are a cortical borer!</span>")
 		to_chat(src, "You are a brain slug that worms its way into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, your host and your eventual spawn safe and warm.")
 		to_chat(src, "Sugar nullifies your abilities, avoid it at all costs!")
-		to_chat(src, "You can speak to your fellow borers by prefixing your messages with ':x'. Check out your Borer tab to see your abilities.")
+		to_chat(src, "You can speak to your fellow borers by prefixing your messages with ':bo'. Check out your Borer tab to see your abilities.")
 
 /proc/create_borer_mind(key)
 	var/datum/mind/M = new /datum/mind(key)

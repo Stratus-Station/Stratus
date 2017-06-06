@@ -17,7 +17,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area
 	var/fire = null
-	var/atmosalm = 0
+	var/atmosalm = ATMOS_ALARM_NONE
 	var/poweralm = 1
 	var/party = null
 	var/radalert = 0
@@ -490,15 +490,19 @@ var/list/ghostteleportlocs = list()
 
 /area/centcom/control
 	name = "\improper Centcom Control"
+	icon_state = "centcom_ctrl"
 
 /area/centcom/evac
 	name = "\improper Centcom Emergency Shuttle"
+	icon_state = "centcom_evac"
 
 /area/centcom/suppy
 	name = "\improper Centcom Supply Shuttle"
+	icon_state = "centcom_supply"
 
 /area/centcom/ferry
 	name = "\improper Centcom Transport Shuttle"
+	icon_state = "centcom_ferry"
 
 /area/centcom/shuttle
 	name = "\improper Centcom Administration Shuttle"
@@ -511,9 +515,11 @@ var/list/ghostteleportlocs = list()
 
 /area/centcom/specops
 	name = "\improper Centcom Special Ops"
+	icon_state = "centcom_specops"
 
-/area/centcom/creed
-	name = "Creed's Office"
+/area/centcom/gamma
+	name = "\improper Centcom Gamma Armory"
+	icon_state = "centcom_gamma"
 
 /area/centcom/holding
 	name = "\improper Holding Facility"
@@ -1043,7 +1049,7 @@ var/list/ghostteleportlocs = list()
 
 /area/bridge/meeting_room
 	name = "\improper Heads of Staff Meeting Room"
-	icon_state = "bridge"
+	icon_state = "meeting"
 	music = null
 
 /area/crew_quarters/captain
@@ -1875,6 +1881,10 @@ area/security/podbay
 	name = "\improper Toxins Mixing Room"
 	icon_state = "toxmix"
 
+/area/toxins/launch
+	name = "Toxins Launch Room"
+	icon_state = "toxlaunch"
+
 /area/toxins/misc_lab
 	name = "\improper Research Testing Lab"
 	icon_state = "toxmisc"
@@ -2466,11 +2476,6 @@ area/security/podbay
 /area/awaymission/spacebattle/secret
 	name = "\improper Hidden Chamber"
 
-/area/awaymission/listeningpost
-	name = "\improper Listening Post"
-	icon_state = "away"
-	requires_power = 0
-
 /area/awaymission/beach
 	name = "Beach"
 	icon_state = "beach"
@@ -2582,6 +2587,22 @@ area/security/podbay
 
 /area/awaycontent/a30
 	icon_state = "awaycontent30"
+
+////////////////////////VR AREAS///////////////////////////////////
+
+/area/vr
+	name = "VR"
+	requires_power = 0
+	dynamic_lighting = 0
+	no_teleportlocs = 1
+
+
+/area/vr/lobby
+	name = "VR Lobby"
+
+/area/vr/roman
+	name = "Roman Arena"
+
 
 /////////////////////////////////////////////////////////////////////
 /*

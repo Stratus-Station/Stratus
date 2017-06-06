@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items.dmi'
 	amount = 6
 	max_amount = 6
-	w_class = 1
+	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
 	throw_range = 7
 	var/heal_brute = 0
@@ -75,7 +75,7 @@
 	singular_name = "gauze length"
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "gauze"
-	origin_tech = "biotech=1"
+	origin_tech = "biotech=2"
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/M, mob/user)
 	if(..())
@@ -121,7 +121,7 @@
 	gender = PLURAL
 	singular_name = "ointment"
 	icon_state = "ointment"
-	origin_tech = "biotech=1"
+	origin_tech = "biotech=2"
 
 /obj/item/stack/medical/ointment/attack(mob/living/M, mob/user)
 	if(..())
@@ -175,7 +175,7 @@
 	heal_burn = 12
 
 
-//Splits//
+//Splints//
 
 
 /obj/item/stack/medical/splint
@@ -203,14 +203,14 @@
 				to_chat(user, "<span class='notice'>You remove the splint from [H]'s [limb].</span>")
 			return
 		if(M == user)
-			user.visible_message("<span class='notice'>[user] starts to apply [src] to [H]'s [limb].</span>", \
-								 "<span class='notice'>You start to apply [src] to [H]'s [limb].</span>", \
+			user.visible_message("<span class='notice'>[user] starts to apply [src] to their [limb].</span>", \
+								 "<span class='notice'>You start to apply [src] to your [limb].</span>", \
 								 "<span class='notice'>You hear something being wrapped.</span>")
 			if(!do_mob(user, H, self_delay))
 				return
 		else
-			user.visible_message("<span class='green'>[user] applies [src] to their [limb].</span>", \
-								 "<span class='green'>You apply [src] to your [limb].</span>", \
+			user.visible_message("<span class='green'>[user] applies [src] to [H]'s [limb].</span>", \
+								 "<span class='green'>You apply [src] to [H]'s [limb].</span>", \
 								 "<span class='green'>You hear something being wrapped.</span>")
 
 		affecting.status |= ORGAN_SPLINTED
