@@ -19,22 +19,22 @@
 		/datum/job/ai,
 		/datum/job/cyborg,
 		/datum/job/captain,
-		/datum/job/hop,
+//		/datum/job/hop,
 		/datum/job/hos,
 		/datum/job/chief_engineer,
-		/datum/job/rd,
+//		/datum/job/rd,
 		/datum/job/cmo,
-		/datum/job/judge,
-		/datum/job/blueshield,
-		/datum/job/nanotrasenrep,
-		/datum/job/pilot,
+//		/datum/job/judge,
+//		/datum/job/blueshield,
+//		/datum/job/nanotrasenrep,
+//		/datum/job/pilot,
 		/datum/job/brigdoc,
-		/datum/job/mechanic,
-		/datum/job/barber,
-		/datum/job/chaplain,
+//		/datum/job/mechanic,
+//		/datum/job/barber,
+//		/datum/job/chaplain,
 		/datum/job/ntnavyofficer,
 		/datum/job/ntspecops,
-		/datum/job/civilian
+//		/datum/job/civilian
 	)
 
 	//The scaling factor of max total positions in relation to the total amount of people on board the station in %

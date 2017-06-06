@@ -576,7 +576,7 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 	metadata["[tweak]"] = new_metadata
 
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 13, list/splitJobs = list("Civilian","Research Director","AI","Bartender"), width = 760, height = 790)
+/datum/preferences/proc/SetChoices(mob/user, limit = 12, list/splitJobs = list("AI"), width = 640, height = 790)
 	if(!job_master)
 		return
 
@@ -616,6 +616,8 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 
 		HTML += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
 		var/rank = job.title
+		if(job.alt_titles)
+			rank = GetPlayerAltTitle(job)
 		lastJob = job
 		if(!is_job_whitelisted(user, rank))
 			HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
@@ -671,7 +673,7 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 		HTML += "<a class='white' href='?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank]\");'>"
 
 //			HTML += "<a href='?_src_=prefs;preference=job;task=input;text=[rank]'>"
-
+/*
 		if(rank == "Civilian")//Civilian is special
 			if(job_support_low & CIVILIAN)
 				HTML += " <font color=green>\[Yes]</font></a>"
@@ -680,7 +682,7 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 			if(job.alt_titles)
 				HTML += "<br><b><a class='white' href=\"byond://?_src_=prefs;preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></b></td></tr>"
 			HTML += "</td></tr>"
-			continue
+			continue*/
 /*
 		if(GetJobDepartment(job, 1) & job.flag)
 			HTML += " <font color=blue>\[High]</font>"
@@ -694,7 +696,8 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 		HTML += "<font color=[prefLevelColor]>[prefLevelLabel]</font></a>"
 
 		if(job.alt_titles)
-			HTML += "<br><b><a class='white' href=\"?_src_=prefs;preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></b></td></tr>"
+//			HTML += "<br><b><a class='white' href=\"?_src_=prefs;preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></b></td></tr>"
+			HTML += "<b><a class='white' href=\"?_src_=prefs;preference=job;task=alt_title;job=\ref[job]\">\[+\]</a></b></td></tr>"
 
 
 		HTML += "</td></tr>"

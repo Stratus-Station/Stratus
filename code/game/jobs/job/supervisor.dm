@@ -58,7 +58,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 0)
 
 
 
-/datum/job/hop
+/*/datum/job/hop
 	title = "Head of Personnel"
 	flag = HOP
 	department_flag = SUPPORT
@@ -284,3 +284,4 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 0)
 
 	satchel = /obj/item/weapon/storage/backpack/satchel_sec
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/security
+*/

@@ -1,5 +1,5 @@
 //Food
-/datum/job/bartender
+/*/datum/job/bartender
 	title = "Bartender"
 	flag = BARTENDER
 	department_flag = SUPPORT
@@ -97,7 +97,7 @@
 	backpack = /obj/item/weapon/storage/backpack/botany
 	satchel = /obj/item/weapon/storage/backpack/satchel_hyd
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/hydro
-
+*/
 
 
 //Cargo
@@ -108,9 +108,9 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_supply = 1
-	supervisors = "the head of personnel"
+	supervisors = "the captain"
 	department_head = list("Head of Personnel")
-	selection_color = "#dddddd"
+	selection_color = "#ffdd7a"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	outfit = /datum/outfit/job/qm
@@ -138,7 +138,7 @@
 	is_supply = 1
 	supervisors = "the quartermaster"
 	department_head = list("Head of Personnel")
-	selection_color = "#dddddd"
+	selection_color = "#ffebb2"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_mineral_storeroom)
 	outfit = /datum/outfit/job/cargo_tech
@@ -164,7 +164,7 @@
 	is_supply = 1
 	supervisors = "the quartermaster"
 	department_head = list("Head of Personnel")
-	selection_color = "#dddddd"
+	selection_color = "#ffebb2"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_mining, access_mint, access_mining_station, access_mailsorting, access_maint_tunnels, access_mineral_storeroom)
 	alt_titles = list("Spelunker")
@@ -193,7 +193,7 @@
 
 
 //Griff //BS12 EDIT
-
+/*
 /datum/job/clown
 	title = "Clown"
 	flag = CLOWN
@@ -302,7 +302,7 @@
 		H.mind.miming = 1
 
 
-
+*/
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR
@@ -310,7 +310,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	supervisors = "the head of personnel"
+	supervisors = "the captain"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
 	access = list(access_janitor, access_maint_tunnels)
@@ -327,7 +327,7 @@
 	l_ear = /obj/item/device/radio/headset/headset_service
 	pda = /obj/item/device/pda/janitor
 
-
+/*
 //More or less assistants
 /datum/job/librarian
 	title = "Librarian"
@@ -383,3 +383,4 @@
 		/obj/item/weapon/storage/box/lip_stick = 1,
 		/obj/item/weapon/storage/box/barber = 1
 	)
+*/

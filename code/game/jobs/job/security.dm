@@ -48,7 +48,7 @@
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/security
 
 
-
+/*
 /datum/job/warden
 	title = "Warden"
 	flag = WARDEN
@@ -90,7 +90,7 @@
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel = /obj/item/weapon/storage/backpack/satchel_sec
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/security
-
+*/
 
 
 /datum/job/detective
@@ -230,7 +230,7 @@
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/medical
 
 
-
+/*
 /datum/job/pilot
 	title = "Security Pod Pilot"
 	flag = PILOT
@@ -268,4 +268,4 @@
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel = /obj/item/weapon/storage/backpack/satchel_sec
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/security
-	box = /obj/item/weapon/storage/box/engineer
+	box = /obj/item/weapon/storage/box/engineer*/

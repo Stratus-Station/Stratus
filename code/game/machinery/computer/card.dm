@@ -431,7 +431,7 @@ var/time_last_changed_position = 0
 					return 0
 
 				var/list/access = list()
-				var/datum/job/jobdatum = new /datum/job/civilian
+				var/datum/job/jobdatum = new /datum/job/janitor
 				access = jobdatum.get_access()
 
 				modify.access = access

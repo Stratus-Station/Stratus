@@ -7,7 +7,7 @@
 	is_medical = 1
 	supervisors = "the captain"
 	department_head = list("Captain")
-	selection_color = "#ffddf0"
+	selection_color = "#42f4f1"
 	req_admin_notify = 1
 	access = list(access_medical, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
@@ -49,7 +49,7 @@
 	is_medical = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
-	selection_color = "#ffeef0"
+	selection_color = "#c1eeff"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_mineral_storeroom)
 	minimal_access = list(access_medical, access_morgue, access_surgery, access_maint_tunnels)
 	alt_titles = list("Surgeon","Nurse")
@@ -75,7 +75,7 @@
 	satchel = /obj/item/weapon/storage/backpack/satchel_med
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/medical
 
-/datum/job/coroner
+/*/datum/job/coroner
 	title = "Coroner"
 	flag = CORONER
 	department_flag = MEDSCI
@@ -90,10 +90,10 @@
 	exp_requirements = 180
 	exp_type = EXP_TYPE_CREW
 	outfit = /datum/outfit/job/coroner
-
+*/
 /datum/outfit/job/coroner
 	name = "Coroner"
-	jobtype = /datum/job/coroner
+//	jobtype = /datum/job/coroner
 
 	uniform = /obj/item/clothing/under/rank/medical/mortician
 	suit = /obj/item/clothing/suit/storage/labcoat/mortician
@@ -145,7 +145,7 @@
 	is_medical = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
-	selection_color = "#ffeef0"
+	selection_color = "#c1eeff"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_mineral_storeroom)
 	minimal_access = list(access_medical, access_chemistry, access_maint_tunnels, access_mineral_storeroom)
 	alt_titles = list("Pharmacist","Pharmacologist")
@@ -170,7 +170,7 @@
 	satchel = /obj/item/weapon/storage/backpack/satchel_chem
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/chemistry
 
-/datum/job/geneticist
+/*/datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
 	department_flag = MEDSCI
@@ -276,7 +276,7 @@
 				uniform = /obj/item/clothing/under/rank/psych/turtleneck
 			if("Therapist")
 				uniform = /obj/item/clothing/under/rank/medical
-
+*/
 /datum/job/paramedic
 	title = "Paramedic"
 	flag = PARAMEDIC
@@ -286,7 +286,7 @@
 	is_medical = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
-	selection_color = "#ffeef0"
+	selection_color = "#c1eeff"
 	access = list(access_paramedic, access_medical, access_maint_tunnels, access_external_airlocks, access_morgue)
 	minimal_access=list(access_paramedic, access_medical, access_maint_tunnels, access_external_airlocks, access_morgue)
 	minimal_player_age = 3

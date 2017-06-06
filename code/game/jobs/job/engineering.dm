@@ -114,6 +114,7 @@
 
 	box = /obj/item/weapon/storage/box/engineer
 
+/*
 /datum/job/mechanic
 	title = "Mechanic"
 	flag = MECHANIC
@@ -148,3 +149,40 @@
 	satchel = /obj/item/weapon/storage/backpack/satchel_eng
 	dufflebag = /obj/item/weapon/storage/backpack/duffel/engineering
 	box = /obj/item/weapon/storage/box/engineer
+*/
+
+/datum/job/roboticist
+	title = "Roboticist"
+	flag = ROBOTICIST
+	department_flag = ENGSEC
+	total_positions = 2
+	spawn_positions = 2
+	is_science = 1
+	supervisors = "the chief engineer"
+	department_head = list("Chief Engineer")
+	selection_color = "#ffeeff"
+	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_maint_tunnels, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+	minimal_player_age = 3
+	exp_requirements = 180
+	exp_type = EXP_TYPE_CREW
+
+	required_objectives = list(
+		/datum/job_objective/make_cyborg,
+		/datum/job_objective/make_ripley
+	)
+
+	outfit = /datum/outfit/job/roboticist
+
+/datum/outfit/job/roboticist
+	name = "Roboticist"
+	jobtype = /datum/job/roboticist
+
+	uniform = /obj/item/clothing/under/rank/roboticist
+	suit = /obj/item/clothing/suit/storage/labcoat
+	belt = /obj/item/weapon/storage/belt/utility/full
+	shoes = /obj/item/clothing/shoes/black
+	l_ear = /obj/item/device/radio/headset/headset_sci
+	id = /obj/item/weapon/card/id/research
+	pda = /obj/item/device/pda/roboticist
