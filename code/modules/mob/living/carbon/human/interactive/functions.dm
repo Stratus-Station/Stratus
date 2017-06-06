@@ -787,7 +787,7 @@
 	return pick(
 		"The [adjective_insult] [pick(command_positions)] [past_verb(verbs_touch)] the [adjective_objects] [nouns_objects] and was [result].",
 		"The [adjective_generic] [pick(engineering_positions)] [past_verb(verbs_touch)] the [adjective_insult] [nouns_objects]. [capitalize(curse_words)], the [nouns_insult] was [result].",
-		"The [adjective_insult] [pick(security_positions)] [past_verb(verbs_touch)] the [adjective_generic] [nouns_insult] [pick(security_positions)]'s [nouns_body] and had to be [result].",
+		"The [adjective_insult] [pick(security_positions)] [past_verb(verbs_touch)] the [adjective_generic] [nouns_insult] [pick(support_positions)]'s [nouns_body] and had to be [result].",
 		"Medical had to [verbs_use] the [adjective_generic] [pick(command_positions)]'s [adjective_objects] [nouns_body] after the incident.",
 		"I demand that [nouns_generic] respond with a [adjective_generic] update ASAP.",
 		"Would like an update from [nouns_generic] regarding the [adjective_insult] [pick(command_positions)] being [result].",

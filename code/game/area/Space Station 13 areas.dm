@@ -244,10 +244,6 @@ var/list/ghostteleportlocs = list()
 	music = "music/escape.ogg"
 	icon_state = "shuttle"
 
-/area/shuttle/elevator
-	name = "\improper Mining Elevator"
-	icon_state = "shuttle"
-
 /area/shuttle/transport
 	icon_state = "shuttle"
 	name = "\improper Transport Shuttle"
@@ -1209,6 +1205,10 @@ var/list/ghostteleportlocs = list()
 
 /area/lawoffice
 	name = "\improper Law Office"
+	icon_state = "law"
+
+/area/magistrateoffice
+	name = "\improper Magistrate's Office"
 	icon_state = "law"
 
 /area/clownoffice
@@ -2649,6 +2649,7 @@ var/list/the_station_areas = list (
 	/area/chapel,
 	/area/escapepodbay,
 	/area/lawoffice,
+	/area/magistrateoffice,
 	/area/clownoffice,
 	/area/mimeoffice,
 	/area/engine,

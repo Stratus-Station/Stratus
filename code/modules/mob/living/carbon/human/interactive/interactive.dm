@@ -51,7 +51,7 @@
 	var/obj/item/other_hand
 	var/TRAITS = 0
 	var/obj/item/weapon/card/id/Path_ID
-	var/default_job = null	// the type for the default job
+	var/default_job = /datum/job/civilian	// the type for the default job
 	var/datum/job/myjob
 	var/list/myPath = list()
 	faction = list("synth")
@@ -313,14 +313,14 @@
 
 /mob/living/carbon/human/interactive/proc/setup_job(thejob)
 	switch(thejob)
-		if("Visitor")
+		if("Civilian")
 			favoured_types = list(/obj/item/clothing, /obj/item/weapon)
 		if("Captain", "Head of Personnel")
 			favoured_types = list(/obj/item/clothing, /obj/item/weapon/stamp/captain,/obj/item/weapon/disk/nuclear)
 		if("Nanotrasen Representative")
 			favoured_types = list(/obj/item/clothing, /obj/item/weapon/stamp/centcom, /obj/item/weapon/paper, /obj/item/weapon/melee/classic_baton/ntcane)
 			functions += "paperwork"
-		if("Internal Affairs Agent")
+		if("Magistrate", "Internal Affairs Agent")
 			favoured_types = list(/obj/item/clothing, /obj/item/weapon/stamp/law, /obj/item/weapon/paper)
 			functions += "paperwork"
 		if("Quartermaster", "Cargo Technician")
@@ -334,7 +334,7 @@
 			favoured_types = list(/obj/item/weapon/reagent_containers/food, /obj/item/weapon/kitchen)
 			functions += "bartend"
 			restrictedJob = 1
-		if("Station Engineer", "Chief Engineer", "Atmospherics Technician", "Explorer")
+		if("Station Engineer", "Chief Engineer", "Life Support Specialist", "Mechanic")
 			favoured_types = list(/obj/item/stack, /obj/item/weapon, /obj/item/clothing)
 		if("Chief Medical Officer", "Medical Doctor", "Chemist", "Virologist", "Geneticist", "Psychiatrist", "Paramedic", "Brig Physician")
 			favoured_types = list(/obj/item/weapon/reagent_containers/glass/beaker, /obj/item/weapon/storage/firstaid, /obj/item/stack/medical, /obj/item/weapon/reagent_containers/syringe)
@@ -851,7 +851,7 @@
 /mob/living/carbon/human/interactive/proc/job2area(target)
 	var/datum/job/T = target
 	switch(T.title)
-		if("Visitor", "Paramedic")
+		if("Civilian", "Paramedic")
 			return /area/hallway/primary
 		if("Captain", "Head of Personnel", "Blueshield")
 			return /area/bridge
@@ -859,9 +859,9 @@
 			return /area/crew_quarters/bar
 		if("Chef")
 			return /area/crew_quarters/kitchen
-		if("Station Engineer", "Chief Engineer", "Explorer")
+		if("Station Engineer", "Chief Engineer", "Mechanic")
 			return /area/engine
-		if("Atmospherics Technician")
+		if("Life Support Specialist")
 			return /area/atmos
 		if("Chief Medical Officer", "Medical Doctor", "Chemist", "Virologist", "Psychiatrist")
 			return /area/medical

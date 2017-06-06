@@ -627,15 +627,5 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HARM)
 	// Cast to 1/0
 	return !!(client.prefs.toggles & toggleflag)
 
-/mob/proc/get_footprint()//returns the typepath of the footprint/blood trail decal that the mob currently uses
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		if(H.lying)
-			return /obj/effect/decal/cleanable/blood/tracks/trail
-		else if(H.shoes)
-			return /obj/effect/decal/cleanable/blood/tracks/footprints
-		else
-			return H.species.footprints
-	return null
 
 #define isterrorspider(A) (istype((A), /mob/living/simple_animal/hostile/poison/terror_spider))
