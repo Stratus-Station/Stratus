@@ -114,6 +114,7 @@
 		preloadRuinTemplates()
 	preloadShelterTemplates()
 	preloadShuttleTemplates()
+	preloadAirbridgeTemplates()
 
 /proc/preloadRuinTemplates()
 	// Still supporting bans by filename
@@ -164,3 +165,14 @@
 
 		shuttle_templates[S.shuttle_id] = S
 		map_templates[S.shuttle_id] = S
+
+/proc/preloadAirbridgeTemplates()
+	for(var/item in subtypesof(/datum/map_template/airbridge))
+		var/datum/map_template/airbridge/airbridge_type = item
+		if(!initial(airbridge_type.suffix))
+			continue
+
+		var/datum/map_template/airbridge/S = new airbridge_type()
+
+		airbridge_templates[S.suffix] = S
+		map_templates[S.suffix] = S

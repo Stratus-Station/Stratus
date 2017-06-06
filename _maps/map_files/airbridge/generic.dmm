@@ -1,0 +1,8 @@
+"a" = (/turf/simulated/shuttle/wall/airless,/area/airbridge)
+"b" = (/turf/simulated/shuttle/floor/airless,/area/airbridge)
+
+(1,1,1) = {"
+abbba
+abbba
+abbba
+"}

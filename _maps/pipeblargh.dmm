@@ -1,0 +1,26 @@
+"a" = (/turf/space,/area/space)
+"b" = (/obj/machinery/atmospherics/binary/pump{dir = 4; name = "N2 to Pure"; on = 0},/turf/space,/area/space)
+"c" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 1},/turf/space,/area/space)
+"d" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 10; initialize_directions = 10; level = 2},/turf/space,/area/space)
+"e" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 6; initialize_directions = 6; level = 2},/turf/space,/area/space)
+"f" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4; level = 2},/turf/space,/area/space)
+"g" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4; level = 2},/obj/machinery/meter,/turf/space,/area/space)
+"h" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan,/turf/space,/area/space)
+"i" = (/obj/machinery/atmospherics/trinary/mixer{dir = 4; name = "Gas mixer (N2/O2)"; node1_concentration = 0.8; node2_concentration = 0.2; on = 1; pixel_x = 0; pixel_y = 0; target_pressure = 4500},/turf/space,/area/space)
+"j" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4; level = 2},/obj/machinery/atmospherics/binary/pump{dir = 1; name = "O2 to Pure"; on = 0},/turf/space,/area/space)
+"k" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/space,/area/space)
+"l" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 8; initialize_directions = 11; level = 2},/obj/machinery/meter,/turf/space,/area/space)
+"m" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 9; level = 2},/turf/space,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaa
+aaaaaaaaaa
+aaaaabcada
+aaaefghijd
+aaakaaalmk
+aaaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaaa
+"}
