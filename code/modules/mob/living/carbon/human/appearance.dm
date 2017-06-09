@@ -343,7 +343,7 @@
 				continue
 			if(blacklist.len && (current_species_name in blacklist))
 				continue
-			if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
+			if((current_species.req_playtime) && !current_species.available_in_playtime(usr.client))
 				continue
 
 		valid_species += current_species_name

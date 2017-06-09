@@ -228,7 +228,7 @@
 							else
 								if(alert("Are you sure you want to unlock Plasmaman?", "Confirmation", "No", "Yes") != "Yes")
 									return
-								DB_species_unlock("Plasmaman",100)
+								DB_species_unlock("Phorosian",100)
 								return
 						if("7")
 							if(karma <30)

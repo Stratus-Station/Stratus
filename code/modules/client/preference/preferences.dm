@@ -616,30 +616,31 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 
 		HTML += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
 		var/rank = job.title
+		var/rank_name = job.title
 		if(job.alt_titles)
-			rank = GetPlayerAltTitle(job)
+			rank_name = GetPlayerAltTitle(job)
 		lastJob = job
 		if(!is_job_whitelisted(user, rank))
-			HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
+			HTML += "<font color=red>[rank_name]</font></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
 			continue
 		if(jobban_isbanned(user, rank))
-			HTML += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
+			HTML += "<del>[rank_name]</del></td><td><b> \[BANNED]</b></td></tr>"
 			continue
 		var/available_in_playtime = job.available_in_playtime(user.client)
 		if(available_in_playtime)
-			HTML += "<del>[rank]</del></td><td> \[ " + get_exp_format(available_in_playtime) + " as " + job.get_exp_req_type()  + " \]</td></tr>"
+			HTML += "<del>[rank_name]</del></td><td> \[ " + get_exp_format(available_in_playtime) + " as " + job.get_exp_req_type()  + " \]</td></tr>"
 			continue
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
-			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			HTML += "<del>[rank_name]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 			continue
 		if((job_support_low & CIVILIAN) && (rank != "Civilian"))
-			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
+			HTML += "<font color=orange>[rank_name]</font></td><td></td></tr>"
 			continue
 		if((rank in command_positions) || (rank == "AI"))//Bold head jobs
-			HTML += "<b><span class='dark'>[rank]</span></b>"
+			HTML += "<b><span class='dark'>[rank_name]</span></b>"
 		else
-			HTML += "<span class='dark'>[rank]</span>"
+			HTML += "<span class='dark'>[rank_name]</span>"
 
 		HTML += "</td><td width='40%'>"
 
@@ -670,9 +671,9 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 			prefLowerLevel = 1
 
 
-		HTML += "<a class='white' href='?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank]\");'>"
+		HTML += "<a class='white' href='?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank_name]\");'>"
 
-//			HTML += "<a href='?_src_=prefs;preference=job;task=input;text=[rank]'>"
+//			HTML += "<a href='?_src_=prefs;preference=job;task=input;text=[rank_name]'>"
 /*
 		if(rank == "Civilian")//Civilian is special
 			if(job_support_low & CIVILIAN)
@@ -1279,19 +1280,27 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 					if(new_age)
 						age = max(min(round(text2num(new_age)), AGE_MAX),AGE_MIN)
 				if("species")
-					var/list/new_species = list("Human", "Tajaran", "Skrell", "Unathi", "Diona", "Vulpkanin")
+					var/list/new_species = list()
 					var/prev_species = species
 //						var/whitelisted = 0
 
-					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-						for(var/Spec in whitelisted_species)
+					var/list/paths = subtypesof(/datum/species)
+					for(var/T in paths)
+						var/datum/species/race = new T
+						if(race.flags & IS_PLAYABLE)
+							if(!race.req_playtime || !config.usealienwhitelist)
+								new_species += race.name
+							else
+								if(!race.available_in_playtime(user.client))
+									new_species += race.name
+/*						for(var/Spec in whitelisted_species)
 							if(is_alien_whitelisted(user,Spec))
 								new_species += Spec
 //									whitelisted = 1
 //							if(!whitelisted)
 //								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
 					else //Not using the whitelist? Aliens for everyone!
-						new_species += whitelisted_species
+						new_species += whitelisted_species*/
 
 					species = input("Please select a species", "Character Generation", null) in new_species
 					var/datum/species/NS = all_species[species]

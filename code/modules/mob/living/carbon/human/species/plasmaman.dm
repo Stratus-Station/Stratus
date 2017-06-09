@@ -1,12 +1,13 @@
 /datum/species/plasmaman // /vg/
-	name = "Plasmaman"
-	name_plural = "Plasmamen"
+	name = "Phorosian"
+	name_plural = "Phorosians"
 	icobase = 'icons/mob/human_races/r_plasmaman_sb.dmi'
 	deform = 'icons/mob/human_races/r_plasmaman_pb.dmi'  // TODO: Need deform.
 	//language = "Clatter"
 	unarmed_type = /datum/unarmed_attack/punch
+	req_playtime = 1200
 
-	flags = IS_WHITELISTED | NO_BLOOD | NOTRANSSTING
+	flags = IS_PLAYABLE | NO_BLOOD | NOTRANSSTING
 	dietflags = DIET_OMNI
 	reagent_tag = PROCESS_ORG
 

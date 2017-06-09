@@ -97,7 +97,7 @@
 	..(new_loc, "Kidan")
 
 /mob/living/carbon/human/plasma/New(var/new_loc)
-	..(new_loc, "Plasmaman")
+	..(new_loc, "Phorosian")
 
 /mob/living/carbon/human/slime/New(var/new_loc)
 	..(new_loc, "Slime People")

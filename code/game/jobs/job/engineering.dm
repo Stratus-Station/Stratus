@@ -12,7 +12,7 @@
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
 			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors,
-			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_minisat, access_mechanic, access_mineral_storeroom)
+			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_minisat, access_mechanic, access_mineral_storeroom, access_research)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
 			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors,
@@ -55,7 +55,7 @@
 	supervisors = "the chief engineer"
 	department_head = list("Chief Engineer")
 	selection_color = "#fff5cc"
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mineral_storeroom)
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mineral_storeroom, access_research)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_mineral_storeroom)
 	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
 	minimal_player_age = 7
@@ -93,7 +93,7 @@
 	supervisors = "the chief engineer"
 	department_head = list("Chief Engineer")
 	selection_color = "#fff5cc"
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mineral_storeroom)
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_mineral_storeroom, access_research)
 	minimal_access = list(access_eva, access_atmospherics, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_construction, access_mineral_storeroom)
 	alt_titles = list("Atmospheric Technician")
 	minimal_player_age = 7
@@ -157,11 +157,11 @@
 	department_flag = ENGSEC
 	total_positions = 2
 	spawn_positions = 2
-	is_science = 1
+	is_engineering = 1
 	supervisors = "the chief engineer"
 	department_head = list("Chief Engineer")
-	selection_color = "#ffeeff"
-	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	selection_color = "#fff5cc"
+	access = list(access_robotics, access_engine, access_tech_storage, access_morgue, access_research, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_maint_tunnels, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
 	minimal_player_age = 3

@@ -52,7 +52,7 @@
 	selection_color = "#c1eeff"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_mineral_storeroom)
 	minimal_access = list(access_medical, access_morgue, access_surgery, access_maint_tunnels)
-	alt_titles = list("Surgeon","Nurse")
+	alt_titles = list("Surgeon","Nurse", "Virologist")
 	minimal_player_age = 3
 	exp_requirements = 180
 	exp_type = EXP_TYPE_CREW
@@ -132,6 +132,11 @@
 					head = /obj/item/clothing/head/nursehat
 				else
 					uniform = /obj/item/clothing/under/rank/medical/purple
+			if("Virologist")
+				uniform = /obj/item/clothing/under/rank/virologist
+				suit = /obj/item/clothing/suit/storage/labcoat/virologist
+				mask = /obj/item/clothing/mask/surgical
+
 
 
 

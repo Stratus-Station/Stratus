@@ -29,7 +29,7 @@
 #define NO_DNA			4
 #define NO_SCAN 		8
 #define NO_PAIN 		16
-#define IS_WHITELISTED 	32
+#define IS_PLAYABLE 	32
 #define HAS_LIPS 		64
 #define IS_PLANT 		128
 #define CAN_BE_FAT 		256

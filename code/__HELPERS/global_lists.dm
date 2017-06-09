@@ -45,10 +45,13 @@
 		S.race_key = ++rkey //Used in mob icon caching.
 		all_species[S.name] = S
 
-		if(S.flags & IS_WHITELISTED)
+		if(S.req_playtime)
 			whitelisted_species += S.name
 
 	init_subtypes(/datum/crafting_recipe, crafting_recipes)
+
+	all_cults = typesof(/datum/cult_info)
+
 	return 1
 
 /* // Uncomment to debug chemical reaction list.

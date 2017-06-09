@@ -588,7 +588,7 @@ var/global/list/multiverse = list()
 
 	if(M.get_species() == "Vox")
 		M.species.after_equip_job(null, M) //Voxygen(tm)
-	if(M.get_species() == "Plasmaman")
+	if(M.get_species() == "Phorosian")
 		M.species.after_equip_job(null, M) //No fireballs from other dimensions.
 
 	M.update_icons()

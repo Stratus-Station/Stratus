@@ -6,7 +6,7 @@
 	primitive_form = "Monkey"
 	path = /mob/living/carbon/human/human
 	language = "Sol Common"
-	flags = HAS_LIPS | CAN_BE_FAT
+	flags = IS_PLAYABLE | HAS_LIPS | CAN_BE_FAT
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_TONE | HAS_BODY_MARKINGS
 	dietflags = DIET_OMNI
@@ -289,7 +289,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | IS_WHITELISTED | NOTRANSSTING
+	flags = NO_SCAN | IS_PLAYABLE | NOTRANSSTING
 	clothing_flags = HAS_SOCKS
 	dietflags = DIET_OMNI
 	bodyflags = HAS_ICON_SKIN_TONE | HAS_TAIL | TAIL_WAGGING | TAIL_OVERLAPPED | HAS_BODY_MARKINGS | HAS_TAIL_MARKINGS
@@ -442,7 +442,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | NO_PAIN | IS_WHITELISTED
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN
 	bodyflags = HAS_TAIL
 	dietflags = DIET_OMNI	//should inherit this from vox, this is here just in case
 
@@ -486,7 +486,6 @@
 
 	brute_mod = 0.8
 
-	flags = IS_WHITELISTED
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = FEET_CLAWS | HAS_HEAD_ACCESSORY | HAS_HEAD_MARKINGS | HAS_BODY_MARKINGS
 	eyes = "kidan_eyes_s"
@@ -540,7 +539,7 @@
 	male_cough_sounds = list('sound/effects/slime_squish.ogg')
 	female_cough_sounds = list('sound/effects/slime_squish.ogg')
 
-	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS | NO_SCAN
+	flags = NO_BREATHE | HAS_LIPS | NO_INTORGANS | NO_SCAN
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | NO_EYES
 	dietflags = DIET_CARN
@@ -735,7 +734,7 @@
 	default_genes = list(REMOTE_TALK)
 
 
-	flags = IS_WHITELISTED | HAS_LIPS | CAN_BE_FAT
+	flags = HAS_LIPS | CAN_BE_FAT
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags =  HAS_BODY_MARKINGS
 	dietflags = DIET_HERB
@@ -790,7 +789,7 @@
 	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
 	water and other radiation."
 
-	flags = NO_BREATHE | RADIMMUNE | IS_PLANT | NO_BLOOD | NO_PAIN
+	flags = IS_PLAYABLE | NO_BREATHE | RADIMMUNE | IS_PLANT | NO_BLOOD | NO_PAIN
 	clothing_flags = HAS_SOCKS
 	dietflags = 0		//Diona regenerate nutrition in light, no diet necessary
 
@@ -900,7 +899,7 @@
 	oxy_mod = 0
 	death_message = "gives one shrill beep before falling limp, their monitor flashing blue before completely shutting off..."
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_DNA | RADIMMUNE | ALL_RPARTS | NOTRANSSTING
+	flags = IS_PLAYABLE | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_DNA | RADIMMUNE | ALL_RPARTS | NOTRANSSTING
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	bodyflags = HAS_SKIN_COLOR | HAS_HEAD_MARKINGS | HAS_HEAD_ACCESSORY
 	dietflags = 0		//IPCs can't eat, so no diet
@@ -1000,7 +999,7 @@
 		"is sucking in warm air!",
 		"is holding their breath!")
 
-	flags = IS_WHITELISTED | HAS_LIPS
+	flags = HAS_LIPS
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT
 	bodyflags = FEET_CLAWS | HAS_SKIN_TONE | HAS_BODY_MARKINGS
 	dietflags = DIET_OMNI
