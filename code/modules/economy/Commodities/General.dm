@@ -1,8 +1,8 @@
 /datum/commodity/salvage
 	name = "Salvaged Goods"
 	item_types = list(
-		(/obj/structure/closet/crate/secure/loot/, 50)
-		(/obj/structure/closet/crate/secure/unknownchemicals, 40)
+		list(/obj/structure/closet/crate/secure/loot/, 50),
+		list(/obj/structure/closet/crate/secure/unknownchemicals, 40)
 		)
 
 /datum/commodity/weapons
@@ -54,7 +54,7 @@
 	name = "Computer Circuitry"
 
 /datum/commodity/mining
-	name = "Mining Equipment
+	name = "Mining Equipment"
 
 /datum/commodity/suits_space
 	name = "Spacesuits"
@@ -115,8 +115,8 @@
 /datum/commodity/illegal/plundered
 	name = "Orphaned Goods"
 	item_types = list(
-		(/obj/structure/closet/coffin/sarcophagus, 30)
-		(/obj/structure/closet/crate/necropolis, 10)
+		list(/obj/structure/closet/coffin/sarcophagus, 30),
+		list(/obj/structure/closet/crate/necropolis, 10)
 		)
 
 //Shuttles

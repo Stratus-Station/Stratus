@@ -1261,7 +1261,7 @@
 "aym" = (/obj/machinery/floodlight,/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 5},/area/storage/secure)
 "ayn" = (/obj/structure/closet/secure_closet/engineering_personal,/turf/simulated/floor/plasteel,/area/engine/equipmentstorage)
 "ayo" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0; tag = ""},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plasteel,/area/engine/equipmentstorage)
-"ayp" = (/turf/simulated/floor/plasteel,/area/engine/equipmentstorage)
+"ayp" = (/obj/machinery/vending/engivend,/turf/simulated/floor/plasteel,/area/engine/equipmentstorage)
 "ayq" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/plasteel{dir = 4; icon_state = "yellow"},/area/engine/engineering)
 "ayr" = (/obj/item/clothing/mask/balaclava,/turf/simulated/floor/plating/airless/asteroid,/area/space)
 "ays" = (/obj/structure/barricade/wooden,/turf/simulated/floor/plating/airless/asteroid,/area/space)

@@ -8,4 +8,4 @@
 	both salvaged and plundered."
 	species = list(/datum/species/machine,/datum/species/vox, /datum/species/diona)
 	stability = 45
-	var/list/exports = list((/datum/commodity/salvage, 50, -35), (/datum/commodity/illegal/plundered, 50, -20))
+	exports = list(list(/datum/commodity/salvage, 50, -35), list(/datum/commodity/illegal/plundered, 50, -20))
