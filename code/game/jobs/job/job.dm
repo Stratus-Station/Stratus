@@ -57,6 +57,9 @@
 
 	var/outfit = null
 
+	//For species exclusive jobs.
+	var/list/species_exclusive
+
 	/////////////////////////////////
 	// /vg/ feature: Job Objectives!
 	/////////////////////////////////

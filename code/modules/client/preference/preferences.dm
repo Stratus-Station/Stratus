@@ -620,8 +620,26 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 		if(job.alt_titles)
 			rank_name = GetPlayerAltTitle(job)
 		lastJob = job
+//		var/race_locked = FALSE
+		var/datum/species/S = all_species[species]
+		if(S.is_job_locked(job))
+			HTML += "<font color=red><del>[rank_name]</del></font></td><td><font color=red><b> \[Race-locked]</b></font></td></tr>"
+			continue
+/*		if(job.species_exclusive)
+			for(var/exc in job.species_exclusive)
+				if(istype(S,exc))
+					break
+				HTML += "<font color=red>[rank_name]</font></td><td><font color=red><b> \[Race-locked]</b></font></td></tr>"
+				race_locked = TRUE
+		if(S.restricted_jobs && !race_locked)
+			for(var/res in S.restricted_jobs)
+				if(istype(job,res))
+					HTML += "<font color=red>[rank_name]</font></td><td><font color=red><b> \[Race-locked]</b></font></td></tr>"
+					race_locked = TRUE
+		if(race_locked)
+			continue*/
 		if(!is_job_whitelisted(user, rank))
-			HTML += "<font color=red>[rank_name]</font></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
+			HTML += "<font color=red>[rank_name]</font></del></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
 			continue
 		if(jobban_isbanned(user, rank))
 			HTML += "<del>[rank_name]</del></td><td><b> \[BANNED]</b></td></tr>"
@@ -805,7 +823,6 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 
 /datum/preferences/proc/UpdateJobPreference(mob/user, role, desiredLvl)
 	var/datum/job/job = job_master.GetJob(role)
-
 	if(!job)
 		user << browse(null, "window=mob_occupation")
 		ShowChoices(user)
@@ -1309,6 +1326,9 @@ var/global/list/special_role_times = list( //minimum age (in days) for accounts 
 						to_chat(user, "<span class='warning'>Invalid species, please pick something else.</span>")
 						return
 					if(prev_species != species)
+						for(var/datum/job/job in job_master.occupations)
+							if(NS.is_job_locked(job))
+								SetJobPreferenceLevel(job, 4)
 						if(NS.has_gender && gender == PLURAL)
 							gender = pick(MALE,FEMALE)
 						var/datum/robolimb/robohead

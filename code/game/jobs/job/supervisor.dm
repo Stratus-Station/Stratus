@@ -16,6 +16,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 0)
 	exp_requirements = 1200
 	exp_type = EXP_TYPE_CREW
 	outfit = /datum/outfit/job/captain
+	species_exclusive = list(/datum/species/human)
 
 /datum/job/captain/get_access()
 	return get_all_accesses()

@@ -247,6 +247,7 @@
 	icobase = 'icons/mob/human_races/vox/r_vox.dmi'
 	deform = 'icons/mob/human_races/vox/r_def_vox.dmi'
 	path = /mob/living/carbon/human/vox
+	restricted_jobs = list(/datum/job/chief_engineer,/datum/job/cmo,/datum/job/hos,/datum/job/officer,/datum/job/brigdoc)
 
 	default_language = "Galactic Common"
 	language = "Vox-pidgin"
