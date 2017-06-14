@@ -24,6 +24,9 @@
 	//How many players have this job
 	var/current_positions = 0
 
+	//Number of slots to add, should all other job slots fill up. -1 means indefinite slots.
+	var/more_slots = 0
+
 	//Supervisors, who this person answers to directly
 	var/supervisors = ""
 

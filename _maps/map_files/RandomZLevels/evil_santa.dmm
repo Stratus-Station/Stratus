@@ -80,52 +80,51 @@
 "bB" = (/obj/structure/closet/toolcloset,/turf/simulated/floor/plasteel,/area/awaymission/challenge/main)
 "bC" = (/obj/item/taperoll/engineering,/turf/simulated/floor/plasteel,/area/awaymission/challenge/main)
 "bD" = (/obj/item/weapon/storage/toolbox/emergency,/turf/simulated/floor/plasteel,/area/awaymission/challenge/main)
-"bE" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/gateroom)
-"bF" = (/obj/machinery/door/poddoor{icon_state = "pdoor1"; id_tag = "challenge"; name = "Gateway Shutters"; p_open = 0},/turf/simulated/floor/plasteel{tag = "icon-delivery (SOUTHEAST)"; icon_state = "delivery"; dir = 6},/area/awaymission/gateroom)
-"bG" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/floor/plasteel{tag = "icon-delivery (SOUTHEAST)"; icon_state = "delivery"; dir = 6},/area/awaymission/gateroom)
-"bH" = (/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"bI" = (/obj/machinery/door_control{id = "challenge"; name = "Gateway Lockdown"; pixel_x = -4; pixel_y = 26; req_access_txt = "0"},/turf/simulated/floor/plasteel{dir = 1; icon_state = "warning"},/area/awaymission/gateroom)
-"bJ" = (/obj/machinery/atmospherics/unary/vent_scrubber{on = 1},/turf/simulated/floor/plasteel{dir = 1; icon_state = "warning"},/area/awaymission/gateroom)
-"bK" = (/obj/effect/landmark{name = "awaystart"},/turf/simulated/floor/greengrid,/area/awaymission/gateroom)
-"bL" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"bM" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/item/weapon/paper/journal_scrap_1,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"bN" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"bO" = (/obj/machinery/gateway{dir = 9},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"bP" = (/obj/machinery/gateway{dir = 1},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"bQ" = (/obj/machinery/gateway{dir = 5},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"bR" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/challenge/main)
-"bS" = (/obj/machinery/atmospherics/unary/vent_pump{on = 1},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"bT" = (/obj/structure/dispenser/oxygen{oxygentanks = 9},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"bU" = (/obj/machinery/gateway{dir = 8},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"bV" = (/obj/machinery/gateway/centeraway,/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"bW" = (/obj/machinery/gateway{dir = 4},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"bX" = (/obj/machinery/power/smes/magical,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/awaymission/challenge/main)
-"bY" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"; tag = ""},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc/noalarm{dir = 4; name = "Worn-out APC"; pixel_x = 24; pixel_y = 0},/turf/simulated/floor/plating,/area/awaymission/challenge/main)
-"bZ" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"ca" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cb" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4; level = 1},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cc" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cd" = (/obj/machinery/gateway{dir = 10},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"ce" = (/obj/machinery/gateway,/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"cf" = (/obj/machinery/gateway{dir = 6},/turf/simulated/floor/bluegrid,/area/awaymission/gateroom)
-"cg" = (/turf/simulated/floor/plating,/area/awaymission/challenge/main)
-"ch" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/awaymission/challenge/main)
-"ci" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"; tag = ""},/obj/machinery/power/apc/noalarm{dir = 4; name = "Worn-out APC"; pixel_x = 24; pixel_y = 0},/turf/simulated/floor/plating,/area/awaymission/gateroom)
-"cj" = (/obj/machinery/space_heater,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"ck" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4; level = 1},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cl" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cm" = (/obj/structure/table,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cn" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/table,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"co" = (/obj/structure/table,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cp" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/plasteel,/area/awaymission/gateroom)
-"cq" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/gateroom)
-"cr" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/gateroom)
-"cs" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal{dir = 4},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/gateroom)
-"ct" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/gateroom)
-"cu" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; initialize_directions = 10},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/gateroom)
-"cv" = (/obj/machinery/atmospherics/unary/tank/air{dir = 1},/turf/simulated/floor/plating,/area/awaymission/gateroom)
-"cw" = (/turf/space,/area/space)
-"cx" = (/obj/machinery/atmospherics/unary/outlet_injector/on{dir = 1},/turf/simulated/floor/plating/airless,/area/awaymission/gateroom)
+"bE" = (/obj/machinery/door/poddoor{icon_state = "pdoor1"; id_tag = "challenge"; name = "Gateway Shutters"; p_open = 0},/turf/simulated/floor/plasteel{tag = "icon-delivery (SOUTHEAST)"; icon_state = "delivery"; dir = 6},/area/space)
+"bF" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/floor/plasteel{tag = "icon-delivery (SOUTHEAST)"; icon_state = "delivery"; dir = 6},/area/space)
+"bG" = (/turf/simulated/floor/plasteel,/area/space)
+"bH" = (/obj/machinery/door_control{id = "challenge"; name = "Gateway Lockdown"; pixel_x = -4; pixel_y = 26; req_access_txt = "0"},/turf/simulated/floor/plasteel{dir = 1; icon_state = "warning"},/area/space)
+"bI" = (/obj/machinery/atmospherics/unary/vent_scrubber{on = 1},/turf/simulated/floor/plasteel{dir = 1; icon_state = "warning"},/area/space)
+"bJ" = (/obj/effect/landmark{name = "awaystart"},/turf/simulated/floor/greengrid,/area/space)
+"bK" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/plasteel,/area/space)
+"bL" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/item/weapon/paper/journal_scrap_1,/turf/simulated/floor/plasteel,/area/space)
+"bM" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/plasteel,/area/space)
+"bN" = (/obj/machinery/gateway{dir = 9},/turf/simulated/floor/bluegrid,/area/space)
+"bO" = (/obj/machinery/gateway{dir = 1},/turf/simulated/floor/bluegrid,/area/space)
+"bP" = (/obj/machinery/gateway{dir = 5},/turf/simulated/floor/bluegrid,/area/space)
+"bQ" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/awaymission/challenge/main)
+"bR" = (/obj/machinery/atmospherics/unary/vent_pump{on = 1},/turf/simulated/floor/plasteel,/area/space)
+"bS" = (/obj/structure/dispenser/oxygen{oxygentanks = 9},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plasteel,/area/space)
+"bT" = (/obj/machinery/gateway{dir = 8},/turf/simulated/floor/bluegrid,/area/space)
+"bU" = (/obj/machinery/gateway/centeraway,/turf/simulated/floor/bluegrid,/area/space)
+"bV" = (/obj/machinery/gateway{dir = 4},/turf/simulated/floor/bluegrid,/area/space)
+"bW" = (/obj/machinery/power/smes/magical,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/awaymission/challenge/main)
+"bX" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"; tag = ""},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc/noalarm{dir = 4; name = "Worn-out APC"; pixel_x = 24; pixel_y = 0},/turf/simulated/floor/plating,/area/awaymission/challenge/main)
+"bY" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/plasteel,/area/space)
+"bZ" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/plasteel,/area/space)
+"ca" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4; level = 1},/turf/simulated/floor/plasteel,/area/space)
+"cb" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor/plasteel,/area/space)
+"cc" = (/obj/machinery/gateway{dir = 10},/turf/simulated/floor/bluegrid,/area/space)
+"cd" = (/obj/machinery/gateway,/turf/simulated/floor/bluegrid,/area/space)
+"ce" = (/obj/machinery/gateway{dir = 6},/turf/simulated/floor/bluegrid,/area/space)
+"cf" = (/turf/simulated/floor/plating,/area/awaymission/challenge/main)
+"cg" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/awaymission/challenge/main)
+"ch" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"; tag = ""},/obj/machinery/power/apc/noalarm{dir = 4; name = "Worn-out APC"; pixel_x = 24; pixel_y = 0},/turf/simulated/floor/plating,/area/space)
+"ci" = (/obj/machinery/space_heater,/turf/simulated/floor/plasteel,/area/space)
+"cj" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4; level = 1},/turf/simulated/floor/plasteel,/area/space)
+"ck" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/turf/simulated/floor/plasteel,/area/space)
+"cl" = (/obj/structure/table,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/obj/item/clothing/accessory/scarf/christmas,/turf/simulated/floor/plasteel,/area/space)
+"cm" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/table,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/obj/item/clothing/head/helmet/space/santahat,/turf/simulated/floor/plasteel,/area/space)
+"cn" = (/obj/structure/table,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/obj/item/clothing/suit/furcoat,/turf/simulated/floor/plasteel,/area/space)
+"co" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/plasteel,/area/space)
+"cp" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
+"cq" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
+"cr" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal{dir = 4},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
+"cs" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
+"ct" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; initialize_directions = 10},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
+"cu" = (/obj/machinery/atmospherics/unary/tank/air{dir = 1},/turf/simulated/floor/plating,/area/space)
+"cv" = (/turf/space,/area/space)
+"cw" = (/obj/machinery/atmospherics/unary/outlet_injector/on{dir = 1},/turf/simulated/floor/plating/airless,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -181,15 +180,15 @@ aaabababacacacacacagbwamambxagacacacacacacacacacacacacacacacaIacacacacacacacacaf
 aaabababacacacacacaubyamamamagbzacacacacacbjacacacacacacacacacbAacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababaa
 aaabababacacacacacauasamamamaqacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababaa
 aaabababacacacacacagbBbCambDagbzacacacacacacacacacacacacacacacacacacacacacacacacacacacacacapacacacacacacacacacacacacacacabababaa
-aaabababacacacacacagagagagagagacacacacacacacacacacacacacacbEbFbFbFbEbkacacacacacacacacacacacacacacacacacacacacacacaeacacabababaa
-aaabababacacacacacalacacacacacacacacacacacacacacacacacaeacbEbGbGbGbEbjaIacacacacacacacacacacacacacacacacacacacacacacacacabababaa
-aaabababacacacacacacacacacacacacacacacacacacacacbEbEbEbEbEbEbFbFbFbEbEbEbEbEbEacacacacacacacacacacacacacacacacacacacacacabababaa
-aaabababacaeacacacacacacacacacacacacacacacabacabbEbHbHbHbHbIbJbJbJbIbHbHbHbHbEababacacacacacacacacacacacacacacacacacacacabababaa
-aaababababacacacacacacadacacacacacacacacababababbEbHbKbKbKbHbLbMbNbHbObPbQbHbEabbjacababacacacacacacacadacacacacacacacacabababaa
-aaabababababacacacacacacacacacacacacacababbRbRbRbEbHbKbKbKbHbSbTbSbHbUbVbWbHbEbRbRbRababacacacacacacacacacacacacacacacababababaa
-aaabababababacabacacacacacacacacacacacababbRbXbYbEbHbKbKbKbZcacbcacccdcecfbHbEcgcgbRabababacacacacacacacacacacacacacabababababaa
-aaababababababababababababababababababababbRchcibEcjbZckckclcmcncocpckckccbHbEcgcgbRabababababababababababababababababababababaa
-aaababababababababababababababababababababbRcgcgbEbEcqbEbEcrcsctcscubEbEcqbEbEcgcgbRabababababababababababababababababababababaa
-aaababababababababababababababababababababbRcgcgcgbEcvbEcwcxcwcwcwcxcwbEcvbEcgcgcgbRabababababababababababababababababababababaa
+aaabababacacacacacagagagagagagacacacacacacacacacacacacacacaabEbEbEaabkacacacacacacacacacacacacacacacacacacacacacacaeacacabababaa
+aaabababacacacacacalacacacacacacacacacacacacacacacacacaeacaabFbFbFaabjaIacacacacacacacacacacacacacacacacacacacacacacacacabababaa
+aaabababacacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaabEbEbEaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacabababaa
+aaabababacaeacacacacacacacacacacacacacacacabacabaabGbGbGbGbHbIbIbIbHbGbGbGbGaaababacacacacacacacacacacacacacacacacacacacabababaa
+aaababababacacacacacacadacacacacacacacacababababaabGbJbJbJbGbKbLbMbGbNbObPbGaaabbjacababacacacacacacacadacacacacacacacacabababaa
+aaabababababacacacacacacacacacacacacacababbQbQbQaabGbJbJbJbGbRbSbRbGbTbUbVbGaabQbQbQababacacacacacacacacacacacacacacacababababaa
+aaabababababacabacacacacacacacacacacacababbQbWbXaabGbJbJbJbYbZcabZcbcccdcebGaacfcfbQabababacacacacacacacacacacacacacabababababaa
+aaababababababababababababababababababababbQcgchaacibYcjcjckclcmcncocjcjcbbGaacfcfbQabababababababababababababababababababababaa
+aaababababababababababababababababababababbQcfcfaaaacpaaaacqcrcscrctaaaacpaaaacfcfbQabababababababababababababababababababababaa
+aaababababababababababababababababababababbQcfcfcfaacuaacvcwcvcvcvcwcvaacuaacfcfcfbQabababababababababababababababababababababaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

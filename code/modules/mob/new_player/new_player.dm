@@ -201,7 +201,7 @@
 	if(job.available_in_playtime(client))
 		return 0
 
-	if(config.assistantlimit)
+/*	if(config.assistantlimit)
 		if(job.title == "Civilian")
 			var/count = 0
 			var/datum/job/officer = job_master.GetJob("Security Officer")
@@ -211,7 +211,7 @@
 			if(job.current_positions > (config.assistantratio * count))
 				if(count >= 5) // if theres more than 5 security on the station just let assistants join regardless, they should be able to handle the tide
 					return 1
-				return 0
+				return 0*/
 	return 1
 
 /mob/new_player/proc/IsAdminJob(rank)

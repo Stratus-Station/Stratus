@@ -100,7 +100,7 @@
 
 	if(!scanning)
 		// Can remotely scan objects and mobs.
-		if(!in_range(A, user) && !(A in view(world.view, user)))
+		if(!in_range(A, user) && !(A in view(;, user)))
 			return
 		if(loc != user)
 			return
