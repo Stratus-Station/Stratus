@@ -154,3 +154,8 @@
 /turf/simulated/floor/fakespace/New()
 	..()
 	icon_state = "[rand(0,25)]"
+
+/turf/simulated/floor/plastic
+	name = "plastic floor"
+	icon_state = "plastic"
+	floor_tile = /obj/item/stack/tile/plastic

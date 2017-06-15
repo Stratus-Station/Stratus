@@ -247,7 +247,7 @@
 /obj/effect/meteor/tunguska
 	name = "tunguska meteor"
 	icon_state = "flaming"
-	desc = "Your life briefly passes before your eyes the moment you lay them on this monstruosity."
+	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 30
 	hitpwr = 1
 	heavy = 1

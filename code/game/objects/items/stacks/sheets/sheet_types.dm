@@ -176,7 +176,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list(
 	origin_tech = "materials=1;biotech=1"
 	burn_state = FLAMMABLE
 	merge_type = /obj/item/stack/sheet/wood
-
+	sheettype = "wood"
 /obj/item/stack/sheet/wood/New(var/loc, var/amount=null)
 	recipes = wood_recipes
 	return ..()
@@ -319,6 +319,7 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	new/datum/stack_recipe("cash mould", /obj/item/weapon/kitchen/mould/cash, 1, on_floor = 1), \
 	new/datum/stack_recipe("coin mould", /obj/item/weapon/kitchen/mould/coin, 1, on_floor = 1), \
 	new/datum/stack_recipe("sucker mould", /obj/item/weapon/kitchen/mould/loli, 1, on_floor = 1), \
+	new/datum/stack_recipe("plastic floor tile", /obj/item/stack/tile/plastic, 1, 4, 20), \
 	)
 
 /obj/item/stack/sheet/plastic
@@ -329,6 +330,7 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	throwforce = 7
 	origin_tech = "materials=1;biotech=1"
 	merge_type = /obj/item/stack/sheet/plastic
+	sheettype = "plastic"
 
 /obj/item/stack/sheet/plastic/New()
 	recipes = plastic_recipes

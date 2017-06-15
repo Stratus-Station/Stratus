@@ -174,7 +174,7 @@
 						return
 					S.use(2)
 					to_chat(user, "<span class='notice'>You create a false wall. Push on it to open or close the passage.</span>")
-					var/obj/structure/falsewall/iron/FW = new (loc)
+					var/obj/structure/falsewall/mineral/iron/FW = new (loc)
 					transfer_fingerprints_to(FW)
 					qdel(src)
 			else
@@ -198,7 +198,7 @@
 
 		var/obj/item/stack/sheet/S = W
 
-		if(istype(S, /obj/item/stack/sheet/wood))
+/*		if(istype(S, /obj/item/stack/sheet/wood))
 			if(state == GIRDER_DISPLACED)
 				if(S.get_amount() < 2)
 					to_chat(user, "<span class='warning'>You need two planks of wood to create a false wall!</span>")
@@ -228,9 +228,9 @@
 						if(X)
 							X.add_hiddenprint(usr)
 					qdel(src)
-				return
+				return*/
 
-		else if(istype(S, /obj/item/stack/sheet/metal))
+		if(istype(S, /obj/item/stack/sheet/metal))
 			if(state == GIRDER_DISPLACED)
 				if(S.get_amount() < 2)
 					to_chat(user, "<span class='warning'>You need two sheets of metal to create a false wall!</span>")
@@ -308,7 +308,7 @@
 					return
 
 		if(S.sheettype)
-			var/M = S.sheettype
+			var/M = (S.subpath + S.sheettype)
 			if(state == GIRDER_DISPLACED)
 				if(S.get_amount() < 2)
 					to_chat(user, "<span class='warning'>You need at least two sheets to create a false wall!</span>")

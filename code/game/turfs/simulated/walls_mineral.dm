@@ -14,7 +14,7 @@
 	icon_state = "gold"
 	sheet_type = /obj/item/stack/sheet/mineral/gold
 	explosion_block = 0 //gold is a soft metal you dingus.
-	canSmoothWith = list(/turf/simulated/wall/mineral/gold, /obj/structure/falsewall/gold)
+	canSmoothWith = list(/turf/simulated/wall/mineral/gold, /obj/structure/falsewall/mineral/gold)
 
 /turf/simulated/wall/mineral/silver
 	name = "silver wall"
@@ -22,7 +22,7 @@
 	icon = 'icons/turf/walls/silver_wall.dmi'
 	icon_state = "silver"
 	sheet_type = /obj/item/stack/sheet/mineral/silver
-	canSmoothWith = list(/turf/simulated/wall/mineral/silver, /obj/structure/falsewall/silver)
+	canSmoothWith = list(/turf/simulated/wall/mineral/silver, /obj/structure/falsewall/mineral/silver)
 
 /turf/simulated/wall/mineral/diamond
 	name = "diamond wall"
@@ -31,7 +31,7 @@
 	icon_state = "diamond"
 	sheet_type = /obj/item/stack/sheet/mineral/diamond
 	explosion_block = 3
-	canSmoothWith = list(/turf/simulated/wall/mineral/diamond, /obj/structure/falsewall/diamond)
+	canSmoothWith = list(/turf/simulated/wall/mineral/diamond, /obj/structure/falsewall/mineral/diamond)
 
 /turf/simulated/wall/mineral/bananium
 	name = "bananium wall"
@@ -39,7 +39,7 @@
 	icon = 'icons/turf/walls/bananium_wall.dmi'
 	icon_state = "bananium"
 	sheet_type = /obj/item/stack/sheet/mineral/bananium
-	canSmoothWith = list(/turf/simulated/wall/mineral/bananium, /obj/structure/falsewall/bananium)
+	canSmoothWith = list(/turf/simulated/wall/mineral/bananium, /obj/structure/falsewall/mineral/bananium)
 
 /turf/simulated/wall/mineral/sandstone
 	name = "sandstone wall"
@@ -48,7 +48,7 @@
 	icon_state = "sandstone"
 	sheet_type = /obj/item/stack/sheet/mineral/sandstone
 	explosion_block = 0
-	canSmoothWith = list(/turf/simulated/wall/mineral/sandstone, /obj/structure/falsewall/sandstone)
+	canSmoothWith = list(/turf/simulated/wall/mineral/sandstone, /obj/structure/falsewall/mineral/sandstone)
 
 /turf/simulated/wall/mineral/uranium
 	name = "uranium wall"
@@ -56,7 +56,7 @@
 	icon = 'icons/turf/walls/uranium_wall.dmi'
 	icon_state = "uranium"
 	sheet_type = /obj/item/stack/sheet/mineral/uranium
-	canSmoothWith = list(/turf/simulated/wall/mineral/uranium, /obj/structure/falsewall/uranium)
+	canSmoothWith = list(/turf/simulated/wall/mineral/uranium, /obj/structure/falsewall/mineral/uranium)
 
 /turf/simulated/wall/mineral/uranium/proc/radiate()
 	if(!active)
@@ -90,7 +90,7 @@
 	icon_state = "plasma"
 	sheet_type = /obj/item/stack/sheet/mineral/plasma
 	thermal_conductivity = 0.04
-	canSmoothWith = list(/turf/simulated/wall/mineral/plasma, /obj/structure/falsewall/plasma)
+	canSmoothWith = list(/turf/simulated/wall/mineral/plasma, /obj/structure/falsewall/mineral/plasma)
 
 /turf/simulated/wall/mineral/plasma/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(is_hot(W) > 300)//If the temperature of the object is over 300, then ignite
@@ -126,7 +126,7 @@
 	icon = 'icons/turf/walls/plasma_wall.dmi'
 	icon_state = "plasma"
 	sheet_type = null
-	canSmoothWith = list(/turf/simulated/wall/mineral/alien, /obj/structure/falsewall/alien)
+	canSmoothWith = list(/turf/simulated/wall/mineral/alien, /obj/structure/falsewall/mineral/alien)
 
 /turf/simulated/wall/mineral/wood
 	name = "wooden wall"
@@ -145,7 +145,7 @@
 	icon_state = "iron"
 	sheet_type = /obj/item/stack/rods
 	sheet_amount = 5
-	canSmoothWith = list(/turf/simulated/wall/mineral/iron, /obj/structure/falsewall/iron)
+	canSmoothWith = list(/turf/simulated/wall/mineral/iron, /obj/structure/falsewall/mineral/iron)
 
 /turf/simulated/wall/mineral/abductor
 	name = "alien wall"
@@ -154,4 +154,14 @@
 	icon_state = "abductor"
 	sheet_type = /obj/item/stack/sheet/mineral/abductor
 	explosion_block = 3
-	canSmoothWith = list(/turf/simulated/wall/mineral/abductor, /obj/structure/falsewall/abductor)
+	canSmoothWith = list(/turf/simulated/wall/mineral/abductor, /obj/structure/falsewall/mineral/abductor)
+
+/turf/simulated/wall/mineral/plastic
+	name = "plastic wall"
+	desc = "A wall made of colorful plastic blocks attached together."
+	icon = 'icons/turf/walls/plastic_wall.dmi'
+	icon_state = "plastic"
+	sheet_type = /obj/item/stack/sheet/plastic
+	opacity = 0
+	explosion_block = 0
+	canSmoothWith = list(/turf/simulated/wall/mineral/plastic, /obj/structure/falsewall/plastic)

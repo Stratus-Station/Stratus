@@ -161,3 +161,17 @@
 	desc = "A grooved floor tile."
 	icon_state = "tile_pod"
 	turf_type = /turf/simulated/floor/pod
+
+/obj/item/stack/tile/plastic
+	name = "plastic tile"
+	singular_name = "plastic floor tile"
+	desc = "A tile made of tiny plastic blocks."
+	icon_state = "tile_plastic"
+	turf_type = /turf/simulated/floor/plastic
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 3
+	throw_range = 7
+	max_amount = 60
+	origin_tech = "materials=1;biotech=1"
+
