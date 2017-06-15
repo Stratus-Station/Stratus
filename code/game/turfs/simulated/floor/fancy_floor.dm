@@ -159,3 +159,8 @@
 	name = "plastic floor"
 	icon_state = "plastic"
 	floor_tile = /obj/item/stack/tile/plastic
+
+/turf/simulated/floor/carpet/black
+	icon = 'icons/turf/floors/carpet_black.dmi'
+	floor_tile = /obj/item/stack/tile/carpet/black
+	canSmoothWith = list(/turf/simulated/floor/carpet/black)

@@ -3,7 +3,7 @@
 "c" = (/turf/simulated/floor/wood,/area/space)
 "d" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/wood,/area/space)
 "e" = (/obj/structure/mineral_door/wood,/turf/simulated/floor/wood,/area/space)
-"f" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/bible,/obj/item/weapon/nullrod,/turf/simulated/floor/wood,/area/space)
+"f" = (/obj/item/weapon/storage/bible,/obj/item/weapon/nullrod,/obj/structure/table/woodentable/fancy/black,/turf/simulated/floor/wood,/area/space)
 "g" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/wood,/area/space)
 "h" = (/turf/simulated/floor/wood{broken = 1; icon_state = "wood-broken"},/area/space)
 

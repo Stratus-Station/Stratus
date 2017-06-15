@@ -416,23 +416,23 @@
  * Fancy Tables
  */
 
-/obj/structure/table/wood/fancy
+/obj/structure/table/woodentable/fancy
 	name = "fancy table"
 	desc = "A standard metal table frame covered with an amazingly fancy, patterned cloth."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "fancy_table"
 	parts = /obj/item/weapon/table_parts/fancy
-	canSmoothWith = list(/obj/structure/table/wood/fancy, /obj/structure/table/wood/fancy/black)
+	canSmoothWith = list(/obj/structure/table/woodentable/fancy, /obj/structure/table/woodentable/fancy/black)
 
-/obj/structure/table/wood/fancy/New()
+/obj/structure/table/woodentable/fancy/New()
 	icon = 'icons/obj/smooth_structures/fancy_table.dmi' //so that the tables place correctly in the map editor
 	..()
 
-/obj/structure/table/wood/fancy/black
+/obj/structure/table/woodentable/fancy/black
 	icon_state = "fancy_table_black"
 	parts = /obj/item/weapon/table_parts/fancy/black
 
-/obj/structure/table/wood/fancy/black/New()
+/obj/structure/table/woodentable/fancy/black/New()
 	..()
 	icon = 'icons/obj/smooth_structures/fancy_table_black.dmi' //so that the tables place correctly in the map editor
 

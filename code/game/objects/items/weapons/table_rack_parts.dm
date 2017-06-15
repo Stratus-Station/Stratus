@@ -73,12 +73,12 @@
 	name = "fancy table parts"
 	desc = "Pretty!"
 	icon_state = "fancy_tableparts"
-	result = /obj/structure/table/wood/fancy
+	result = /obj/structure/table/woodentable/fancy
 
 /obj/item/weapon/table_parts/fancy/black
 	name = "black fancy table parts"
 	icon_state = "black_fancy_tableparts"
-	result = /obj/structure/table/wood/fancy/black
+	result = /obj/structure/table/woodentable/fancy/black
 
 /obj/item/weapon/rack_parts
 	name = "rack parts"
