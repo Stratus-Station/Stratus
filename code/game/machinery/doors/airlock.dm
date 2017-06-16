@@ -103,6 +103,15 @@
 	doorOpen = 'sound/machines/windowdoor.ogg'
 	doorClose = 'sound/machines/windowdoor.ogg'
 
+/obj/machinery/door/airlock/glass/engineering
+	name = "Glass Airlock"
+	icon = 'icons/obj/doors/Dooreng-glass.dmi'
+	opacity = 0
+	glass = 1
+	doorOpen = 'sound/machines/windowdoor.ogg'
+	doorClose = 'sound/machines/windowdoor.ogg'
+
+
 /obj/machinery/door/airlock/centcom
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorele.dmi'
