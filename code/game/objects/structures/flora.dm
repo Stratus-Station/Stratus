@@ -9,6 +9,59 @@
 	density = 1
 	pixel_x = -16
 	layer = 9
+	var/fruit = null
+	var/fruit_yield = 0
+	var/wood = /obj/item/weapon/grown/log
+	var/wood_yield = 2
+	var/chops = 0 //how many times it's been chopped. Gotta make them work for it!
+	var/chops_needed = 6 //Number of chops needed to fell it.
+	var/fell_tool = /obj/item/weapon/hatchet //Item needed to fell it.
+	var/fruitless //Icon_state to use when tree runs out of fruit.
+
+/obj/structure/flora/tree/attackby(var/obj/item/I, mob/user as mob)
+	if(istype(I, fell_tool))
+		user.show_message("<span class='notice'>You chop [src] with [I].</span>")
+
+		playsound(src.loc, 'sound/effects/chopchop.ogg', 100, 1)
+
+		sleep(5)
+
+
+		chops += 1
+
+		if(chops == chops_needed)
+			user.show_message("<span class='notice'>[src] comes crashing down!</span>")
+			playsound(src.loc, 'sound/effects/treefalling.ogg', 100, 1)
+			var/displacement = 0
+			while(wood_yield)
+				var/obj/item/L = new wood(get_step(src, NORTH))
+				L.y += displacement
+				displacement += 0.1
+				wood_yield -= 1
+			if(fruit)
+				displacement = 0
+				while(fruit_yield)
+					var/obj/item/F = new fruit(get_step(src, NORTH))
+					F.y += displacement
+					displacement += 0.1
+					fruit_yield -= 1
+
+			qdel(src)
+
+	return
+
+/obj/structure/flora/tree/attack_hand(mob/user)
+	if(fruit)
+		var/obj/item/F = new fruit
+		if(fruit_yield)
+			fruit_yield -= 1
+			user.show_message("<span class='notice'>You pick the [F] from [src]</span>")
+			user.put_in_hands(F)
+			if(!fruit_yield && fruitless)
+				icon_state = fruitless
+		else
+			user.show_message("<span class='notice'>[src] has nothing left to pick!</span>")
+	return
 
 /obj/structure/flora/tree/pine
 	name = "pine tree"
