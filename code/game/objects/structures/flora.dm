@@ -306,7 +306,6 @@
 	anchored = 1
 
 /obj/structure/flora/rock/New()
-	..()
 	icon_state = "rock[rand(1,5)]"
 
 /obj/structure/flora/rock/pile
@@ -315,8 +314,82 @@
 	icon_state = "rockpile1"
 
 /obj/structure/flora/rock/pile/New()
-	..()
 	icon_state = "rockpile[rand(1,5)]"
+//a rock is flora according to where the icon file is
+//and now these defines
+
+/obj/structure/flora/rock/basalt
+	icon_state = "basalt"
+	desc = "A volcanic rock"
+	icon = 'icons/obj/flora/rocks2.dmi'
+	burn_state = FIRE_PROOF
+	density = 1
+
+/obj/structure/flora/rock/basalt/New()
+	icon_state = "[icon_state][rand(1,3)]"
+
+/obj/structure/flora/rock/basalt/pile
+	icon_state = "lavarocks"
+	desc = "A pile of rocks"
+
+/obj/structure/flora/rock/basalt/pile/New()
+	icon_state = "[icon_state][rand(1,3)]"
+
+/obj/structure/flora/rock/basalt/icy
+	name = "icy rock"
+	color = rgb(114,228,250)
+
+/obj/structure/flora/rock/pile/basalt/icy
+	name = "icy rocks"
+	color = rgb(114,228,250)
+
+/obj/structure/flora/rock/jungle
+	icon_state = "pile of rocks"
+	desc = "A pile of rocks."
+	icon_state = "rock"
+	icon = 'icons/obj/flora/jungleflora.dmi'
+	density = FALSE
+
+/obj/structure/flora/rock/jungle/New()
+	..()
+	icon_state = "[initial(icon_state)][rand(1,5)]"
+
+
+//Jungle bushes
+
+/obj/structure/flora/junglebush
+	name = "bush"
+	icon = 'icons/obj/flora/jungleflora.dmi'
+	icon_state = "busha"
+
+/obj/structure/flora/junglebush/New()
+	icon_state = "[icon_state][rand(1, 3)]"
+	..()
+
+/obj/structure/flora/junglebush/b
+	icon_state = "bushb"
+
+/obj/structure/flora/junglebush/c
+	icon_state = "bushc"
+
+/obj/structure/flora/junglebush/large
+	icon_state = "bush"
+	icon = 'icons/obj/flora/largejungleflora.dmi'
+	pixel_x = -16
+	pixel_y = -12
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/flora/rock/pile/largejungle
+	name = "rocks"
+	icon_state = "rocks"
+	icon = 'icons/obj/flora/largejungleflora.dmi'
+	density = FALSE
+	pixel_x = -16
+	pixel_y = -16
+
+/obj/structure/flora/rock/pile/largejungle/New()
+	..()
+	icon_state = "[initial(icon_state)][rand(1,3)]"
 
 /obj/structure/flora/corn_stalk
 	name = "corn stalk"
