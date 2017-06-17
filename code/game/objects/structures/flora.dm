@@ -98,6 +98,13 @@
 	icon_state = pick("palm1","palm2")
 	pixel_x = 0
 
+/obj/structure/flora/tree/apple
+	name = "apple tree"
+	icon = 'icons/obj/flora/appletree.dmi'
+	icon_state = "apple"
+	fruit = /obj/item/weapon/reagent_containers/food/snacks/grown/apple
+	fruit_yield = 10
+
 //grass
 /obj/structure/flora/grass
 	name = "grass"
