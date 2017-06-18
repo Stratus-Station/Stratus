@@ -74,6 +74,7 @@
 	var/burn_mod = 1     // Burn damage reduction/amplification
 	var/tox_mod = 1      // Toxin damage reduction/amplification
 	var/oxy_mod = 1		 // Oxy damage reduction/amplification
+	var/radiation_mod = 1                    // Radiation modifier
 	var/clone_mod = 1	 // Clone damage reduction/amplification
 	var/brain_mod = 1    // Brain damage damage reduction/amplification
 	var/stun_mod = 1	 // If a species is more/less impacated by stuns/weakens/paralysis

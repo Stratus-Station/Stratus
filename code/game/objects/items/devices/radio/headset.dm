@@ -17,6 +17,8 @@
 	var/ks1type = null
 	var/ks2type = null
 
+	var/translate_hivenet = 0
+
 /obj/item/device/radio/headset/New()
 	..()
 	internal_channels.Cut()
