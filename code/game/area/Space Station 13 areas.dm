@@ -244,6 +244,10 @@ var/list/ghostteleportlocs = list()
 	music = "music/escape.ogg"
 	icon_state = "shuttle"
 
+/area/shuttle/elevator
+	name = "\improper Mining Elevator"
+	icon_state = "shuttle"
+
 /area/shuttle/transport
 	icon_state = "shuttle"
 	name = "\improper Transport Shuttle"

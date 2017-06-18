@@ -203,6 +203,7 @@
 	var/roundstart_move				//id of port to send shuttle to at roundstart
 	var/travelDir = 0				//direction the shuttle would travel in
 	var/rebuildable = 0				//can build new shuttle consoles for this one
+	var/nobuckle = FALSE			//If true, unbuckled passengers won't be stunned.
 
 	var/obj/docking_port/stationary/destination
 	var/obj/docking_port/stationary/previous
@@ -484,7 +485,7 @@
 
 		//move mobile to new location
 		for(var/atom/movable/AM in T0)
-			AM.onShuttleMove(T1, rotation)
+			AM.onShuttleMove(T1, rotation, nobuckle)
 
 		if(rotation)
 			T1.shuttleRotate(rotation)
@@ -690,6 +691,7 @@
 	var/admin_controlled
 	var/max_connect_range = 7
 	var/docking_request = 0
+	var/shutname = "shuttle"
 
 /obj/machinery/computer/shuttle/New(location, obj/item/weapon/circuitboard/shuttle/C)
 	..()
@@ -773,9 +775,9 @@
 			return
 		switch(shuttle_master.moveShuttle(shuttleId, href_list["move"], 1))
 			if(0)
-				to_chat(usr, "<span class='notice'>Shuttle received message and will be sent shortly.</span>")
+				to_chat(usr, "<span class='notice'>[shutname] received message and will be sent shortly.</span>")
 			if(1)
-				to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
+				to_chat(usr, "<span class='warning'>Invalid [shutname] requested.</span>")
 			else
 				to_chat(usr, "<span class='notice'>Unable to comply.</span>")
 		return 1
@@ -905,6 +907,17 @@ var/global/trade_dockrequest_timelimit = 0
 	possible_destinations_nodock = "trade_sol_base;trade_sol_offstation"
 	shuttleId = "trade_sol"
 	docking_request_message = "A trading ship of Sol origin has requested docking aboard the NSS Cyberiad for trading. This request can be accepted or denied using a communications console."
+
+/obj/machinery/computer/shuttle/elevator
+	name = "Elevator Console"
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "elevator"
+	density = 0
+	pixel_y = 32
+	desc = "Used to call and send the mining elevator."
+	shuttleId = "elevator"
+	possible_destinations = "elevator_home;elevator_away"
+	shutname = "elevator"
 
 #undef DOCKING_PORT_HIGHLIGHT
 

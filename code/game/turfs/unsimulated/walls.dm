@@ -33,3 +33,10 @@
 /turf/unsimulated/wall/abductor
 	icon_state = "alien1"
 	explosion_block = 50
+
+/turf/unsimulated/wall/elevator
+	name = "Rock"
+	icon = 'icons/turf/elevator.dmi'
+	icon_state = "movingrock3"
+	dir = 2
+	var/elevator_id = "elevator"

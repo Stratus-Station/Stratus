@@ -119,6 +119,29 @@
 		to_chat(M, "Your Clown Mask has now morphed into [choice], all praise the Honk Mother!")
 		return 1
 
+/obj/item/clothing/mask/gas/tiki_mask
+	name = "tiki mask"
+	desc = "A tiki mask. Only a real Jerk would wear this."
+	icon_state = "tiki_eyebrow"
+	item_state = "tiki_eyebrow"
+	burn_state = FLAMMABLE
+
+/obj/item/clothing/mask/gas/tiki_mask/attack_self(mob/user)
+
+	var/mob/M = usr
+	var/list/options = list()
+	options["Original Tiki"] = "tiki_eyebrow"
+	options["Happy Tiki"] = "tiki_happy"
+	options["Confused Tiki"] = "tiki_confused"
+	options["Angry Tiki"] ="tiki_angry"
+
+	var/choice = input(M,"To what form do you wish to change this mask?","Morph Mask") in options
+
+	if(src && choice && !M.stat && in_range(M,src))
+		icon_state = options[choice]
+		to_chat("The Tiki Mask has now changed into the [choice] Mask!")
+		return 1
+
 /obj/item/clothing/mask/gas/clownwiz
 	name = "wizard clown wig and mask"
 	desc = "Some pranksters are truly magical."
