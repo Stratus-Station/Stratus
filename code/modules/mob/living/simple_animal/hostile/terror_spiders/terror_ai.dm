@@ -169,7 +169,7 @@
 	..(damage)
 	Retaliate()
 
-/mob/living/simple_animal/hostile/poison/terror_spider/proc/Retaliate()
+/*/mob/living/simple_animal/hostile/poison/terror_spider/Retaliate()
 	var/list/around = oview(src, 7)
 	var/list/ts_nearby = list()
 	for(var/atom/movable/A in around)
@@ -200,7 +200,7 @@
 				break
 		if(retaliate_faction_check && !attack_same && !H.attack_same)
 			H.enemies |= enemies
-	return 0
+	return 0*/
 
 // --------------------------------------------------------------------------------
 // --------------------- TERROR SPIDERS: PATHING CODE -----------------------------

@@ -27,7 +27,7 @@
 	var/disabled = 0//A holder for if it needs to be disabled, if true it will not seach for targets, shoot at targets, or move, currently only used for lasertag
 
 
-	var/mob/living/carbon/target
+	var/mob/living/carbon/ed_target
 	var/oldtarget_name
 	var/threatlevel = 0
 	var/target_lastloc //Loc of target when arrested.
@@ -82,7 +82,7 @@
 
 /mob/living/simple_animal/bot/ed209/bot_reset()
 	..()
-	target = null
+	ed_target = null
 	oldtarget_name = null
 	anchored = 0
 	walk_to(src,0)
@@ -157,7 +157,7 @@ Auto Patrol[]"},
 	threatlevel = H.assess_threat(src)
 	threatlevel += 6
 	if(threatlevel >= 4)
-		target = H
+		ed_target = H
 		mode = BOT_HUNT
 
 /mob/living/simple_animal/bot/ed209/attack_hand(mob/living/carbon/human/H)
@@ -169,7 +169,7 @@ Auto Patrol[]"},
 	..()
 	if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != "harm") // Any intent but harm will heal, so we shouldn't get angry.
 		return
-	if(!istype(W, /obj/item/weapon/screwdriver) && (!target)) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
+	if(!istype(W, /obj/item/weapon/screwdriver) && (!ed_target)) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
 		if(W.force && W.damtype != STAMINA)//If force is non-zero and damage type isn't stamina.
 			retaliate(user)
 			if(lasercolor)//To make up for the fact that lasertag bots don't hunt
@@ -234,19 +234,19 @@ Auto Patrol[]"},
 				walk_to(src,0)
 				back_to_idle()
 
-			if(target)		// make sure target exists
-				if(Adjacent(target) && isturf(target.loc)) // if right next to perp
-					stun_attack(target)
+			if(ed_target)		// make sure target exists
+				if(Adjacent(ed_target) && isturf(ed_target.loc)) // if right next to perp
+					stun_attack(ed_target)
 
 					mode = BOT_PREP_ARREST
 					anchored = 1
-					target_lastloc = target.loc
+					target_lastloc = ed_target.loc
 					return
 
 				else								// not next to perp
-					var/turf/olddist = get_dist(src, target)
-					walk_to(src, target,1,4)
-					if((get_dist(src, target)) >= (olddist))
+					var/turf/olddist = get_dist(src, ed_target)
+					walk_to(src, ed_target,1,4)
+					if((get_dist(src, ed_target)) >= (olddist))
 						frustration++
 					else
 						frustration = 0
@@ -256,14 +256,14 @@ Auto Patrol[]"},
 		if(BOT_PREP_ARREST)		// preparing to arrest target
 
 			// see if he got away. If he's no no longer adjacent or inside a closet or about to get up, we hunt again.
-			if(!Adjacent(target) || !isturf(target.loc) ||  target.weakened < 2)
+			if(!Adjacent(ed_target) || !isturf(ed_target.loc) ||  ed_target.weakened < 2)
 				back_to_hunt()
 				return
 
-			if(iscarbon(target) && target.canBeHandcuffed())
+			if(iscarbon(ed_target) && ed_target.canBeHandcuffed())
 				if(!arrest_type)
-					if(!target.handcuffed)  //he's not cuffed? Try to cuff him!
-						cuff(target)
+					if(!ed_target.handcuffed)  //he's not cuffed? Try to cuff him!
+						cuff(ed_target)
 					else
 						back_to_idle()
 						return
@@ -272,18 +272,18 @@ Auto Patrol[]"},
 				return
 
 		if(BOT_ARREST)
-			if(!target)
+			if(!ed_target)
 				anchored = 0
 				mode = BOT_IDLE
 				last_found = world.time
 				frustration = 0
 				return
 
-			if(target.handcuffed) //no target or target cuffed? back to idle.
+			if(ed_target.handcuffed) //no target or target cuffed? back to idle.
 				back_to_idle()
 				return
 
-			if(!Adjacent(target) || !isturf(target.loc) || (target.loc != target_lastloc && target.weakened < 2)) //if he's changed loc and about to get up or not adjacent or got into a closet, we prep arrest again.
+			if(!Adjacent(ed_target) || !isturf(ed_target.loc) || (ed_target.loc != target_lastloc && ed_target.weakened < 2)) //if he's changed loc and about to get up or not adjacent or got into a closet, we prep arrest again.
 				back_to_hunt()
 				return
 			else
@@ -304,7 +304,7 @@ Auto Patrol[]"},
 /mob/living/simple_animal/bot/ed209/proc/back_to_idle()
 	anchored = 0
 	mode = BOT_IDLE
-	target = null
+	ed_target = null
 	last_found = world.time
 	frustration = 0
 	spawn(0)
@@ -337,7 +337,7 @@ Auto Patrol[]"},
 			continue
 
 		else if(threatlevel >= 4)
-			target = C
+			ed_target = C
 			oldtarget_name = C.name
 			speak("Level [threatlevel] infraction alert!")
 			playsound(loc, pick('sound/voice/ed209_20sec.ogg', 'sound/voice/EDPlaceholder.ogg'), 50, 0)
@@ -416,12 +416,12 @@ Auto Patrol[]"},
 		else if(lasercolor == "r")
 			projectile = /obj/item/projectile/beam/lasertag/redtag
 
-/mob/living/simple_animal/bot/ed209/proc/shootAt(mob/target)
+/mob/living/simple_animal/bot/ed209/proc/shootAt(mob/ed_target)
 	if(lastfired && world.time - lastfired < shot_delay)
 		return
 	lastfired = world.time
 	var/turf/T = loc
-	var/atom/U = (istype(target, /atom/movable) ? target.loc : target)
+	var/atom/U = (istype(ed_target, /atom/movable) ? ed_target.loc : ed_target)
 	if((!( U ) || !( T )))
 		return
 	while(!(istype(U, /turf)))
@@ -443,8 +443,8 @@ Auto Patrol[]"},
 
 /mob/living/simple_animal/bot/ed209/attack_alien(mob/living/carbon/alien/user)
 	..()
-	if(!isalien(target))
-		target = user
+	if(!isalien(ed_target))
+		ed_target = user
 		mode = BOT_HUNT
 
 
@@ -483,7 +483,7 @@ Auto Patrol[]"},
 				if(targets.len)
 					var/mob/toarrest = pick(targets)
 					if(toarrest)
-						target = toarrest
+						ed_target = toarrest
 						mode = BOT_HUNT
 
 
@@ -499,7 +499,7 @@ Auto Patrol[]"},
 		if(lasertag_check)
 			icon_state = "[lasercolor]ed2090"
 			disabled = 1
-			target = null
+			ed_target = null
 			spawn(100)
 				disabled = 0
 				icon_state = "[lasercolor]ed2091"

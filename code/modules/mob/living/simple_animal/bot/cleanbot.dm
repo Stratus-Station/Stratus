@@ -20,7 +20,7 @@
 
 	var/blood = 1
 	var/list/target_types = list()
-	var/obj/effect/decal/cleanable/target
+	var/obj/effect/decal/cleanable/clean_target
 	var/max_targets = 50 //Maximum number of targets a cleanbot can ignore.
 	var/oldloc = null
 	var/closest_dist
@@ -49,7 +49,7 @@
 /mob/living/simple_animal/bot/cleanbot/bot_reset()
 	..()
 	ignore_list = list() //Allows the bot to clean targets it previously ignored due to being unreachable.
-	target = null
+	clean_target = null
 	oldloc = null
 
 /mob/living/simple_animal/bot/cleanbot/set_custom_texts()
@@ -103,35 +103,35 @@
 	else if(prob(5))
 		audible_message("[src] makes an excited beeping booping sound!")
 
-	if(!target) //Search for cleanables it can see.
-		target = scan(/obj/effect/decal/cleanable/)
+	if(!clean_target) //Search for cleanables it can see.
+		clean_target = scan(/obj/effect/decal/cleanable/)
 
-	if(!target && auto_patrol) //Search for cleanables it can see.
+	if(!clean_target && auto_patrol) //Search for cleanables it can see.
 		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
 			start_patrol()
 
 		if(mode == BOT_PATROL)
 			bot_patrol()
 
-	if(target)
+	if(clean_target)
 		if(!path || path.len == 0) //No path, need a new one
 			//Try to produce a path to the target, and ignore airlocks to which it has access.
-			path = get_path_to(src, target.loc, /turf/proc/Distance_cardinal, 0, 30, id=access_card)
-			if(!bot_move(target))
-				add_to_ignore(target)
-				target = null
+			path = get_path_to(src, clean_target.loc, /turf/proc/Distance_cardinal, 0, 30, id=access_card)
+			if(!bot_move(clean_target))
+				add_to_ignore(clean_target)
+				clean_target = null
 				path = list()
 				return
 			mode = BOT_MOVING
-		else if(!bot_move(target))
-			target = null
+		else if(!bot_move(clean_target))
+			clean_target = null
 			mode = BOT_IDLE
 			return
 
-	if(target && loc == target.loc)
-		clean(target)
+	if(clean_target && loc == clean_target.loc)
+		clean(clean_target)
 		path = list()
-		target = null
+		clean_target = null
 
 	oldloc = loc
 
@@ -160,16 +160,16 @@
 		target_types += /obj/effect/decal/cleanable/blood/tracks
 		target_types += /obj/effect/decal/cleanable/dirt
 
-/mob/living/simple_animal/bot/cleanbot/proc/clean(obj/effect/decal/cleanable/target)
+/mob/living/simple_animal/bot/cleanbot/proc/clean(obj/effect/decal/cleanable/clean_target)
 	anchored = 1
 	icon_state = "cleanbot-c"
-	visible_message("<span class='notice'>[src] begins to clean up [target]</span>")
+	visible_message("<span class='notice'>[src] begins to clean up [clean_target]</span>")
 	mode = BOT_CLEANING
 	spawn(50)
 		if(mode == BOT_CLEANING)
-			qdel(target)
+			qdel(clean_target)
 			anchored = 0
-			target = null
+			clean_target = null
 		mode = BOT_IDLE
 		icon_state = "cleanbot[on]"
 

@@ -20,7 +20,7 @@
 	window_name = "Automatic Security Unit v1.6"
 
 	var/base_icon = "secbot"
-	var/mob/living/carbon/target
+	var/mob/living/carbon/sec_target
 	var/oldtarget_name
 	var/threatlevel = 0
 	var/target_lastloc //Loc of target when arrested.
@@ -102,7 +102,7 @@
 
 /mob/living/simple_animal/bot/secbot/bot_reset()
 	..()
-	target = null
+	sec_target = null
 	oldtarget_name = null
 	anchored = 0
 	walk_to(src,0)
@@ -169,7 +169,7 @@ Auto Patrol: []"},
 	threatlevel = H.assess_threat(src)
 	threatlevel += 6
 	if(threatlevel >= 4)
-		target = H
+		sec_target = H
 		mode = BOT_HUNT
 
 /mob/living/simple_animal/bot/secbot/attack_hand(mob/living/carbon/human/H)
@@ -181,7 +181,7 @@ Auto Patrol: []"},
 	..()
 	if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != "harm") // Any intent but harm will heal, so we shouldn't get angry.
 		return
-	if(!istype(W, /obj/item/weapon/screwdriver) && (W.force) && (!target) && (W.damtype != STAMINA) ) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
+	if(!istype(W, /obj/item/weapon/screwdriver) && (W.force) && (!sec_target) && (W.damtype != STAMINA) ) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
 		retaliate(user)
 
 /mob/living/simple_animal/bot/secbot/emag_act(mob/user)
@@ -307,19 +307,19 @@ Auto Patrol: []"},
 				back_to_idle()
 				return
 
-			if(target)		// make sure target exists
-				if(Adjacent(target) && isturf(target.loc))	// if right next to perp
-					stun_attack(target)
+			if(sec_target)		// make sure target exists
+				if(Adjacent(sec_target) && isturf(sec_target.loc))	// if right next to perp
+					stun_attack(sec_target)
 
 					mode = BOT_PREP_ARREST
 					anchored = 1
-					target_lastloc = target.loc
+					target_lastloc = sec_target.loc
 					return
 
 				else								// not next to perp
-					var/turf/olddist = get_dist(src, target)
-					walk_to(src, target,1,4)
-					if((get_dist(src, target)) >= (olddist))
+					var/turf/olddist = get_dist(src, sec_target)
+					walk_to(src, sec_target,1,4)
+					if((get_dist(src, sec_target)) >= (olddist))
 						frustration++
 					else
 						frustration = 0
@@ -328,14 +328,14 @@ Auto Patrol: []"},
 
 		if(BOT_PREP_ARREST)		// preparing to arrest target
 			// see if he got away. If he's no no longer adjacent or inside a closet or about to get up, we hunt again.
-			if( !Adjacent(target) || !isturf(target.loc) ||  target.weakened < 2 )
+			if( !Adjacent(sec_target) || !isturf(sec_target.loc) ||  sec_target.weakened < 2 )
 				back_to_hunt()
 				return
 
-			if(iscarbon(target) && target.canBeHandcuffed())
+			if(iscarbon(sec_target) && sec_target.canBeHandcuffed())
 				if(!arrest_type)
-					if(!target.handcuffed)  //he's not cuffed? Try to cuff him!
-						cuff(target)
+					if(!sec_target.handcuffed)  //he's not cuffed? Try to cuff him!
+						cuff(sec_target)
 					else
 						back_to_idle()
 						return
@@ -344,18 +344,18 @@ Auto Patrol: []"},
 				return
 
 		if(BOT_ARREST)
-			if(!target)
+			if(!sec_target)
 				anchored = 0
 				mode = BOT_IDLE
 				last_found = world.time
 				frustration = 0
 				return
 
-			if(target.handcuffed) //no target or target cuffed? back to idle.
+			if(sec_target.handcuffed) //no target or target cuffed? back to idle.
 				back_to_idle()
 				return
 
-			if(!Adjacent(target) || !isturf(target.loc) || (target.loc != target_lastloc && target.weakened < 2)) //if he's changed loc and about to get up or not adjacent or got into a closet, we prep arrest again.
+			if(!Adjacent(sec_target) || !isturf(sec_target.loc) || (sec_target.loc != target_lastloc && sec_target.weakened < 2)) //if he's changed loc and about to get up or not adjacent or got into a closet, we prep arrest again.
 				back_to_hunt()
 				return
 			else //Try arresting again if the target escapes.
@@ -376,7 +376,7 @@ Auto Patrol: []"},
 /mob/living/simple_animal/bot/secbot/proc/back_to_idle()
 	anchored = 0
 	mode = BOT_IDLE
-	target = null
+	sec_target = null
 	last_found = world.time
 	frustration = 0
 	spawn(0)
@@ -405,7 +405,7 @@ Auto Patrol: []"},
 			continue
 
 		else if(threatlevel >= 4)
-			target = C
+			sec_target = C
 			oldtarget_name = C.name
 			speak("Level [threatlevel] infraction alert!")
 			playsound(loc, pick('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg'), 50, 0)
@@ -446,14 +446,14 @@ Auto Patrol: []"},
 
 /mob/living/simple_animal/bot/secbot/attack_alien(var/mob/living/carbon/alien/user as mob)
 	..()
-	if(!isalien(target))
-		target = user
+	if(!isalien(sec_target))
+		sec_target = user
 		mode = BOT_HUNT
 
 /mob/living/simple_animal/bot/secbot/Crossed(atom/movable/AM)
-	if(ismob(AM) && target)
+	if(ismob(AM) && sec_target)
 		var/mob/living/carbon/C = AM
-		if(!istype(C) || !C || in_range(src, target))
+		if(!istype(C) || !C || in_range(src, sec_target))
 			return
 		C.visible_message("<span class='warning'>[pick( \
 						  "[C] dives out of [src]'s way!", \

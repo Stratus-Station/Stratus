@@ -34,7 +34,7 @@
 	var/global/mulebot_count = 0
 	var/atom/movable/load = null
 	var/mob/living/passenger = null
-	var/turf/target				// this is turf to navigate to (location of beacon)
+	var/turf/mule_target				// this is turf to navigate to (location of beacon)
 	var/loaddir = 0				// this the direction to unload onto/load from
 	var/home_destination = "" 	// tag of home beacon
 
@@ -227,7 +227,7 @@
 				home_destination = new_home
 		if("unload")
 			if(load && mode != BOT_HUNT)
-				if(loc == target)
+				if(loc == mule_target)
 					unload(loaddir)
 				else
 					unload(0)
@@ -451,8 +451,8 @@
 	..()
 	var/area/dest_area
 	if(path && path.len)
-		target = ai_waypoint //Target is the end point of the path, the waypoint set by the AI.
-		dest_area = get_area(target)
+		mule_target = ai_waypoint //Target is the end point of the path, the waypoint set by the AI.
+		dest_area = get_area(mule_target)
 		destination = format_text(dest_area.name)
 		pathset = 1 //Indicates the AI's custom path is initialized.
 		start()
@@ -496,11 +496,11 @@
 			return
 
 		if(BOT_DELIVER, BOT_GO_HOME, BOT_BLOCKED) // navigating to deliver,home, or blocked
-			if(loc == target) // reached target
+			if(loc == mule_target) // reached target
 				at_target()
 				return
 
-			else if(path.len > 0 && target) // valid path
+			else if(path.len > 0 && mule_target) // valid path
 				var/turf/next = path[1]
 				reached_target = 0
 				if(next == loc)
@@ -589,7 +589,7 @@
 // given an optional turf to avoid
 /mob/living/simple_animal/bot/mulebot/calc_path(turf/avoid = null)
 	check_bot_access()
-	path = get_path_to(src, target, /turf/proc/Distance_cardinal, 0, 250, id=access_card, exclude=avoid)
+	path = get_path_to(src, mule_target, /turf/proc/Distance_cardinal, 0, 250, id=access_card, exclude=avoid)
 
 // sets the current destination
 // signals all beacons matching the delivery code
@@ -746,7 +746,7 @@
 		if("unload")
 			if(client)
 				return 1
-			if(loc == target)
+			if(loc == mule_target)
 				unload(loaddir)
 			else
 				unload(0)
@@ -803,7 +803,7 @@
 	for(var/obj/machinery/navbeacon/NB in deliverybeacons)
 		if(NB.location == new_destination)	// if the beacon location matches the set destination
 			destination = new_destination	// the we will navigate there
-			target = NB.loc
+			mule_target = NB.loc
 			var/direction = NB.dir	// this will be the load/unload dir
 			loaddir = direction
 			update_icon()

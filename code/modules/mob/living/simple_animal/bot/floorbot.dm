@@ -29,7 +29,7 @@
 	var/nag_on_empty = 1
 	var/nagged = 0 //Prevents the Floorbot nagging more than once per refill.
 	var/max_targets = 50
-	var/turf/target
+	var/turf/floor_target
 	var/oldloc = null
 
 	#define HULL_BREACH		1
@@ -48,7 +48,7 @@
 
 /mob/living/simple_animal/bot/floorbot/bot_reset()
 	..()
-	target = null
+	floor_target = null
 	oldloc = null
 	ignore_list = list()
 	nagged = 0
@@ -153,13 +153,13 @@
 	if(mode == BOT_REPAIRING)
 		return
 
-	if(amount <= 0 && !target) //Out of tiles! We must refill!
+	if(amount <= 0 && !floor_target) //Out of tiles! We must refill!
 		if(eattiles) //Configured to find and consume floortiles!
-			target = scan(/obj/item/stack/tile/plasteel)
+			floor_target = scan(/obj/item/stack/tile/plasteel)
 			process_type = null
 
-		if(!target && maketiles) //We did not manage to find any floor tiles! Scan for metal stacks and make our own!
-			target = scan(/obj/item/stack/sheet/metal)
+		if(!floor_target && maketiles) //We did not manage to find any floor tiles! Scan for metal stacks and make our own!
+			floor_target = scan(/obj/item/stack/sheet/metal)
 			process_type = null
 			return
 		else
@@ -170,35 +170,35 @@
 		audible_message("[src] makes an excited booping beeping sound!")
 
 	//Normal scanning procedure. We have tiles loaded, are not emagged.
-	if(!target && emagged < 2 && amount > 0)
+	if(!floor_target && emagged < 2 && amount > 0)
 		if(targetdirection != null) //The bot is in bridge mode.
 			//Try to find a space tile immediately in our selected direction.
 			var/turf/T = get_step(src, targetdirection)
 			if(istype(T, /turf/space))
-				target = T
+				floor_target = T
 
 			else //Find a space tile farther way!
-				target = scan(/turf/space)
+				floor_target = scan(/turf/space)
 			process_type = BRIDGE_MODE
 
-		if(!target)
+		if(!floor_target)
 			process_type = HULL_BREACH //Ensures the floorbot does not try to "fix" space areas or shuttle docking zones.
-			target = scan(/turf/space)
+			floor_target = scan(/turf/space)
 
-		if(!target && replacetiles) //Finds a floor without a tile and gives it one.
+		if(!floor_target && replacetiles) //Finds a floor without a tile and gives it one.
 			process_type = REPLACE_TILE //The target must be the floor and not a tile. The floor must not already have a floortile.
-			target = scan(/turf/simulated/floor)
+			floor_target = scan(/turf/simulated/floor)
 
-		if(!target && fixfloors) //Repairs damaged floors and tiles.
+		if(!floor_target && fixfloors) //Repairs damaged floors and tiles.
 			process_type = FIX_TILE
-			target = scan(/turf/simulated/floor)
+			floor_target = scan(/turf/simulated/floor)
 
-	if(!target && emagged == 2) //We are emagged! Time to rip up the floors!
+	if(!floor_target && emagged == 2) //We are emagged! Time to rip up the floors!
 		process_type = TILE_EMAG
-		target = scan(/turf/simulated/floor)
+		floor_target = scan(/turf/simulated/floor)
 
 
-	if(!target)
+	if(!floor_target)
 
 		if(auto_patrol)
 			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
@@ -207,33 +207,33 @@
 			if(mode == BOT_PATROL)
 				bot_patrol()
 
-	if(target)
+	if(floor_target)
 		if(path.len == 0)
-			if(!istype(target, /turf/))
-				var/turf/TL = get_turf(target)
+			if(!istype(floor_target, /turf/))
+				var/turf/TL = get_turf(floor_target)
 				path = get_path_to(src, TL, /turf/proc/Distance_cardinal, 0, 30, id=access_card,simulated_only = 0)
 			else
-				path = get_path_to(src, target, /turf/proc/Distance_cardinal, 0, 30, id=access_card,simulated_only = 0)
+				path = get_path_to(src, floor_target, /turf/proc/Distance_cardinal, 0, 30, id=access_card,simulated_only = 0)
 
-			if(!bot_move(target))
-				add_to_ignore(target)
-				target = null
+			if(!bot_move(floor_target))
+				add_to_ignore(floor_target)
+				floor_target = null
 				mode = BOT_IDLE
 				return
-		else if( !bot_move(target) )
-			target = null
+		else if( !bot_move(floor_target) )
+			floor_target = null
 			mode = BOT_IDLE
 			return
 
-		if(loc == target || loc == target.loc)
-			if(istype(target, /obj/item/stack/tile/plasteel))
-				eattile(target)
-			else if(istype(target, /obj/item/stack/sheet/metal))
-				maketile(target)
-			else if(istype(target, /turf/) && emagged < 2)
-				repair(target)
-			else if(emagged == 2 && istype(target,/turf/simulated/floor))
-				var/turf/simulated/floor/F = target
+		if(loc == floor_target || loc == floor_target.loc)
+			if(istype(floor_target, /obj/item/stack/tile/plasteel))
+				eattile(floor_target)
+			else if(istype(floor_target, /obj/item/stack/sheet/metal))
+				maketile(floor_target)
+			else if(istype(floor_target, /turf/) && emagged < 2)
+				repair(floor_target)
+			else if(emagged == 2 && istype(floor_target,/turf/simulated/floor))
+				var/turf/simulated/floor/F = floor_target
 				anchored = 1
 				mode = BOT_REPAIRING
 				if(prob(90))
@@ -245,7 +245,7 @@
 					amount ++
 					anchored = 0
 					mode = BOT_IDLE
-					target = null
+					floor_target = null
 			path = list()
 			return
 
@@ -297,13 +297,13 @@
 	if(istype(target_turf, /turf/space/))
 		 //Must be a hull breach or in bridge mode to continue.
 		if(!is_hull_breach(target_turf) && !targetdirection)
-			target = null
+			floor_target = null
 			return
 	else if(!istype(target_turf, /turf/simulated/floor))
 		return
 	if(amount <= 0)
 		mode = BOT_IDLE
-		target = null
+		floor_target = null
 		return
 	anchored = 1
 	icon_state = "floorbot-c"
@@ -320,7 +320,7 @@
 				amount -= 1
 				update_icon()
 				anchored = 0
-				target = null
+				floor_target = null
 	else
 		var/turf/simulated/floor/F = target_turf
 		mode = BOT_REPAIRING
@@ -334,7 +334,7 @@
 				amount -= 1
 				update_icon()
 				anchored = 0
-				target = null
+				floor_target = null
 
 /mob/living/simple_animal/bot/floorbot/proc/eattile(obj/item/stack/tile/plasteel/T)
 	if(!istype(T, /obj/item/stack/tile/plasteel))
@@ -343,7 +343,7 @@
 	mode = BOT_REPAIRING
 	spawn(20)
 		if(isnull(T))
-			target = null
+			floor_target = null
 			mode = BOT_IDLE
 			return
 		if(amount + T.amount > 50)
@@ -354,7 +354,7 @@
 			amount += T.amount
 			qdel(T)
 		update_icon()
-		target = null
+		floor_target = null
 		mode = BOT_IDLE
 
 /mob/living/simple_animal/bot/floorbot/proc/maketile(obj/item/stack/sheet/metal/M)
@@ -364,7 +364,7 @@
 	mode = BOT_REPAIRING
 	spawn(20)
 		if(isnull(M))
-			target = null
+			floor_target = null
 			mode = BOT_IDLE
 			return
 		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
@@ -374,7 +374,7 @@
 			M.amount--
 		else
 			qdel(M)
-		target = null
+		floor_target = null
 		mode = BOT_IDLE
 
 /mob/living/simple_animal/bot/floorbot/update_icon()
