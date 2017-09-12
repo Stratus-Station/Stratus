@@ -206,8 +206,7 @@
 		on = 0
 //		A.update_lights()
 	processing_objects.Remove(src)
-	return
-	..()
+	return ..()
 
 /obj/machinery/light/update_icon()
 
@@ -402,7 +401,6 @@
 /obj/machinery/light/process()
 	if(prob(3))
 		flicker(20)
-
 
 // ai attack - make lights flicker, because why not
 /obj/machinery/light/attack_ai(mob/user)
