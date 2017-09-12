@@ -198,13 +198,16 @@
 					broken(1)
 		spawn(1)
 			update(0)
+	processing_objects.Add(src)
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
 	if(A)
 		on = 0
 //		A.update_lights()
-	return ..()
+	processing_objects.Remove(src)
+	return
+	..()
 
 /obj/machinery/light/update_icon()
 
@@ -394,6 +397,12 @@
 			on = (status == LIGHT_OK)
 			update(0)
 		flickering = 0
+
+// random flicker
+/obj/machinery/light/process()
+	if(prob(3))
+		flicker(20)
+
 
 // ai attack - make lights flicker, because why not
 /obj/machinery/light/attack_ai(mob/user)
