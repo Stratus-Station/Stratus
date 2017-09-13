@@ -399,6 +399,7 @@
 
 // random flicker
 /obj/machinery/light/process()
+	..()
 	if(prob(3))
 		flicker(20)
 
