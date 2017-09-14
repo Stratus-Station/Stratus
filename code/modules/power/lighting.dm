@@ -400,8 +400,8 @@
 // random flicker
 /obj/machinery/light/process()
 	..()
-	if(prob(3))
-		flicker(20)
+	if(prob(1))
+		flicker(2)
 
 // ai attack - make lights flicker, because why not
 /obj/machinery/light/attack_ai(mob/user)
