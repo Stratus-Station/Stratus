@@ -32,20 +32,52 @@
 	magazine = new /obj/item/ammo_box/magazine/m10mm/empty(src)
 	..()
 
+/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45
+	name = "Enforcer .45"
+	desc = "A pistol of modern design. Standard issue for Nanotrasen Asset Protection units."
+	icon_state = "enforcer_grey"
+	force = 10
+	mag_type = /obj/item/ammo_box/magazine/m45/enforcer45
+	can_suppress = 1
+	unique_reskin = 1
+	can_flashlight = 1
+
+/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45/update_icon()
+	..()
+	if(current_skin)
+		icon_state = "[current_skin][chambered ? "" : "-e"]"
+	else
+		icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
+	overlays.Cut()
+	if(suppressed)
+		overlays += image(icon = icon, icon_state = "enforcer_supp", pixel_x = 4)
+	if(gun_light)
+		var/iconF = "Enforcer_light"
+		if(gun_light.on)
+			iconF = "Enforcer_light-on"
+		overlays += image(icon = icon, icon_state = iconF, pixel_x = 0)
+
+/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45/ui_action_click()
+	toggle_gunlight()
+
+/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45/New()
+	..()
+	options["Grey slide"] = "enforcer_grey"
+	options["Red slide"] = "enforcer_red"
+	options["Green slide"] = "enforcer_green"
+	options["Tan slide"] = "enforcer_tan"
+	options["Black slide"] = "enforcer_black"
+	options["Green Handle"] = "enforcer_greengrip"
+	options["Tan Handle"] = "enforcer_tangrip"
+	options["Red Handle"] = "enforcer_redgrip"
+	options["Cancel"] = null
+
 /obj/item/weapon/gun/projectile/automatic/pistol/deagle
 	name = "desert eagle"
 	desc = "A robust .50 AE handgun."
 	icon_state = "deagle"
 	force = 14.0
 	mag_type = /obj/item/ammo_box/magazine/m50
-	can_suppress = 0
-
-/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45
-	name = "Enforcer .45"
-	desc = "A pistol of modern design."
-	icon_state = "enforcer"
-	force = 10
-	mag_type = /obj/item/ammo_box/magazine/m45/enforcer45
 	can_suppress = 0
 
 /obj/item/weapon/gun/projectile/automatic/pistol/deagle/update_icon()
@@ -61,14 +93,6 @@
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
-
-/obj/item/weapon/gun/projectile/automatic/pistol/enforcer45
-	name = "Enforcer .45"
-	desc = "A pistol of modern design. Standard issue for Nanotrasen Asset Protection units."
-	icon_state = "enforcer"
-	force = 10
-	mag_type = /obj/item/ammo_box/magazine/m45/enforcer45
-	can_suppress = 0
 
 /obj/item/weapon/gun/projectile/automatic/pistol/APS
 	name = "stechkin APS pistol"

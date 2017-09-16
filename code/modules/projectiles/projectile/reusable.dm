@@ -66,3 +66,23 @@
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/riot
 	stamina = 25
 	log_override = FALSE
+
+/obj/item/projectile/bullet/reusable/flash
+	name = " Flash rocket"
+	desc = "GET DOWN."
+	damage = 10
+	nodamage = FALSE
+	icon_state= "bolter"
+	ammo_type = /obj/item/weapon/grenade/flashbang
+	range = 10
+	var/det_time = 0
+
+/obj/item/projectile/bullet/reusable/flash/handle_drop()
+	if(!dropped)
+		var/obj/item/weapon/grenade/F = new ammo_type(loc)
+		dropped = TRUE
+		spawn(det_time)
+			F.prime()
+
+/obj/item/projectile/bullet/reusable/flash/tear
+	ammo_type = /obj/item/weapon/grenade/chem_grenade/teargas

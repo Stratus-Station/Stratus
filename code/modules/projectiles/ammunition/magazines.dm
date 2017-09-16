@@ -129,6 +129,18 @@
 	ammo_type = /obj/item/ammo_casing/a40mm
 	max_ammo = 6
 
+/obj/item/ammo_box/magazine/internal/grenadelauncher2
+	name = "grenade launcher internal magazine"
+	ammo_type = /obj/item/ammo_casing/grenade
+	caliber = "grenade"
+	max_ammo = 1
+
+/obj/item/ammo_box/magazine/internal/launcher
+	name = "rocketlaucher internal magazine"
+	ammo_type = /obj/item/ammo_casing/rocket2
+	caliber = "rocket2"
+	max_ammo = 1
+
 /obj/item/ammo_box/magazine/internal/speargun
 	name = "speargun internal magazine"
 	ammo_type = /obj/item/ammo_casing/caseless/magspear
