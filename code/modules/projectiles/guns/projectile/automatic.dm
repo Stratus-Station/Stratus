@@ -202,6 +202,10 @@
 	burst_size = 4
 	fire_delay = 1
 
+/obj/item/weapon/gun/projectile/automatic/tommygun/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][magazine ? "" : "-e"]"
+
 /obj/item/weapon/gun/projectile/automatic/ar
 	name = "ARG"
 	desc = "A robust assault rile used by Nanotrasen fighting forces."
