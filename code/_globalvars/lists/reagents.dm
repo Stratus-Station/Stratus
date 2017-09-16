@@ -44,7 +44,9 @@ var/list/drinks = list("beer2","chocolate","orangejuice","tomatojuice","limejuic
 					"vodkatonic","ginfizz","bahama_mama","singulo","sbiten","devilskiss","red_mead",
 					"mead","iced_beer","grog","aloe","andalusia","alliescocktail","soy_latte",
 					"cafe_latte","acidspit","amasec","neurotoxin","hippiesdelight","bananahonk",
-					"silencer","changelingsting","irishcarbomb","syndicatebomb","erikasurprise","driestmartini")
+					"silencer","changelingsting","irishcarbomb","syndicatebomb","erikasurprise",
+					"driestmartini","mangorinehardt","starmansparkle","barryredkola","alohacoconut","mingussoda",
+					"blurredlimejuice","queenmilk")
 
 //Random chem blacklist
 var/global/list/blocked_chems = list("polonium", "initropidril", "concentrated_initro",

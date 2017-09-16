@@ -158,6 +158,78 @@
 	drink_name = "Rewriter"
 	drink_desc = "The secert of the sanctuary of the Libarian..."
 
+
+/datum/reagent/consumable/drink/cold/mingusdew
+	name = "Mingus Dew"
+	id = "mingussoda"
+	description = "Tastes like a rip-off of another drink."
+	color = "#d4fa00" //  rgb (212, 250, 0)
+	adj_temp_cool = 5
+	drink_icon = "glass_green"
+	drink_name = "Glass of Mingus Dew"
+	drink_desc = "Gimme my Mingus Dew!."
+
+/datum/reagent/consumable/drink/cold/starmansparkle
+	name = "Starman Sparkle"
+	id = "starmansparkle"
+	description = "Reminds you of a vast cosmos, glittering in the dark void."
+	color = "#dbab44" //  rgb (219, 171, 68)
+	adj_temp_cool = 10
+	drink_icon = "glass_yellow"
+	drink_name = "Glass of Starman's Sparkle"
+	drink_desc = "Something about a starman, waiting in the sky."
+
+/datum/reagent/consumable/drink/cold/mangorinehardt
+	name = "Mango Reinhardt"
+	id = "mangorinehardt"
+	description = "Mango Reinhardt, the thinking man's pop!"
+	color = "#f3b416"
+	adj_temp_cool = 10
+	drink_icon = "glass_orange"
+	drink_name = "Glass of Mango Reinehardt"
+	drink_desc = "Mango Rinehardt, the thinking man's pop!."
+
+/datum/reagent/consumable/drink/cold/redkola
+	name = "Barry's Red Kola"
+	id = "redkola"
+	description = "There's nothing as refreshing as a nice cold glass of Barry's Red Kola."
+	color = "#1c0d0d"
+	adj_temp_cool = 3
+	drink_icon = "brownstar"
+	drink_name = "Glass of Barry's Red Kola"
+	drink_desc = "Nothing can quench an adventurer's thirst, quite like a nice cold glass of Barry's Red Kola."
+
+/datum/reagent/consumable/drink/cold/alohacoe
+	name = "Aloha Coe"
+	id = "alohacoconut"
+	description = "Taste's like coconut juice, oddly refreshing."
+	color = "#e9d477"
+	adj_temp_cool = 4
+	drink_icon = "glass_white"
+	drink_name = "Glass of Aloha Coe"
+	drink_desc = "Looks milky, reminds you of the tropics."
+
+/datum/reagent/consumable/drink/cold/blurredlimes
+	name = "Blurred Limes"
+	id = "blurredlimejuice"
+	description = "Zesty."
+	color = "#cad470"
+	adj_temp_cool = 1
+	drink_icon = "glass_green"
+	drink_name = "Glass of Blurred Limes"
+	drink_desc = "A green concuction of what you can assume to be lime juice, certainly smells like it too.."
+
+/datum/reagent/consumable/drink/cold/queenshaven
+	name = "Queen's Haven"
+	id = "queenmilk"
+	description = "Looks like pretty good milk."
+	color = "##dfcda7"
+	adj_temp_cool = 3
+	drink_icon = "glass_white"
+	drink_name = "Glass of Queen's Haven"
+	drink_desc = "Looks like a glass full of milk, don't dip your cereal in here."
+
+
 /datum/reagent/consumable/drink/cold/rewriter/on_mob_life(mob/living/M)
 	M.Jitter(5)
 	..()
