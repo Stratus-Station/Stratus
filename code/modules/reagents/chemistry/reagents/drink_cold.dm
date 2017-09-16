@@ -229,7 +229,6 @@
 	drink_name = "Glass of Queen's Haven"
 	drink_desc = "Looks like a glass full of milk, don't dip your cereal in here."
 
-
 /datum/reagent/consumable/drink/cold/rewriter/on_mob_life(mob/living/M)
 	M.Jitter(5)
 	..()
