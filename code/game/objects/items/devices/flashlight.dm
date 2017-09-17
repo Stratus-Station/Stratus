@@ -17,9 +17,11 @@
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
+		playsound(user, 'sound/weapons/flashlighton.ogg', 15, 1)
 	else
 		icon_state = initial(icon_state)
 		set_light(0)
+		playsound(user, 'sound/weapons/flashlightoff.ogg', 15, 1)
 
 /obj/item/device/flashlight/proc/update_brightness(var/mob/user = null)
 	if(on)
