@@ -1036,7 +1036,7 @@ so that different stomachs can handle things in different ways VB*/
 	if(satiety > -200)
 		satiety -= toEat.junkiness
 	if(toEat.consume_sound)
-		playsound(loc, toEat.consume_sound, rand(10,50), 1)
+		playsound(loc, pick(toEat.consume_sound), rand(10,50), 1)
 	if(toEat.reagents.total_volume)
 		var/fraction = min(this_bite/toEat.reagents.total_volume, 1)
 		toEat.reagents.reaction(src, toEat.apply_type, fraction)
