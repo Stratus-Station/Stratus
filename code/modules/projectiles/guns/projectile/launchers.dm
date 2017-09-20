@@ -5,7 +5,7 @@
 	desc = "A break-operated grenade launcher."
 	name = "grenade launcher"
 	icon_state = "dshotgun-sawn"
-	item_state = "gun"
+	item_state = "bulldog"
 	mag_type = /obj/item/ammo_box/magazine/internal/grenadelauncher
 	fire_sound = 'sound/weapons/grenadelaunch.ogg'
 	w_class = WEIGHT_CLASS_NORMAL
@@ -14,6 +14,27 @@
 	..()
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		chamber_round()
+		update_icon()
+
+/obj/item/weapon/gun/projectile/revolver/grenadelauncher/custom
+	desc = "A break-operated grenade launcher."
+	name = "grenade launcher"
+	icon_state = "grenadelauncher"
+	item_state = "gun"
+	mag_type = /obj/item/ammo_box/magazine/internal/grenadelauncher2
+	fire_sound = 'sound/weapons/grenadelaunch.ogg'
+	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/weapon/gun/projectile/revolver/grenadelauncher/custom/update_icon()
+	icon_state = "[initial(icon_state)][chambered? "" : "-e"]"
+	overlays.Cut()
+	if(chambered)
+		if(istype(chambered, /obj/item/ammo_casing/grenade/he))
+			overlays += image(icon = icon, icon_state = "grenadeblue")
+		else if(istype(chambered, /obj/item/ammo_casing/grenade/tear))
+			overlays += image(icon = icon, icon_state = "grenadered")
+		else
+			overlays += image(icon = icon, icon_state = "grenadewhite")
 
 /obj/item/weapon/gun/projectile/revolver/grenadelauncher/multi
 	desc = "A revolving 6-shot grenade launcher."
@@ -83,3 +104,48 @@
 		to_chat(user, "<span class='notice'>You load [num_loaded] spear\s into \the [src].</span>")
 		update_icon()
 		chamber_round()
+
+/obj/item/weapon/gun/projectile/automatic/speargun/launcher
+	desc = "A caseless front loading rocket launcher."
+	name = "rocket launcher"
+	icon_state = "launcher2"
+	item_state = "bulldog"
+	mag_type = /obj/item/ammo_box/magazine/internal/launcher
+	w_class = WEIGHT_CLASS_BULKY
+	origin_tech = "combat=4;engineering=4"
+
+
+/obj/item/weapon/gun/projectile/automatic/speargun/launcher/attackby(obj/item/A, mob/user, params)
+	if(!chambered)
+		var/num_loaded = magazine.attackby(A, user, params, 1)
+		if(num_loaded)
+			to_chat(user, "<span class='notice'>You load [num_loaded] rockets\s into \the [src].</span>")
+			chamber_round()
+			update_icon()
+
+/obj/item/weapon/gun/projectile/automatic/speargun/launcher/update_icon()
+	overlays.Cut()
+	if(chambered)
+		if(istype(chambered, /obj/item/ammo_casing/rocket2/heat))
+			overlays += image(icon = icon, icon_state = "rocketheat", pixel_x = 5)
+		else if(istype(chambered, /obj/item/ammo_casing/rocket2/he))
+			overlays += image(icon = icon, icon_state = "rocketblue", pixel_x = 5)
+		else if(istype(chambered, /obj/item/ammo_casing/rocket2/emp))
+			overlays += image(icon = icon, icon_state = "rocketemp", pixel_x = 5)
+		else
+			overlays += image(icon = icon, icon_state = "rocketplain", pixel_x = 5)
+
+/obj/item/weapon/gun/projectile/automatic/speargun/launcher/attack_self(mob/living/user)
+	var/num_unloaded = 0
+	if(chambered)
+		var/obj/item/ammo_casing/CB
+		CB = chambered
+		chambered = null
+		CB.loc = get_turf(loc)
+		CB.update_icon()
+		num_unloaded++
+	if(num_unloaded)
+		to_chat(user, "<span class = 'notice'>You break open \the [src] and unload a rocket.</span>")
+	else
+		to_chat(user, "<span class='notice'>[src] is empty.</span>")
+	update_icon()

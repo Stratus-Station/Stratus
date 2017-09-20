@@ -43,6 +43,54 @@
 	explosion(target, -1, 0, 2, 1, 0, flame_range = 3)
 	return 1
 
+/obj/item/projectile/bullet/rocketstd
+	name ="Rocket"
+	desc = "Boom"
+	icon_state= "rocketplain"
+	damage = 60
+	flag = "bullet"
+
+/obj/item/projectile/bullet/rocketstd/on_hit(atom/target, blocked = 0)
+	..()
+	explosion(target, -1, 0, 2, 1, 0, flame_range = 3)
+	return 1
+
+/obj/item/projectile/bullet/rockethe
+	name ="Rocket"
+	desc = "Boom"
+	icon_state= "rocketblue"
+	damage = 60
+	flag = "bullet"
+
+/obj/item/projectile/bullet/rockethe/on_hit(atom/target, blocked = 0)
+	..()
+	explosion(target,1,2,4,flame_range = 4)
+	return 1
+
+/obj/item/projectile/bullet/rocketheat
+	name ="Rocket"
+	desc = "Boom"
+	icon_state= "rocketheat"
+	damage = 300
+	flag = "bullet"
+
+/obj/item/projectile/bullet/rocketheat/on_hit(atom/target, blocked = 0)
+	..()
+	explosion(target, -1, 0, 2, 1, 0, flame_range = 0)
+	return 1
+
+/obj/item/projectile/bullet/rocketemp
+	name ="Rocket"
+	desc = "Boom"
+	icon_state= "rocketemp"
+	damage = 60
+	flag = "bullet"
+
+/obj/item/projectile/bullet/rocketemp/on_hit(atom/target, blocked = 0)
+	..()
+	empulse(target, 3, 6)
+	return 1
+
 /obj/item/projectile/temp
 	name = "temperature beam"
 	icon_state = "temp_4"
