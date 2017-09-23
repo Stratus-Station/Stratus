@@ -7,7 +7,7 @@
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
 	flags = OPENCONTAINER
-	consume_sound = 'sound/items/drink.ogg'
+	consume_sound = list('sound/items/drink.ogg','sound/items/drink2.ogg','sound/items/drink3.ogg')
 	possible_transfer_amounts = list(5,10,15,20,25,30,50)
 	volume = 50
 	burn_state = FIRE_PROOF
