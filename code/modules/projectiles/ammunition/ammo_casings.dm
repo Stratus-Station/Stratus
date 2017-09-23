@@ -289,6 +289,32 @@
 	projectile_type = /obj/item/missile
 	caliber = "rocket"
 
+/obj/item/ammo_casing/rocket2
+	name = "explosive rocket"
+	desc = "A high explosive designed to be fired from a launcher."
+	icon_state = "rocketplain"
+	projectile_type = /obj/item/projectile/bullet/rocketstd
+	caliber = "rocket2"
+
+/obj/item/ammo_casing/rocket2/emp
+	name = "emp rocket"
+	desc = "A specially rocket designed to be fired from a launcher."
+	icon_state = "rocketemp"
+	projectile_type = /obj/item/projectile/bullet/rocketemp
+
+/obj/item/ammo_casing/rocket2/he
+	name = "high explosive rocket"
+	desc = "A high explosive designed to be fired from a launcher."
+	icon_state = "rocketblue"
+	projectile_type = /obj/item/projectile/bullet/rockethe
+
+/obj/item/ammo_casing/rocket2/heat
+	name = "heat explosive rocket"
+	desc = "A high explosive designed to be fired from a launcher."
+	icon_state = "rocketheat"
+	projectile_type = /obj/item/projectile/bullet/rocketheat
+
+
 /obj/item/ammo_casing/caseless
 	desc = "A caseless bullet casing."
 
@@ -310,6 +336,26 @@
 	caliber = "40mm"
 	icon_state = "40mmHE"
 	projectile_type = /obj/item/projectile/bullet/a40mm
+
+/obj/item/ammo_casing/grenade
+	name = "flashbang shell"
+	desc = "A flashbang grenade that can only be activated once fired out of a grenade launcher."
+	caliber = "grenade"
+	icon_state = "grenadewhite"
+	projectile_type = /obj/item/projectile/bullet/reusable/flash
+
+/obj/item/ammo_casing/grenade/he
+	name = "HE shell"
+	desc = "A cased high explosive grenade that can only be activated once fired out of a grenade launcher."
+	icon_state = "grenadeblue"
+	projectile_type = /obj/item/projectile/bullet/a40mm
+
+/obj/item/ammo_casing/grenade/tear
+	name = "tear gas shell"
+	desc = "A tear gas grenade that can only be activated once fired out of a grenade launcher."
+	icon_state = "grenadered"
+	projectile_type = /obj/item/projectile/bullet/reusable/flash/tear
+
 
 /obj/item/ammo_casing/caseless/foam_dart
 	name = "foam dart"
