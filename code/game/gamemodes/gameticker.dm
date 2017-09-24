@@ -42,6 +42,8 @@ var/round_start_time = 0
 	'sound/music/THUNDERDOME.ogg',\
 	'sound/music/space.ogg',\
 	'sound/music/Title1.ogg',\
+	'sound/music/bootes.ogg',\
+	'sound/music/hydra.ogg',\
 	'sound/music/Title2.ogg',\
 	'sound/music/Title3.ogg',)
 	do
