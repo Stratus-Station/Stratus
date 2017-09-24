@@ -132,6 +132,48 @@
 	icon_state = "starkist"
 	list_reagents = list("brownstar" = 30)
 
+/obj/item/weapon/reagent_containers/food/drinks/cans/mangorinehardt
+	name = "Mango Rinehardt"
+	desc = "Mango Rinehardt, the thinking man's pop!"
+	icon_state = "mangorine"
+	list_reagents = list("mangorinehardt" = 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/starmansparkle
+	name = "Starman Sparkle"
+	desc = "Something about a starman waiting in the sky, how suiting. The text reads about having a unique flavour never seen before."
+	icon_state = "starman"
+	list_reagents = list("starmansparkle" = 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/barrysredkola
+	name = "Barry's Red Kola"
+	desc = "What better way to enjoy Red Kola than the real thing, the real red kola. Barry's Red Kola."
+	icon_state = "redkola"
+	list_reagents = list("barryredkola" = 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/alohacoe
+	name = "Aloha Coe"
+	desc = "Made from authentic space coconuts grown under authentic space sunshine."
+	icon_state = "aloha"
+	list_reagents = list("alohacoconut" = 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/mingusdew
+	name = "Mingus Dew"
+	desc = "Gimme my Mingus Dew! The small print says something about it not being related to a mountain, weird."
+	icon_state = "mingusdew"
+	list_reagents = list("mingussoda" = 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/blurredlimes
+	name = "Blurred Limes"
+	desc = "Zesty, tasty and part of your five a day, probably. Come to think of it, all that carbonated drink will be doing wonders for your body.."
+	icon_state = "blurredlimes"
+	list_reagents = list("blurredlimejuice" = 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/queenshaven
+	name = "Queen's Haven"
+	desc = "Made from the finest cows, harvested in the perfect biodome enviroment to produce the highest quality milk, atleast that's what the label says."
+	icon_state = "queens"
+	list_reagents = list("queenmilk" = 30)
+
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
 	name = "Space-Up"
 	desc = "Tastes like a hull breach in your mouth."
