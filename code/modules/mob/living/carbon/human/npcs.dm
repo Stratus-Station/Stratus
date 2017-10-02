@@ -8,6 +8,6 @@
 /mob/living/carbon/human/monkey/punpun/New()
 	..()
 	spawn(1)
-		name = "Pun Pun"
+		name = "Plumpers"
 		real_name = name
 		equip_to_slot(new /obj/item/clothing/under/punpun(src), slot_w_uniform)

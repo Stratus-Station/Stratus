@@ -1,7 +1,7 @@
 //Medbot
 /mob/living/simple_animal/bot/medbot
 	name = "\improper Medibot"
-	desc = "A little medical robot. He looks somewhat underwhelmed."
+	desc = "A small little medibot with a cute face on it, wear and tear has clearly got to him."
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "medibot0"
 	density = 0
@@ -256,7 +256,7 @@
 /mob/living/simple_animal/bot/medbot/process_scan(mob/living/carbon/human/H)
 	if(buckled)
 		if((last_warning + 300) < world.time)
-			speak("<span class='danger'>Movement restrained! Unit on standby!</span>")
+			speak("<span class='danger'>Pa-a-thfinding errRror! Unit on stas-s-standby!</span>")
 			playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 			last_warning = world.time
 		return
@@ -269,7 +269,7 @@
 	if(assess_patient(H))
 		last_found = world.time
 		if((last_newpatient_speak + 300) < world.time) //Don't spam these messages!
-			var/message = pick("Hey, [H.name]! Hold on, I'm coming.","Wait [H.name]! I want to help!","[H.name], you appear to be injured!")
+			var/message = pick("[H.name] y-Your pe-r-r-formance appEars to be s-s-suboptimal.","WaiAiiiiTTt [H.name]! I want to-o-o HeEHelp!","[H.name], yoOoou apP-^&*ear to be innJurrrrnjured!")
 			speak(message)
 			last_newpatient_speak = world.time
 		return H
@@ -302,7 +302,7 @@
 
 	if(!patient)
 		if(!shut_up && prob(1))
-			var/message = pick("Radar, put a mask on!","There's always a catch, and it's the best there is.","I knew it, I should've been a plastic surgeon.","What kind of medbay is this? Everyone's dropping like dead flies.","Delicious!")
+			var/message = pick("Ra--a-adarrrrr, pu--t a mask on!","Ther-re-re-re's always a catch, aaaaa!%^*dNnd it's the bes-st there is.","I kne....w it, I should've been a-%£%&* plastic surrrrrrr...gzzgeon.","I-IzI-I hope you h..av--e a plesant day-ay-ay.","Who chose these colourss..s.s.%$? I don’t like them one bit-it-it.","An apple-szeeet... a day keeps Mee>E.. away","What kind of med-d-d-d-ZzzET?!bay is this? Everyone's dropping like D>E??A..d flies-s-szze.","C-Clean..NN>N>N> those blOodd-d-stains coNnnnnsarn it.")
 			speak(message)
 		var/scan_range = (stationary_mode ? 1 : DEFAULT_SCAN_RANGE) //If in stationary mode, scan range is limited to adjacent patients.
 		patient = scan(/mob/living/carbon/human, oldpatient, scan_range)
@@ -437,7 +437,7 @@
 		return
 
 	if(C.stat == 2)
-		var/death_message = pick("No! NO!","Live, damnit! LIVE!","I...I've never lost a patient before. Not today, I mean.")
+		var/death_message = pick("L-_LIFe Signs failed>>SUBject-d-d expired.","LiV--E-E-E damnit, LiVVVV-gzzeEe!","I...I've never-r...r. lost a PATEEEEI£@^%ient before. Not today, I mean-n-n-n-n.","Ano?TJER paiteeeent lost, I hope I am not downgrade-d-d-d$% for this.")
 		speak(death_message)
 		oldpatient = patient
 		soft_reset()
@@ -486,7 +486,7 @@
 					break
 
 	if(!reagent_id) //If they don't need any of that they're probably cured!
-		var/message = pick("All patched up!","An apple a day keeps me away.","Feel better soon!")
+		var/message = pick("M-ME&^%edical aid applied-d","P-PleaseZzs% avoid harms way-ay-ay&*","T-t-thank you for cOmplyiiiiiying with my medic-cal aid")
 		speak(message)
 		bot_reset()
 		return
@@ -576,7 +576,7 @@
 	if((skin == "bezerk"))
 		return
 	var/area/location = get_area(src)
-	speak("Medical emergency! [crit_patient ? "<b>[crit_patient]</b>" : "A patient"] is in critical condition at [location]!", radio_channel)
+	speak("MedI*%£cal emEmergency [crit_patient ? "<b>[crit_patient]</b>" : "A patient"] is-snN in critical-l Coono-ndition at [location]!", radio_channel)
 	declare_cooldown = 1
 	spawn(200) //Twenty seconds
 		declare_cooldown = 0

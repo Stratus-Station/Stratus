@@ -27,10 +27,10 @@
 	var/mob/living/simple_animal/mouse/movement_target
 	var/eats_mice = 1
 
-//RUNTIME IS ALIVE! SQUEEEEEEEE~
+//Kirby lives, run cowards.
 /mob/living/simple_animal/pet/cat/Runtime
-	name = "Runtime"
-	desc = "GCAT"
+	name = "Kirby"
+	desc = "It's Kirby, the CMO's pet."
 	icon_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"

@@ -4,7 +4,7 @@
 
 /mob/living/simple_animal/hostile/hivebot
 	name = "Hivebot"
-	desc = "A small robot"
+	desc = "A menacing looking Bug-like Robot"
 	icon = 'icons/mob/hivebot.dmi'
 	icon_state = "basic"
 	icon_living = "basic"
@@ -24,12 +24,12 @@
 	speak_emote = list("states")
 	gold_core_spawnable = CHEM_MOB_SPAWN_HOSTILE
 	loot = list(/obj/effect/decal/cleanable/blood/gibs/robot)
-	deathmessage = "blows apart!"
+	deathmessage = "shudders and collapses before exploding into a mangled mess of mechanical parts."
 	del_on_death = 1
 
 /mob/living/simple_animal/hostile/hivebot/range
 	name = "Hivebot"
-	desc = "A smallish robot, this one is armed!"
+	desc = "A menacing bug-like robot, this one is armed with some sort of alien firearm!"
 	ranged = 1
 	retreat_distance = 5
 	minimum_distance = 5
@@ -42,7 +42,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	name = "Strong Hivebot"
-	desc = "A robot, this one is armed and looks tough!"
+	desc = "A menacing robot, this one is armed and looks tough!"
 	health = 80
 	maxHealth = 80
 	ranged = 1
@@ -55,7 +55,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/tele//this still needs work
 	name = "Beacon"
-	desc = "Some odd beacon thing"
+	desc = "A strange looking beacon which emits an odd humming noise up close."
 	icon = 'icons/mob/hivebot.dmi'
 	icon_state = "def_radar-off"
 	icon_living = "def_radar-off"

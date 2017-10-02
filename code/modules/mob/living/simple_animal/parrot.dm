@@ -677,15 +677,25 @@
  * Sub-types
  */
 /mob/living/simple_animal/parrot/Poly
-	name = "Poly"
-	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	name = "Hephaestus"
+	desc = "Hephaestus the poorly named Parrot. An expert on quantum cracker theory."
 	clean_speak = list(
-		"Poly wanna cracker!",
+		"Squuaaaaaaaaaaak!",
+		"Vox are Pox!",
 		"Check the singlo, you chucklefucks!",
+		"Who's fucked up the damn pipes, you shits!",
+		"Hephy wanna cracker!",
+		"We might as well be swimming in piss, how did you fuck up the pipes so bad?!",
+		"DON'T WEAR A RADIATION SUIT THEN FUCKER ENJOY THE NEW ARM.",
+		"WE ARE HAVING A GODDAMN MELTDOWN AND YOU FUCKERS ARE IN THE BAR?",
 		"Check the tesla, you shits!",
-		"STOP HOT-WIRING THE ENGINE, FUCKING CHRIST!",
-		"Wire the solars, you lazy bums!",
+		"THE ENGINE IS HOTWIRED, OH CHRIST!",
+		"Wire the solars, you damn tools!",
 		"WHO TOOK THE DAMN HARDSUITS?",
+		"I DON'T PAY YOU LOT TO STAND AROUND, SQUAWK!",
+		"CRYSTAL DELAMINATION IMMINENT!",
+		"THE WATER IS BROKE, AGAIN. IT'S LIKE LIVING IN A DAMN SLUM.",
+		"ATMOSPHERICS IS ON FIRE AGAIN, WHAT HAPPENED TO FIRE HAZARD?",
 		"OH GOD ITS FREE CALL THE SHUTTLE")
 	gold_core_spawnable = CHEM_MOB_SPAWN_INVALID
 
