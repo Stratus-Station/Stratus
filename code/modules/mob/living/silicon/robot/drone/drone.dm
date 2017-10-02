@@ -76,7 +76,7 @@
 	decompiler = locate(/obj/item/weapon/matter_decompiler) in src.module
 
 	//Some tidying-up.
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an Gamma Symbol with a title reading: 'Stratum Metallurgy, you can't make out the rest as it's covered in dust and oil.'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with a Gamma Symbol with a title reading: 'Stratum Metallurgy, you can't make out the rest as it's covered in dust and oil.'"
 	scanner.Grant(src)
 	update_icons()
 
