@@ -15,7 +15,7 @@
 	req_access = list(access_engine, access_robotics)
 	ventcrawler = 2
 	magpulse = 1
-	
+
 	default_language = "Drone"
 
 	// We need to keep track of a few module items so we don't need to do list operations
@@ -43,7 +43,7 @@
 	remove_language("Galactic Common")
 	add_language("Drone Talk", 1)
 	add_language("Drone", 1)
-	
+
 	// Disable the microphone wire on Drones
 	if(radio)
 		radio.wires.CutWireIndex(WIRE_TRANSMIT)
@@ -76,7 +76,7 @@
 	decompiler = locate(/obj/item/weapon/matter_decompiler) in src.module
 
 	//Some tidying-up.
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'Nanotrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an Gamma Symbol with a title reading: 'Stratum Metallurgy, you can't make out the rest as it's covered in dust and oil.'"
 	scanner.Grant(src)
 	update_icons()
 
