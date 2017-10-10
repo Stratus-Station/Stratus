@@ -214,12 +214,12 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 	if(W.flags & NOBLUDGEON)
 		return
 
-	if(handle_decon(W, user, is_fulltile()))
+	if(handle_decon(I, user, is_fulltile()))
 		return
 
-	if(W.damtype == BRUTE || W.damtype == BURN)
+	if(I.damtype == BRUTE || I.damtype == BURN)
 		user.changeNext_move(CLICK_CD_MELEE)
-		hit(W.force)
+		hit(I.force)
 		if(health <= 7)
 			anchored = 0
 			update_nearby_icons()
@@ -229,42 +229,42 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 	..()
 	return
 
-/obj/structure/window/proc/handle_decon(obj/item/weapon/W, mob/user, var/takes_time = FALSE)
+/obj/structure/window/proc/handle_decon(obj/item/I, mob/user, var/takes_time = FALSE)
 	//screwdriver
-	if(isscrewdriver(W))
-		playsound(loc, W.usesound, 75, 1)
+	if(isscrewdriver(I))
+		playsound(loc, I.usesound, 75, 1)
 		if(reinf)
 			if(state == 0)
 				if(takes_time)
 					to_chat(user, "<span class='notice'>You begin to [anchored ? "unfasten the frame from" : "fasten the frame to"] the floor.</span>")
-					if(!do_after(user, 20 * W.toolspeed, target = src))
+					if(!do_after(user, 20 * I.toolspeed, target = src))
 						return 1
 				anchored = !anchored
 				to_chat(user, (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>"))
 			if(state >= 1)
 				if(takes_time)
 					to_chat(user, "<span class='notice'>You begin to [(state == 1) ? "fasten the window to" : "unfasten the window from"] the frame.</span>")
-					if(!do_after(user, 20 * W.toolspeed, target = src))
+					if(!do_after(user, 20 * I.toolspeed, target = src))
 						return 1
 				state = 3 - state
 				to_chat(user, (state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>"))
 		else
 			if(takes_time)
 				to_chat(user, "<span class='notice'>You begin to [anchored ? "unfasten the frame from" : "fasten the frame to"] the floor.</span>")
-				if(!do_after(user, 20 * W.toolspeed, target = src))
+				if(!do_after(user, 20 * I.toolspeed, target = src))
 					return 1
 			anchored = !anchored
 			update_nearby_icons()
 			to_chat(user, (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>"))
 		return 1
 	//crowbar
-	if(iscrowbar(W))
+	if(iscrowbar(I))
 		if(!reinf || state > 1)
 			return 0
-		playsound(loc, W.usesound, 75, 1)
+		playsound(loc, I.usesound, 75, 1)
 		if(takes_time)
 			to_chat(user, "<span class='notice'>You begin to pry the window [state ? "out of" : "in to"] the frame.</span>")
-			if(!do_after(user, 20 * W.toolspeed, target = src))
+			if(!do_after(user, 20 * I.toolspeed, target = src))
 				return 1
 		state = 1 - state
 		to_chat(user, (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>"))
@@ -273,10 +273,10 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 	if(iswrench(W))
 		if(anchored)
 			return 0
-		playsound(loc, W.usesound, 50, 1)
+		playsound(loc, I.usesound, 50, 1)
 		if(takes_time)
 			to_chat(user, "<span class='notice'>You begin to disassemble [src]...</span>")
-			if(!do_after(user, 20 * W.toolspeed, target = src))
+			if(!do_after(user, 20 * I.toolspeed, target = src))
 				return 1
 		for(var/i=0;i<sheets;i++)
 			var/obj/item/stack/sheet/NS = new glasstype(get_turf(src))	//glass types don't share a base tye of /glass, so this didn't work for plasma glass
