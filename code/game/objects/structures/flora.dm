@@ -9,6 +9,8 @@
 	density = 1
 	pixel_x = -16
 	layer = 9
+	var/icon_count = 1
+	var/icon_prefix
 	var/fruit = null
 	var/fruit_yield = 0
 	var/wood = /obj/item/weapon/grown/log
@@ -17,6 +19,11 @@
 	var/chops_needed = 6 //Number of chops needed to fell it.
 	var/fell_tool = /obj/item/weapon/hatchet //Item needed to fell it.
 	var/fruitless //Icon_state to use when tree runs out of fruit.
+
+/obj/structure/flora/tree/New()
+	..()
+	icon_state = "[icon_prefix][rand(1, icon_count)]"
+
 
 /obj/structure/flora/tree/attackby(var/obj/item/I, mob/user as mob)
 	if(istype(I, fell_tool))
@@ -66,11 +73,10 @@
 /obj/structure/flora/tree/pine
 	name = "pine tree"
 	icon = 'icons/obj/flora/pinetrees.dmi'
+	icon_prefix = "pine_"
 	icon_state = "pine_1"
+	icon_count = 3
 
-/obj/structure/flora/tree/pine/New()
-	..()
-	icon_state = "pine_[rand(1, 3)]"
 
 /obj/structure/flora/tree/pine/xmas
 	name = "xmas tree"
@@ -83,19 +89,19 @@
 
 /obj/structure/flora/tree/dead
 	icon = 'icons/obj/flora/deadtrees.dmi'
+	icon_prefix = "tree_"
 	icon_state = "tree_1"
+	icon_count = 6
 
-/obj/structure/flora/tree/dead/New()
-	..()
-	icon_state = "tree_[rand(1, 6)]"
 
 /obj/structure/flora/tree/palm
 	icon = 'icons/misc/beach2.dmi'
+	icon_prefix = "palm"
 	icon_state = "palm1"
+	icon_count = 2
 
 /obj/structure/flora/tree/palm/New()
 	..()
-	icon_state = pick("palm1","palm2")
 	pixel_x = 0
 
 /obj/structure/flora/tree/apple
@@ -104,6 +110,10 @@
 	icon_state = "apple"
 	fruit = /obj/item/weapon/reagent_containers/food/snacks/grown/apple
 	fruit_yield = 10
+
+/obj/structure/flora/tree/apple/New()
+	..()
+	icon_state = "apple"
 
 //grass
 /obj/structure/flora/grass
