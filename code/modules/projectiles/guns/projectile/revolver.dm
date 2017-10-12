@@ -7,7 +7,7 @@
 
 /obj/item/weapon/gun/projectile/revolver/New()
 	..()
-	if(!istype(magazine, /obj/item/ammo_box/magazine/internal/cylinder))
+	if(!istype(magazine, /obj/item/ammo_box/magazine/internal/cylinder) || magazine.max_ammo < 2)
 		verbs -= /obj/item/weapon/gun/projectile/revolver/verb/spin
 
 /obj/item/weapon/gun/projectile/revolver/chamber_round(var/spin = 1)
