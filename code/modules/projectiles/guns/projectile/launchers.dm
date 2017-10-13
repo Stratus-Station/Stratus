@@ -21,7 +21,7 @@
 	name = "grenade launcher"
 	icon_state = "grenadelauncher"
 	item_state = "gun"
-	mag_type = /obj/item/ammo_box/magazine/internal/grenadelauncher2
+	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/grenadelauncher2
 	fire_sound = 'sound/weapons/grenadelaunch.ogg'
 	w_class = WEIGHT_CLASS_NORMAL
 
