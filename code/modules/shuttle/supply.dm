@@ -14,7 +14,7 @@
 	id = "supply"
 	callTime = 1200
 
-	dir = 8
+	dir = 1
 	travelDir = 90
 	width = 12
 	dwidth = 5

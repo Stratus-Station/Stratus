@@ -45,7 +45,7 @@ var/list/ai_verbs_default = list(
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
 	see_in_dark = 8
 	can_strip = 0
-	var/list/network = list("SS13","Telecomms","Research Outpost","Mining Outpost")
+	var/list/network = list("Stratus","Telecomms","Mining Outpost")
 	var/obj/machinery/camera/current = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -197,7 +197,7 @@ var/list/ai_verbs_default = list(
 
 	builtInCamera = new /obj/machinery/camera/portable(src)
 	builtInCamera.c_tag = name
-	builtInCamera.network = list("SS13")
+	builtInCamera.network = list("Stratus")
 
 	ai_list += src
 	shuttle_caller_list += src
