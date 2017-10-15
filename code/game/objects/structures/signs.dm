@@ -126,6 +126,56 @@
 	desc = "A warning sign which reads 'NO SMOKING'"
 	icon_state = "nosmoking2"
 
+/obj/structure/sign/dogpoker
+ 	name = "\improper dog painting"
+ 	desc = "A painting of some dogs playing poker, wonder if Ian is in it."
+ 	icon_state = "dogpoker"
+
+/obj/structure/sign/starry
+ 	name = "\improper beautiful landscape painting"
+ 	desc = "A beautiful painting with swirling stars and a twisting skyline."
+ 	icon_state = "starry"
+
+/obj/structure/sign/snow
+ 	name = "\improper snowy painting."
+ 	desc = "A calming picture of a cabin surronded by velvety snow."
+ 	icon_state = "snowy"
+
+/obj/structure/sign/gogh
+ 	name = "\improper portrait"
+ 	desc = "An impressive self-portrait of an artist, dated many centuries ago."
+ 	icon_state = "gogh"
+
+/obj/structure/sign/bigwave
+ 	name = "\improper tidal wave painting"
+ 	desc = "A painting of a huge wave, written in an old ancient language you cannot seem to understand."
+ 	icon_state = "wave"
+
+/obj/structure/sign/desert
+ 	name = "\improper desert painting"
+ 	desc = "A picture of what appears to be bones cast out in the desert, it looks quite melancholy and haunting.."
+ 	icon_state = "desert"
+
+/obj/structure/sign/stillife
+	name = "\improper still-life painting"
+	desc = "A painting that shows what appears to be fruit on a table in great detail."
+	icon_state = "still"
+
+/obj/structure/sign/persistance
+	name = "\improper surreal painting"
+	desc = "A surreal painting focusing on clocks melting into the landscape, almost trippy to look at."
+	icon_state = "persistance"
+
+/obj/structure/sign/sonofman
+	name = "\improper surreal portrait"
+	desc = "A strange surreal painting of a man with an apple for a face. Sounds like something Botany would do."
+	icon_state = "sonman"
+
+/obj/structure/sign/scream
+ 	name = "\improper eerie painting"
+ 	desc = "An odd picture showing a figure with his hands clasped over his face, screaming in a cacophony of agony, disturbing."
+ 	icon_state = "thescream"
+
 /obj/structure/sign/redcross
 	name = "medbay"
 	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here.'"
