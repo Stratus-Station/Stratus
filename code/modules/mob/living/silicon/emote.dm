@@ -13,7 +13,7 @@
 		//Cooldown-inducing emotes
 		if("scream", "screams")
 			on_CD = handle_emote_CD(50) //longer cooldown
-		if("ping","pings","buzz","buzzs","buzzes","beep","beeps","yes","no", "buzz2")
+		if("ping","pings","buzz","buzzs","buzzes","beep","beeps","yes","no","dweep","dwoop","buzz2")
 			//halt is exempt because it's used to stop criminal scum //WHOEVER THOUGHT THAT WAS A GOOD IDEA IS GOING TO GET SHOT.
 			on_CD = handle_emote_CD()			//proc located in code\modules\mob\emote.dm
 		//Everything else, including typos of the above emotes
@@ -37,6 +37,23 @@
 
 			message = "<B>[src]</B> buzzes[M ? " at [M]" : ""]."
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+			m_type = 2
+
+		if("dwoop","dweep")
+			var/M = null
+			if(param)
+				for(var/mob/A in view(null, null))
+					if(param == A.name)
+						M = A
+						break
+			if(!M)
+				param = null
+
+			if(param)
+				message = "<B>[src]</B> dwoops at [param]."
+			else
+				message = "<B>[src]</B> dwoops."
+			playsound(src.loc, 'sound/machines/dwoop.ogg', 50, 0)
 			m_type = 2
 
 		if("beep","beeps")
