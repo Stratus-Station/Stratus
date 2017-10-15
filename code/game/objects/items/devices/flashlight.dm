@@ -17,19 +17,19 @@
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
-		playsound(src, 'sound/weapons/flashlighton.ogg', 15, 1)
 	else
 		icon_state = initial(icon_state)
 		set_light(0)
-		playsound(src, 'sound/weapons/flashlightoff.ogg', 15, 1)
 
 /obj/item/device/flashlight/proc/update_brightness(var/mob/user = null)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
+		playsound(src, 'sound/weapons/flashlighton.ogg', 15, 1)
 	else
 		icon_state = initial(icon_state)
 		set_light(0)
+		playsound(src, 'sound/weapons/flashlightoff.ogg', 15, 1)
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	if(!isturf(user.loc))
@@ -37,7 +37,6 @@
 
 		return 0
 	on = !on
-	playsound(user, 'sound/weapons/empty.ogg', 100, 1)
 	update_brightness(user)
 	for(var/X in actions)
 		var/datum/action/A = X
