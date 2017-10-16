@@ -74,8 +74,8 @@
 	name = "make cavity space"
 	allowed_tools = list(
 	/obj/item/weapon/surgicaldrill = 100,	\
-	/obj/item/weapon/pen = 75,	\
-	/obj/item/stack/rods = 50
+	/obj/item/weapon/pen = 90,	\
+	/obj/item/stack/rods = 60
 	)
 
 	time = 54
@@ -99,9 +99,9 @@
 	allowed_tools = list(
 	/obj/item/weapon/scalpel/laser = 100, \
 	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/cigarette = 75,	\
-	/obj/item/weapon/lighter = 50,			\
-	/obj/item/weapon/weldingtool = 25
+	/obj/item/clothing/mask/cigarette = 90,	\
+	/obj/item/weapon/lighter = 60,			\
+	/obj/item/weapon/weldingtool = 30
 	)
 
 	time = 24
