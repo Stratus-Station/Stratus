@@ -85,7 +85,7 @@
 /proc/get_pain_modifier(mob/living/carbon/human/M) //returns modfier to make surgery harder if patient is conscious and feels pain
 	if(M.stat && !M.sleeping) //stat=0 if CONSCIOUS, 1=UNCONSCIOUS and 2=DEAD. Operating on dead people is easy, too. Just sleeping won't work, though.
 		return 1
-	if(NO_PAIN in M.species.species_traits)//if you don't feel pain, you can hold still
+	if(M.species.flags & NO_PAIN)//if you don't feel pain, you can hold still
 		return 1
 	if(M.reagents.has_reagent("hydrocodone"))//really good pain killer
 		return 0.99
