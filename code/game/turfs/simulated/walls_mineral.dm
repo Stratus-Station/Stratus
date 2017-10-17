@@ -40,6 +40,26 @@
 	icon_state = "bananium"
 	sheet_type = /obj/item/stack/sheet/mineral/bananium
 	canSmoothWith = list(/turf/simulated/wall/mineral/bananium, /obj/structure/falsewall/mineral/bananium)
+	var/spam_flag = 0
+
+/turf/simulated/wall/mineral/bananium/Bumped(atom/user)
+	honk()
+	..()
+
+/turf/simulated/wall/mineral/bananium/attackby(obj/item/weapon/W, mob/user, params)
+	honk()
+	..()
+
+/turf/simulated/wall/mineral/bananium/attack_hand(mob/user)
+	honk()
+	..()
+
+/turf/simulated/wall/mineral/bananium/proc/honk()
+	if(!spam_flag)
+		spam_flag = 1
+		playsound(src,'sound/items/bikehorn.ogg', 50, 1)
+		spawn(20)
+			spam_flag = 0
 
 /turf/simulated/wall/mineral/sandstone
 	name = "sandstone wall"
