@@ -333,7 +333,7 @@
 					S.use(2)
 					to_chat(user, "<span class='notice'>You add the plating.</span>")
 					var/turf/Tsrc = get_turf(src)
-					Tsrc.ChangeTurf(text2path("/turf/simulated/wall/mineral/[M]"))
+					Tsrc.ChangeTurf(text2path("/turf/simulated/wall/[M]"))
 					for(var/turf/simulated/wall/mineral/X in Tsrc.loc)
 						if(X)
 							X.add_hiddenprint(usr)
