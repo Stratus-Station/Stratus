@@ -14,7 +14,7 @@ z7 = empty
 
 #if !defined(MAP_FILE)
 
-        #include "StratusGamma0.4.7.7WorksAsIntended.dmm"
+        #include "StratusGamma0.4.7.8SmashThatLikeButton.dmm"
         #include "map_files\stratus\z2.dmm"
         #include "map_files\stratus\z3.dmm"
         #include "map_files\stratus\z4.dmm"
