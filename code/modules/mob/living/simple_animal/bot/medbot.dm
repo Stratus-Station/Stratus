@@ -489,16 +489,16 @@
 //Check to see if the reagent actually treats the corresponding damage type.
 	switch(damagetype)
 		if(BRUTE)
-			if(brute_healing_chems_injest.Find(reagent_id))
+			if(brute_healing_chems_ingest.Find(reagent_id))
 				return TRUE
 		if(BURN)
-			if(burn_healing_chems_injest.Find(reagent_id))
+			if(burn_healing_chems_ingest.Find(reagent_id))
 				return TRUE
 		if(OXY)
-			if(oxy_healing_chems_injest.Find(reagent_id))
+			if(oxy_healing_chems_ingest.Find(reagent_id))
 				return TRUE
 		if(TOX)
-			if(tox_healing_chems_injest.Find(reagent_id))
+			if(tox_healing_chems_ingest.Find(reagent_id))
 				return TRUE
 	return FALSE
 
@@ -548,11 +548,11 @@
 	switch(skin)
 		if("ointment")
 			new /obj/item/weapon/storage/firstaid/fire/empty(Tsec)
-		if(TOX)
+		if("tox")
 			new /obj/item/weapon/storage/firstaid/toxin/empty(Tsec)
 		if("o2")
 			new /obj/item/weapon/storage/firstaid/o2/empty(Tsec)
-		if(BRUTE)
+		if("brute")
 			new /obj/item/weapon/storage/firstaid/brute/empty(Tsec)
 		if("adv")
 			new /obj/item/weapon/storage/firstaid/adv/empty(Tsec)
