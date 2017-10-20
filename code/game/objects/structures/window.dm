@@ -179,15 +179,23 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 	attack_generic(user, rand(10, 15))
 
 
+<<<<<<< HEAD
 /obj/structure/window/attackby(obj/item/W as obj, mob/living/user as mob, params)
 	if(!istype(W))
 		return//I really wish I did not need this
 	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
+=======
+/obj/structure/window/attackby(obj/item/I as obj, mob/living/user as mob, params)
+	if(!istype(I))
+		return//I really wish I did not need this
+	if(istype(I, /obj/item/weapon/grab) && get_dist(src,user)<2)
+		var/obj/item/weapon/grab/G = I
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 		if(istype(G.affecting,/mob/living))
 			var/mob/living/M = G.affecting
 			var/state = G.state
-			qdel(W)	//gotta delete it here because if window breaks, it won't get deleted
+			qdel(I)	//gotta delete it here because if window breaks, it won't get deleted
 			switch(state)
 				if(1)
 					M.visible_message("<span class='warning'>[user] slams [M] against \the [src]!</span>")
@@ -210,13 +218,21 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 					M.apply_damage(30)
 					hit(75)
 			return
+	if(I.flags & NOBLUDGEON)
+		return
 
+<<<<<<< HEAD
 	if(W.flags & NOBLUDGEON)
 		return
 
 	if(handle_decon(I, user, is_fulltile()))
 		return
 
+=======
+	if(handle_decon(I, user, is_fulltile()))
+		return
+
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 	if(I.damtype == BRUTE || I.damtype == BURN)
 		user.changeNext_move(CLICK_CD_MELEE)
 		hit(I.force)
@@ -227,37 +243,58 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 	else
 		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 	..()
+<<<<<<< HEAD
 	return
 
 /obj/structure/window/proc/handle_decon(obj/item/I, mob/user, var/takes_time = FALSE)
 	//screwdriver
 	if(isscrewdriver(I))
 		playsound(loc, I.usesound, 75, 1)
+=======
+
+/obj/structure/window/proc/handle_decon(obj/item/weapon/W, mob/user, var/takes_time = FALSE)
+	//screwdriver
+	if(isscrewdriver(W))
+		playsound(loc, W.usesound, 75, 1)
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 		if(reinf)
 			if(state == 0)
 				if(takes_time)
 					to_chat(user, "<span class='notice'>You begin to [anchored ? "unfasten the frame from" : "fasten the frame to"] the floor.</span>")
+<<<<<<< HEAD
 					if(!do_after(user, 20 * I.toolspeed, target = src))
+=======
+					if(!do_after(user, 20 * W.toolspeed, target = src))
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 						return 1
 				anchored = !anchored
 				to_chat(user, (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>"))
 			if(state >= 1)
 				if(takes_time)
 					to_chat(user, "<span class='notice'>You begin to [(state == 1) ? "fasten the window to" : "unfasten the window from"] the frame.</span>")
+<<<<<<< HEAD
 					if(!do_after(user, 20 * I.toolspeed, target = src))
+=======
+					if(!do_after(user, 20 * W.toolspeed, target = src))
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 						return 1
 				state = 3 - state
 				to_chat(user, (state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>"))
 		else
 			if(takes_time)
 				to_chat(user, "<span class='notice'>You begin to [anchored ? "unfasten the frame from" : "fasten the frame to"] the floor.</span>")
+<<<<<<< HEAD
 				if(!do_after(user, 20 * I.toolspeed, target = src))
+=======
+				if(!do_after(user, 20 * W.toolspeed, target = src))
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 					return 1
 			anchored = !anchored
 			update_nearby_icons()
 			to_chat(user, (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>"))
 		return 1
 	//crowbar
+<<<<<<< HEAD
 	if(iscrowbar(I))
 		if(!reinf || state > 1)
 			return 0
@@ -265,6 +302,15 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 		if(takes_time)
 			to_chat(user, "<span class='notice'>You begin to pry the window [state ? "out of" : "in to"] the frame.</span>")
 			if(!do_after(user, 20 * I.toolspeed, target = src))
+=======
+	if(iscrowbar(W))
+		if(!reinf || state > 1)
+			return 0
+		playsound(loc, W.usesound, 75, 1)
+		if(takes_time)
+			to_chat(user, "<span class='notice'>You begin to pry the window [state ? "out of" : "in to"] the frame.</span>")
+			if(!do_after(user, 20 * W.toolspeed, target = src))
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 				return 1
 		state = 1 - state
 		to_chat(user, (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>"))
@@ -273,10 +319,17 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 	if(iswrench(W))
 		if(anchored)
 			return 0
+<<<<<<< HEAD
 		playsound(loc, I.usesound, 50, 1)
 		if(takes_time)
 			to_chat(user, "<span class='notice'>You begin to disassemble [src]...</span>")
 			if(!do_after(user, 20 * I.toolspeed, target = src))
+=======
+		playsound(loc, W.usesound, 50, 1)
+		if(takes_time)
+			to_chat(user, "<span class='notice'>You begin to disassemble [src]...</span>")
+			if(!do_after(user, 20 * W.toolspeed, target = src))
+>>>>>>> 8765a3d084dba9dd9a01f92fc53a909460a49932
 				return 1
 		for(var/i=0;i<sheets;i++)
 			var/obj/item/stack/sheet/NS = new glasstype(get_turf(src))	//glass types don't share a base tye of /glass, so this didn't work for plasma glass
