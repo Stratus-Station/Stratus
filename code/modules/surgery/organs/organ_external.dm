@@ -753,13 +753,23 @@ Note that amputating the affected organ does in fact remove the infection from t
 				// Throw limb around.
 				if(src && istype(loc,/turf))
 					dropped_part.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
-					var/obj/effect/decal/cleanable/blood/gibs/G = (status & ORGAN_ROBOT) ? (new/obj/effect/decal/cleanable/blood/gibs/robot(get_turf(src))) : (new/obj/effect/decal/cleanable/blood/gibs(get_turf(src)))
+					var/obj/effect/decal/cleanable/blood/splatter/B = (status & ORGAN_ROBOT) ? (new/obj/effect/decal/cleanable/blood/gibs/robot(get_turf(src))) : (new/obj/effect/decal/cleanable/blood/gibs(get_turf(src)))
 					spawn()
-						G.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),15)
+						B.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),15)
 				dir = 2
 			return dropped_part
-		else
+		if(DROPLIMB_BURN)
 			qdel(src) // If you flashed away to ashes, YOU FLASHED AWAY TO ASHES
+			return null
+		if(DROPLIMB_BLUNT)
+			if(src && istype(loc,/turf))
+				var/obj/effect/decal/cleanable/blood/gibs/G = (status & ORGAN_ROBOT) ? (new/obj/effect/decal/cleanable/blood/gibs/robot(get_turf(src))) : (new/obj/effect/decal/cleanable/blood/gibs(get_turf(src)))
+				spawn()
+					G.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),15)
+				var/obj/effect/decal/cleanable/blood/splatter/B = (status & ORGAN_ROBOT) ? (new/obj/effect/decal/cleanable/blood/gibs/robot(get_turf(src))) : (new/obj/effect/decal/cleanable/blood/gibs(get_turf(src)))
+				spawn()
+					B.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),15)
+			qdel(src) //If you exploded in a shower of gore, YOU EXPLODED IN A SHOWER OF GORE
 			return null
 
 /****************************************************
