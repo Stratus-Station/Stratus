@@ -66,3 +66,10 @@ var/global/list/safe_chem_list = list("antihol", "charcoal", "epinephrine", "ins
 									  "omnizine", "stimulants", "synaptizine", "potass_iodide", "oculine", "mannitol", "styptic_powder",
 									  "spaceacillin", "salglu_solution", "sal_acid", "cryoxadone", "blood", "synthflesh", "hydrocodone",
 									  "mitocholide", "rezadone")
+
+//Lists of chems by what they heal for INGEST only
+
+var/global/list/brute_healing_chems_ingest = list("salglu_solution","atropine","sal_acid","omnizine","epinephrine")
+var/global/list/burn_healing_chems_ingest = list("salglu_solution","atropine","omnizine","epinephrine")
+var/global/list/oxy_healing_chems_ingest = list("salbutamol","atropine","perfluorodecalin","epinephrine")
+var/global/list/tox_healing_chems_ingest = list("charcoal","omnizine","pen_acid","epinephrine")
