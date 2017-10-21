@@ -753,6 +753,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				// Throw limb around.
 				if(src && istype(loc,/turf))
 					dropped_part.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+					var/obj/effect/decal/cleanable/blood/gibs/G = (status & ORGAN_ROBOT) ? (new/obj/effect/decal/cleanable/blood/gibs/robot(get_turf(src))) : (new/obj/effect/decal/cleanable/blood/gibs(get_turf(src)))
+					spawn()
+						G.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),15)
 				dir = 2
 			return dropped_part
 		else
