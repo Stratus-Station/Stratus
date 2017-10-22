@@ -408,7 +408,7 @@
 			patient_status |= REQ_TOX
 		if((C.getOxyLoss() >= (15 + heal_threshold)) && (!C.reagents.has_reagent(treatments[OXY])))
 			patient_status |= REQ_OXY
-		if ((C.health <= config.health_threshold_crit) && (!C.reagents.has_reagent(treatments["crit"])))
+		if ((C.inCritical()) && (!C.reagents.has_reagent(treatments["crit"])))
 			patient_status |= REQ_CRIT
 		return patient_status
 	else
@@ -524,6 +524,8 @@
 		dam += list(OXY = C.getOxyLoss())
 	if((patient_status & REQ_TOX) && !C.reagents.has_reagent(treatments[TOX]))
 		dam += list(TOX = C.getToxLoss())
+	if((patient_status & REQ_CRIT) && !C.reagents.has_reagent(treatments["crit"])
+		dam += list("crit" = C.getToxLoss() + C.getOxyLoss() + C.getBruteLoss() + C.getFireLoss()) //Always inject epinephrine first
 
 	var/highest = 0
 	var/highest_key
