@@ -524,7 +524,7 @@
 		dam += list(OXY = C.getOxyLoss())
 	if((patient_status & REQ_TOX) && !C.reagents.has_reagent(treatments[TOX]))
 		dam += list(TOX = C.getToxLoss())
-	if((patient_status & REQ_CRIT) && !C.reagents.has_reagent(treatments["crit"])
+	if((patient_status & REQ_CRIT) && !C.reagents.has_reagent(treatments["crit"]))
 		dam += list("crit" = C.getToxLoss() + C.getOxyLoss() + C.getBruteLoss() + C.getFireLoss()) //Always inject epinephrine first
 
 	var/highest = 0
