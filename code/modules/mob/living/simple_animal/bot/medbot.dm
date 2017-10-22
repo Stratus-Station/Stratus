@@ -609,3 +609,4 @@
 #undef REQ_TOX
 #undef REQ_OXY
 #undef REQ_VIRUS
+#undef REQ_CRIT
