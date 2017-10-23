@@ -408,7 +408,7 @@
 			patient_status |= REQ_TOX
 		if((C.getOxyLoss() >= (15 + heal_threshold)) && (!C.reagents.has_reagent(treatments[OXY])))
 			patient_status |= REQ_OXY
-		if ((C.inCritical()) && (!C.reagents.has_reagent(treatments["crit"])))
+		if ((C.InCritical()) && (!C.reagents.has_reagent(treatments["crit"])))
 			patient_status |= REQ_CRIT
 		return patient_status
 	else
