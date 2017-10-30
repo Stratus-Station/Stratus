@@ -14,7 +14,7 @@ z7 = empty
 
 #if !defined(MAP_FILE)
 
-        #include "StratusGamma0.4.7.8SmashThatLikeButton.dmm"
+        #include "StratusGamma0.4.7.9.1MinorUpdates.dmm"
         #include "map_files\stratus\z2.dmm"
         #include "map_files\stratus\z3.dmm"
         #include "map_files\stratus\z4.dmm"
@@ -22,7 +22,7 @@ z7 = empty
         #include "map_files\stratus\z6.dmm"
         #include "map_files\stratus\z7.dmm"
 
-        #define MAP_FILE "StratusGamma0.4.7.8SmashThatLikeButton.dmm"
+        #define MAP_FILE "StratusGamma0.4.7.9.1MinorUpdates.dmm"
         #define MAP_NAME "Stratus Station"
         #define MAP_TRANSITION_CONFIG list(\
 DECLARE_LEVEL(MAIN_STATION, CROSSLINKED, list(STATION_LEVEL,STATION_CONTACT,REACHABLE,AI_OK)),\
