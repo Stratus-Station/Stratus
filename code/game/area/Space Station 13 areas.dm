@@ -1128,6 +1128,20 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Central Command Docks"
 	icon_state = "centcom"
 
+//Human Resources
+
+/area/hr
+	name = "\improper Human Resources"
+	icon_state = "hr"
+
+/area/hr/ia
+	name = "\improper Internal Affairs"
+	icon_state = "ia"
+
+/area/hr/ialobby
+	name = "\improper Internal Affairs"
+	icon_state = "ialobby"
+
 //Crew
 
 /area/crew_quarters
