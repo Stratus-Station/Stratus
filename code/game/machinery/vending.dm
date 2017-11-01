@@ -42,7 +42,12 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
+	pass_flags = null
 
+	var/tippable = 1
+	var/tipped = 0
+	var/climbable = 0
+	var/mob/climber
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
 
@@ -146,11 +151,8 @@
 			product_records.Add(product)
 
 /obj/machinery/vending/Destroy()
-	qdel(wires) // qdel
-	wires = null
-	if(coin)
-		qdel(coin) // qdel
-		coin = null
+	QDEL_NULL(wires)
+	QDEL_NULL(coin)
 	return ..()
 
 /obj/machinery/vending/ex_act(severity)
@@ -221,8 +223,8 @@
 			if(PDA.id)
 				paid = pay_with_card(PDA.id)
 				handled = 1
-		else if(istype(I, /obj/item/weapon/spacecash))
-			var/obj/item/weapon/spacecash/C = I
+		else if(istype(I, /obj/item/stack/spacecash))
+			var/obj/item/stack/spacecash/C = I
 			paid = pay_with_cash(C, user)
 			handled = 1
 
@@ -233,11 +235,12 @@
 			nanomanager.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
-	if(default_unfasten_wrench(user, I, time = 60))
+	if(default_unfasten_wrench(user, I, time = 60)// && !tipped)
 		return
+//	else to_chat(user, "<span class='warning'>You can't secure \the [src] while it is tipped over!</span>") these parts are meant to stop you anchoring it if it is tipped
 
 	if(istype(I, /obj/item/weapon/screwdriver) && anchored)
-		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		playsound(loc, I.usesound, 50, 1)
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance panel.")
 		overlays.Cut()
@@ -264,7 +267,7 @@
 		I.loc = src
 		coin = I
 		categories |= CAT_COIN
-		to_chat(user, "\blue You insert the [I] into the [src]")
+		to_chat(user, "<span class='notice'>You insert the [I] into the [src]</span>")
 		nanomanager.update_uis(src)
 		return
 	else if(istype(I, refill_canister) && refill_canister != null)
@@ -297,8 +300,8 @@
  *
  *  usr is the mob who gets the change.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
-	if(currently_vending.price > cashmoney.get_total())
+/obj/machinery/vending/proc/pay_with_cash(obj/item/stack/spacecash/cashmoney, mob/user)
+	if(currently_vending.price > cashmoney.amount)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
 		to_chat(usr, "[bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
@@ -310,12 +313,7 @@
 	// just assume that all spacecash that's not something else is a bill
 
 	visible_message("<span class='info'>[usr] inserts a credit chip into [src].</span>")
-	var/left = cashmoney.get_total() - currently_vending.price
-	usr.unEquip(cashmoney)
-	qdel(cashmoney)
-
-	if(left)
-		dispense_cash(left, src.loc, user)
+	cashmoney.use(currently_vending.price)
 
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
@@ -389,10 +387,13 @@
 	T.time = worldtime2text()
 	vendor_account.transaction_log.Add(T)
 
-/obj/machinery/vending/attack_ai(mob/user as mob)
+/obj/machinery/vending/attack_ai(mob/user)
 	return attack_hand(user)
 
-/obj/machinery/vending/attack_hand(mob/user as mob)
+/obj/machinery/vending/attack_ghost(mob/user)
+	return attack_hand(user)
+
+/obj/machinery/vending/attack_hand(mob/user)
 	if(stat & (BROKEN|NOPOWER))
 		return
 
@@ -465,7 +466,7 @@
 
 		usr.put_in_hands(coin)
 		coin = null
-		to_chat(usr, "\blue You remove the [coin] from the [src]")
+		to_chat(usr, "<span class='notice'>You remove [coin] from [src].</span>")
 		categories &= ~CAT_COIN
 
 	if(href_list["pay"])
@@ -479,127 +480,127 @@
 			else if(istype(usr.get_active_hand(), /obj/item/weapon/card))
 				paid = pay_with_card(usr.get_active_hand())
 				handled = 1
+			else if(usr.can_admin_interact())
+				paid = 1
+				handled = 1
 			if(paid)
-				src.vend(currently_vending, usr)
+				vend(currently_vending, usr)
 				return
 			else if(handled)
 				nanomanager.update_uis(src)
 				return // don't smack that machine with your 2 credits
 
-	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
-		if((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
+	if((href_list["vend"]) && vend_ready && !currently_vending)
 
-			if(issilicon(usr) && !isrobot(usr))
-				to_chat(usr, "<span class=warning>The vending machine refuses to interface with you, as you are not in its target demographic!</span>")
-				return
+		if(issilicon(usr) && !isrobot(usr))
+			to_chat(usr, "<span class=warning>The vending machine refuses to interface with you, as you are not in its target demographic!</span>")
+			return
 
-			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
-				to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
+		if(!allowed(usr) && !usr.can_admin_interact() && !emagged && scan_id) //For SECURE VENDING MACHINES YEAH
+			to_chat(usr, "<span class='warning'>Access denied.</span>") //Unless emagged of course
+			flick(icon_deny,src)
+			return
 
-				flick(icon_deny,src)
-				return
+		var/key = text2num(href_list["vend"])
+		var/datum/data/vending_product/R = product_records[key]
 
-			var/key = text2num(href_list["vend"])
-			var/datum/data/vending_product/R = product_records[key]
+		// This should not happen unless the request from NanoUI was bad
+		if(!(R.category & categories))
+			return
 
-			// This should not happen unless the request from NanoUI was bad
-			if(!(R.category & src.categories))
-				return
-
-			if(R.price <= 0)
-				src.vend(R, usr)
+		if(R.price <= 0)
+			vend(R, usr)
+		else
+			currently_vending = R
+			if(!vendor_account || vendor_account.suspended)
+				status_message = "This machine is currently unable to process payments due to problems with the associated account."
+				status_error = 1
 			else
-				src.currently_vending = R
-				if(!vendor_account || vendor_account.suspended)
-					src.status_message = "This machine is currently unable to process payments due to problems with the associated account."
-					src.status_error = 1
-				else
-					src.status_message = "Please swipe a card or insert cash to pay for the item."
-					src.status_error = 0
+				status_message = "Please swipe a card or insert cash to pay for the item."
+				status_error = 0
 
-		else if(href_list["cancelpurchase"])
-			src.currently_vending = null
+	else if(href_list["cancelpurchase"])
+		currently_vending = null
 
-		else if((href_list["togglevoice"]) && (src.panel_open))
-			src.shut_up = !src.shut_up
+	else if(href_list["togglevoice"] && panel_open)
+		shut_up = !src.shut_up
 
-		src.add_fingerprint(usr)
-		nanomanager.update_uis(src)
+	add_fingerprint(usr)
+	nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
-	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+	if(!allowed(usr) && !usr.can_admin_interact() && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
+		flick(icon_deny,src)
+		return
 
-		flick(src.icon_deny,src)
-		return
 	if(!R.amount)
-		to_chat(user, "\red The vending machine has ran out of that product.")
+		to_chat(user, "<span class='warning'>The vending machine has ran out of that product.</span>")
 		return
-	src.vend_ready = 0 //One thing at a time!!
-	src.status_message = "Vending..."
-	src.status_error = 0
+
+	vend_ready = 0 //One thing at a time!!
+	status_message = "Vending..."
+	status_error = 0
 	nanomanager.update_uis(src)
 
 	if(R.category & CAT_COIN)
 		if(!coin)
-			to_chat(user, "\blue You need to insert a coin to get this item.")
+			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
 			return
 		if(coin.string_attached)
 			if(prob(50))
-				to_chat(user, "\blue You successfully pull the coin out before the [src] could swallow it.")
+				to_chat(user, "<span class='notice'>You successfully pull the coin out before the [src] could swallow it.</span>")
 			else
-				to_chat(user, "\blue You weren't able to pull the coin out fast enough, the machine ate it, string and all.")
-				coin = null
-				qdel(coin)
+				to_chat(user, "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>")
+				QDEL_NULL(coin)
 				categories &= ~CAT_COIN
 		else
-			coin = null
-			qdel(coin)
+			QDEL_NULL(coin)
 			categories &= ~CAT_COIN
 
 	R.amount--
 
-	if(((src.last_reply + (src.vend_delay + 200)) <= world.time) && src.vend_reply)
+	if(((last_reply + (vend_delay + 200)) <= world.time) && vend_reply)
 		spawn(0)
-			src.speak(src.vend_reply)
-			src.last_reply = world.time
+			speak(src.vend_reply)
+			last_reply = world.time
 
 	use_power(vend_power_usage)	//actuators and stuff
-	if(src.icon_vend) //Show the vending animation if needed
-		flick(src.icon_vend,src)
+	if(icon_vend) //Show the vending animation if needed
+		flick(icon_vend,src)
 	spawn(src.vend_delay)
 		new R.product_path(get_turf(src))
-		src.status_message = ""
-		src.status_error = 0
-		src.vend_ready = 1
+		status_message = ""
+		status_error = 0
+		vend_ready = 1
 		currently_vending = null
 		nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
-	if(src.panel_open)
-		to_chat(user, "\blue You stock the [src] with \a [R.product_name]")
+	if(panel_open)
+		to_chat(user, "<span class='notice'>You stock the [src] with \a [R.product_name]</span>")
 		R.amount++
-	src.updateUsrDialog()
+	updateUsrDialog()
 
 
 /obj/machinery/vending/process()
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	if(!src.active)
+	if(!active)
 		return
 
 	if(src.seconds_electrified > 0)
 		src.seconds_electrified--
 
 	//Pitch to the people!  Really sell it!
-	if(((src.last_slogan + src.slogan_delay) <= world.time) && (src.slogan_list.len > 0) && (!src.shut_up) && prob(5))
+	if(((last_slogan + src.slogan_delay) <= world.time) && (slogan_list.len > 0) && (!shut_up) && prob(5))
 		var/slogan = pick(src.slogan_list)
-		src.speak(slogan)
-		src.last_slogan = world.time
+		speak(slogan)
+		last_slogan = world.time
 
-	if(src.shoot_inventory && prob(shoot_chance))
-		src.throw_item()
+	if(shoot_inventory && prob(shoot_chance))
+		throw_item()
 
 	return
 
@@ -620,12 +621,12 @@
 			stat &= ~NOPOWER
 		else
 			spawn(rand(0, 15))
-				src.icon_state = "[initial(icon_state)]-off"
+				icon_state = "[initial(icon_state)]-off"
 				stat |= NOPOWER
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
-	for(var/datum/data/vending_product/R in src.product_records)
+	for(var/datum/data/vending_product/R in product_records)
 		if(R.amount <= 0) //Try to use a record that actually has something to dump.
 			continue
 		var/dump_path = R.product_path
@@ -633,12 +634,12 @@
 			continue
 
 		while(R.amount>0)
-			new dump_path(src.loc)
+			new dump_path(loc)
 			R.amount--
 		break
 
 	stat |= BROKEN
-	src.icon_state = "[initial(icon_state)]-broken"
+	icon_state = "[initial(icon_state)]-broken"
 	return
 
 //Somebody cut an important wire and now we're following a new definition of "pitch."
@@ -648,7 +649,7 @@
 	if(!target)
 		return 0
 
-	for(var/datum/data/vending_product/R in src.product_records)
+	for(var/datum/data/vending_product/R in product_records)
 		if(R.amount <= 0) //Try to use a record that actually has something to dump.
 			continue
 		var/dump_path = R.product_path
@@ -656,13 +657,13 @@
 			continue
 
 		R.amount--
-		throw_item = new dump_path(src.loc)
+		throw_item = new dump_path(loc)
 		break
 	if(!throw_item)
 		return 0
 	spawn(0)
 		throw_item.throw_at(target, 16, 3, src)
-	src.visible_message("<span class='danger'>[src] launches [throw_item.name] at [target.name]!</span>")
+	visible_message("<span class='danger'>[src] launches [throw_item.name] at [target.name]!</span>")
 	return 1
 
 /*
@@ -1069,7 +1070,9 @@
 					/obj/item/clothing/shoes/singerb = 1,/obj/item/clothing/under/singerb = 1,
 					/obj/item/clothing/suit/hooded/carp_costume = 1,/obj/item/clothing/suit/hooded/bee_costume = 1,
 					/obj/item/clothing/suit/snowman = 1,/obj/item/clothing/head/snowman = 1,
-					/obj/item/clothing/head/cueball = 1,/obj/item/clothing/under/scratch = 1)
+					/obj/item/clothing/head/cueball = 1,/obj/item/clothing/under/scratch = 1,
+					/obj/item/clothing/under/victdress = 1, /obj/item/clothing/under/victdress/red = 1, /obj/item/clothing/suit/victcoat = 1, /obj/item/clothing/suit/victcoat/red = 1,
+					/obj/item/clothing/under/victsuit = 1, /obj/item/clothing/under/victsuit/redblk = 1, /obj/item/clothing/under/victsuit/red = 1, /obj/item/clothing/suit/tailcoat = 1)
 	contraband = list(/obj/item/clothing/suit/judgerobe = 1,/obj/item/clothing/head/powdered_wig = 1,/obj/item/weapon/gun/magic/wand = 1, /obj/item/clothing/mask/balaclava=1, /obj/item/clothing/mask/horsehead = 2)
 	premium = list(/obj/item/clothing/suit/hgpirate = 1, /obj/item/clothing/head/hgpiratecap = 1, /obj/item/clothing/head/helmet/roman = 1, /obj/item/clothing/head/helmet/roman/legionaire = 1, /obj/item/clothing/under/roman = 1, /obj/item/clothing/shoes/roman = 1, /obj/item/weapon/shield/riot/roman = 1)
 	refill_canister = /obj/item/weapon/vending_refill/autodrobe
@@ -1161,13 +1164,6 @@
 					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
-
-
-/obj/machinery/vending/eva
-	name = "\improper Hardsuit Kits"
-	desc = "Conversion kits for your alien hardsuit needs."
-	products = list(/obj/item/device/modkit = 6,/obj/item/device/modkit/tajaran = 6,/obj/item/device/modkit/unathi = 6,/obj/item/device/modkit/skrell = 6,/obj/item/device/modkit/vox = 6)
-
 
 /obj/machinery/vending/sustenance
 	name = "\improper Sustenance Vendor"
@@ -1320,3 +1316,128 @@
 	component_parts += new /obj/item/weapon/vending_refill/crittercare(0)
 	component_parts += new /obj/item/weapon/vending_refill/crittercare(0)
 	component_parts += new /obj/item/weapon/vending_refill/crittercare(0)
+
+//CODING BOOGALOO : FLIPPING OUT EDITION//
+//This is a WIP segment of code that will allow vending machines to be tipped over, and used as barricades///
+
+/*List of things to do:
+1.Add chance for projectiles to be blocked/pass
+2.Add checks to stop simple mobs from using these verbs
+3.Add checks to only show topple if it's not tipped and stand up if it's tipped
+4.Prevent anchoring while tipped
+5.Allow mobs to stand on the same tile as the machine when tipped, just like table barricades
+6.Let items pass over the top of vending machines like seriously what the fuck I thought I just needed to add the flag
+7.Learn to code instead of just scabbing code from other .dm files and just changing it around
+
+List of things I need to run past Frosty first but would like to implement:
+1.Hacked machines have a chance to change the price charged ranging from free to 5x original price
+2.Dragging/Pushing vending machines slows you down
+3.Custom vending machines for cargo to load items into to sell
+*/
+
+/obj/machinery/vending/verb/tip(mob/user in view(1))
+	set name = "Tip over"
+	set category = "Object"
+	set src in view(1)
+	if(tippable = 0)
+		to_chat(user, "<span class='notice'>How do you propose to tip [src]?</span>")
+		return
+	if(anchored != 0)
+		to_chat(user, "<span class='notice'>[src] is firmly bolted to the floor</span>")
+		return
+	if(tipped != 0)
+		to_chat(user, "<span class='notice'>[src] is already tipped over.</span>")
+		return
+	else
+		src.visible_message("<b><font color=red>[user] starts to rock [src] back and forth!</font></b>")
+		do_after(user, 80, target = src)
+		src.icon_state = "liberationstation"
+		src.visible_message("<b><font color=red>[user] tips [src] to the ground with a thud!</font></b>")
+		climbable = !climbable
+		tipped = !tipped
+		pass_flags = LETPASSTHROW
+		return
+
+/obj/machinery/vending/verb/untip(mob/user in view(1))
+	set name = "Stand up"
+	set category = "Object"
+	set src in view(1)
+	src.visible_message("<b><font color=red>[user] starts to stand [src] back up!</font></b>")
+	do_after(user, 120, target = src)
+	src.icon_state = "[initial(icon_state)]"
+	src.visible_message("<b><font color=red>[user] stands [src] upright!</font></b>")
+	tipped = !tipped
+	climbable = !climbable
+	pass_flags = null
+	return
+
+/obj/machinery/vending/verb/climb_on()
+
+	set name = "Climb structure"
+	set desc = "Climbs onto a structure."
+	set category = null
+	set src in oview(1)
+
+	do_climb(usr)
+
+/obj/machinery/vending/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+	if(..())
+		return
+	if(C == user)
+		do_climb(user)
+
+
+/obj/machinery/vending/proc/do_climb(var/mob/living/user)
+
+	if(!can_touch(user) || climbable != 1)
+		return
+
+	for(var/obj/O in range(0, src))
+		if(O.density == 1 && O != src && !istype(O, /obj/machinery/door/window)) //Ignores windoors, as those already block climbing, otherwise a windoor on the opposite side of a table would prevent climbing.
+			to_chat(user, "<span class='warning'>You cannot climb [src], as it is blocked by \a [O]!</span>")
+			return
+	for(var/turf/T in range(0, src))
+		if(T.density == 1)
+			to_chat(user, "<span class='warning'>You cannot climb [src], as it is blocked by \a [T]!</span>")
+			return
+	var/turf/T = src.loc
+	if(!T || !istype(T)) return
+
+	var/obj/machinery/door/poddoor/shutters/S = locate() in T.contents
+	if(S && S.density) return
+
+	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	climber = user
+	if(!do_after(user, 50, target = src))
+		climber = null
+		return
+
+	if(!can_touch(user) || !climbable)
+		climber = null
+		return
+
+	S = locate() in T.contents
+	if(S && S.density)
+		climber = null
+		return
+
+	usr.loc = get_turf(src)
+	if(get_turf(user) == get_turf(src))
+		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+
+	climber = null
+
+/obj/machinery/vending/proc/can_touch(var/mob/user)
+	if(!user)
+		return 0
+	if(!Adjacent(user))
+		return 0
+	if(user.restrained() || user.buckled)
+		to_chat(user, "<span class='notice'>You need your hands and legs free for this.</span>")
+		return 0
+	if(user.stat || user.paralysis || user.sleeping || user.lying || user.weakened)
+		return 0
+	if(issilicon(user))
+		to_chat(user, "<span class='notice'>You need hands for this.</span>")
+		return 0
+	return 1
