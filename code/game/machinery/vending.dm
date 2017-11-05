@@ -42,7 +42,12 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
+	pass_flags = null
 
+	var/tippable = 1
+	var/tipped = 0
+	var/climbable = 0
+	var/mob/climber
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
 
@@ -230,8 +235,9 @@
 			nanomanager.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
-	if(default_unfasten_wrench(user, I, time = 60))
+	if(default_unfasten_wrench(user, I, time = 60)// && !tipped)
 		return
+//	else to_chat(user, "<span class='warning'>You can't secure \the [src] while it is tipped over!</span>") these parts are meant to stop you anchoring it if it is tipped
 
 	if(istype(I, /obj/item/weapon/screwdriver) && anchored)
 		playsound(loc, I.usesound, 50, 1)
@@ -1310,3 +1316,128 @@
 	component_parts += new /obj/item/weapon/vending_refill/crittercare(0)
 	component_parts += new /obj/item/weapon/vending_refill/crittercare(0)
 	component_parts += new /obj/item/weapon/vending_refill/crittercare(0)
+
+//CODING BOOGALOO : FLIPPING OUT EDITION//
+//This is a WIP segment of code that will allow vending machines to be tipped over, and used as barricades///
+
+/*List of things to do:
+1.Add chance for projectiles to be blocked/pass
+2.Add checks to stop simple mobs from using these verbs
+3.Add checks to only show topple if it's not tipped and stand up if it's tipped
+4.Prevent anchoring while tipped
+5.Allow mobs to stand on the same tile as the machine when tipped, just like table barricades
+6.Let items pass over the top of vending machines like seriously what the fuck I thought I just needed to add the flag
+7.Learn to code instead of just scabbing code from other .dm files and just changing it around
+
+List of things I need to run past Frosty first but would like to implement:
+1.Hacked machines have a chance to change the price charged ranging from free to 5x original price
+2.Dragging/Pushing vending machines slows you down
+3.Custom vending machines for cargo to load items into to sell
+*/
+
+/obj/machinery/vending/verb/tip(mob/user in view(1))
+	set name = "Tip over"
+	set category = "Object"
+	set src in view(1)
+	if(tippable = 0)
+		to_chat(user, "<span class='notice'>How do you propose to tip [src]?</span>")
+		return
+	if(anchored != 0)
+		to_chat(user, "<span class='notice'>[src] is firmly bolted to the floor</span>")
+		return
+	if(tipped != 0)
+		to_chat(user, "<span class='notice'>[src] is already tipped over.</span>")
+		return
+	else
+		src.visible_message("<b><font color=red>[user] starts to rock [src] back and forth!</font></b>")
+		do_after(user, 80, target = src)
+		src.icon_state = "liberationstation"
+		src.visible_message("<b><font color=red>[user] tips [src] to the ground with a thud!</font></b>")
+		climbable = !climbable
+		tipped = !tipped
+		pass_flags = LETPASSTHROW
+		return
+
+/obj/machinery/vending/verb/untip(mob/user in view(1))
+	set name = "Stand up"
+	set category = "Object"
+	set src in view(1)
+	src.visible_message("<b><font color=red>[user] starts to stand [src] back up!</font></b>")
+	do_after(user, 120, target = src)
+	src.icon_state = "[initial(icon_state)]"
+	src.visible_message("<b><font color=red>[user] stands [src] upright!</font></b>")
+	tipped = !tipped
+	climbable = !climbable
+	pass_flags = null
+	return
+
+/obj/machinery/vending/verb/climb_on()
+
+	set name = "Climb structure"
+	set desc = "Climbs onto a structure."
+	set category = null
+	set src in oview(1)
+
+	do_climb(usr)
+
+/obj/machinery/vending/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+	if(..())
+		return
+	if(C == user)
+		do_climb(user)
+
+
+/obj/machinery/vending/proc/do_climb(var/mob/living/user)
+
+	if(!can_touch(user) || climbable != 1)
+		return
+
+	for(var/obj/O in range(0, src))
+		if(O.density == 1 && O != src && !istype(O, /obj/machinery/door/window)) //Ignores windoors, as those already block climbing, otherwise a windoor on the opposite side of a table would prevent climbing.
+			to_chat(user, "<span class='warning'>You cannot climb [src], as it is blocked by \a [O]!</span>")
+			return
+	for(var/turf/T in range(0, src))
+		if(T.density == 1)
+			to_chat(user, "<span class='warning'>You cannot climb [src], as it is blocked by \a [T]!</span>")
+			return
+	var/turf/T = src.loc
+	if(!T || !istype(T)) return
+
+	var/obj/machinery/door/poddoor/shutters/S = locate() in T.contents
+	if(S && S.density) return
+
+	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	climber = user
+	if(!do_after(user, 50, target = src))
+		climber = null
+		return
+
+	if(!can_touch(user) || !climbable)
+		climber = null
+		return
+
+	S = locate() in T.contents
+	if(S && S.density)
+		climber = null
+		return
+
+	usr.loc = get_turf(src)
+	if(get_turf(user) == get_turf(src))
+		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+
+	climber = null
+
+/obj/machinery/vending/proc/can_touch(var/mob/user)
+	if(!user)
+		return 0
+	if(!Adjacent(user))
+		return 0
+	if(user.restrained() || user.buckled)
+		to_chat(user, "<span class='notice'>You need your hands and legs free for this.</span>")
+		return 0
+	if(user.stat || user.paralysis || user.sleeping || user.lying || user.weakened)
+		return 0
+	if(issilicon(user))
+		to_chat(user, "<span class='notice'>You need hands for this.</span>")
+		return 0
+	return 1
