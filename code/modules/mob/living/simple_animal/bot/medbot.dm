@@ -4,6 +4,7 @@
 #define REQ_TOX		4
 #define REQ_OXY		8
 #define REQ_VIRUS	16
+#define REQ_CRIT	32
 
 //medbot
 /mob/living/simple_animal/bot/medbot
@@ -47,6 +48,7 @@
 		BURN = "salglu_solution",
 		OXY = "salbutamol",
 		TOX = "charcoal",
+		"crit" = "epinephrine",
 		"virus" = "spaceacillin",
 		"evil" = "pancuronium"
 		)
@@ -406,6 +408,8 @@
 			patient_status |= REQ_TOX
 		if((C.getOxyLoss() >= (15 + heal_threshold)) && (!C.reagents.has_reagent(treatments[OXY])))
 			patient_status |= REQ_OXY
+		if ((C.InCritical()) && (!C.reagents.has_reagent(treatments["crit"])))
+			patient_status |= REQ_CRIT
 		return patient_status
 	else
 		return patient_status
@@ -456,6 +460,9 @@
 					break
 				else
 					break
+			else if (!internalsafety && !emagged) //If they already have our reagent in them, and safety is off, then just leave them be, unless we are emagged (in that case use beaker first, then "evil" treatment)
+				soft_reset()
+				return
 	if(!emagged && check_overdose(patient,reagent_id,injection_amount)) // Now we check to see if it will overdose the patient, unless we're emagged and don't care.
 		soft_reset()
 		return
@@ -517,6 +524,8 @@
 		dam += list(OXY = C.getOxyLoss())
 	if((patient_status & REQ_TOX) && !C.reagents.has_reagent(treatments[TOX]))
 		dam += list(TOX = C.getToxLoss())
+	if((patient_status & REQ_CRIT) && !C.reagents.has_reagent(treatments["crit"]))
+		dam += list("crit" = C.getToxLoss() + C.getOxyLoss() + C.getBruteLoss() + C.getFireLoss()) //Always inject epinephrine first
 
 	var/highest = 0
 	var/highest_key
@@ -602,3 +611,4 @@
 #undef REQ_TOX
 #undef REQ_OXY
 #undef REQ_VIRUS
+#undef REQ_CRIT
