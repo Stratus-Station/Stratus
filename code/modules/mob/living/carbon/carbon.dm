@@ -32,10 +32,15 @@
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
-		if(nutrition && stat != DEAD)
-			nutrition -= hunger_drain / 10
-			if(m_intent == "run")
+		if(stat != DEAD)
+			if(nutrition)
 				nutrition -= hunger_drain / 10
+				if(m_intent == "run")
+					nutrition -= hunger_drain / 10
+			if(thirst)
+				thirst -= thirst_drain / 10
+				if(m_intent == "run")
+					thirst -= thirst_drain / 8
 		if((FAT in mutations) && m_intent == "run" && bodytemperature <= 360)
 			bodytemperature += 2
 
@@ -114,6 +119,7 @@
 				if(T)
 					T.add_vomit_floor(src)
 				nutrition -= lost_nutrition
+				thirst -= lost_nutrition * 1.5
 				if(stun)
 					adjustToxLoss(-3)
 			T = get_step(T, dir)

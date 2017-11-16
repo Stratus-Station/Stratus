@@ -97,6 +97,13 @@
 #define NUTRITION_LEVEL_HUNGRY 250
 #define NUTRITION_LEVEL_STARVING 150
 
+//Thirsty boi values. Putting it here for the sake of consistency with nutrition.
+#define THIRST_LEVEL_HYPONATREMIA 800//serious effects begin here
+#define THIRST_LEVEL_DANGERZONE 750//headaches begin here
+#define THIRST_LEVEL_QUENCHED 500//satisfied bois have more than this
+#define THIRST_LEVEL_THIRSTY 250//dry mouth begins here
+#define THIRST_LEVEL_PARCHED 100//headaches begin here, serious effects begin under this
+
 //Blood levels
 #define BLOOD_VOLUME_NORMAL			560
 #define BLOOD_VOLUME_SAFE			501

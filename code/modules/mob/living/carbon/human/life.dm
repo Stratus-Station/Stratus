@@ -35,6 +35,7 @@
 		handle_heartbeat()
 		handle_heartattack()
 		handle_drunk()
+		handle_thirst()
 		species.handle_life(src)
 
 		if(!client)
@@ -672,18 +673,21 @@
 			if(overeatduration > 500)
 				becomeFat()
 
-	// nutrition decrease
-	if(nutrition > 0 && stat != DEAD)
-		// THEY HUNGER
-		var/hunger_rate = hunger_drain
-		if(satiety > 0)
-			satiety--
-		if(satiety < 0)
-			satiety++
-			if(prob(round(-satiety/40)))
-				Jitter(5)
-			hunger_rate = 3 * hunger_drain
-		nutrition = max(0, nutrition - hunger_rate)
+	// nutrition and thirst decrease
+	if(stat != DEAD)
+		if(nutrition > 0)
+			// THEY HUNGER
+			var/hunger_rate = hunger_drain
+			if(satiety > 0)
+				satiety--
+			if(satiety < 0)
+				satiety++
+				if(prob(round(-satiety/40)))
+					Jitter(5)
+				hunger_rate = 3 * hunger_drain
+			nutrition = max(0, nutrition - hunger_rate)
+		if(thirst > 0)
+			thirst = max(0, thirst - thirst_drain)
 
 	if(nutrition > NUTRITION_LEVEL_FULL)
 		if(overeatduration < 600) //capped so people don't take forever to unfat
@@ -807,6 +811,69 @@
 		if(istype(R, /datum/reagent/consumable/ethanol))
 			return 1
 	return 0
+
+/mob/living/carbon/human/proc/handle_thirst()
+	if(thirst >= THIRST_LEVEL_HYPONATREMIA)
+		if(prob((thirst - THIRST_LEVEL_HYPONATREMIA) * 0.001))
+			vomit((thirst - THIRST_LEVEL_HYPONATREMIA) * 0.01)
+		if(prob((thirst - THIRST_LEVEL_HYPONATREMIA) * 0.05))
+			if(prob(5))
+				to_chat(src, "<span class ='warning'>You feel pretty exhausted")
+			adjustStaminaLoss((thirst - THIRST_LEVEL_HYPONATREMIA) * 0.1)
+		adjustStaminaLoss((thirst - THIRST_LEVEL_HYPONATREMIA) * 0.005)
+	if(thirst >= THIRST_LEVEL_DANGERZONE)
+		if(prob((thirst - THIRST_LEVEL_DANGERZONE) * 0.01))
+			var/thirstnagmessage
+			switch(thirst)
+				if(THIRST_LEVEL_DANGERZONE to THIRST_LEVEL_HYPONATREMIA)
+					thirstnagmessage = "Your head hurts."
+				if(THIRST_LEVEL_HYPONATREMIA to THIRST_LEVEL_HYPONATREMIA + 100)
+					thirstnagmessage = "You feel a painful pressure in your head."
+				if(THIRST_LEVEL_HYPONATREMIA + 100 to INFINITY)
+					thirstnagmessage = "You feel as though your brain is pounding against your skull."
+			if(thirstnagmessage)
+				custom_pain(thirstnagmessage, ((thirst - THIRST_LEVEL_DANGERZONE) * 0.01))
+	if(thirst <= THIRST_LEVEL_THIRSTY)
+		if(prob((thirst - THIRST_LEVEL_THIRSTY) * -0.01))
+			var/thirstnagmessage
+			switch(thirst)
+				if(-INFINITY to THIRST_LEVEL_PARCHED)
+					thirstnagmessage = "Your head hurts, and your mouth is painfully dry."
+				if(THIRST_LEVEL_PARCHED to THIRST_LEVEL_THIRSTY - 100)
+					thirstnagmessage = "Your mouth feels dry."
+				if(THIRST_LEVEL_THIRSTY - 100 to INFINITY)
+					thirstnagmessage = "You feel thirsty."
+			if(thirstnagmessage)
+				custom_pain(thirstnagmessage, ((thirst - THIRST_LEVEL_THIRSTY)* -0.01))
+	if(thirst <= THIRST_LEVEL_PARCHED)
+		if(prob((thirst - THIRST_LEVEL_PARCHED) * -0.01))
+			if(prob(5))
+				to_chat(src, "<span class='warning'>You feel light-headed.")
+			AdjustConfused((thirst - THIRST_LEVEL_PARCHED) * -0.1)
+			adjustStaminaLoss((thirst - THIRST_LEVEL_PARCHED) * -0.1)
+		adjustStaminaLoss((thirst - THIRST_LEVEL_PARCHED) * -0.005)
+	switch(thirst)
+		if(THIRST_LEVEL_HYPONATREMIA to INFINITY)
+			staminaminimum = min(staminaminimum + ((thirst - THIRST_LEVEL_HYPONATREMIA) * 0.01), 70)
+		if(THIRST_LEVEL_DANGERZONE to THIRST_LEVEL_HYPONATREMIA)
+			if(staminaminimum <= 40)
+				staminaminimum = min(staminaminimum + ((thirst - THIRST_LEVEL_DANGERZONE) * 0.005), 40)
+			else
+				staminaminimum = max(staminaminimum - ((thirst - THIRST_LEVEL_DANGERZONE) * 0.005), 40)
+		if(THIRST_LEVEL_QUENCHED to THIRST_LEVEL_DANGERZONE)
+			staminaminimum = max(staminaminimum - ((thirst - THIRST_LEVEL_QUENCHED) * 0.1), 0)
+		if(THIRST_LEVEL_THIRSTY to THIRST_LEVEL_QUENCHED)
+			if(staminaminimum <= 10)
+				staminaminimum = min(staminaminimum + ((thirst - THIRST_LEVEL_QUENCHED) * -0.01), 10)
+			else
+				staminaminimum = max(staminaminimum - ((thirst - THIRST_LEVEL_QUENCHED) * -0.01), 10)
+		if(THIRST_LEVEL_PARCHED to THIRST_LEVEL_THIRSTY)
+			if(staminaminimum <= 25)
+				staminaminimum = min(staminaminimum + ((thirst - THIRST_LEVEL_THIRSTY) * -0.01), 25)
+			else
+				staminaminimum = max(staminaminimum - ((thirst - THIRST_LEVEL_THIRSTY) * -0.01), 25)
+		if(-INFINITY to THIRST_LEVEL_PARCHED)
+			staminaminimum = min(staminaminimum + ((thirst - THIRST_LEVEL_PARCHED) * -0.01), 80)
 
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(status_flags & GODMODE)

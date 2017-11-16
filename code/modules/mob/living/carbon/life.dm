@@ -277,7 +277,7 @@
 			Weaken(5)
 			setStaminaLoss(health - 2)
 			return
-		setStaminaLoss(max((staminaloss - 3), 0))
+		setStaminaLoss(max((staminaloss - 3), staminaminimum))
 
 //this updates all special effects: stunned, sleeping, weakened, druggy, stuttering, etc..
 /mob/living/carbon/handle_status_effects()

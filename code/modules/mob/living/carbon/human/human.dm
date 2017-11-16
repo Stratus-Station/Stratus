@@ -1472,6 +1472,7 @@
 		add_language(species.default_language)
 
 	hunger_drain = species.hunger_drain
+	thirst_drain = species.thirst_drain
 	digestion_ratio = species.digestion_ratio
 
 	if(species.base_color && default_colour)

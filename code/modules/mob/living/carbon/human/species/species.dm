@@ -47,6 +47,7 @@
 	var/reagent_tag                 //Used for metabolizing reagents.
 	var/hunger_drain = HUNGER_FACTOR
 	var/digestion_ratio = 1 //How quickly the species digests/absorbs reagents.
+	var/thirst_drain = THIRST_FACTOR
 
 	var/siemens_coeff = 1 //base electrocution coefficient
 
@@ -644,6 +645,15 @@
 			H.throw_alert("nutrition", /obj/screen/alert/hungry)
 		else
 			H.throw_alert("nutrition", /obj/screen/alert/starving)
+
+	switch(H.thirst) //todo: yell about lack of sprites
+		if(THIRST_LEVEL_QUENCHED to INFINITY)//hyponatremia doesnt really need its own alert
+			H.throw_alert("nutrition", /obj/screen/alert/full)
+		if(THIRST_LEVEL_THIRSTY to THIRST_LEVEL_QUENCHED)
+			H.throw_alert("nutrition", /obj/screen/alert/fed)
+		else
+			H.throw_alert("nutrition", /obj/screen/alert/hungry)
+
 	return 1
 
 /*
