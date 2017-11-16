@@ -19,7 +19,7 @@
 		if(!attached_hand)
 			if(!ChargeHand(target))
 				return 0
-	while(attached_hand) //hibernate untill the spell is actually used
+	while(attached_hand) //hibernate until the spell is actually used
 		charge_counter = 0
 		sleep(1)
 
@@ -36,7 +36,7 @@
 				hand_handled = 0
 	if(!hand_handled)
 		qdel(attached_hand)
-		charge_counter = charge_max
+		revert_cast()
 		attached_hand = null
 		to_chat(user, "<span class='warning'>Your hands are full!</span>")
 		return 0

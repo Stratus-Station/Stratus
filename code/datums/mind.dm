@@ -42,7 +42,7 @@
 	var/special_role
 	var/list/restricted_roles = list()
 
-	var/list/spell_list = list() // Wizard mode & "Give Spell" badmin button.
+	var/list/spell_list = list() // Wizard mode, PSI spells & "Give Spell" badmin button.
 
 	var/role_alt_title
 
@@ -1574,7 +1574,8 @@
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)	mind.assigned_role = "Visitor"	//defualt
+	if(!mind.assigned_role)
+		mind.assigned_role = "Visitor"	//default
 
 /mob/proc/sync_mind()
 	mind_initialize()  //updates the mind (or creates and initializes one if one doesn't exist)
