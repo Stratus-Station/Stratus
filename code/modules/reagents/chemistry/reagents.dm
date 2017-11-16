@@ -72,7 +72,7 @@
 	current_cycle++
 	holder.remove_reagent(id, metabolization_rate * M.metabolism_efficiency * M.digestion_ratio) //By default it slowly disappears.
 	if(M)
-		M.thirst += quench_amount * REAGENTS_METABOLISM * digestion_ratio
+		M.thirst += quench_amount * REAGENTS_METABOLISM * M.digestion_ratio
 
 /datum/reagent/proc/on_mob_death(mob/living/M)	//use this to have chems have a "death-triggered" effect
 	return
