@@ -22,6 +22,7 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/alt_heads, alt_heads_list)
 
 	init_subtypes(/datum/surgery_step, surgery_steps)
+	init_subtypes(/datum/psi_spell, psi_spells_list)
 
 	for(var/path in (subtypesof(/datum/surgery)))
 		surgeries_list += new path()

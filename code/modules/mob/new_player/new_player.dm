@@ -453,6 +453,8 @@
 			new_character.real_name = pick(diona_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
 			new_character.rename_self("diona")
 		mind.original = new_character
+		for(var/datum/psi_spell/spell_to_add in psi_spells_list) //This is really ugly here but there are few alternatives because the mind is not in the body when the body is created!
+			mind.AddSpell(new spell_to_add.spell_type())
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 
