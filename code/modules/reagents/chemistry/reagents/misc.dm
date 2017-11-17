@@ -77,6 +77,7 @@
 	description = "A chemical element."
 	reagent_state = SOLID
 	color = "#808080" // rgb: 128, 128, 128
+	quench_amount = -1
 
 
 /datum/reagent/phosphorus

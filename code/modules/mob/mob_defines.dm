@@ -72,6 +72,9 @@
 	var/satiety = 0 //Carbon
 	var/hunger_drain = HUNGER_FACTOR // how quickly the mob gets hungry; largely utilized by species.
 
+	var/thirst = THIRST_LEVEL_QUENCHED + 150
+	var/thirst_drain = THIRST_FACTOR
+
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/intent = null//Living
 	var/shakecamera = 0
@@ -196,5 +199,5 @@
 	var/list/permanent_huds = list()
 
 	var/list/actions = list()
-	
+
 	var/list/progressbars = null	//for stacking do_after bars

@@ -6,6 +6,7 @@
 	drink_icon = "glass_orange"
 	drink_name = "Glass of Orange juice"
 	drink_desc = "Vitamins! Yay!"
+	quench_amount = 1.5
 
 /datum/reagent/consumable/drink/orangejuicde/on_mob_life(mob/living/M)
 	if(M.getOxyLoss() && prob(30))
@@ -160,6 +161,7 @@
 	drink_icon = "nothing"
 	drink_name = "Nothing"
 	drink_desc = "Absolutely nothing."
+	quench_amount = 0
 
 /datum/reagent/consumable/drink/nothing/on_mob_life(mob/living/M)
 	if(ishuman(M) && M.job in list("Mime"))

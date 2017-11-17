@@ -18,6 +18,7 @@
 	drink_icon = "glass_clear"
 	drink_name = "Glass of Water"
 	drink_desc = "The father of all refreshments."
+	quench_amount = 2
 
 /datum/reagent/water/reaction_mob(mob/living/M, method=TOUCH, volume)
 // Put out fire
@@ -138,6 +139,7 @@
 	drink_icon = "glass_red"
 	drink_name = "Glass of Tomato juice"
 	drink_desc = "Are you sure this is tomato juice?"
+	quench_amount = 0.5
 
 /datum/reagent/blood/reaction_mob(mob/living/M, method=TOUCH, volume)
 	if(data && data["viruses"])
@@ -238,6 +240,7 @@
 	description = "Smelly water from a fish tank. Gross!"
 	reagent_state = LIQUID
 	color = "#757547"
+	quench_amount = 1.5
 
 /datum/reagent/fishwater/reaction_mob(mob/living/M, method=TOUCH, volume)
 	if(method == INGEST)
@@ -271,6 +274,7 @@
 	drink_icon = "glass_clear"
 	drink_name = "Glass of Water"
 	drink_desc = "The father of all refreshments."
+	quench_amount = 5
 
 /datum/reagent/holywater/on_mob_life(mob/living/M)
 	M.AdjustJitter(-5)
@@ -388,6 +392,7 @@
 	color = "#FF9966"
 	description = "You don't even want to think about what's in here."
 	reagent_state = LIQUID
+	quench_amount = 0.5
 
 /datum/reagent/liquidgibs/reaction_turf(turf/T, volume) //yes i took it from synthflesh...
 	if(volume >= 5 && !istype(T, /turf/space))
@@ -407,6 +412,7 @@
 	description = "Can be used to dry things."
 	reagent_state = LIQUID
 	color = "#A70FFF"
+	quench_amount = -1
 
 /datum/reagent/drying_agent/reaction_turf(turf/simulated/T, volume)
 	if(istype(T) && T.wet)
