@@ -40,7 +40,7 @@
 			if(thirst)
 				thirst -= thirst_drain / 10
 				if(m_intent == "run")
-					thirst -= thirst_drain / 8
+					thirst -= thirst_drain / 10
 		if((FAT in mutations) && m_intent == "run" && bodytemperature <= 360)
 			bodytemperature += 2
 

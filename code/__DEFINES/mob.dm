@@ -68,7 +68,7 @@
 #define	HUNGER_FACTOR 0.1
 
 // How fast mob thirst decreases
-#define THIRST_FACTOR 0.15
+#define THIRST_FACTOR 0.12
 
 // Reagent type flags, defines the types of mobs this reagent will affect
 #define ORGANIC 1
